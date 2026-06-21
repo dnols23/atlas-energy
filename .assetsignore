@@ -1,3 +1,6 @@
 .vscode
 .assetsignore
 .git
+.github
+.gitignore
+README.md
