@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$80.50</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€49.50</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.10</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$80.57</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€49.00</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.05</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.11</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -141,11 +141,11 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 <!-- FILTER BAR -->
 <div class="filter-wrap">
   <div class="filters" id="filters" role="group" aria-label="Filter news by category">
-    <button class="filt active" data-cat="all" style="color:var(--t1)">All Stories <span class="filt-count">20</span></button>
+    <button class="filt active" data-cat="all" style="color:var(--t1)">All Stories <span class="filt-count">21</span></button>
     <button class="filt" data-cat="prices" style="color:#fbbf24">💰 Prices <span class="filt-count">5</span></button>
     <button class="filt" data-cat="supply" style="color:#f97316">🛢 Supply <span class="filt-count">4</span></button>
     <button class="filt" data-cat="demand" style="color:#3b82f6">📈 Demand <span class="filt-count">4</span></button>
-    <button class="filt" data-cat="renewables" style="color:#10b981">♻ Renewables <span class="filt-count">4</span></button>
+    <button class="filt" data-cat="renewables" style="color:#10b981">♻ Renewables <span class="filt-count">5</span></button>
     <button class="filt" data-cat="policy" style="color:#a855f7">🏛 Policy <span class="filt-count">2</span></button>
     <button class="filt" data-cat="geopolitics" style="color:#ef4444">⚔ Geopolitics <span class="filt-count">1</span></button>
   </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:80.50, unit:'/bbl',     chg:-1.30, pct:-1.59},
-  {label:'WTI Crude',      val:76.80, unit:'/bbl',     chg:-1.15, pct:-1.47},
-  {label:'Natural Gas TTF',val:49.50, unit:'€/MWh',    chg:-0.90, pct:-1.79},
-  {label:'Henry Hub',      val:3.10,  unit:'/MMBtu',   chg:-0.10, pct:-3.12},
-  {label:'LNG Asia JKM',   val:17.20, unit:'/MMBtu',   chg:+0.22, pct:+1.30},
-  {label:'Coal API2',      val:132.0, unit:'/t',       chg:+2.40, pct:+1.85},
-  {label:'EU Carbon ETS',  val:77.50, unit:'€/t CO₂',  chg:+0.95, pct:+1.24},
-  {label:'Uranium',        val:85.00, unit:'/lb U₃O₈', chg:-0.45, pct:-0.53},
-  {label:'Solar Module',   val:0.11,  unit:'/W',       chg:-0.003,pct:-2.65},
+  {label:'Brent Crude',    val:80.57, unit:'/bbl',     chg:+0.72, pct:+0.90},
+  {label:'WTI Crude',      val:77.00, unit:'/bbl',     chg:+0.65, pct:+0.85},
+  {label:'Natural Gas TTF',val:49.00, unit:'€/MWh',    chg:-0.50, pct:-1.01},
+  {label:'Henry Hub',      val:3.05,  unit:'/MMBtu',   chg:-0.05, pct:-1.61},
+  {label:'LNG Asia JKM',   val:15.82, unit:'/MMBtu',   chg:-0.12, pct:-0.75},
+  {label:'Coal API2',      val:128.5, unit:'/t',       chg:-3.50, pct:-2.65},
+  {label:'EU Carbon ETS',  val:77.46, unit:'€/t CO₂',  chg:+0.40, pct:+0.52},
+  {label:'Uranium',        val:85.00, unit:'/lb U₃O₈', chg:-0.30, pct:-0.35},
+  {label:'Solar Module',   val:0.11,  unit:'/W',       chg:-0.002,pct:-1.79},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:22950, unit:'/t',       chg:-380,  pct:-1.63},
-  {label:'Copper',         val:10650, unit:'/t',       chg:+110,  pct:+1.04},
+  {label:'Lithium',        val:22700, unit:'/t',       chg:-250,  pct:-1.09},
+  {label:'Copper',         val:10950, unit:'/t',       chg:+180,  pct:+1.67},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,19 +224,19 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'US and Iran sign deal to end war; Strait of Hormuz reopens to tanker traffic',
-  'Brent crude slides ~8.5% on the week to near $80 as Hormuz risk premium unwinds',
-  'US solar out-generates coal for the first time ever — 12.8% vs 12.2% of May power',
-  'OPEC launches World Oil Outlook 2026, sees oil demand at 124 mb/d by 2050',
-  'LNG JKM holds near 3-year highs as 2026 supply shortfall tops 35 Mt',
-  'EU carbon price climbs to €77/t, highest since April',
-  'Henry Hub falls to 8-month low near $3.10/MMBtu on record US output',
-  'Asia\'s 2026 coal demand to jump 70 Mt as high LNG prices force fuel switching',
-  'Talen Energy expands Amazon nuclear deal to 1,920 MW through 2042',
-  'Uranium steadies near $85/lb as TVA signs 6 GW small-modular-reactor agreement',
-  '455 GW of European battery storage stuck in grid-connection queues',
-  'UK and Japan seal £18B clean-energy and offshore-wind partnership',
-  'US court restores wind and solar tax-credit safe harbor, vacating Treasury guidance',
+  'Iran re-closes Strait of Hormuz on June 20, imperiling US peace deal amid Israel-Lebanon fighting',
+  'US-Iran technical talks open in Switzerland on Sunday; VP Vance attends as ceasefire frays',
+  'US military says 55 ships and 17M barrels still transited Hormuz on Saturday despite closure claim',
+  'Brent ends the week near $80, down ~10%, as the Hormuz risk premium whipsaws',
+  'OPEC World Oil Outlook 2026 sees oil demand at 124 mb/d by 2050, $17.7T investment needed',
+  'LNG JKM eases ~16% on the month to near $15.8/MMBtu as war premium fades',
+  'EU carbon price climbs to €77.5/t, highest since April',
+  'Henry Hub near 8-month low ~$3.05/MMBtu as 2026 STEO pencils in 3.3% output growth',
+  'Newcastle thermal coal retreats to ~$145/t from 3-year highs as peace hopes ease fuel switching',
+  'US solar and storage pipeline swells to 195 GW as new wind capacity stalls',
+  'BloombergNEF sees 158 GW / 459 GWh of global storage deployed in 2026, up 41%',
+  'OPEC+ compensation cuts triple to 829,000 bpd as UAE, Iraq, Kazakhstan and Oman rein in output',
+  'Copper holds near record highs while lithium carbonate cools to CNY 163,000/t',
 ];
 
 function buildBreaking() {
@@ -255,30 +255,24 @@ function buildBreaking() {
 // ─────────────────────────────────────────────
 const NEWS = [
   // FEATURED
-  {featured:true, emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 18, 2026', impact:'high',
-   headline:'Oil at a Crossroads: Brent Slides ~8.5% on the Week to Near $80 as US-Iran Ceasefire Reopens Hormuz',
-   summary:'Brent crude steadied near $80/bbl after a brutal weekly decline of roughly 8.5%, erasing most of the war premium that had built up during the 2026 US-Iran conflict. The reversal followed a memorandum of understanding, signed by the US and Iranian presidents on June 17, that lifts the US blockade on Iranian ports and reopens the Strait of Hormuz — through which about 20% of the world\'s seaborne oil flows — to safe tanker passage. At the height of the war, OPEC had modelled June-July Brent averaging $105/bbl on the assumption the strait stayed shut to most traffic. With the chokepoint reopening and a global supply glut underneath, traders quickly unwound the risk premium.',
-   source:'Reuters / Fortune', tags:['Oil Price','Hormuz','Iran']},
+  {featured:true, emoji:'⚓', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
+   date:'June 20, 2026', impact:'high',
+   headline:'Iran Re-Closes Strait of Hormuz, Imperiling US Peace Deal as Switzerland Talks Open',
+   summary:'Iran dealt two quick blows to its interim agreement with the United States on June 20, declaring the Strait of Hormuz closed again and warning that little is likely to come of the talks now under way in Switzerland. Tehran\'s joint military command cited Israel\'s continued attacks in Lebanon and what it called Washington\'s "bad faith" and "clear breach" of commitments to end the war. The US military pushed back, saying 55 merchant ships still transited the strait on Saturday, moving more than 17 million barrels of oil to global markets. The reversal shatters the optimism that had built after the June 17 memorandum of understanding, and reinstates a war-risk premium over the chokepoint through which roughly a fifth of seaborne oil flows.',
+   source:'NPR / CNN / Washington Times', tags:['Hormuz','Iran','Geopolitics']},
 
   {featured:true, emoji:'☀', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'June 16, 2026', impact:'high',
-   headline:'US Solar Out-Generates Coal for the First Time Ever',
-   summary:'For the first time in history, US solar generation exceeded coal over a full month, supplying 12.8% of the country\'s electricity in May 2026 against coal\'s 12.2%. A record 45.5 TWh of solar power was generated in May, up 17% on the same month a year earlier. The US added 7.8 GW of new solar capacity in the first quarter alone, with more than 6 million installations now nationwide. Notably, states won by Trump in 2024 accounted for 74% of the first-quarter capacity additions, underscoring how solar economics now cut across the political map.',
-   source:'PBS / Ember', tags:['Solar','Coal','US Grid']},
+   date:'June 3, 2026', impact:'high',
+   headline:'US Solar and Storage Pipeline Swells to 195 GW as New Wind Capacity Stalls',
+   summary:'The United States brought 6.4 GW of new utility-scale solar, wind and storage online in the first quarter of 2026, with solar and batteries doing nearly all of the work and onshore wind contributing just 415 MW. Planned solar capacity rose 13% year-on-year and storage 8%, leaving a development pipeline of more than 195 GW nationwide. Land-based wind, by contrast, has flatlined near 28 GW of planned capacity, while planned offshore wind fell a third to about 10 GW amid permitting and policy headwinds. The data underscore how solar-plus-storage has become the default build for new US capacity, even as the wind sector struggles.',
+   source:'pv magazine USA / EIA', tags:['Solar','Storage','US Grid']},
 
   // REGULAR
-  {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'June 9, 2026', impact:'high',
-   headline:'AI Data Centers Near 1,050 TWh in 2026 as Talen Expands Amazon Nuclear Deal to 1,920 MW',
-   summary:'Global data center electricity consumption is on track to approach 1,050 TWh in 2026 — enough to rank as the world\'s fifth-largest power consumer, slotting in between Japan and Russia. The relentless growth is pushing hyperscalers toward nuclear: Talen Energy this month expanded its existing relationship with Amazon, agreeing to supply 1,920 MW of carbon-free power from its Susquehanna plant to AWS data centers through 2042. US data center load is forecast to climb toward 35 GW by 2030, up from roughly 19 GW in 2023, forcing grid operators to delay retirements of gas and even coal capacity.',
-   source:'Brookings / Talen Energy', tags:['AI','Data Centers','Nuclear']},
-
-  {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 15, 2026', impact:'high',
-   headline:'LNG Asia JKM Holds Near Three-Year Highs as 2026 Supply Shortfall Tops 35 Mt',
-   summary:'The Japan-Korea Marker for spot LNG is hovering near three-year highs around $17/MMBtu after touching $17.6 in May, with analysts pointing to an estimated 35 million tonne global supply shortfall for 2026. European TTF has been dragged up in sympathy, trading near €50/MWh as buyers in both regions compete for scarce cargoes. The elevated prices are simultaneously discouraging some price-sensitive Asian demand while failing to attract meaningful new liquefaction supply until the next wave of US and Qatari projects ramps. The squeeze is the single biggest driver behind a fuel-switching surge back toward coal across Asia.',
-   source:'Global LNG Hub / S&P Global', tags:['LNG','JKM','Gas Prices']},
+  {emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'June 19, 2026', impact:'high',
+   headline:'Brent Ends the Week Near $80, Down ~10%, as the Hormuz Risk Premium Whipsaws',
+   summary:'Brent crude steadied around $80.50/bbl and WTI near $77 on Friday June 19, but both benchmarks were still set for a weekly drop of roughly 10% as traders unwound much of the war premium built up during the 2026 US-Iran conflict. Prices had ticked higher into the close after planned US-Iran talks in Switzerland were briefly thrown into doubt. From a March spike near $118-120/bbl, crude has more than halved its conflict-era gains, with an underlying global supply glut capping every rally. The late-week re-closure of the Strait of Hormuz threatens to re-inject volatility when markets reopen.',
+   source:'Reuters / Investing.com', tags:['Oil Price','Brent','Hormuz']},
 
   {emoji:'📕', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'June 18, 2026', impact:'med',
@@ -286,53 +280,83 @@ const NEWS = [
    summary:'OPEC unveiled its World Oil Outlook 2026 at its Vienna secretariat, projecting global energy demand rising 23% to 2050 and oil demand climbing to 124 million barrels per day by mid-century. Secretary General Haitham Al Ghais said meeting that demand will require $17.7 trillion of oil-sector investment from 2026 to 2050 — more than $700 billion every year. The bullish long-term call stands in sharp contrast to near-term conditions, with markets digesting a 2026 supply glut and the demand shock from this year\'s Middle East war. OPEC reaffirmed it would hold to its current output policy.',
    source:'OPEC', tags:['OPEC','Oil Demand','Outlook']},
 
-  {emoji:'🪨', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 14, 2026', impact:'med',
-   headline:'Asia\'s 2026 Coal Demand to Jump 70 Million Tonnes as LNG Shortfall Bites',
-   summary:'Asian coal demand is set to rise by about 70 million tonnes in 2026 as utilities switch away from prohibitively expensive LNG, according to analysts tracking the regional power mix. Thermal coal futures have climbed toward $150/tonne — their highest since September 2023 — after Indonesia tightened export controls, while API2 coal into Europe firmed above $130. Summer cooling demand and lingering disruption from the Middle East conflict have added further support. The dynamic is an uncomfortable reminder that gas-price spikes can reverse, rather than accelerate, the coal phase-down.',
-   source:'OilPrice / Argus', tags:['Coal','Asia','Fuel Switching']},
-
-  {emoji:'🌡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'June 13, 2026', impact:'med',
-   headline:'Early Summer Heat Drives Record Asian Power Demand, Accelerating Fuel Switching',
-   summary:'An early and intense heatwave across South and East Asia has pushed electricity demand to seasonal records, straining grids from India to Japan as air-conditioning load surges. With spot LNG near three-year highs, utilities are leaning harder on coal to keep the lights on, reinforcing the regional swing back toward thermal generation. Grid operators have leaned on demand-response programmes and emergency reserves to avoid the rolling blackouts seen in previous heat events. Analysts warn the pattern of hotter, earlier summers is structurally lifting peak demand faster than dispatchable clean capacity is being added.',
-   source:'Reuters / EIA', tags:['Heatwave','Asia','Peak Demand']},
-
-  {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'June 11, 2026', impact:'high',
-   headline:'War-Driven Price Spike Triggers Demand Destruction: Q2 Oil Deliveries Down ~5 mb/d Year-on-Year',
-   summary:'The IEA and OPEC both flag a sharp near-term hit to oil consumption from the 2026 Middle East conflict, with second-quarter deliveries estimated to have plunged by roughly 5 million barrels per day year-on-year as higher fuel prices and product-availability disruptions curbed usage. Global oil demand is now forecast to decline about 1.1 mb/d across full-year 2026, an unusual contraction outside of recession. The demand hit, layered on top of resilient non-OPEC supply, helps explain why Brent fell so quickly once the Hormuz risk premium began to unwind.',
-   source:'IEA Oil Market Report / OPEC', tags:['Oil Demand','Demand Destruction','War']},
-
-  {emoji:'⛏', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 10, 2026', impact:'med',
-   headline:'US Natural Gas Output Hits Record as June STEO Pencils In 3.3% Production Growth',
-   summary:'The EIA\'s June Short-Term Energy Outlook projects US marketed natural gas production growing 3.3% in 2026 — about 3.9 billion cubic feet per day — keeping domestic prices subdued even as LNG export demand climbs. Henry Hub has slipped to an eight-month low near $3.10/MMBtu as supply growth outpaces consumption. The widening transatlantic spread, with TTF near €50/MWh and Henry Hub barely above $3, has reopened a multi-dollar LNG arbitrage that is pulling record volumes of US gas toward export terminals on the Gulf Coast.',
-   source:'EIA Short-Term Energy Outlook', tags:['Natural Gas','Henry Hub','US Supply']},
-
-  {emoji:'☢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 10, 2026', impact:'med',
-   headline:'Uranium Holds Near $85/lb as TVA Signs Agreement for 6 GW of Small Modular Reactors',
-   summary:'Uranium spot prices have settled into a narrow range near $85 per pound through June, cooling from a speculative spike above $100 earlier in the year while remaining historically elevated. Forward demand keeps building: the Tennessee Valley Authority signed an agreement for up to 6 GW of small modular reactor capacity, one of the largest SMR commitments to date, as utilities position for AI-driven load growth. Kazatomprom and other producers continue to flag supply-chain constraints, underpinning a structurally tighter long-term fuel market even as the spot price consolidates.',
-   source:'TradeTech / Utility Dive', tags:['Uranium','SMR','Nuclear']},
+  {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'June 17, 2026', impact:'med',
+   headline:'LNG Asia JKM Eases ~16% on the Month to Near $15.8/MMBtu as War Premium Fades',
+   summary:'The Japan-Korea Marker for spot LNG fell to about $15.8/MMBtu on June 17, down roughly 16% over the prior month as the geopolitical risk premium drained out of gas markets alongside oil. The benchmark remains around 14% higher than a year ago, and analysts still see a tight global balance with a multi-million-tonne supply shortfall for 2026. European TTF moved lower in sympathy toward €49/MWh as Northeast Asian and European buyers stepped back from aggressive spot buying. The pullback eases — but does not erase — the fuel-switching pressure that has pushed Asian utilities back toward coal.',
+   source:'Global LNG Hub / Trading Economics', tags:['LNG','JKM','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'June 16, 2026', impact:'med',
-   headline:'EU Carbon Price Climbs to €77/Tonne, Highest Since April',
-   summary:'EU Emissions Trading System allowances rose to about €77 per tonne in mid-June, the highest level since April, gaining more than 3% over the past four weeks and nearly 8% year-on-year. Firmer power-sector demand, higher gas prices lifting the cost of coal-to-gas switching, and tightening allowance supply have all supported the move. The strength stands in stark contrast to the multi-year lows the carbon market hit during the previous industrial downturn, and reinforces the cost signal pushing European utilities toward lower-carbon generation.',
+   headline:'EU Carbon Price Climbs to €77.5/Tonne, Highest Since April',
+   summary:'EU Emissions Trading System allowances rose to about €77.5 per tonne in mid-June, the highest level since April, having traded between €60 and €80 over the past year. Firmer power-sector demand, the higher cost of coal-to-gas switching, and tightening allowance supply have all supported the move. Brussels recently adjusted the carbon market\'s rules to dampen price volatility, but the underlying trend remains firm. The strength reinforces the cost signal pushing European utilities toward lower-carbon generation even as gas and coal prices gyrate.',
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'June 18, 2026', impact:'med',
-   headline:'Transition Metals Diverge: Copper Near Record Highs While Lithium Stays Up 175% Year-on-Year',
-   summary:'The metals that underpin the energy transition are moving in opposite directions. Copper is trading in a $10,000-$11,000 per tonne range near record highs, with Goldman Sachs expecting prices to ease only modestly from here as electrification demand keeps the market structurally tight. Lithium carbonate, by contrast, has cooled to around CNY 163,000 ($22,900) per tonne — down more than 10% over the past month — yet remains roughly 175% higher than a year ago after a sharp 2026 rally on tighter supply. The split underscores how copper\'s grid-and-wiring demand is proving stickier than lithium\'s more volatile battery cycle.',
+   headline:'Transition Metals Diverge: Copper Holds Near Records While Lithium Cools to CNY 163,000/t',
+   summary:'The metals underpinning the energy transition are moving in opposite directions. Copper is trading near $10,950 per tonne, just shy of the record $11,771 hit in December 2025, with Goldman Sachs expecting only a modest decline from here as electrification keeps the market structurally tight. Lithium carbonate, by contrast, has slid to about CNY 163,000 ($22,700) per tonne in China — its lowest in nearly two months — as higher prices coaxed producers to restart idled output, pulling back from a two-year high near CNY 200,500 in May. The split shows how copper\'s grid-and-wiring demand is proving stickier than lithium\'s more volatile battery cycle.',
    source:'Goldman Sachs / Trading Economics', tags:['Copper','Lithium','Metals']},
+
+  {emoji:'🪨', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 14, 2026', impact:'med',
+   headline:'Asia\'s 2026 Coal Demand to Jump 70 Million Tonnes Even as Prices Retreat From Highs',
+   summary:'Asian coal demand is set to rise by about 70 million tonnes in 2026 as utilities switch away from expensive LNG, according to analysts tracking the regional power mix. Newcastle thermal coal futures retreated to around $145/tonne after touching three-year highs near $150 — a level last seen in September 2023 following Indonesian export curbs — as hopes for a US-Iran peace deal trimmed the fuel-switching incentive. European API2 coal eased toward $128/tonne in sympathy. The dynamic is an uncomfortable reminder that gas-price spikes can reverse, rather than accelerate, the coal phase-down.',
+   source:'OilPrice / Argus', tags:['Coal','Asia','Fuel Switching']},
+
+  {emoji:'⛏', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 10, 2026', impact:'med',
+   headline:'US Natural Gas Output Hits Record as June STEO Pencils In 3.3% Production Growth',
+   summary:'The EIA\'s June Short-Term Energy Outlook projects US marketed natural gas production growing 3.3% in 2026 — about 3.9 billion cubic feet per day — keeping domestic prices subdued even as LNG export demand climbs. Henry Hub has slipped to an eight-month low near $3.05/MMBtu as supply growth outpaces consumption. The widening transatlantic spread, with TTF near €49/MWh and Henry Hub barely above $3, keeps a multi-dollar LNG arbitrage open that is pulling record volumes of US gas toward export terminals on the Gulf Coast.',
+   source:'EIA Short-Term Energy Outlook', tags:['Natural Gas','Henry Hub','US Supply']},
+
+  {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 11, 2026', impact:'med',
+   headline:'2026 Branded the \'Year of the Glut\' as Non-OPEC Supply Swamps Soft Demand',
+   summary:'Market strategists are calling 2026 the year of the oil glut, with surging non-OPEC output from the US, Guyana and Brazil colliding with demand softened by this year\'s price shock. Even a historic US intervention in Venezuela and the Middle East war failed to durably lift crude, as ample inventories and spare capacity capped rallies. The structural oversupply has repeatedly reasserted itself whenever the Hormuz risk premium fades, pushing forecasters toward a softer second-half price path despite OPEC keeping its current production policy.',
+   source:'EnergyNow / TD Securities', tags:['Oil Glut','Supply','Non-OPEC']},
+
+  {emoji:'📉', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 12, 2026', impact:'med',
+   headline:'OPEC+ Compensation Cuts Triple to 829,000 bpd as Key Producers Rein In Output',
+   summary:'OPEC+ producers that had overshot their quotas are tripling their compensation cuts, with the UAE, Iraq, Kazakhstan and Oman set to remove a combined 829,000 barrels per day from the market — roughly three times their previous pledge. The move is an effort to claw back credibility on supply discipline as the group navigates a glutted 2026 market and the whipsawing Middle East risk premium. Analysts see the deeper cuts as a signal that OPEC+ is prioritizing price defense over market share heading into the second half of the year.',
+   source:'OilPrice / Al Jazeera', tags:['OPEC+','Output Cuts','Supply']},
+
+  {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 9, 2026', impact:'high',
+   headline:'AI Data Centers Near 1,050 TWh in 2026 as Hyperscalers Lock In Nuclear Power',
+   summary:'Global data center electricity consumption is on track to approach 1,050 TWh in 2026 — enough to rank as the world\'s fifth-largest power consumer, slotting in between Japan and Russia. Goldman Sachs estimates data center demand could rise 160% by 2030, and EPRI sees the sector consuming up to 9% of US electricity by then, up from about 4% in 2023. The relentless growth is pushing hyperscalers toward nuclear: Amazon is drawing power directly from the Susquehanna plant in Pennsylvania, while Microsoft is restarting part of Three Mile Island, forcing grid operators to delay retirements of gas and even coal capacity.',
+   source:'Brookings / Belfer Center', tags:['AI','Data Centers','Nuclear']},
+
+  {emoji:'📊', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 17, 2026', impact:'med',
+   headline:'BloombergNEF New Energy Outlook 2026: Solar to Become Largest Power Source by 2032',
+   summary:'BloombergNEF\'s New Energy Outlook 2026 argues that expanded electrification and a shift toward newer technologies will strengthen national energy security while reshaping global power demand. The report projects solar becoming the world\'s single largest source of electricity generation by 2032, driven by relentless cost declines and overcapacity. Rising electrification of transport, heating and industry — compounded by AI computing load — keeps total electricity demand on a steep upward path, even as efficiency gains slow growth in primary energy. The analysis frames the 2030s as the decade clean power moves from marginal to dominant.',
+   source:'BloombergNEF', tags:['Electrification','BNEF','Demand']},
+
+  {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 11, 2026', impact:'high',
+   headline:'War-Driven Price Spike Triggers Demand Destruction: Q2 Oil Deliveries Down ~5 mb/d Year-on-Year',
+   summary:'The IEA and OPEC both flag a sharp near-term hit to oil consumption from the 2026 Middle East conflict, with second-quarter deliveries estimated to have plunged by roughly 5 million barrels per day year-on-year as higher fuel prices and product-availability disruptions curbed usage. Global oil demand is now forecast to decline about 1.1 mb/d across full-year 2026, an unusual contraction outside of recession. The demand hit, layered on top of resilient non-OPEC supply, helps explain why Brent fell so quickly each time the Hormuz risk premium began to unwind.',
+   source:'IEA Oil Market Report / OPEC', tags:['Oil Demand','Demand Destruction','War']},
+
+  {emoji:'🌡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 13, 2026', impact:'med',
+   headline:'Early Summer Heat Drives Record Asian Power Demand, Reinforcing Fuel Switching',
+   summary:'An early and intense heatwave across South and East Asia has pushed electricity demand to seasonal records, straining grids from India to Japan as air-conditioning load surges. Even with spot LNG retreating from three-year highs, utilities are leaning hard on coal to keep the lights on, sustaining the regional swing back toward thermal generation. Grid operators have relied on demand-response programmes and emergency reserves to avoid the rolling blackouts seen in previous heat events. Analysts warn the pattern of hotter, earlier summers is structurally lifting peak demand faster than dispatchable clean capacity is being added.',
+   source:'Reuters / EIA', tags:['Heatwave','Asia','Peak Demand']},
 
   {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 1, 2026', impact:'high',
    headline:'455 GW of European Battery Storage Stuck in Grid-Connection Queues',
    summary:'Distribution-grid connection queues are holding up roughly 455 GW of battery storage projects and 375 GW of renewable capacity across eight European markets, with the stranded assets valued at around €100 billion. The bottleneck means Europe is wasting large amounts of clean power for lack of somewhere to store it, raising the risk of curtailment, congestion and price volatility across the bloc. Energy ministers have flagged grid modernisation and faster permitting as the binding constraint on the transition — increasingly more important than the cost of the hardware itself.',
    source:'ESS-News / Energy-Storage.News', tags:['Battery Storage','Grid','Europe']},
+
+  {emoji:'🔌', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'June 10, 2026', impact:'med',
+   headline:'BloombergNEF Sees Record 158 GW / 459 GWh of Global Storage Deployed in 2026',
+   summary:'BloombergNEF expects global non-pumped-hydro energy storage deployments to jump 41% this year to 158 GW / 459 GWh, after a record 112 GW was installed in 2025. Falling costs are the engine: the benchmark price for a four-hour battery project dropped 27% year-on-year to a record-low $78 per MWh, even as the costs of some other clean technologies rose. The surge cements batteries as the fastest-scaling piece of the power system, smoothing the variability of the solar capacity flooding onto grids worldwide.',
+   source:'BloombergNEF / Energy-Storage.News', tags:['Battery Storage','BNEF','Costs']},
 
   {emoji:'🤝', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 12, 2026', impact:'med',
@@ -342,7 +366,7 @@ const NEWS = [
 
   {emoji:'🛰', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 7, 2026', impact:'med',
-   headline:'Solar Module Prices Ease Toward $0.11/W Even as Polysilicon Stages a Rebound',
+   headline:'Solar Module Prices Hold Near $0.11/W Even as Polysilicon Stages a Rebound',
    summary:'Chinese tier-1 TOPCon modules are trading near $0.11 per watt, with the industry expected to settle around $0.12/W in the second half of 2026 as front-loaded demand and persistent oversupply battle against rising input costs. Polysilicon has staged a sharp rebound, with prices pushing above CNY 60,000 ($8,590) per tonne after Chinese producers curbed loss-making output and Beijing removed the 9% VAT export rebate. The result is a tug-of-war between supply-chain discipline upstream and chronic module oversupply downstream that is keeping panel prices volatile but still near historic lows.',
    source:'PV Magazine / InfoLink', tags:['Solar','Modules','Polysilicon']},
 
@@ -357,24 +381,6 @@ const NEWS = [
    headline:'EU Restricts Funding for Chinese Inverters and Battery Systems Over Cybersecurity',
    summary:'The European Commission has moved to restrict EU funding — including via the European Investment Bank — for solar, wind and storage projects that rely on inverters and power-conversion systems from high-risk countries, naming China, Russia, Iran and North Korea, citing cybersecurity concerns. The restriction explicitly extends to battery energy storage systems, affecting billions in financing. The policy lands as Chinese firms control more than 80% of Europe\'s residential storage market and nearly 88% of its lithium-ion battery imports, exposing how dependent the bloc\'s transition has become on a single supplier base.',
    source:'PV Magazine / Euronews', tags:['EU Policy','Cybersecurity','China']},
-
-  {emoji:'📊', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'June 17, 2026', impact:'med',
-   headline:'BloombergNEF New Energy Outlook 2026: Electrification and Newer Tech to Reshape Demand',
-   summary:'BloombergNEF\'s New Energy Outlook 2026 argues that expanded electrification and a shift toward newer technologies will strengthen national energy security while reshaping global power demand. The report projects solar becoming the world\'s single largest source of electricity generation by 2032, driven by relentless cost declines and overcapacity. Rising electrification of transport, heating and industry — compounded by AI computing load — keeps total electricity demand on a steep upward path, even as efficiency gains slow growth in primary energy. The analysis frames the 2030s as the decade clean power moves from marginal to dominant.',
-   source:'BloombergNEF', tags:['Electrification','BNEF','Demand']},
-
-  {emoji:'⛏', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 11, 2026', impact:'med',
-   headline:'2026 Branded the \'Year of the Glut\' as Non-OPEC Supply Swamps Soft Demand',
-   summary:'Market strategists are calling 2026 the year of the oil glut, with surging non-OPEC output from the US, Guyana and Brazil colliding with demand softened by this year\'s price shock. Even a historic US intervention in Venezuela and the Middle East war failed to durably lift crude, as ample inventories and spare capacity capped rallies. The structural oversupply has reasserted itself now that the Strait of Hormuz is reopening, pushing forecasters toward a softer second-half price path despite OPEC\'s decision to hold its current production policy.',
-   source:'EnergyNow / TD Securities', tags:['Oil Glut','Supply','Non-OPEC']},
-
-  {emoji:'⚓', bgColor:'rgba(239,68,68,0.1)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'June 18, 2026', impact:'high',
-   headline:'Hormuz Reopens but War-Risk Premiums and Mine-Clearing Slow Tanker Normalization',
-   summary:'Commercial traffic through the Strait of Hormuz — which fell more than 90% at the height of the conflict — is beginning to recover after the US lifted its blockade and Iran pledged safe passage, but normalization is gradual. War-risk insurance premiums for Gulf tankers remain sharply elevated, and naval and commercial operators are wary of sea mines laid during the fighting that still require clearing. A 60-day clock toward a final deal is now ticking following the June 17 signing, leaving shippers and oil traders watching for any breakdown that could re-close the world\'s most important oil chokepoint.',
-   source:'NPR / Council on Foreign Relations', tags:['Hormuz','Geopolitics','Shipping']},
 ];
 
 // ─────────────────────────────────────────────
