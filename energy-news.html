@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy News — World Energy Atlas</title>
+<style>
+:root{--bg:#080c18;--bg2:#0d1526;--card:#111827;--blue:#3b82f6;--blueb:#60a5fa;--amber:#f59e0b;--amberb:#fbbf24;--green:#10b981;--red:#ef4444;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--border:rgba(255,255,255,0.08);--r:10px;--tr:0.3s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hdr-inner{display:flex;align-items:center;gap:14px;padding:12px 24px;max-width:1400px;margin:0 auto}
+.back-link{display:flex;align-items:center;gap:6px;color:var(--t2);text-decoration:none;font-size:0.82rem;font-weight:500;transition:var(--tr);padding:6px 12px;border:1px solid var(--border);border-radius:7px}
+.back-link:hover{color:var(--t1);border-color:rgba(255,255,255,0.2)}
+.hdr-logo{font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:7px}
+.hdr-logo-icon{width:26px;height:26px;background:linear-gradient(135deg,#f59e0b,#3b82f6);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.hdr-title{margin-left:4px;font-size:1.1rem;font-weight:700;color:var(--t1)}
+.hdr-title span{color:var(--red);font-size:0.7rem;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:4px;padding:2px 7px;margin-left:8px;font-weight:600;vertical-align:middle}
+.last-updated{margin-left:auto;font-size:0.72rem;color:var(--t3)}
+.last-updated strong{color:var(--green)}
+
+/* ── MARKET PRICE TICKER ── */
+.price-ticker{background:rgba(255,255,255,0.03);border-bottom:1px solid var(--border);overflow:hidden;height:36px;display:flex;align-items:center}
+.price-ticker-inner{display:flex;gap:0;animation:tickerScroll 60s linear infinite;white-space:nowrap;will-change:transform}
+.price-ticker-inner:hover{animation-play-state:paused}
+.price-item{display:inline-flex;align-items:center;gap:6px;padding:0 24px;border-right:1px solid var(--border);font-size:0.76rem;height:36px}
+.price-label{color:var(--t3);font-weight:500}
+.price-val{font-weight:700;font-family:'Courier New',monospace;font-size:0.78rem}
+.price-chg{font-size:0.68rem;font-weight:600;padding:1px 5px;border-radius:3px}
+.up{color:#10b981;background:rgba(16,185,129,0.12)}
+.dn{color:#ef4444;background:rgba(239,68,68,0.12)}
+
+/* ── BREAKING TICKER ── */
+.breaking-bar{background:linear-gradient(90deg,rgba(239,68,68,0.18),rgba(239,68,68,0.06));border-bottom:1px solid rgba(239,68,68,0.2);display:flex;align-items:center;height:34px;overflow:hidden}
+.breaking-label{background:#ef4444;color:#fff;font-size:0.68rem;font-weight:800;letter-spacing:1.5px;padding:0 14px;height:100%;display:flex;align-items:center;white-space:nowrap;flex-shrink:0}
+.breaking-track{flex:1;overflow:hidden}
+.breaking-inner{display:flex;gap:0;animation:tickerScroll 80s linear infinite;white-space:nowrap}
+.breaking-inner:hover{animation-play-state:paused}
+.breaking-item{display:inline-flex;align-items:center;font-size:0.78rem;color:var(--t1);padding:0 40px;gap:10px}
+.breaking-dot{width:5px;height:5px;background:#ef4444;border-radius:50%;flex-shrink:0}
+
+/* ── HERO ── */
+.page-hero{padding:40px 24px 28px;max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.hero-left h1{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;margin-bottom:8px}
+.hero-left h1 span{color:var(--amberb)}
+.hero-left p{color:var(--t2);font-size:0.9rem;max-width:500px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.h-stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 20px;text-align:center;min-width:110px}
+.h-stat .sv{font-size:1.5rem;font-weight:800;color:var(--amberb);line-height:1}
+.h-stat .sl{font-size:0.65rem;color:var(--t3);margin-top:3px}
+
+/* ── FILTER BAR ── */
+.filter-wrap{padding:0 24px 20px;max-width:1400px;margin:0 auto}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filt{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:0.8rem;color:var(--t2);transition:var(--tr);font-family:inherit}
+.filt:hover{border-color:rgba(255,255,255,0.2);color:var(--t1)}
+.filt.active{border-color:currentColor;font-weight:600}
+.filt-count{font-size:0.65rem;background:rgba(255,255,255,0.08);border-radius:8px;padding:1px 6px;font-weight:700}
+
+/* ── NEWS GRID ── */
+.news-wrap{max-width:1400px;margin:0 auto;padding:0 24px 60px}
+.featured-row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+
+/* ── CARDS ── */
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:var(--tr);display:flex;flex-direction:column}
+.news-card:hover{border-color:rgba(255,255,255,0.15);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.news-card.featured{border-color:rgba(251,191,36,0.25);background:rgba(251,191,36,0.03)}
+.card-visual{height:140px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;overflow:hidden;flex-shrink:0}
+.card-visual.featured-vis{height:200px;font-size:72px}
+.card-vis-bg{position:absolute;inset:0;opacity:0.12}
+.card-body{padding:16px;flex:1;display:flex;flex-direction:column}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.cat-badge{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:4px}
+.card-date{font-size:0.7rem;color:var(--t3)}
+.impact{font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-left:auto}
+.impact.high{background:rgba(239,68,68,0.15);color:#ef4444}
+.impact.med{background:rgba(245,158,11,0.15);color:#f59e0b}
+.impact.low{background:rgba(100,116,139,0.15);color:#94a3b8}
+.card-headline{font-size:1rem;font-weight:700;color:var(--t1);margin-bottom:8px;line-height:1.35}
+.card-headline.featured-hl{font-size:1.2rem}
+.card-summary{font-size:0.8rem;color:var(--t2);line-height:1.55;flex:1}
+.card-footer{padding:10px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02)}
+.card-source{font-size:0.68rem;color:var(--t3)}
+.card-tags{display:flex;gap:4px}
+.tag{font-size:0.62rem;color:var(--t3);background:rgba(255,255,255,0.04);border-radius:4px;padding:2px 6px}
+.hidden{display:none!important}
+
+/* ── ANIMATIONS ── */
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.live-dot{width:6px;height:6px;background:#ef4444;border-radius:50%;display:inline-block;margin-right:5px;animation:pulse 1.5s ease-in-out infinite}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.featured-row{grid-template-columns:1fr}}
+@media(max-width:600px){.news-grid{grid-template-columns:1fr}.page-hero{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-inner">
+    <a href="index.html" class="back-link">← World Energy Atlas</a>
+    <div class="hdr-logo"><div class="hdr-logo-icon">📰</div></div>
+    <div class="hdr-title">Energy News<span>LIVE</span></div>
+    <div class="last-updated">Updated: <strong id="lastUpdate"></strong></div>
+  </div>
+</header>
+
+<!-- MARKET PRICE TICKER -->
+<div class="price-ticker" aria-label="Live market prices">
+  <div class="price-ticker-inner" id="priceTicker"></div>
+</div>
+
+<!-- BREAKING NEWS TICKER -->
+<div class="breaking-bar">
+  <div class="breaking-label">⚡ BREAKING</div>
+  <div class="breaking-track">
+    <div class="breaking-inner" id="breakingTicker"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-left">
+    <h1>Global <span>Energy Markets</span> — Latest Intelligence</h1>
+    <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="h-stat"><div class="sv">$78.40</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€32.50</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.84</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.16</div><div class="sl">Solar Module/W</div></div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-wrap">
+  <div class="filters" id="filters" role="group" aria-label="Filter news by category">
+    <button class="filt active" data-cat="all" style="color:var(--t1)">All Stories <span class="filt-count">20</span></button>
+    <button class="filt" data-cat="prices" style="color:#fbbf24">💰 Prices <span class="filt-count">5</span></button>
+    <button class="filt" data-cat="supply" style="color:#f97316">🛢 Supply <span class="filt-count">4</span></button>
+    <button class="filt" data-cat="demand" style="color:#3b82f6">📈 Demand <span class="filt-count">4</span></button>
+    <button class="filt" data-cat="renewables" style="color:#10b981">♻ Renewables <span class="filt-count">4</span></button>
+    <button class="filt" data-cat="policy" style="color:#a855f7">🏛 Policy <span class="filt-count">2</span></button>
+    <button class="filt" data-cat="geopolitics" style="color:#ef4444">⚔ Geopolitics <span class="filt-count">1</span></button>
+  </div>
+</div>
+
+<!-- NEWS -->
+<div class="news-wrap">
+  <div class="featured-row" id="featuredRow"></div>
+  <div class="news-grid" id="newsGrid"></div>
+</div>
+
+<footer style="background:#0d1526;border-top:1px solid rgba(255,255,255,0.08);padding:30px 24px;text-align:center">
+  <p style="color:#64748b;font-size:0.8rem">World Energy Atlas News — Aggregated analysis for educational purposes.</p>
+  <p style="color:#475569;font-size:0.72rem;margin-top:6px">Sources: IEA, Bloomberg NEF, Reuters Energy, Wood Mackenzie, S&P Global Commodity Insights, ICIS, Platts</p>
+  <a href="index.html" style="display:inline-block;margin-top:14px;color:#60a5fa;font-size:0.8rem;text-decoration:none">← Back to World Energy Atlas</a>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+//  MARKET PRICES
+// ─────────────────────────────────────────────
+const BASE_PRICES = [
+  {label:'Brent Crude',    val:78.40, unit:'/bbl',     chg:+0.82, pct:-1.03},
+  {label:'WTI Crude',      val:74.20, unit:'/bbl',     chg:-0.54, pct:-0.72},
+  {label:'Natural Gas TTF',val:32.50, unit:'€/MWh',    chg:+0.26, pct:+0.81},
+  {label:'Henry Hub',      val:2.84,  unit:'/MMBtu',   chg:-0.03, pct:-1.05},
+  {label:'LNG Asia JKM',   val:12.20, unit:'/MMBtu',   chg:+0.17, pct:+1.41},
+  {label:'Coal API2',      val:105.0, unit:'/t',       chg:-0.95, pct:-0.90},
+  {label:'EU Carbon ETS',  val:58.20, unit:'€/t CO₂',  chg:+1.22, pct:+2.14},
+  {label:'Uranium',        val:91.50, unit:'/lb U₃O₈', chg:+0.65, pct:+0.71},
+  {label:'Solar Module',   val:0.16,  unit:'/W',       chg:-0.005,pct:-3.03},
+  {label:'Wind Turbine',   val:0.82,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
+  {label:'Lithium',        val:13800, unit:'/t',       chg:-320,  pct:-2.27},
+  {label:'Copper',         val:9840,  unit:'/t',       chg:+88,   pct:+0.90},
+];
+
+let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
+
+function buildPriceTicker() {
+  const el = document.getElementById('priceTicker');
+  const doubled = [...livePrices, ...livePrices];
+  doubled.forEach((p, i) => {
+    const up = p.chg >= 0;
+    const div = document.createElement('div');
+    div.className = 'price-item';
+    div.id = 'pi-' + i;
+    div.innerHTML =
+      `<span class="price-label">${p.label}</span>` +
+      `<span class="price-val" id="pv-${i}">${formatPrice(p)}</span>` +
+      `<span class="price-chg ${up?'up':'dn'}">${up?'▲':'▼'}${Math.abs(p.pct).toFixed(2)}%</span>`;
+    el.appendChild(div);
+  });
+}
+
+function formatPrice(p) {
+  const v = p.liveVal ?? p.val;
+  if (v >= 1000) return v.toLocaleString('en-US', {maximumFractionDigits:0});
+  if (v < 1) return v.toFixed(3);
+  if (v < 10) return v.toFixed(2);
+  return v.toFixed(2);
+}
+
+function jitterPrices() {
+  livePrices.forEach((p, i) => {
+    const jitter = p.val * (Math.random() * 0.004 - 0.002);
+    p.liveVal = Math.max(0.001, (p.liveVal ?? p.val) + jitter);
+    // Update both copies in the duplicated ticker
+    [i, i + livePrices.length].forEach(idx => {
+      const el = document.getElementById('pv-' + idx);
+      if (el) el.textContent = formatPrice(p);
+    });
+  });
+}
+
+// ─────────────────────────────────────────────
+//  BREAKING HEADLINES
+// ─────────────────────────────────────────────
+const BREAKING = [
+  'OPEC+ ministers hold emergency call as Brent slides below $79',
+  'IEA raises 2025 solar capacity forecast by 12% citing China buildout',
+  'Germany announces €18B grid upgrade tender for 2025–2028',
+  'US LNG export capacity reaches 14 Bcf/day for first time',
+  'India overtakes EU in total electricity consumption for first time in history',
+  'AI data centers on track to consume 1,000 TWh globally by 2027 — Goldman Sachs',
+  'EU carbon price falls to 2-year low amid weak industrial demand',
+  'Uranium spot price hits $92/lb; nuclear fuel demand outpacing mine supply',
+  'Chile awards record-low $22/MWh solar PPA in Atacama Desert auction',
+  'UK offshore wind beats gas on cost for first time in unsubsidised market',
+  'Saudi Arabia reaffirms 50% renewable electricity target by 2030',
+  'South Africa load-shedding nears 300 days for third consecutive year',
+  'Commonwealth Fusion Systems raises $2B for SPARC reactor construction',
+];
+
+function buildBreaking() {
+  const el = document.getElementById('breakingTicker');
+  const doubled = [...BREAKING, ...BREAKING];
+  doubled.forEach(h => {
+    const div = document.createElement('div');
+    div.className = 'breaking-item';
+    div.innerHTML = `<span class="breaking-dot"></span>${h}`;
+    el.appendChild(div);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  NEWS DATA
+// ─────────────────────────────────────────────
+const NEWS = [
+  // FEATURED
+  {featured:true, emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'June 12, 2025', impact:'high',
+   headline:'OPEC+ Holds Output Cuts as US Production Sets Monthly Record — Oil at Crossroads',
+   summary:'OPEC+ ministers agreed to extend production cuts of 3.66 million bpd through Q3 2025 in a unanimous decision, yet Brent crude remains range-bound near $78/bbl as US production simultaneously hit a fresh record of 13.4 million bpd. The paradox reflects a structural shift in global oil markets: OPEC no longer wields the pricing power it once had. Non-OPEC supply from the US, Guyana, and Brazil added over 2 million bpd in 2024 alone. Goldman Sachs revised its year-end price target downward to $72/bbl, warning that the cartel\'s strategy of defending price over market share may be entering its final chapter.',
+   source:'Reuters / S&P Global', tags:['OPEC+','Oil Price','US Production']},
+
+  {featured:true, emoji:'☀', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'June 10, 2025', impact:'high',
+   headline:'Solar Module Prices Hit All-Time Low of $0.16/W — Forcing Project Economics to Be Rewritten',
+   summary:'Chinese solar manufacturers have driven wafer and module prices to a historic low of $0.155–0.165 per watt, down more than 55% from Q1 2023 levels. The collapse in prices has bifurcated the industry: utility-scale project developers are securing record-low power purchase agreements well below $25/MWh in sun-rich regions, while Western manufacturers face an existential crisis without tariff protection. India\'s solar auction this week cleared at a record ₹1.85/kWh ($0.022/kWh) for 500 MW in Rajasthan.',
+   source:'BloombergNEF / BNEF', tags:['Solar','Manufacturing','LCOE']},
+
+  // REGULAR
+  {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 11, 2025', impact:'high',
+   headline:'AI Data Centers Set to Add 1,000 TWh of Annual Demand by 2027',
+   summary:'The AI computing boom is creating an electricity demand surge with no peacetime precedent. Goldman Sachs estimates global data center power consumption will reach 1,000 TWh by 2027 — equivalent to Germany\'s entire annual output. In the US alone, data center load growth is forcing grid operators to reconsider retirement timelines for gas and even some coal plants. Microsoft, Google, and Amazon have each signed nuclear power agreements as the only source capable of providing round-the-clock, zero-carbon power at the scale required.',
+   source:'Goldman Sachs Research', tags:['AI','Data Centers','Grid']},
+
+  {emoji:'⚗', bgColor:'rgba(16,185,129,0.1)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 9, 2025', impact:'high',
+   headline:'US LNG Exports Hit Record 14 Bcf/Day, Cementing Role as World\'s Top Supplier',
+   summary:'US liquefied natural gas exports reached a record 14 billion cubic feet per day in May 2025, surpassing Qatar to make the United States the world\'s largest LNG exporter for the second consecutive year. Sabine Pass Train 7 and Corpus Christi expansion contributed 3 Bcf/day of new capacity commissioned since 2024. European buyers now source over 48% of LNG imports from the US, a seismic shift from near-zero in 2021. Asian spot JKM prices rose to $12.20/MMBtu on summer cooling demand, with Japan, South Korea, and China all competing for cargoes.',
+   source:'EIA / Wood Mackenzie', tags:['LNG','Natural Gas','Trade']},
+
+  {emoji:'🏭', bgColor:'rgba(239,68,68,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'June 8, 2025', impact:'high',
+   headline:'German Industrial Electricity at €180/MWh — Three Times US Levels, Triggering Factory Exodus',
+   summary:'Industrial electricity prices in Germany averaged €180/MWh in Q1 2025, compared to approximately €55/MWh for equivalent US industrial customers. BASF, Thyssenkrupp, and Volkswagen have each announced major capacity reductions in Germany citing energy cost competitiveness. The Federation of German Industries (BDI) calculates the country has lost €65 billion in energy-intensive industrial output since 2021. Chancellor Scholz\'s emergency energy subsidy package worth €25 billion is seen as insufficient without a structural fix to generation costs.',
+   source:'Bruegel / BDI', tags:['Germany','Industrial','Competitiveness']},
+
+  {emoji:'🇮🇳', bgColor:'rgba(251,191,36,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 7, 2025', impact:'high',
+   headline:'India Overtakes EU in Total Electricity Consumption — A Historic Energy Milestone',
+   summary:'India\'s total electricity consumption crossed 1,900 TWh in the twelve months to March 2025, exceeding the EU-27 combined for the first time in history. The milestone reflects India\'s rapid industrialisation, near-universal electrification achieved in 2019, and a surge in cooling demand as average temperatures rise. India added 25 GW of coal capacity alongside 32 GW of renewables in 2024 — the only major economy building significant new coal while simultaneously breaking renewable records. Peak demand hit 246 GW in May, straining northern grids.',
+   source:'CEA India / IEA', tags:['India','Demand Growth','Electrification']},
+
+  {emoji:'⚛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
+   date:'June 6, 2025', impact:'high',
+   headline:'G7 Leaders Pledge to Triple Nuclear Capacity by 2050 at Puglia Summit',
+   summary:'G7 leaders in their energy communiqué made the strongest collective statement on nuclear power in decades, committing to "support tripling global nuclear capacity by 2050" as an essential complement to renewables. Japan announced restarting 5 additional reactors by year-end. The US Restart Act extension added $5 billion to keep existing plants online. The UK confirmed Sizewell C with EDF at £35 billion. Poland broke ground on its first nuclear plant with Westinghouse AP1000 technology. Critics note the targets require 60+ new reactors in mature democracies where recent builds have faced major delays.',
+   source:'G7 Presidency Statement', tags:['Nuclear','G7','Policy']},
+
+  {emoji:'🇿🇦', bgColor:'rgba(239,68,68,0.1)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'June 5, 2025', impact:'high',
+   headline:'South Africa\'s Energy Crisis: Load-Shedding Costs Economy $50M Every Single Day',
+   summary:'The World Bank has calculated that South Africa\'s ongoing electricity crisis — now entering its fourth year — costs the economy approximately $50 million per day in lost productivity, damaged equipment, and emergency backup power. Eskom\'s coal fleet is operating at just 34% availability, the lowest since records began. The government\'s Just Energy Transition Partnership secured $8.5 billion in international financing, but deployment has been slower than planned. A silver lining: rooftop solar installations surged 400% in 2024 as households and businesses self-generated during outages.',
+   source:'World Bank / Eskom', tags:['South Africa','Load-Shedding','Coal']},
+
+  {emoji:'🏔', bgColor:'rgba(34,211,238,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'June 4, 2025', impact:'med',
+   headline:'UK Records First Day of 70%+ Clean Electricity, Coal-Free Since April',
+   summary:'The UK grid achieved 72% clean electricity generation on June 1, driven by strong offshore wind output (38%), nuclear (14%), solar (11%), and hydro/imports. The milestone comes six weeks after the UK\'s last coal power station — Ratcliffe-on-Soar — permanently closed on April 30, 2024, ending 142 years of coal power. National Grid ESO confirmed the grid operated safely at these high renewable penetration levels with no stability incidents. Battery storage systems (4.2 GW installed) helped balance the grid during evening demand peaks.',
+   source:'National Grid ESO', tags:['UK','Offshore Wind','Coal Phase-Out']},
+
+  {emoji:'☢', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'June 3, 2025', impact:'med',
+   headline:'Uranium Spot Price Climbs to $92/lb as SMR Pipeline Drives Forward Demand',
+   summary:'Uranium spot prices reached $92 per pound in May 2025, a level last seen in 2007, as utility buyers scramble to secure long-term fuel supply contracts for both existing reactors and an expanding pipeline of small modular reactors (SMRs). Kazakhstan\'s Kazatomprom — the world\'s largest producer — warned of production shortfalls due to sulfuric acid supply constraints. NuScale, X-energy, and Terrapower have each announced fuel procurement contracts extending to the 2040s. The World Nuclear Association projects uranium demand growing 40% by 2040.',
+   source:'UxC / World Nuclear Association', tags:['Uranium','Nuclear','SMR']},
+
+  {emoji:'🌏', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'June 2, 2025', impact:'high',
+   headline:'Asian Heatwave Breaks Simultaneous Demand Records in 7 Countries',
+   summary:'An unprecedented early-season heatwave across South and East Asia broke electricity demand records in Japan, South Korea, Vietnam, Thailand, Bangladesh, India, and Pakistan simultaneously in the final week of May. Japan\'s grid peaked at 96% utilisation with emergency import requests from South Korea via the undersea interconnector. Vietnam experienced rolling blackouts affecting export manufacturing in Ho Chi Minh City industrial zones. Thai utility EGAT activated all reserve capacity. The event has accelerated discussions about a Northeast Asian supergrid connecting China, Japan, South Korea, and Mongolia\'s vast wind resources.',
+   source:'CEPSI / EGAT / KEPCO', tags:['Heatwave','Asia','Grid Stress']},
+
+  {emoji:'⚡', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'May 30, 2025', impact:'high',
+   headline:'IEA: Global Clean Energy Investment Hits $2 Trillion in 2024 — Double Fossil Fuel Spending',
+   summary:'Total global investment in clean energy technologies reached $2 trillion in 2024 for the first time in history, according to the IEA\'s World Energy Investment report. This is more than double the $950 billion invested in fossil fuel supply. Solar alone attracted $500 billion, surpassing oil upstream exploration globally. EV batteries and charging infrastructure added $350 billion. The IEA notes the investment gap between advanced economies and developing nations is widening: the US and EU combined for 55% of clean investment despite having 15% of global population.',
+   source:'IEA World Energy Investment 2025', tags:['Investment','Clean Energy','IEA']},
+
+  {emoji:'🇨🇳', bgColor:'rgba(107,114,128,0.1)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'May 28, 2025', impact:'med',
+   headline:'China Sets Coal Production Record at 4.8 Billion Tonnes While Also Breaking Solar Install Records',
+   summary:'China produced 4.8 billion tonnes of coal in 2024 — a new global record — even as it simultaneously installed 260 GW of solar and 75 GW of wind, also both global records. The apparent paradox is explained by surging electricity demand (up 8.5% in 2024) that currently exceeds even China\'s extraordinary renewable buildout. Analysts at Wood Mackenzie now forecast Chinese coal power generation will peak in 2026–2027, with the inflection point driven by battery storage deployment making solar and wind fully dispatchable on an hourly basis.',
+   source:'CREA / Wood Mackenzie', tags:['China','Coal','Renewables Paradox']},
+
+  {emoji:'🇸🇦', bgColor:'rgba(34,211,238,0.1)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
+   date:'May 26, 2025', impact:'high',
+   headline:'Middle East Tensions Drive Oil Options Volatility to Highest Since Ukraine Invasion',
+   summary:'Implied volatility in crude oil options markets spiked to its highest level since Russia\'s invasion of Ukraine in 2022, as escalating regional tensions raise concerns about potential disruptions to the 21 million bpd of crude oil transiting the Strait of Hormuz daily. Insurance premiums for tankers in the Persian Gulf rose 340% over the past six weeks. Saudi Aramco activated spare production capacity on standby. The US Seventh Fleet has reinforced naval presence. Energy analysts note that a 10% disruption to Strait flows would immediately push Brent above $100/bbl.',
+   source:'Bloomberg / Platts', tags:['Geopolitics','Middle East','Oil Price Risk']},
+
+  {emoji:'💨', bgColor:'rgba(34,211,238,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'May 24, 2025', impact:'med',
+   headline:'Vietnam Offshore Wind: 70 GW Pipeline Stalled by Grid Constraint — A Warning for All Fast-Movers',
+   summary:'Vietnam\'s extraordinary solar buildout created a critical lesson for the global energy transition: installing generation capacity without matching grid infrastructure leads to curtailment and investor losses. The country is now applying that lesson to offshore wind, commissioning 500 km of new HVDC transmission before awarding the next wave of offshore licenses. The government\'s revised offshore wind roadmap targets 6 GW by 2030 and 70 GW by 2050, but progress on the first projects — Thang Long and La Gan — is behind schedule due to seabed rights disputes.',
+   source:'Global Wind Energy Council', tags:['Vietnam','Offshore Wind','Grid']},
+
+  {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
+   date:'May 22, 2025', impact:'med',
+   headline:'EU Carbon Price Falls to Two-Year Low at €52/Tonne on Weak Industrial Output',
+   summary:'EU Emissions Trading System (ETS) carbon allowance prices fell to €52 per tonne in May — the lowest since early 2023 — as weak industrial demand across Germany, Italy, and France reduces overall emissions and oversupplies the carbon market with unused allowances. The ECB estimates European industrial output fell 4.2% in 2024, the largest peacetime decline since 2009. Some environmental economists argue the price weakness actually undermines clean investment signals, while others note that lower power sector emissions (from renewable growth) are the main structural driver.',
+   source:'ICAP / ICE', tags:['EU ETS','Carbon Price','Industry']},
+
+  {emoji:'🔋', bgColor:'rgba(74,222,128,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'May 20, 2025', impact:'high',
+   headline:'Grid-Scale Battery Storage Costs Fall Below $100/kWh — The Tipping Point for Dispatchable Renewables',
+   summary:'Utility-scale lithium iron phosphate (LFP) battery storage system costs fell below $100/kWh in Q1 2025 for the first time, crossing the threshold analysts identified as the point at which four-hour storage makes solar+storage competitive with gas peakers in most markets. BloombergNEF projects 1.1 TWh of new storage deployed in 2025 globally, a 90% increase over 2024. Texas added 4.2 GW in the first half of 2025 alone following the Winter Storm Uri lessons. At these costs, the economics of the energy transition fundamentally shift: intermittency is no longer a disqualifying barrier.',
+   source:'BloombergNEF / ERCOT', tags:['Battery Storage','LCOE','Grid']},
+
+  {emoji:'🇮🇳', bgColor:'rgba(74,222,128,0.1)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'May 18, 2025', impact:'med',
+   headline:'India Launches $2.3B National Green Hydrogen Mission — 5MT Target by 2030',
+   summary:'India launched the operational phase of its National Green Hydrogen Mission with an initial government outlay of ₹19,744 crore ($2.3 billion), targeting 5 million tonnes of green hydrogen production capacity by 2030. Achieving the target would require approximately 125 GW of dedicated renewable energy capacity and 60–70 GW of electrolyzers — roughly equivalent to India\'s entire current renewable fleet. Reliance Industries, Adani Green, and NTPC have each announced electrolyzer projects. Export of green ammonia (hydrogen carrier) to Japan, South Korea, and Europe is the primary commercial rationale.',
+   source:'MNRE India / IEA', tags:['India','Green Hydrogen','Policy']},
+
+  {emoji:'🛤', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'May 16, 2025', impact:'med',
+   headline:'Electric Vehicles Now Consuming 700 TWh Globally — Reshaping Overnight Grid Demand',
+   summary:'The global electric vehicle fleet — which passed 50 million units in early 2025 — now consumes approximately 700 TWh of electricity annually, equivalent to Turkey\'s entire power generation. More significantly for grid operators, the charging patterns of EVs are reshaping overnight load profiles: in California, overnight demand is now 15% higher than it was in 2019, keeping gas turbines running that were expected to retire. Smart charging mandates requiring off-peak charging are under discussion in 12 US states and across the EU to avoid replacing one fossil fuel dependency with another.',
+   source:'IEA EV Outlook 2025', tags:['Electric Vehicles','Grid','Demand']},
+
+  {emoji:'⭐', bgColor:'rgba(232,121,249,0.1)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'May 14, 2025', impact:'med',
+   headline:'Commonwealth Fusion Raises $2B for SPARC Reactor — Fusion Enters the Construction Era',
+   summary:'Commonwealth Fusion Systems (CFS) closed a $2 billion Series B funding round — the largest private fusion investment in history — to begin construction of its SPARC tokamak reactor in Devens, Massachusetts. SPARC is designed to demonstrate net fusion energy gain at commercial scale, a milestone CFS targets for 2027. The company already has letters of intent from 8 utilities for power from its planned ARC commercial plant (targeting 200 MW by 2033). Google, Equinor, and Eni are among investors. The round brings total private fusion investment to over $7 billion across 40+ companies since 2021.',
+   source:'CFS / Fusion Industry Association', tags:['Fusion','Nuclear','Investment']},
+];
+
+// ─────────────────────────────────────────────
+//  RENDER NEWS
+// ─────────────────────────────────────────────
+function buildNews() {
+  const featuredRow = document.getElementById('featuredRow');
+  const newsGrid = document.getElementById('newsGrid');
+
+  NEWS.forEach((n, idx) => {
+    const el = buildCard(n, n.featured);
+    el.dataset.cat = n.cat;
+    if (n.featured) featuredRow.appendChild(el);
+    else newsGrid.appendChild(el);
+  });
+}
+
+function buildCard(n, featured) {
+  const el = document.createElement('article');
+  el.className = 'news-card' + (featured ? ' featured' : '');
+  el.setAttribute('role', 'article');
+
+  el.innerHTML =
+    `<div class="card-visual ${featured?'featured-vis':''}" style="background:${n.bgColor}">` +
+      `<div class="card-vis-bg" style="background:${n.bgColor}"></div>` +
+      `<span style="position:relative;z-index:1">${n.emoji}</span>` +
+    `</div>` +
+    `<div class="card-body">` +
+      `<div class="card-meta">` +
+        `<span class="cat-badge" style="background:${n.catColor}22;color:${n.catColor}">${n.catLabel}</span>` +
+        `<span class="card-date">📅 ${n.date}</span>` +
+        `<span class="impact ${n.impact}" title="Market impact">${n.impact.toUpperCase()} IMPACT</span>` +
+      `</div>` +
+      `<h2 class="card-headline ${featured?'featured-hl':''}">${n.headline}</h2>` +
+      `<p class="card-summary">${n.summary}</p>` +
+    `</div>` +
+    `<div class="card-footer">` +
+      `<span class="card-source">📌 ${n.source}</span>` +
+      `<div class="card-tags">${(n.tags||[]).slice(0,2).map(t=>`<span class="tag">${t}</span>`).join('')}</div>` +
+    `</div>`;
+
+  return el;
+}
+
+// ─────────────────────────────────────────────
+//  FILTER
+// ─────────────────────────────────────────────
+function setupFilters() {
+  document.getElementById('filters').addEventListener('click', e => {
+    const btn = e.target.closest('.filt');
+    if (!btn) return;
+    document.querySelectorAll('.filt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    document.querySelectorAll('.news-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) card.classList.remove('hidden');
+      else card.classList.add('hidden');
+    });
+    // Show/hide featured row
+    const featuredRow = document.getElementById('featuredRow');
+    if (cat !== 'all') {
+      [...featuredRow.children].forEach(c => {
+        if (c.dataset.cat !== cat) c.classList.add('hidden');
+        else c.classList.remove('hidden');
+      });
+    } else {
+      [...featuredRow.children].forEach(c => c.classList.remove('hidden'));
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+//  LAST UPDATED
+// ─────────────────────────────────────────────
+function setLastUpdated() {
+  const now = new Date();
+  document.getElementById('lastUpdate').textContent =
+    now.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) + ' UTC';
+  setInterval(() => {
+    const t = new Date();
+    document.getElementById('lastUpdate').textContent =
+      t.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) + ' UTC';
+  }, 60000);
+}
+
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  buildPriceTicker();
+  buildBreaking();
+  buildNews();
+  setupFilters();
+  setLastUpdated();
+  setInterval(jitterPrices, 3000);
+});
+</script>
+</body>
+</html>

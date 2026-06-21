@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Energy Atlas — Interactive Encyclopedia</title>
+<style>
+:root{--bg:#080c18;--bg2:#0d1526;--card:#111827;--blue:#3b82f6;--blueb:#60a5fa;--amber:#f59e0b;--amberb:#fbbf24;--green:#10b981;--red:#ef4444;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;--border:rgba(255,255,255,0.08);--r:12px;--tr:0.3s ease}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:3px}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(8,12,24,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.hdr-top{display:flex;align-items:center;gap:12px;padding:10px 20px}
+.logo{font-size:1.1rem;font-weight:800;display:flex;align-items:center;gap:8px;white-space:nowrap;color:var(--t1)}
+.logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--amber),var(--blue));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.cc{display:flex;align-items:center;gap:8px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:5px 12px;flex:1;max-width:440px;overflow:hidden}
+.cc-lbl{color:#ef4444;font-weight:700;font-size:0.72rem;white-space:nowrap}
+.cc-val{font-family:'Courier New',monospace;font-weight:700;font-size:0.82rem;letter-spacing:0.3px;color:var(--t1)}
+.cc-unit{color:var(--t3);font-size:0.68rem;white-space:nowrap}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;margin-left:auto}
+.hbg span{display:block;width:22px;height:2px;background:var(--t1);transition:var(--tr);border-radius:1px}
+.hbg.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+nav{display:flex;gap:2px;padding:0 20px 8px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.nl{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:6px;color:var(--t2);text-decoration:none;font-size:0.8rem;font-weight:500;transition:var(--tr);border:1px solid transparent}
+.nl:hover{color:var(--t1);background:rgba(255,255,255,0.06);border-color:var(--border)}
+.nl.active{color:var(--blueb);background:rgba(59,130,246,0.12);border-color:rgba(59,130,246,0.3)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 20px 60px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 40%,rgba(59,130,246,0.07) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 70%,rgba(245,158,11,0.04) 0%,transparent 50%)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(1px 1px at 15% 25%,rgba(255,255,255,0.35) 0%,transparent 100%),radial-gradient(1px 1px at 75% 15%,rgba(255,255,255,0.25) 0%,transparent 100%),radial-gradient(1px 1px at 55% 75%,rgba(255,255,255,0.2) 0%,transparent 100%),radial-gradient(1px 1px at 90% 50%,rgba(255,255,255,0.3) 0%,transparent 100%),radial-gradient(1px 1px at 30% 85%,rgba(255,255,255,0.15) 0%,transparent 100%),radial-gradient(1px 1px at 5% 55%,rgba(255,255,255,0.2) 0%,transparent 100%)}
+.hero-inner{position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:20px;padding:5px 14px;font-size:0.75rem;color:var(--blueb);margin-bottom:20px;font-weight:500}
+.hero h1{font-size:clamp(2rem,6vw,4.2rem);font-weight:800;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff,#94a3b8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 span{background:linear-gradient(135deg,var(--amberb),var(--blueb));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(0.95rem,2vw,1.15rem);color:var(--t2);max-width:580px;margin:0 auto 44px}
+.donut-wrap{position:relative;width:300px;height:300px;margin:0 auto 24px}
+#heroDonut{width:100%;height:100%}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.donut-center .dn{font-size:1.8rem;font-weight:800;color:var(--t1)}
+.donut-center .dl{font-size:0.68rem;color:var(--t3);text-transform:uppercase;letter-spacing:1px}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;max-width:560px;margin:0 auto 32px}
+.li{display:flex;align-items:center;gap:5px;font-size:0.75rem;color:var(--t2)}
+.ld{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.hstats{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.hstat .sv{font-size:1.7rem;font-weight:800;color:var(--amberb)}
+.hstat .sl{font-size:0.7rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px}
+
+/* SECTION HEADERS */
+main{padding-top:90px}
+.sec-hdr{text-align:center;padding:70px 20px 36px;position:relative}
+.sec-hdr h2{font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800;margin-bottom:10px}
+.sec-hdr p{font-size:0.95rem;color:var(--t2);max-width:560px;margin:0 auto}
+.cat-tag{display:inline-block;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding:4px 12px;border-radius:4px;margin-bottom:14px}
+
+/* ENERGY GRID */
+.egrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px;padding:0 20px 56px;max-width:1360px;margin:0 auto}
+
+/* CARD */
+.ecard{background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:var(--tr)}
+.ecard:hover{border-color:rgba(255,255,255,0.14);transform:translateY(-2px);box-shadow:0 10px 40px rgba(0,0,0,0.4)}
+.ch{padding:18px 18px 14px;display:flex;align-items:flex-start;gap:12px;border-bottom:1px solid var(--border)}
+.cicon{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ctitle h3{font-size:1.05rem;font-weight:700;margin-bottom:3px}
+.ctype{font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+.cshare{margin-left:auto;text-align:right}
+.cshare .cs{font-size:1.5rem;font-weight:800;line-height:1}
+.cshare .csl{font-size:0.62rem;color:var(--t3);display:block}
+.cbody{padding:14px 18px}
+
+/* DIAGRAM */
+.diag{background:rgba(255,255,255,0.025);border-radius:8px;padding:12px;margin-bottom:14px;min-height:82px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.diag svg{width:100%;height:70px}
+
+/* METRICS */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.met{background:rgba(255,255,255,0.03);border-radius:8px;padding:9px 11px}
+.ml{font-size:0.65rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px}
+.mv{font-size:0.88rem;font-weight:700;color:var(--t1)}
+.ms{font-size:0.65rem;color:var(--t3)}
+
+/* PROS CONS */
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.pros{background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.18);border-radius:8px;padding:9px 11px}
+.cons{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.18);border-radius:8px;padding:9px 11px}
+.pros h4{color:var(--green);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.cons h4{color:#ef4444;font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.pros ul,.cons ul{list-style:none;display:flex;flex-direction:column;gap:3px}
+.pros li,.cons li{font-size:0.74rem;color:var(--t2);display:flex;gap:4px;align-items:flex-start}
+.pros li::before{content:'✓';color:var(--green);font-size:0.65rem;flex-shrink:0;margin-top:1px}
+.cons li::before{content:'✗';color:#ef4444;font-size:0.65rem;flex-shrink:0;margin-top:1px}
+
+/* COUNTRY BARS */
+.ctry h4{font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:7px}
+.cbar{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.cn{font-size:0.72rem;color:var(--t2);width:76px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrk{flex:1;height:5px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden}
+.cfil{height:100%;border-radius:3px;width:0;transition:width 1.2s ease}
+.cpct{font-size:0.68rem;color:var(--t3);width:28px;text-align:right;flex-shrink:0}
+
+/* CARD FOOTER */
+.cft{padding:10px 18px;border-top:1px solid var(--border);background:rgba(255,255,255,0.018)}
+.nproj strong{color:var(--amberb);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:2px}
+.nproj span{font-size:0.76rem;color:var(--t2)}
+.otlk{display:flex;align-items:center;gap:7px;margin-top:8px}
+.otlk-lbl{font-size:0.65rem;color:var(--t3);white-space:nowrap}
+.otlk-trk{flex:1;height:3px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden}
+.otlk-fil{height:100%;border-radius:2px}
+.otlk-val{font-size:0.7rem;font-weight:600;white-space:nowrap}
+
+/* COMPARISON */
+.cmp-sec{padding:60px 20px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.cmp-sec h2{text-align:center;font-size:1.9rem;font-weight:800;margin-bottom:8px}
+.cmp-sec>p{text-align:center;color:var(--t2);margin-bottom:28px;font-size:0.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px;max-width:880px;margin-left:auto;margin-right:auto}
+.chip{display:flex;align-items:center;gap:5px;padding:7px 13px;border-radius:20px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:0.8rem;color:var(--t2);transition:var(--tr);user-select:none}
+.chip:hover{border-color:rgba(255,255,255,0.2);color:var(--t1)}
+.chip.sel{background:rgba(59,130,246,0.14);border-color:var(--blue);color:var(--blueb)}
+.chip input{display:none}
+.ctbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border);max-width:980px;margin:0 auto}
+.ctbl{width:100%;border-collapse:collapse;font-size:0.83rem}
+.ctbl th{background:var(--card);padding:13px 15px;text-align:left;font-weight:600;color:var(--t1);border-bottom:1px solid var(--border);white-space:nowrap}
+.ctbl th:first-child{color:var(--t3);font-weight:500;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px}
+.ctbl td{padding:11px 15px;border-bottom:1px solid var(--border);color:var(--t2);vertical-align:middle}
+.ctbl td:first-child{color:var(--t3);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.5px;font-weight:500;white-space:nowrap}
+.ctbl tr:last-child td{border-bottom:none}
+.ctbl tr:hover td{background:rgba(255,255,255,0.02)}
+.cmp-empty{text-align:center;padding:44px;color:var(--t3);font-size:0.88rem}
+
+/* TIMELINE */
+.tl-sec{padding:70px 20px;max-width:860px;margin:0 auto}
+.tl-sec h2{text-align:center;font-size:1.9rem;font-weight:800;margin-bottom:8px}
+.tl-sec>p{text-align:center;color:var(--t2);margin-bottom:44px;font-size:0.9rem}
+.tl{position:relative;padding-left:36px}
+.tl::before{content:'';position:absolute;left:13px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--amber),var(--blue),var(--green))}
+.tl-item{position:relative;margin-bottom:30px;opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease}
+.tl-item.vis{opacity:1;transform:none}
+.tl-dot{position:absolute;left:-29px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--amber);z-index:1}
+.tl-yr{font-size:0.68rem;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+.tl-ttl{font-size:0.97rem;font-weight:700;color:var(--t1);margin-bottom:3px}
+.tl-desc{font-size:0.8rem;color:var(--t2);line-height:1.5}
+
+/* SIDEBAR */
+.sb-btn{position:fixed;right:18px;bottom:72px;width:46px;height:46px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 0 18px rgba(59,130,246,0.35),0 4px 14px rgba(0,0,0,0.4);z-index:999;transition:var(--tr)}
+.sb-btn:hover{background:var(--blueb);transform:scale(1.06)}
+.sb{position:fixed;right:0;top:0;bottom:0;width:310px;background:var(--card);border-left:1px solid var(--border);z-index:1100;transform:translateX(100%);transition:transform 0.3s ease;overflow-y:auto;display:flex;flex-direction:column}
+.sb.open{transform:none}
+.sb-hdr{display:flex;align-items:center;justify-content:space-between;padding:18px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:1}
+.sb-hdr h3{font-size:0.88rem;font-weight:700}
+.sb-x{background:none;border:none;color:var(--t3);cursor:pointer;font-size:17px;padding:3px;line-height:1}
+.sb-x:hover{color:var(--t1)}
+.gl{padding:14px 18px;display:flex;flex-direction:column;gap:14px}
+.gi{border-bottom:1px solid var(--border);padding-bottom:12px}
+.gi:last-child{border-bottom:none}
+.gt{font-weight:700;font-size:0.85rem;color:var(--amberb);margin-bottom:2px}
+.ga{font-size:0.68rem;color:var(--t3);margin-bottom:5px}
+.gd{font-size:0.78rem;color:var(--t2);line-height:1.5}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 20px;text-align:center}
+footer p{color:var(--t3);font-size:0.8rem;margin-bottom:6px}
+
+/* ANIMATIONS */
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.45}}
+@keyframes dashflow{to{stroke-dashoffset:-20}}
+@keyframes rise{0%{transform:translateY(0);opacity:0.8}100%{transform:translateY(-18px);opacity:0}}
+@keyframes wavemove{0%,100%{d:path("M0,35 Q25,20 50,35 Q75,50 100,35")}50%{d:path("M0,35 Q25,50 50,35 Q75,20 100,35")}}
+@keyframes glow{0%,100%{opacity:0.6}50%{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hbg{display:flex}
+  nav{display:none;flex-direction:column;padding:8px 20px 14px;gap:2px}
+  nav.open{display:flex}
+  .nl{display:flex}
+  .cc{max-width:200px}
+  .egrid{grid-template-columns:1fr;padding:0 14px 40px}
+  .hero{padding:95px 14px 40px}
+  .donut-wrap{width:250px;height:250px}
+  .sb{width:100%}
+  .pc{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .hstats{gap:14px}
+  .hstat .sv{font-size:1.4rem}
+  .cc{display:none}
+}
+
+/* DEMOGRAPHICS */
+.demo-sec{padding:70px 0 60px;background:rgba(168,85,247,0.015)}
+.demo-tabs{display:flex;overflow-x:auto;padding:0 20px;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;scrollbar-width:none}
+.demo-tabs::-webkit-scrollbar{display:none}
+.dtab{padding:11px 20px;border:none;background:none;color:var(--t2);font-size:0.85rem;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:var(--tr);font-family:inherit;flex-shrink:0}
+.dtab:hover{color:var(--t1)}
+.dtab.active{color:#c084fc;border-bottom-color:#a855f7}
+.demo-panel{display:none;padding:28px 20px 0;max-width:1360px;margin:0 auto}
+.demo-panel.active{display:block}
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.demo-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.demo-card.full{grid-column:1/-1}
+.demo-card h3{font-size:0.9rem;font-weight:700;color:var(--t1);margin-bottom:4px}
+.demo-card .sub{font-size:0.72rem;color:var(--t3);margin-bottom:16px}
+.dbar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.dbar-label{font-size:0.78rem;color:var(--t2);width:130px;flex-shrink:0;text-align:right}
+.dbar-track{flex:1;height:20px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;display:flex}
+.dbar-seg{height:100%;transition:width 1s ease;display:flex;align-items:center;justify-content:center;font-size:0.58rem;color:rgba(255,255,255,0.85);font-weight:700;overflow:hidden;white-space:nowrap}
+.dbar-pct{font-size:0.72rem;font-weight:700;width:36px;text-align:left;flex-shrink:0}
+.demo-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:12px}
+.dl-item{display:flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--t2)}
+.dl-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.insight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:14px}
+.insight-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:12px}
+.insight-box .iv{font-size:1.4rem;font-weight:800;color:var(--amberb);line-height:1}
+.insight-box .il{font-size:0.7rem;color:var(--t3);margin-top:3px}
+.insight-box .id{font-size:0.75rem;color:var(--t2);margin-top:5px}
+.rank-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rank-num{font-size:0.72rem;font-weight:700;color:var(--t3);width:18px;text-align:center;flex-shrink:0}
+.rank-label{font-size:0.8rem;color:var(--t1);width:130px;flex-shrink:0}
+.rank-bar-wrap{flex:1;height:14px;background:rgba(255,255,255,0.05);border-radius:3px;overflow:hidden}
+.rank-bar{height:100%;border-radius:3px;transition:width 1s ease}
+.rank-pct{font-size:0.72rem;color:var(--t2);width:36px;text-align:right;flex-shrink:0}
+.globe-stat{display:flex;justify-content:space-around;flex-wrap:wrap;gap:12px;padding:16px 0 4px}
+.gs-item{text-align:center}
+.gs-val{font-size:1.5rem;font-weight:800;line-height:1}
+.gs-lbl{font-size:0.65rem;color:var(--t3);margin-top:3px}
+@media(max-width:768px){.demo-grid{grid-template-columns:1fr}.dbar-label{width:90px}}
+
+/* COUNTRIES */
+.country-sec{padding:70px 0 60px}
+.ctabs{display:flex;overflow-x:auto;padding:0 20px;border-bottom:1px solid var(--border);max-width:1360px;margin:0 auto;scrollbar-width:none}
+.ctabs::-webkit-scrollbar{display:none}
+.ctab{padding:11px 20px;border:none;background:none;color:var(--t2);font-size:0.85rem;font-weight:500;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:var(--tr);font-family:inherit;flex-shrink:0}
+.ctab:hover{color:var(--t1)}
+.ctab.active{color:var(--blueb);border-bottom-color:var(--blue)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:12px;padding:20px 20px 0;max-width:1360px;margin:0 auto}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;cursor:pointer;transition:var(--tr)}
+.ccard:hover{border-color:rgba(255,255,255,0.18);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,0.35)}
+.ccard.open{border-color:var(--blue);background:rgba(59,130,246,0.07)}
+.cflag{font-size:1.8rem;margin-bottom:6px;line-height:1}
+.cname{font-size:0.9rem;font-weight:700;color:var(--t1);margin-bottom:2px}
+.cco2{font-size:0.68rem;color:var(--t3);margin-bottom:8px}
+.cclean-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.cclean-pct{font-size:0.85rem;font-weight:700}
+.cclean-lbl{font-size:0.62rem;color:var(--t3)}
+.cstackbar{height:6px;border-radius:3px;display:flex;gap:1px;margin-bottom:5px;overflow:hidden}
+.cstack-seg{height:100%}
+.cgen{font-size:0.68rem;color:var(--t3)}
+.cdetail{background:var(--bg2);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:22px;margin:14px 20px 0;max-width:1320px;margin-left:auto;margin-right:auto;display:none;position:relative}
+.cdetail.open{display:block}
+.cd-hdr{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.cd-flag{font-size:2.4rem;line-height:1}
+.cd-title h3{font-size:1.25rem;font-weight:800;margin-bottom:3px}
+.cd-title p{font-size:0.78rem;color:var(--t2)}
+.cd-stats{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap;align-items:flex-start}
+.cd-stat .sv{font-size:1.2rem;font-weight:800;color:var(--amberb);line-height:1}
+.cd-stat .sl{font-size:0.62rem;color:var(--t3)}
+.cd-bigbar{height:22px;border-radius:6px;display:flex;gap:1px;overflow:hidden;margin-bottom:10px}
+.cd-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:0.58rem;color:rgba(255,255,255,0.9);font-weight:700;overflow:hidden;white-space:nowrap}
+.cd-legend{display:flex;flex-wrap:wrap;gap:5px 12px;margin-bottom:14px}
+.cd-leg{display:flex;align-items:center;gap:5px;font-size:0.74rem;color:var(--t2)}
+.cd-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cd-fact{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:10px 13px;font-size:0.79rem;color:var(--t2);margin-bottom:8px}
+.cd-fact:last-child{margin-bottom:0}
+.cd-fact strong{color:var(--amberb);display:block;margin-bottom:3px;font-size:0.67rem;text-transform:uppercase;letter-spacing:0.5px}
+.cd-close{position:absolute;top:14px;right:14px;background:none;border:1px solid var(--border);color:var(--t3);cursor:pointer;border-radius:6px;padding:4px 9px;font-size:0.72rem;transition:var(--tr)}
+.cd-close:hover{color:var(--t1);border-color:rgba(255,255,255,0.2)}
+@media(max-width:768px){.cgrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.cd-stats{margin-left:0}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hdr-top">
+    <div class="logo"><div class="logo-icon">⚡</div>World Energy Atlas</div>
+    <div class="cc">
+      <span class="cc-lbl">🌡 CO₂ since 1900</span>
+      <span class="cc-val" id="ccv">1,800,000,000,000</span>
+      <span class="cc-unit">tonnes</span>
+    </div>
+    <button class="hbg" id="hbg" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav id="mainnav">
+    <a href="#hero" class="nl">🌍 Overview</a>
+    <a href="#fossil" class="nl">⛏ Fossil Fuels</a>
+    <a href="#renewables" class="nl">♻ Renewables</a>
+    <a href="#emerging" class="nl">🔬 Emerging</a>
+    <a href="#demographics" class="nl">👥 Demographics</a>
+    <a href="#countries" class="nl">🗺 By Country</a>
+    <a href="#comparison" class="nl">⚖ Compare</a>
+    <a href="#timeline" class="nl">📅 Timeline</a>
+    <a href="energy-news.html" class="nl" style="color:#ef4444;border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.06)">📰 Live News ↗</a>
+  </nav>
+</header>
+
+<section id="hero" class="hero">
+  <div class="hero-bg"></div>
+  <div class="stars"></div>
+  <div class="hero-inner">
+    <div class="badge">⚡ 2024 Global Energy Data</div>
+    <h1>The World's <span>Energy Sources</span><br>Explained</h1>
+    <p class="hero-sub">From ancient coal seams to experimental fusion reactors — an interactive guide to how humanity powers itself today and tomorrow.</p>
+    <div class="donut-wrap">
+      <canvas id="heroDonut" width="300" height="300"></canvas>
+      <div class="donut-center">
+        <div class="dn">~29,000</div>
+        <div class="dl">TWh global<br>electricity 2024</div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="hstats">
+      <div class="hstat"><div class="sv">13</div><div class="sl">Energy Sources</div></div>
+      <div class="hstat"><div class="sv">8.1B</div><div class="sl">People Powered</div></div>
+      <div class="hstat"><div class="sv">37 Gt</div><div class="sl">CO₂ per Year</div></div>
+      <div class="hstat"><div class="sv">580 EJ</div><div class="sl">Primary Energy</div></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div id="fossil">
+    <div class="sec-hdr">
+      <span class="cat-tag" style="background:rgba(107,114,128,0.2);color:#9ca3af">⚫ Fossil Fuels</span>
+      <h2>The Old Guard</h2>
+      <p>Carbon-based fuels that powered the Industrial Revolution and still dominate global energy — but their era is ending.</p>
+    </div>
+    <div class="egrid" id="fossilGrid"></div>
+  </div>
+
+  <div id="renewables" style="background:rgba(16,185,129,0.018)">
+    <div class="sec-hdr">
+      <span class="cat-tag" style="background:rgba(16,185,129,0.18);color:#34d399">♻ Renewables</span>
+      <h2>The New Frontier</h2>
+      <p>Clean, inexhaustible sources reshaping electricity grids worldwide and racing past fossil fuels on cost.</p>
+    </div>
+    <div class="egrid" id="renewablesGrid"></div>
+  </div>
+
+  <div id="emerging" style="background:rgba(139,92,246,0.018)">
+    <div class="sec-hdr">
+      <span class="cat-tag" style="background:rgba(139,92,246,0.18);color:#a78bfa">🔬 Emerging &amp; Future</span>
+      <h2>Tomorrow's Power</h2>
+      <p>Technologies from early commercial stage to pure research — sources that may define the 22nd century.</p>
+    </div>
+    <div class="egrid" id="emergingGrid"></div>
+  </div>
+
+  <section id="demographics" class="demo-sec">
+    <div class="sec-hdr">
+      <span class="cat-tag" style="background:rgba(168,85,247,0.18);color:#c084fc">👥 Demographics</span>
+      <h2>Global Energy Preferences by Demographics</h2>
+      <p>How age, income, region, and geography shape what people want from their energy systems — and what they're willing to pay for.</p>
+    </div>
+    <div class="demo-tabs" id="demoTabs" role="tablist">
+      <button class="dtab active" data-panel="age"    role="tab">🎂 By Age Group</button>
+      <button class="dtab"        data-panel="region" role="tab">🌍 By Region</button>
+      <button class="dtab"        data-panel="income" role="tab">💰 By Income</button>
+      <button class="dtab"        data-panel="source" role="tab">⚡ Source Approval</button>
+      <button class="dtab"        data-panel="global" role="tab">🌐 Global Snapshot</button>
+    </div>
+
+    <!-- AGE -->
+    <div class="demo-panel active" id="panel-age"></div>
+    <!-- REGION -->
+    <div class="demo-panel" id="panel-region"></div>
+    <!-- INCOME -->
+    <div class="demo-panel" id="panel-income"></div>
+    <!-- SOURCE -->
+    <div class="demo-panel" id="panel-source"></div>
+    <!-- GLOBAL -->
+    <div class="demo-panel" id="panel-global"></div>
+  </section>
+
+  <section id="countries" class="country-sec">
+    <div class="sec-hdr">
+      <span class="cat-tag" style="background:rgba(59,130,246,0.18);color:#60a5fa">🗺 By Location</span>
+      <h2>Energy by Country &amp; Continent</h2>
+      <p>Explore how each nation generates electricity — their mix, carbon intensity, and clean energy progress.</p>
+    </div>
+    <div class="ctabs" id="ctabs" role="tablist" aria-label="Select continent"></div>
+    <div class="cdetail" id="cdetail" aria-live="polite"></div>
+    <div class="cgrid" id="cgrid"></div>
+  </section>
+
+  <section id="comparison" class="cmp-sec">
+    <h2>⚖ Side-by-Side Comparison</h2>
+    <p>Select 2–3 energy sources to compare across all key metrics</p>
+    <div class="chips" id="chips"></div>
+    <div class="ctbl-wrap" id="ctblWrap">
+      <div class="cmp-empty">Select energy sources above to compare them</div>
+    </div>
+  </section>
+
+  <section id="timeline" class="tl-sec">
+    <h2>A History of Human Energy</h2>
+    <p>Humanity's 400,000-year journey — from the first fire to fusion ignition</p>
+    <div class="tl" id="tlContent"></div>
+  </section>
+</main>
+
+<button class="sb-btn" id="sbBtn" aria-label="Open glossary" title="Energy Glossary">📖</button>
+<aside class="sb" id="sb" aria-label="Energy Glossary">
+  <div class="sb-hdr">
+    <h3>Energy Units &amp; Terms</h3>
+    <button class="sb-x" id="sbX" aria-label="Close">✕</button>
+  </div>
+  <div class="gl" id="glList"></div>
+</aside>
+
+<footer>
+  <p><strong>World Energy Atlas</strong> — Interactive Encyclopedia</p>
+  <p>Data sources: IEA World Energy Outlook 2024 · IRENA Renewable Power Costs 2023 · IPCC AR6 · BP Statistical Review 2024 · Our World in Data</p>
+  <p style="margin-top:6px;opacity:0.55">For educational purposes. Figures represent best estimates for 2024.</p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────
+//  DONUT DATA
+// ─────────────────────────────────────────────
+const DONUT = [
+  {label:'Coal',       pct:36,   color:'#6b7280'},
+  {label:'Natural Gas',pct:23,   color:'#f97316'},
+  {label:'Hydro',      pct:15,   color:'#3b82f6'},
+  {label:'Nuclear',    pct:9.2,  color:'#a855f7'},
+  {label:'Wind',       pct:7.8,  color:'#22d3ee'},
+  {label:'Solar',      pct:5.5,  color:'#fbbf24'},
+  {label:'Oil',        pct:3,    color:'#78350f'},
+  {label:'Biomass',    pct:2.4,  color:'#84cc16'},
+  {label:'Other',      pct:1.8,  color:'#475569'},
+];
+
+// ─────────────────────────────────────────────
+//  ENERGY DATA
+// ─────────────────────────────────────────────
+const DATA = [
+  {id:'coal',name:'Coal',emoji:'⛏',color:'#6b7280',bg:'rgba(107,114,128,0.13)',type:'Fossil Fuel',cat:'fossil',
+   capacity:'2,185 GW',cf:'~50%',share:36,lcoe:'$65–150/MWh',ci:'820 gCO₂/kWh',land:'Very High (open-pit mining)',water:'~1,100 L/MWh',
+   countries:[{n:'China',p:100},{n:'India',p:30},{n:'USA',p:25},{n:'Germany',p:8},{n:'S. Africa',p:8}],
+   pros:['Reliable 24/7 baseload','Low fuel cost','Vast global reserves','Existing infrastructure'],
+   cons:['Highest CO₂ emitter','Particulate & SO₂ pollution','Mine safety hazards','Rapidly declining economics'],
+   project:{name:'Datang Tuoketuo',loc:'Inner Mongolia, China',desc:'6,700 MW — world\'s largest coal plant'},
+   outlook:{text:'Global decline underway. EU phasing out by 2030.',growth:-3},
+   how:'Coal is pulverized and burned in a boiler. High-pressure steam spins a turbine connected to a generator. Flue gas passes through scrubbers before release.'},
+
+  {id:'gas',name:'Natural Gas',emoji:'🔥',color:'#f97316',bg:'rgba(249,115,22,0.13)',type:'Fossil Fuel',cat:'fossil',
+   capacity:'1,840 GW',cf:'~40–55%',share:23,lcoe:'$40–74/MWh',ci:'490 gCO₂/kWh',land:'Medium (wells + pipelines)',water:'~500 L/MWh',
+   countries:[{n:'USA',p:100},{n:'Russia',p:71},{n:'Iran',p:25},{n:'Qatar',p:21},{n:'China',p:21}],
+   pros:['Lower CO₂ than coal','Fast-ramping peaker','60%+ CCGT efficiency','Vast pipeline network'],
+   cons:['Methane leak risk','Still significant CO₂','Price volatility','Fracking environmental concerns'],
+   project:{name:'Surgut-2 CGPP',loc:'Siberia, Russia',desc:'5,597 MW combined-cycle gas plant'},
+   outlook:{text:'Seen as bridge fuel. OECD demand peaks ~2030. LNG trade expanding.',growth:1},
+   how:'Combined-cycle plants burn gas in a turbine (like a jet engine), then capture waste heat to drive a steam turbine — achieving 60%+ efficiency vs 35% for coal.'},
+
+  {id:'oil',name:'Oil / Petroleum',emoji:'🛢',color:'#92400e',bg:'rgba(146,64,14,0.13)',type:'Fossil Fuel',cat:'fossil',
+   capacity:'350 GW',cf:'~30%',share:3,lcoe:'$150–250/MWh',ci:'650 gCO₂/kWh',land:'High (wells, refineries)',water:'~800 L/MWh',
+   countries:[{n:'USA',p:100},{n:'Saudi Arabia',p:63},{n:'Russia',p:58},{n:'Canada',p:32},{n:'Iraq',p:26}],
+   pros:['High energy density','Easy transport & storage','Essential for island grids','Backup reliability'],
+   cons:['Very expensive for power gen','Significant CO₂ emissions','Price & supply volatility','Mainly a transport fuel'],
+   project:{name:'Sabiya Power Station',loc:'Kuwait',desc:'4,800 MW oil-fired plant powering Kuwait City'},
+   outlook:{text:'Already minor in power gen. IEA forecasts peak oil demand ~2028–2030.',growth:-8},
+   how:'Crude oil is refined into fuel oil or diesel, burned in boilers or turbines. Mostly confined to island states and oil-rich nations. Among the most expensive and polluting power sources.'},
+
+  {id:'hydro',name:'Hydropower',emoji:'💧',color:'#3b82f6',bg:'rgba(59,130,246,0.13)',type:'Renewable',cat:'renewables',
+   capacity:'1,392 GW',cf:'~40%',share:15,lcoe:'$25–90/MWh',ci:'4–30 gCO₂/kWh',land:'Very High (reservoir)',water:'Evaporative losses only',
+   countries:[{n:'China',p:100},{n:'Brazil',p:40},{n:'Canada',p:30},{n:'USA',p:23},{n:'Russia',p:17}],
+   pros:['100+ year operational life','Fully dispatchable','Pumped storage = grid battery','Very low running costs'],
+   cons:['Ecosystem disruption','Community displacement','Drought vulnerability','Most good sites taken'],
+   project:{name:'Three Gorges Dam',loc:'Hubei, China',desc:'22,500 MW — world\'s largest power station by capacity'},
+   outlook:{text:'Mature technology. New pumped storage growing rapidly. Critical for grid balancing.',growth:1.5},
+   how:'Water falls through penstocks from a high reservoir to turbines below. Gravity\'s potential energy converts to rotational energy, then electricity. Pumped storage reverses flow to store surplus grid power.'},
+
+  {id:'wind',name:'Wind Power',emoji:'💨',color:'#22d3ee',bg:'rgba(34,211,238,0.13)',type:'Renewable',cat:'renewables',
+   capacity:'1,017 GW',cf:'25–45%',share:7.8,lcoe:'$24–75/MWh',ci:'7–15 gCO₂/kWh',land:'Low (farmable below)',water:'Near zero',
+   countries:[{n:'China',p:100},{n:'USA',p:40},{n:'Germany',p:20},{n:'India',p:15},{n:'UK',p:10}],
+   pros:['Lowest lifecycle CO₂','No fuel cost','Land dual-use (farming)','Rapidly falling costs'],
+   cons:['Intermittent (wind-dependent)','Noise & visual impact','Bird/bat mortality','Grid integration challenge'],
+   project:{name:'Hornsea Three (planned)',loc:'North Sea, UK',desc:'2,852 MW offshore — world\'s largest when complete'},
+   outlook:{text:'Fastest-growing source alongside solar. Offshore expanding rapidly. 12%+ CAGR to 2030.',growth:13},
+   how:'Wind rotates aerodynamic blades (30–80 m long). A gearbox converts slow blade rotation to high-speed generator rotation. Offshore turbines now reach 15–20 MW per unit.'},
+
+  {id:'solar',name:'Solar PV',emoji:'☀',color:'#fbbf24',bg:'rgba(251,191,36,0.13)',type:'Renewable',cat:'renewables',
+   capacity:'1,631 GW',cf:'10–25%',share:5.5,lcoe:'$24–96/MWh',ci:'20–50 gCO₂/kWh',land:'Medium (utility) / Zero (rooftop)',water:'Near zero',
+   countries:[{n:'China',p:100},{n:'USA',p:30},{n:'Japan',p:19},{n:'Germany',p:16},{n:'India',p:14}],
+   pros:['Cheapest electricity ever built','Zero operational emissions','Scales from 1 W to GW','Costs fell 99% since 1976'],
+   cons:['Intermittent (night/clouds)','Requires storage','Low energy density','Panel recycling challenge'],
+   project:{name:'Bhadla Solar Park',loc:'Rajasthan, India',desc:'2,245 MW — world\'s largest solar park'},
+   outlook:{text:'Explosive growth. Added 350+ GW in 2023. Expected to be #1 electricity source by 2033.',growth:24},
+   how:'Photons excite electrons in silicon cells, creating DC current (photovoltaic effect). Inverters convert DC to grid-compatible AC. Perovskite tandem cells pushing efficiency past 30%.'},
+
+  {id:'nuclear',name:'Nuclear Fission',emoji:'⚛',color:'#a855f7',bg:'rgba(168,85,247,0.13)',type:'Low-Carbon',cat:'renewables',
+   capacity:'413 GW',cf:'~90%',share:9.2,lcoe:'$60–120/MWh',ci:'12 gCO₂/kWh',land:'Very Low per MWh',water:'High (cooling)',
+   countries:[{n:'USA',p:100},{n:'China',p:53},{n:'France',p:47},{n:'Russia',p:27},{n:'S. Korea',p:20}],
+   pros:['Near-zero lifecycle emissions','90% capacity factor','Smallest land footprint per MWh','Reliable 24/7 baseload'],
+   cons:['Radioactive waste (10,000 yrs)','High capital cost','10–20 year build times','Public perception risk'],
+   project:{name:'Barakah Nuclear Plant',loc:'Abu Dhabi, UAE',desc:'5,600 MW (4 APR-1400 units) — Arab world\'s first nuclear plant'},
+   outlook:{text:'Nuclear renaissance underway. 60+ reactors under construction. SMRs transforming economics.',growth:3},
+   how:'Uranium-235 atoms split when struck by neutrons (fission), releasing enormous heat and more neutrons — a chain reaction. Heat boils water → steam → turbine. Control rods absorb neutrons to regulate power.'},
+
+  {id:'biomass',name:'Biomass & Bioenergy',emoji:'🌿',color:'#84cc16',bg:'rgba(132,204,22,0.13)',type:'Renewable',cat:'renewables',
+   capacity:'~150 GW',cf:'~60%',share:2.4,lcoe:'$60–150/MWh',ci:'230 gCO₂/kWh (lifecycle)',land:'Very High (crops)',water:'Very High',
+   countries:[{n:'USA',p:100},{n:'Germany',p:45},{n:'Brazil',p:40},{n:'UK',p:35},{n:'Japan',p:25}],
+   pros:['Carbon-neutral in principle','Can use waste/residues','Dispatchable on demand','BECCS for carbon removal'],
+   cons:['Competes with food for land','Higher emissions than wind/solar','Lifecycle carbon debated','Biodiversity concerns'],
+   project:{name:'Drax Power Station',loc:'North Yorkshire, UK',desc:'2,595 MW biomass; pioneering BECCS carbon capture technology'},
+   outlook:{text:'Role contested but critical for net-negative pathways via BECCS. Sustainable sourcing key challenge.',growth:2},
+   how:'Wood pellets, agricultural waste, or biogas are burned or gasified to produce heat or syngas, driving steam turbines. Anaerobic digestion of organic waste produces biogas directly.'},
+
+  {id:'geo',name:'Geothermal',emoji:'🌋',color:'#f43f5e',bg:'rgba(244,63,94,0.13)',type:'Renewable',cat:'renewables',
+   capacity:'16.1 GW',cf:'~85%',share:0.5,lcoe:'$60–100/MWh',ci:'38 gCO₂/kWh',land:'Very Low',water:'Low (closed loop)',
+   countries:[{n:'USA',p:100},{n:'Philippines',p:58},{n:'Indonesia',p:50},{n:'Turkey',p:42},{n:'Kenya',p:33}],
+   pros:['24/7 baseload like nuclear','Tiny surface footprint','Long plant life (30+ yrs)','Near-zero emissions (EGS)'],
+   cons:['Geographically limited','H₂S emissions possible','High exploration/drilling cost','Risk of induced seismicity'],
+   project:{name:'Hellisheiðarvirkjun',loc:'Iceland',desc:'303 MW — heats Reykjavik; world\'s second largest geothermal plant'},
+   outlook:{text:'Enhanced Geothermal Systems (EGS) could unlock resources anywhere. Google-backed Fervo Energy proving concept.',growth:5},
+   how:'Wells tap naturally occurring steam or hot water (150–350°C) from geothermal reservoirs. Steam drives turbines directly or via binary-cycle heat exchangers. Water is re-injected to sustain pressure.'},
+
+  {id:'tidal',name:'Tidal & Wave',emoji:'🌊',color:'#0ea5e9',bg:'rgba(14,165,233,0.13)',type:'Emerging Renewable',cat:'emerging',
+   capacity:'0.5 GW',cf:'~25–30%',share:0.01,lcoe:'$150–400/MWh',ci:'10–20 gCO₂/kWh',land:'Negligible (underwater)',water:'None',
+   countries:[{n:'UK',p:100},{n:'France',p:60},{n:'S. Korea',p:40},{n:'Canada',p:30},{n:'Australia',p:20}],
+   pros:['Perfectly predictable tides','Near-zero emissions','Dense energy in moving water','Large untapped potential'],
+   cons:['Very high current costs','Limited suitable sites','Marine ecosystem impact','Corrosion & biofouling'],
+   project:{name:'MeyGen Array',loc:'Pentland Firth, Scotland',desc:'6 MW tidal stream — world\'s largest commercial tidal array'},
+   outlook:{text:'Global tidal resource: 1,200 TWh/yr potential. Commercial scale expected 2030s.',growth:15},
+   how:'Tidal turbines (like underwater wind turbines) are anchored in fast tidal channels. Twice-daily tidal flow rotates blades predictably — unlike wind or solar. Wave energy converters convert ocean swell oscillation.'},
+
+  {id:'hydrogen',name:'Green Hydrogen',emoji:'⚗',color:'#4ade80',bg:'rgba(74,222,128,0.13)',type:'Emerging Energy Carrier',cat:'emerging',
+   capacity:'~1 GW electrolyzers',cf:'Varies',share:0,lcoe:'$3–8/kg H₂',ci:'0 gCO₂/kWh (green)',land:'Low',water:'9 L per kg H₂',
+   countries:[{n:'China',p:100},{n:'Europe (EU)',p:80},{n:'USA',p:60},{n:'Australia',p:40},{n:'Chile',p:20}],
+   pros:['Zero emissions (green H₂)','Long-duration energy storage','Decarbonizes industry/shipping','Fuel cell vehicles'],
+   cons:['30–40% round-trip loss','Costly storage & transport','Currently 4× fossil H₂ cost','Infrastructure gap'],
+   project:{name:'NEOM Green H₂ Project',loc:'Saudi Arabia',desc:'4 GW electrolyzers; 600 t/day of green hydrogen from solar/wind'},
+   outlook:{text:'Costs falling 50–80% by 2030. Critical for steel, shipping, aviation. Electrolyzer capacity +50%/yr.',growth:50},
+   how:'Renewable electricity splits water (H₂O → H₂ + O) via electrolysis (PEM or alkaline electrolyzer). Hydrogen is stored compressed, liquefied, or as ammonia. Burns cleanly in fuel cells or turbines, emitting only water.'},
+
+  {id:'fusion',name:'Nuclear Fusion',emoji:'⭐',color:'#e879f9',bg:'rgba(232,121,249,0.13)',type:'Future Technology',cat:'emerging',
+   capacity:'Experimental (MW scale)',cf:'TBD',share:0,lcoe:'Target: $60–100/MWh',ci:'~2–5 gCO₂/kWh (est.)',land:'Very Low',water:'Moderate (cooling)',
+   countries:[{n:'ITER (35 nations)',p:100},{n:'UK (STEP)',p:50},{n:'USA (NIF/CFS)',p:50},{n:'China (EAST)',p:40},{n:'Private (CFS)',p:30}],
+   pros:['Virtually limitless fuel','No long-lived radioactive waste','Cannot melt down','Immense energy per kg fuel'],
+   cons:['Not yet commercially viable','Massive engineering challenge','70+ years of research so far','First plant likely 2040s+'],
+   project:{name:'ITER Tokamak',loc:'Cadarache, France',desc:'35-nation megaproject targeting 500 MW fusion output; first plasma 2025'},
+   outlook:{text:'Dec 2022: NIF achieved fusion ignition for the first time in history. CFS targets first commercial plant by 2030s.',growth:999},
+   how:'Deuterium + tritium (hydrogen isotopes) are heated to 150 million °C — 10× hotter than the sun\'s core — forming plasma. Magnetic fields (tokamak) contain the plasma as nuclei fuse, releasing net energy.'},
+
+  {id:'otec',name:'OTEC',emoji:'🌡',color:'#06b6d4',bg:'rgba(6,182,212,0.13)',type:'Emerging Renewable',cat:'emerging',
+   capacity:'<1 MW (pilot only)',cf:'~90% (continuous)',share:0,lcoe:'$150–350/MWh',ci:'~10 gCO₂/kWh',land:'Negligible',water:'Ocean water only',
+   countries:[{n:'Japan',p:100},{n:'USA',p:80},{n:'India',p:40},{n:'Taiwan',p:30},{n:'Martinique',p:20}],
+   pros:['24/7 baseload (constant ΔT)','Desalination as byproduct','No fuel cost','Vast tropical resource'],
+   cons:['Very low efficiency (<5%)','High capital cost','Long cold-water pipe','Far from commercial scale'],
+   project:{name:'Okinawa OTEC Pilot',loc:'Okinawa, Japan',desc:'100 kW demonstration plant proving closed-cycle OTEC thermodynamics'},
+   outlook:{text:'Theoretical resource: 30,000–90,000 TWh/yr in tropical oceans. Proven at lab scale; awaiting cost breakthrough.',growth:20},
+   how:'Exploits 20°C temperature difference between warm surface ocean (25°C) and cold deep water (5°C). Warm water evaporates a working fluid (ammonia) → turbine → cold water condenses it back. Continuous cycle, no fuel.'},
+];
+
+// ─────────────────────────────────────────────
+//  DEMOGRAPHICS DATA
+// ─────────────────────────────────────────────
+const PREF_COLORS = {
+  Renewables:'#10b981', Nuclear:'#a855f7', Gas:'#f97316', Coal:'#6b7280', Oil:'#78350f'
+};
+
+const DEMO_AGE = [
+  {label:'Gen Z (18–27)',       mix:[{s:'Renewables',p:81},{s:'Nuclear',p:10},{s:'Gas',p:7},{s:'Coal',p:2}]},
+  {label:'Millennials (28–42)', mix:[{s:'Renewables',p:72},{s:'Nuclear',p:14},{s:'Gas',p:10},{s:'Coal',p:4}]},
+  {label:'Gen X (43–58)',       mix:[{s:'Renewables',p:58},{s:'Nuclear',p:19},{s:'Gas',p:16},{s:'Coal',p:7}]},
+  {label:'Baby Boomers (59–77)',mix:[{s:'Renewables',p:47},{s:'Nuclear',p:22},{s:'Gas',p:20},{s:'Coal',p:11}]},
+  {label:'Silent Gen (78+)',    mix:[{s:'Renewables',p:38},{s:'Nuclear',p:24},{s:'Gas',p:24},{s:'Coal',p:14}]},
+];
+
+const DEMO_REGION = [
+  {label:'Western Europe',    cleanPct:78, topSource:'Solar & Wind', co2concern:82, willPay:62},
+  {label:'Oceania',           cleanPct:72, topSource:'Solar',        co2concern:75, willPay:58},
+  {label:'Latin America',     cleanPct:67, topSource:'Hydro & Wind', co2concern:71, willPay:48},
+  {label:'North America',     cleanPct:62, topSource:'Wind & Solar', co2concern:63, willPay:52},
+  {label:'East Asia',         cleanPct:55, topSource:'Solar',        co2concern:58, willPay:44},
+  {label:'Eastern Europe',    cleanPct:49, topSource:'Nuclear',      co2concern:50, willPay:35},
+  {label:'South/SE Asia',     cleanPct:44, topSource:'Hydro',        co2concern:62, willPay:30},
+  {label:'Middle East',       cleanPct:41, topSource:'Solar',        co2concern:45, willPay:38},
+  {label:'Sub-Saharan Africa',cleanPct:34, topSource:'Hydro',        co2concern:55, willPay:21},
+];
+
+const DEMO_INCOME = [
+  {label:'High Income', priority:[{s:'Environment',p:35},{s:'Cost',p:33},{s:'Reliability',p:22},{s:'Security',p:10}], willPay:68, renewPref:71},
+  {label:'Middle Income',priority:[{s:'Cost',p:52},{s:'Environment',p:24},{s:'Reliability',p:16},{s:'Security',p:8}], willPay:44, renewPref:55},
+  {label:'Low Income',  priority:[{s:'Access',p:55},{s:'Cost',p:29},{s:'Reliability',p:11},{s:'Environment',p:5}], willPay:22, renewPref:38},
+];
+
+const DEMO_SOURCES = [
+  {label:'Solar PV',           approval:77, color:'#fbbf24'},
+  {label:'Onshore Wind',       approval:72, color:'#22d3ee'},
+  {label:'Offshore Wind',      approval:68, color:'#0ea5e9'},
+  {label:'Hydropower',         approval:65, color:'#3b82f6'},
+  {label:'Geothermal',         approval:60, color:'#f43f5e'},
+  {label:'Biomass/Bioenergy',  approval:44, color:'#84cc16'},
+  {label:'Nuclear',            approval:42, color:'#a855f7'},
+  {label:'Natural Gas',        approval:38, color:'#f97316'},
+  {label:'Coal',               approval:24, color:'#6b7280'},
+  {label:'Oil/Petroleum',      approval:19, color:'#78350f'},
+];
+
+const DEMO_GLOBAL = {
+  willPayMore:46,
+  prioritiseCost:38,
+  prioritiseReliability:29,
+  prioritiseEnvironment:24,
+  prioritiseSecurity:9,
+  trustUtilities:31,
+  trustGovt:28,
+  trustSciEntists:72,
+  accessLacking:733, // millions without electricity
+  cookingEnergy:2400, // millions without clean cooking
+  urbanClean:69,
+  ruralClean:45,
+};
+
+// ─────────────────────────────────────────────
+//  BUILD DEMOGRAPHICS
+// ─────────────────────────────────────────────
+function buildDemographics() {
+  // ── Tab switching ──
+  const tabs = document.querySelectorAll('.dtab');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
+      t.classList.add('active');
+      t.setAttribute('aria-selected','true');
+      document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + t.dataset.panel).classList.add('active');
+    });
+  });
+
+  // ── AGE PANEL ──
+  const ageEl = document.getElementById('panel-age');
+  ageEl.innerHTML = `<div class="demo-grid">
+    <div class="demo-card full">
+      <h3>Clean Energy Preference by Age Group</h3>
+      <div class="sub">% who say each source should be the primary energy type in their country — Ipsos / Pew Research composite 2024</div>
+      <div id="age-bars"></div>
+      <div class="demo-legend">${Object.entries(PREF_COLORS).map(([s,c])=>`<div class="dl-item"><div class="dl-dot" style="background:${c}"></div>${s}</div>`).join('')}</div>
+    </div>
+    <div class="demo-card">
+      <h3>Climate Urgency by Generation</h3>
+      <div class="sub">% who rate climate change as "very serious" threat</div>
+      ${[{g:'Gen Z',p:84},{g:'Millennials',p:76},{g:'Gen X',p:63},{g:'Boomers',p:51},{g:'Silent',p:42}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.g}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:linear-gradient(90deg,#a855f7,#60a5fa)"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Willingness to Pay Premium for Clean Energy</h3>
+      <div class="sub">% who would accept higher bills for 100% renewable electricity</div>
+      ${[{g:'Gen Z',p:72},{g:'Millennials',p:63},{g:'Gen X',p:48},{g:'Boomers',p:35},{g:'Silent',p:24}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.g}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:linear-gradient(90deg,#10b981,#22d3ee)"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+
+  const ageBarsEl = document.getElementById('age-bars');
+  DEMO_AGE.forEach(d => {
+    const segs = d.mix.map(m =>
+      `<div class="dbar-seg" data-w="${m.p}" style="width:0%;background:${PREF_COLORS[m.s]||'#475569'}">${m.p>=12?m.p+'%':''}</div>`
+    ).join('');
+    ageBarsEl.insertAdjacentHTML('beforeend',
+      `<div class="dbar-row">
+        <span class="dbar-label">${d.label}</span>
+        <div class="dbar-track">${segs}</div>
+        <span class="dbar-pct" style="color:#10b981">${d.mix[0].p}%<br><span style="font-size:0.58rem;color:#64748b">renewables</span></span>
+      </div>`);
+  });
+
+  // ── REGION PANEL ──
+  const regionEl = document.getElementById('panel-region');
+  regionEl.innerHTML = `<div class="demo-grid">
+    <div class="demo-card full">
+      <h3>Clean Energy Priority by World Region</h3>
+      <div class="sub">% who say transitioning to clean energy should be the top national energy priority — YouGov International 2024</div>
+      ${DEMO_REGION.map(r => {
+        const col = r.cleanPct >= 70 ? '#10b981' : r.cleanPct >= 55 ? '#f59e0b' : '#ef4444';
+        return `<div class="rank-row">
+          <span class="rank-label" style="width:160px">${r.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${r.cleanPct}" style="background:${col}"></div></div>
+          <span class="rank-pct">${r.cleanPct}%</span>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>CO₂ Concern vs. Energy Security Priority</h3>
+      <div class="sub">% who cite climate impact as primary energy concern (vs. reliability/cost)</div>
+      ${DEMO_REGION.map(r=>`
+        <div class="rank-row">
+          <span class="rank-label" style="width:145px;font-size:0.73rem">${r.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${r.co2concern}" style="background:linear-gradient(90deg,#a855f7,#3b82f6)"></div></div>
+          <span class="rank-pct">${r.co2concern}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Willingness to Pay Premium by Region</h3>
+      <div class="sub">% who would accept 10%+ higher energy bills for cleaner supply</div>
+      ${DEMO_REGION.map(r=>`
+        <div class="rank-row">
+          <span class="rank-label" style="width:145px;font-size:0.73rem">${r.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${r.willPay}" style="background:linear-gradient(90deg,#f59e0b,#10b981)"></div></div>
+          <span class="rank-pct">${r.willPay}%</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+
+  // ── INCOME PANEL ──
+  const incomeEl = document.getElementById('panel-income');
+  incomeEl.innerHTML = `<div class="demo-grid">
+    <div class="demo-card full">
+      <h3>What Matters Most in Energy — By Income Level</h3>
+      <div class="sub">Primary energy priority stated in household surveys — World Bank / Ipsos 2024. Access = reliable electricity access, a priority absent in wealthier nations.</div>
+      <div id="income-bars"></div>
+      <div class="demo-legend">
+        ${[['Environment','#10b981'],['Cost','#fbbf24'],['Reliability','#3b82f6'],['Security','#a855f7'],['Access','#f97316']].map(([s,c])=>`<div class="dl-item"><div class="dl-dot" style="background:${c}"></div>${s}</div>`).join('')}
+      </div>
+    </div>
+    <div class="demo-card">
+      <h3>Renewable Energy Preference</h3>
+      <div class="sub">% who prefer renewables as primary electricity source</div>
+      ${DEMO_INCOME.map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.renewPref}" style="background:#10b981"></div></div>
+          <span class="rank-pct">${d.renewPref}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Willingness to Pay for Clean Energy</h3>
+      <div class="sub">% who would pay a premium for verified clean electricity</div>
+      ${DEMO_INCOME.map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.willPay}" style="background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div>
+          <span class="rank-pct">${d.willPay}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Urban vs. Rural: Clean Energy Priority</h3>
+      <div class="sub">Global average — urban residents consistently prioritise clean energy over cost/reliability compared to rural populations</div>
+      ${[{l:'Urban (global avg.)',p:69,c:'#60a5fa'},{l:'Rural (global avg.)',p:45,c:'#84cc16'},{l:'Urban (high-income)',p:78,c:'#a855f7'},{l:'Rural (high-income)',p:61,c:'#22d3ee'},{l:'Urban (low-income)',p:55,c:'#f59e0b'},{l:'Rural (low-income)',p:28,c:'#f97316'}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label" style="font-size:0.72rem">${d.l}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:${d.c}"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+
+  const incomeBarsEl = document.getElementById('income-bars');
+  const priorityCols = {Environment:'#10b981',Cost:'#fbbf24',Reliability:'#3b82f6',Security:'#a855f7',Access:'#f97316'};
+  DEMO_INCOME.forEach(d => {
+    const segs = d.priority.map(m =>
+      `<div class="dbar-seg" data-w="${m.p}" style="width:0%;background:${priorityCols[m.s]||'#475569'}">${m.p>=12?m.p+'%':''}</div>`
+    ).join('');
+    incomeBarsEl.insertAdjacentHTML('beforeend',
+      `<div class="dbar-row">
+        <span class="dbar-label">${d.label}</span>
+        <div class="dbar-track">${segs}</div>
+      </div>`);
+  });
+
+  // ── SOURCE APPROVAL PANEL ──
+  const srcEl = document.getElementById('panel-source');
+  srcEl.innerHTML = `<div class="demo-grid">
+    <div class="demo-card full">
+      <h3>Global Public Approval of Energy Sources</h3>
+      <div class="sub">% with a "favourable" or "very favourable" view — Ipsos Global Survey 2024, 29 countries, n=23,000</div>
+      ${DEMO_SOURCES.map((s,i) => `
+        <div class="rank-row">
+          <span class="rank-num">${i+1}</span>
+          <span class="rank-label">${s.label}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${s.approval}" style="background:${s.color}"></div></div>
+          <span class="rank-pct">${s.approval}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Why People Support Renewables</h3>
+      <div class="sub">Top reasons given for favouring clean energy — open-ended survey responses</div>
+      ${[
+        {r:'Environmental protection',p:68},{r:'Lower long-term costs',p:54},{r:'Energy independence',p:49},
+        {r:'Job creation',p:41},{r:'Technological progress',p:38},{r:'Reduced health impacts',p:35},
+      ].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label" style="font-size:0.73rem">${d.r}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:#10b981"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Barriers to Clean Energy Adoption</h3>
+      <div class="sub">Top concerns preventing greater support for clean energy transition</div>
+      ${[
+        {r:'Higher energy bills',p:62},{r:'Reliability / blackout risk',p:55},{r:'Job losses in fossil sector',p:48},
+        {r:'Visual impact / NIMBYism',p:41},{r:'Slow transition pace',p:38},{r:'Government trust deficit',p:35},
+      ].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label" style="font-size:0.73rem">${d.r}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:#ef4444"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+  </div>`;
+
+  // ── GLOBAL SNAPSHOT PANEL ──
+  const globalEl = document.getElementById('panel-global');
+  globalEl.innerHTML = `<div class="demo-grid">
+    <div class="demo-card full">
+      <h3>Global Energy Snapshot — People &amp; Access</h3>
+      <div class="sub">Key human metrics behind the energy transition — IEA / World Bank 2024</div>
+      <div class="globe-stat">
+        <div class="gs-item"><div class="gs-val" style="color:#ef4444">733M</div><div class="gs-lbl">without electricity</div></div>
+        <div class="gs-item"><div class="gs-val" style="color:#f97316">2.4B</div><div class="gs-lbl">without clean cooking</div></div>
+        <div class="gs-item"><div class="gs-val" style="color:#10b981">46%</div><div class="gs-lbl">willing to pay more for clean</div></div>
+        <div class="gs-item"><div class="gs-val" style="color:#60a5fa">72%</div><div class="gs-lbl">trust scientists on energy</div></div>
+        <div class="gs-item"><div class="gs-val" style="color:#a855f7">31%</div><div class="gs-lbl">trust energy companies</div></div>
+        <div class="gs-item"><div class="gs-val" style="color:#fbbf24">28%</div><div class="gs-lbl">trust governments</div></div>
+      </div>
+    </div>
+    <div class="demo-card">
+      <h3>Top Energy Priority — Global Average</h3>
+      <div class="sub">What people say is the most important factor in national energy policy</div>
+      ${[{l:'Affordable cost',p:38,c:'#fbbf24'},{l:'Reliable supply',p:29,c:'#3b82f6'},{l:'Environmental impact',p:24,c:'#10b981'},{l:'Energy security',p:9,c:'#a855f7'}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.l}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:${d.c}"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Trust in Information Sources on Energy</h3>
+      <div class="sub">% who say they "mostly trust" this source for energy information</div>
+      ${[{l:'Scientists / academics',p:72,c:'#10b981'},{l:'Environmental NGOs',p:54,c:'#84cc16'},{l:'International agencies',p:47,c:'#3b82f6'},{l:'National media',p:38,c:'#f59e0b'},{l:'Government',p:28,c:'#f97316'},{l:'Energy companies',p:31,c:'#6b7280'},{l:'Social media',p:18,c:'#ef4444'}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.l}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:${d.c}"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+    </div>
+    <div class="demo-card">
+      <h3>Energy Access Progress 2000–2024</h3>
+      <div class="sub">Global electrification rate over time — the most important demographic energy story</div>
+      ${[{l:'2000',p:73},{l:'2005',p:78},{l:'2010',p:83},{l:'2015',p:87},{l:'2019',p:90},{l:'2022',p:91.4},{l:'2024',p:91.8}].map(d=>`
+        <div class="rank-row">
+          <span class="rank-label">${d.l}</span>
+          <div class="rank-bar-wrap"><div class="rank-bar" data-w="${d.p}" style="background:linear-gradient(90deg,#f97316,#10b981)"></div></div>
+          <span class="rank-pct">${d.p}%</span>
+        </div>`).join('')}
+      <div style="font-size:0.72rem;color:var(--t3);margin-top:8px">Progress stalled since 2019 — pandemic reversed gains in SSA. 733M still off-grid, 85% in Sub-Saharan Africa.</div>
+    </div>
+  </div>`;
+
+  // ── ANIMATE BARS ON SCROLL ──
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('[data-w]').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+      e.target.querySelectorAll('.dbar-seg[data-w]').forEach(seg => {
+        seg.style.width = seg.dataset.w + '%';
+      });
+      barObs.unobserve(e.target);
+    });
+  }, {threshold: 0.15});
+
+  document.querySelectorAll('.demo-card').forEach(c => barObs.observe(c));
+}
+
+// ─────────────────────────────────────────────
+//  COUNTRY DATA
+// ─────────────────────────────────────────────
+const MIX_COLORS = {
+  Coal:'#6b7280',Gas:'#f97316',Oil:'#78350f',Nuclear:'#a855f7',
+  Hydro:'#3b82f6',Wind:'#22d3ee',Solar:'#fbbf24',Biomass:'#84cc16',
+  Geothermal:'#f43f5e','Rooftop Solar':'#f59e0b','Utility Solar':'#fbbf24',Other:'#475569'
+};
+
+const CONTINENTS = [
+  {id:'asia',    name:'Asia',           emoji:'🌏'},
+  {id:'europe',  name:'Europe',         emoji:'🌍'},
+  {id:'namerica',name:'North America',  emoji:'🌎'},
+  {id:'samerica',name:'South America',  emoji:'🌎'},
+  {id:'africa',  name:'Africa',         emoji:'🌍'},
+  {id:'oceania', name:'Oceania',        emoji:'🌏'},
+];
+
+const COUNTRIES = [
+  // ASIA
+  {id:'cn',name:'China',       flag:'🇨🇳',continent:'asia',    gen:8500,pop:1412,co2:572,cleanPct:40,
+   keyFact:'World\'s largest electricity market and simultaneously the largest coal burner AND the largest installer of renewables.',
+   trend:'Adding more solar & wind annually than any other nation. On track to peak emissions before 2030.',
+   mix:[{s:'Coal',p:61},{s:'Hydro',p:15},{s:'Wind',p:9},{s:'Nuclear',p:5},{s:'Solar',p:5},{s:'Gas',p:3},{s:'Other',p:2}]},
+  {id:'in',name:'India',       flag:'🇮🇳',continent:'asia',    gen:1900,pop:1429,co2:680,cleanPct:22,
+   keyFact:'Third-largest electricity consumer globally. Targeting 500 GW renewable capacity by 2030.',
+   trend:'Solar growing fastest of any source; coal share declining but absolute use still rising with demand growth.',
+   mix:[{s:'Coal',p:73},{s:'Hydro',p:9},{s:'Wind',p:5},{s:'Solar',p:5},{s:'Gas',p:3},{s:'Nuclear',p:3},{s:'Other',p:2}]},
+  {id:'jp',name:'Japan',       flag:'🇯🇵',continent:'asia',    gen:1050,pop:124,co2:440,cleanPct:24,
+   keyFact:'Post-Fukushima 2011 pivot to LNG & coal. Nuclear restarts accelerating; offshore wind major focus.',
+   trend:'Ambitious 2030 target of 36–38% renewables. Green hydrogen import strategy via Australia.',
+   mix:[{s:'Gas',p:33},{s:'Coal',p:30},{s:'Solar',p:10},{s:'Nuclear',p:9},{s:'Hydro',p:8},{s:'Biomass',p:7},{s:'Wind',p:1},{s:'Other',p:2}]},
+  {id:'kr',name:'South Korea', flag:'🇰🇷',continent:'asia',    gen:610,pop:52,co2:420,cleanPct:30,
+   keyFact:'Nuclear provides a quarter of all electricity. Strong offshore wind pipeline in Yellow & East Sea.',
+   trend:'Government reversed nuclear phase-out in 2022; new reactor approvals accelerating.',
+   mix:[{s:'Coal',p:40},{s:'Gas',p:28},{s:'Nuclear',p:26},{s:'Solar',p:4},{s:'Wind',p:1},{s:'Other',p:1}]},
+  {id:'id',name:'Indonesia',   flag:'🇮🇩',continent:'asia',    gen:320,pop:277,co2:700,cleanPct:18,
+   keyFact:'World\'s largest coal exporter, yet holds 40% of global geothermal resources — mostly untapped.',
+   trend:'$20B Just Energy Transition Partnership to retire coal early. Geothermal expansion underway.',
+   mix:[{s:'Coal',p:62},{s:'Gas',p:15},{s:'Hydro',p:7},{s:'Geothermal',p:6},{s:'Oil',p:5},{s:'Solar',p:3},{s:'Other',p:2}]},
+  {id:'sa',name:'Saudi Arabia',flag:'🇸🇦',continent:'asia',    gen:380,pop:36,co2:720,cleanPct:2,
+   keyFact:'Near-zero renewables today, but Vision 2030 targets 50% clean electricity within the decade.',
+   trend:'Massive solar auctions underway. NEOM green H₂ project is world\'s largest. 20 GW solar deals in 2023.',
+   mix:[{s:'Gas',p:60},{s:'Oil',p:38},{s:'Solar',p:2}]},
+  {id:'ae',name:'UAE',         flag:'🇦🇪',continent:'asia',    gen:145,pop:10,co2:450,cleanPct:11,
+   keyFact:'Barakah nuclear — Arab world\'s first (4 units online). Noor Abu Dhabi: world\'s largest single solar farm.',
+   trend:'Net zero by 2050 target. Rapid grid diversification away from gas ahead of COP28 legacy.',
+   mix:[{s:'Gas',p:88},{s:'Nuclear',p:7},{s:'Solar',p:4},{s:'Other',p:1}]},
+  {id:'vn',name:'Vietnam',     flag:'🇻🇳',continent:'asia',    gen:280,pop:98,co2:550,cleanPct:43,
+   keyFact:'Installed 16+ GW of solar in just 4 years (2017–2021) — one of the fastest buildouts in history.',
+   trend:'70+ GW offshore wind pipeline. Grid transmission bottleneck is current critical constraint.',
+   mix:[{s:'Coal',p:48},{s:'Hydro',p:28},{s:'Wind',p:9},{s:'Solar',p:6},{s:'Gas',p:8},{s:'Other',p:1}]},
+  {id:'tr',name:'Turkey',      flag:'🇹🇷',continent:'asia',    gen:315,pop:85,co2:430,cleanPct:43,
+   keyFact:'Largest economy outside G7/EU. Wind leader in the region; Geothermal #4 globally.',
+   trend:'2023: renewables (hydro+wind+solar+geo) exceeded coal for first time. Strong trajectory ahead.',
+   mix:[{s:'Coal',p:36},{s:'Gas',p:22},{s:'Hydro',p:25},{s:'Wind',p:9},{s:'Solar',p:5},{s:'Geothermal',p:3}]},
+
+  // EUROPE
+  {id:'de',name:'Germany',     flag:'🇩🇪',continent:'europe',  gen:490,pop:83,co2:380,cleanPct:62,
+   keyFact:'Energiewende since 2011. Nuclear-free since April 2023. Wind is now the single largest source.',
+   trend:'62% clean electricity in 2023. Target 80% by 2030. Offshore wind and green H₂ ramp are critical.',
+   mix:[{s:'Wind',p:31},{s:'Coal',p:26},{s:'Gas',p:15},{s:'Solar',p:10},{s:'Biomass',p:8},{s:'Hydro',p:4},{s:'Nuclear',p:2},{s:'Other',p:4}]},
+  {id:'fr',name:'France',      flag:'🇫🇷',continent:'europe',  gen:490,pop:68,co2:60,cleanPct:92,
+   keyFact:'Lowest CO₂ grid in the G7. 56-reactor nuclear fleet provides 70% of electricity.',
+   trend:'Ageing reactors undergoing extended life reviews. Macron ordered 6 new EPR2 reactors in 2022.',
+   mix:[{s:'Nuclear',p:70},{s:'Hydro',p:12},{s:'Wind',p:9},{s:'Solar',p:5},{s:'Gas',p:3},{s:'Other',p:1}]},
+  {id:'gb',name:'United Kingdom',flag:'🇬🇧',continent:'europe', gen:300,pop:67,co2:230,cleanPct:58,
+   keyFact:'First G7 nation to phase out coal (final closure April 2024). Wind surpassed gas as top source.',
+   trend:'Sizewell C nuclear approved. 50 GW offshore wind by 2030. World\'s largest offshore wind market.',
+   mix:[{s:'Gas',p:35},{s:'Wind',p:25},{s:'Nuclear',p:14},{s:'Biomass',p:11},{s:'Solar',p:5},{s:'Hydro',p:2},{s:'Other',p:8}]},
+  {id:'es',name:'Spain',       flag:'🇪🇸',continent:'europe',  gen:250,pop:47,co2:160,cleanPct:58,
+   keyFact:'Wind has been Spain\'s #1 electricity source consistently since 2013.',
+   trend:'2023: 50%+ clean electricity. Last coal plant closed 2020. Green H₂ export hub ambition.',
+   mix:[{s:'Wind',p:24},{s:'Nuclear',p:20},{s:'Gas',p:20},{s:'Solar',p:15},{s:'Hydro',p:10},{s:'Other',p:11}]},
+  {id:'no',name:'Norway',      flag:'🇳🇴',continent:'europe',  gen:155,pop:5.4,co2:25,cleanPct:98,
+   keyFact:'98% renewable electricity. World\'s highest EV adoption rate (>90% new car sales). Pumped storage hub for Europe.',
+   trend:'Green hydrogen export target via North Sea. Interconnectors to UK & Germany trade clean surplus.',
+   mix:[{s:'Hydro',p:88},{s:'Wind',p:10},{s:'Other',p:2}]},
+  {id:'se',name:'Sweden',      flag:'🇸🇪',continent:'europe',  gen:160,pop:10.5,co2:45,cleanPct:96,
+   keyFact:'Carbon-neutral power grid. Nuclear + hydro backbone. Fossil fuel ban in heating by 2040.',
+   trend:'Expanding offshore wind to power EU data center boom. Parliament approved 4 new reactors.',
+   mix:[{s:'Hydro',p:42},{s:'Nuclear',p:29},{s:'Wind',p:19},{s:'Solar',p:4},{s:'Other',p:6}]},
+  {id:'pl',name:'Poland',      flag:'🇵🇱',continent:'europe',  gen:170,pop:38,co2:720,cleanPct:18,
+   keyFact:'Most coal-dependent large EU economy. But solar capacity doubled annually 2020–2023.',
+   trend:'First nuclear plant under construction (target: 2040). Solar boom continuing under EU pressure.',
+   mix:[{s:'Coal',p:69},{s:'Wind',p:12},{s:'Gas',p:9},{s:'Solar',p:5},{s:'Other',p:5}]},
+  {id:'it',name:'Italy',       flag:'🇮🇹',continent:'europe',  gen:290,pop:60,co2:310,cleanPct:44,
+   keyFact:'No nuclear since 1987 referendum. Large untapped solar resource in the southern regions.',
+   trend:'Superbonus scheme drove rooftop solar boom. Offshore wind pipeline accelerating in the south.',
+   mix:[{s:'Gas',p:44},{s:'Hydro',p:16},{s:'Solar',p:12},{s:'Wind',p:7},{s:'Biomass',p:7},{s:'Coal',p:7},{s:'Other',p:7}]},
+
+  // NORTH AMERICA
+  {id:'us',name:'United States',flag:'🇺🇸',continent:'namerica',gen:4400,pop:334,co2:380,cleanPct:43,
+   keyFact:'Largest nuclear fleet on Earth (93 GW). IRA 2022 = $369B clean energy investment — largest in US history.',
+   trend:'Wind & solar now cheapest new electricity. Coal retiring rapidly. Federal 100% clean by 2035 goal.',
+   mix:[{s:'Gas',p:40},{s:'Nuclear',p:19},{s:'Coal',p:17},{s:'Wind',p:10},{s:'Hydro',p:7},{s:'Solar',p:5},{s:'Other',p:2}]},
+  {id:'ca',name:'Canada',       flag:'🇨🇦',continent:'namerica',gen:650,pop:40,co2:130,cleanPct:82,
+   keyFact:'82% clean electricity, primarily hydro. Federal 2035 clean grid target now legislated.',
+   trend:'Alberta & Saskatchewan still gas/coal heavy. LNG export expansion controversial vs climate goals.',
+   mix:[{s:'Hydro',p:60},{s:'Nuclear',p:15},{s:'Gas',p:11},{s:'Wind',p:6},{s:'Coal',p:5},{s:'Solar',p:2},{s:'Other',p:1}]},
+  {id:'mx',name:'Mexico',       flag:'🇲🇽',continent:'namerica',gen:310,pop:130,co2:440,cleanPct:26,
+   keyFact:'Rich renewable resources (Baja solar, Oaxaca wind) — mostly untapped due to policy reversals since 2019.',
+   trend:'2024 election may shift direction. Nearshoring boom driving massive new electricity demand.',
+   mix:[{s:'Gas',p:56},{s:'Oil',p:8},{s:'Coal',p:7},{s:'Hydro',p:10},{s:'Wind',p:9},{s:'Nuclear',p:4},{s:'Solar',p:4},{s:'Other',p:2}]},
+
+  // SOUTH AMERICA
+  {id:'br',name:'Brazil',       flag:'🇧🇷',continent:'samerica',gen:650,pop:215,co2:100,cleanPct:84,
+   keyFact:'84% clean electricity — one of the cleanest large grids globally. Amazon hydro + NE wind powerhouse.',
+   trend:'Wind & solar cheapest electricity in the world by auction price. Vast green H₂ export potential.',
+   mix:[{s:'Hydro',p:63},{s:'Wind',p:12},{s:'Gas',p:9},{s:'Biomass',p:8},{s:'Solar',p:5},{s:'Nuclear',p:2},{s:'Coal',p:1}]},
+  {id:'cl',name:'Chile',        flag:'🇨🇱',continent:'samerica',gen:90,pop:19,co2:300,cleanPct:59,
+   keyFact:'Atacama Desert has the world\'s highest solar irradiation. Set record-low solar auction prices in 2021.',
+   trend:'100% renewable target by 2050. World\'s largest copper mining industry being electrified.',
+   mix:[{s:'Gas',p:27},{s:'Hydro',p:24},{s:'Solar',p:19},{s:'Wind',p:16},{s:'Coal',p:10},{s:'Other',p:4}]},
+  {id:'ar',name:'Argentina',    flag:'🇦🇷',continent:'samerica',gen:140,pop:46,co2:350,cleanPct:46,
+   keyFact:'Patagonia wind resources rank among the best on Earth. Latin America\'s nuclear pioneer (3 plants).',
+   trend:'Economic crises delayed plans; new government opening private renewable investment again.',
+   mix:[{s:'Gas',p:42},{s:'Hydro',p:26},{s:'Wind',p:14},{s:'Oil',p:7},{s:'Solar',p:4},{s:'Nuclear',p:4},{s:'Coal',p:3}]},
+  {id:'co',name:'Colombia',     flag:'🇨🇴',continent:'samerica',gen:80,pop:52,co2:140,cleanPct:77,
+   keyFact:'77% hydropower — but severe El Niño droughts now threatening grid reliability.',
+   trend:'Diversifying into wind & solar to hedge against climate-driven hydro risk. Guajira wind farm largest in LatAm.',
+   mix:[{s:'Hydro',p:71},{s:'Gas',p:13},{s:'Coal',p:10},{s:'Wind',p:3},{s:'Solar',p:2},{s:'Other',p:1}]},
+
+  // AFRICA
+  {id:'za',name:'South Africa', flag:'🇿🇦',continent:'africa',  gen:240,pop:60,co2:750,cleanPct:14,
+   keyFact:'Africa\'s most industrialised nation. Ageing Eskom coal fleet causing severe load-shedding blackouts.',
+   trend:'Load-shedding crisis triggered massive rooftop solar boom. $8.5B JET-P transition funding secured.',
+   mix:[{s:'Coal',p:85},{s:'Nuclear',p:6},{s:'Wind',p:4},{s:'Solar',p:3},{s:'Hydro',p:1},{s:'Other',p:1}]},
+  {id:'eg',name:'Egypt',        flag:'🇪🇬',continent:'africa',  gen:200,pop:104,co2:620,cleanPct:14,
+   keyFact:'Benban Solar Park (1.8 GW) is Africa\'s largest. Aswan High Dam still the grid backbone.',
+   trend:'Targeting 42% renewable by 2035. Suez Canal zone positioned as green H₂ export hub.',
+   mix:[{s:'Gas',p:80},{s:'Oil',p:5},{s:'Hydro',p:8},{s:'Wind',p:4},{s:'Solar',p:3}]},
+  {id:'ma',name:'Morocco',      flag:'🇲🇦',continent:'africa',  gen:40,pop:38,co2:490,cleanPct:40,
+   keyFact:'Noor Ouarzazate concentrated solar complex — one of the world\'s largest CSP installations.',
+   trend:'Targeting 52% renewable by 2030. Africa\'s leader in renewable investment per capita.',
+   mix:[{s:'Coal',p:35},{s:'Gas',p:15},{s:'Wind',p:18},{s:'Hydro',p:14},{s:'Solar',p:12},{s:'Oil',p:6}]},
+  {id:'ng',name:'Nigeria',      flag:'🇳🇬',continent:'africa',  gen:32,pop:220,co2:430,cleanPct:17,
+   keyFact:'Africa\'s most populous nation — yet ~45% of people lack electricity access entirely.',
+   trend:'Off-grid solar fastest growing segment. Gas flaring scandal wastes energy equal to Ghana\'s entire output.',
+   mix:[{s:'Gas',p:80},{s:'Hydro',p:17},{s:'Solar',p:2},{s:'Other',p:1}]},
+  {id:'et',name:'Ethiopia',     flag:'🇪🇹',continent:'africa',  gen:14,pop:126,co2:15,cleanPct:100,
+   keyFact:'Grand Ethiopian Renaissance Dam (5.1 GW) — Africa\'s largest power station. 100% renewable grid.',
+   trend:'Exporting clean electricity to neighbors. But 55% of population still off-grid.',
+   mix:[{s:'Hydro',p:97},{s:'Wind',p:3}]},
+  {id:'ke',name:'Kenya',        flag:'🇰🇪',continent:'africa',  gen:12,pop:56,co2:120,cleanPct:92,
+   keyFact:'Africa\'s geothermal leader. Olkaria complex (800+ MW) powers from the Great Rift Valley.',
+   trend:'Targeting 100% clean electricity by 2030. Lake Turkana wind farm (310 MW) — Africa\'s largest.',
+   mix:[{s:'Geothermal',p:47},{s:'Hydro',p:25},{s:'Wind',p:18},{s:'Solar',p:5},{s:'Gas',p:4},{s:'Other',p:1}]},
+
+  // OCEANIA
+  {id:'au',name:'Australia',    flag:'🇦🇺',continent:'oceania', gen:265,pop:26,co2:580,cleanPct:38,
+   keyFact:'Highest solar irradiation of any continent. Rooftop solar on 1-in-3 homes — a world record.',
+   trend:'38% renewable in 2023. South Australia leads at 70%+. National 82% by 2030 target.',
+   mix:[{s:'Coal',p:45},{s:'Gas',p:17},{s:'Wind',p:13},{s:'Rooftop Solar',p:10},{s:'Utility Solar',p:6},{s:'Hydro',p:7},{s:'Other',p:2}]},
+  {id:'nz',name:'New Zealand',  flag:'🇳🇿',continent:'oceania', gen:43,pop:5,co2:130,cleanPct:85,
+   keyFact:'85% renewable electricity. Geothermal + hydro backbone. Rapid EV uptake across both islands.',
+   trend:'100% renewable by 2030 target. Onslow pumped hydro under consideration as giant seasonal battery.',
+   mix:[{s:'Hydro',p:57},{s:'Geothermal',p:17},{s:'Gas',p:11},{s:'Wind',p:9},{s:'Coal',p:4},{s:'Solar',p:2}]},
+];
+
+// ─────────────────────────────────────────────
+//  TIMELINE DATA
+// ─────────────────────────────────────────────
+const TIMELINE = [
+  {yr:'~400,000 BCE',title:'Fire',desc:'Homo erectus controls fire — humanity\'s first energy source. Heat, light, protection, and cooked food.'},
+  {yr:'~10,000 BCE',title:'Wind & Draft Animals',desc:'Agricultural revolution: sails harness wind on the Nile and Aegean; oxen and horses multiply human muscle.'},
+  {yr:'~200 BCE',title:'Waterwheels',desc:'Greeks and Romans build water mills to grind grain — the first conversion of natural flow to mechanical work.'},
+  {yr:'1712',title:'Steam Engine',desc:'Thomas Newcomen\'s atmospheric steam engine pumps water from mines. The Industrial Revolution begins.'},
+  {yr:'1859',title:'Commercial Oil Drilling',desc:'Edwin Drake strikes oil in Titusville, Pennsylvania. The petroleum age begins, transforming transport and war.'},
+  {yr:'1882',title:'Electric Power Grid',desc:'Edison opens Pearl Street Station in Manhattan — the world\'s first central electric power plant. 59 customers.'},
+  {yr:'1888',title:'Wind Turbine Electricity',desc:'Charles Brush builds a 12 kW wind turbine in Cleveland, Ohio — the first to generate electricity from wind.'},
+  {yr:'1904',title:'Geothermal Power',desc:'First geothermal plant at Larderello, Italy. Prince Conti lights 5 bulbs from volcanic steam.'},
+  {yr:'1954',title:'Silicon Solar Cell',desc:'Bell Labs\' Chapin, Fuller & Pearson demonstrate the silicon photovoltaic cell at 6% efficiency. Cost: $1,000/watt.'},
+  {yr:'1954',title:'First Nuclear Power Plant',desc:'USSR opens Obninsk — 5 MW nuclear plant, first to generate electricity for a grid. Nuclear age begins.'},
+  {yr:'1973',title:'Oil Crisis & Renewables Push',desc:'OPEC embargo. Oil price 4×. Western governments pour billions into solar, wind, and efficiency research.'},
+  {yr:'1991',title:'First Offshore Wind Farm',desc:'Vindeby offshore farm opens in Denmark. 11 turbines × 450 kW = 4.95 MW. Today offshore capacity exceeds 60 GW.'},
+  {yr:'2010',title:'Solar Cost Crosses Threshold',desc:'Utility solar drops below $1/watt installed for the first time. The exponential cost decline becomes undeniable.'},
+  {yr:'2015',title:'Paris Agreement',desc:'195 nations agree to limit warming to 1.5–2°C above pre-industrial levels. Renewables acceleration begins.'},
+  {yr:'2022',title:'NIF Fusion Ignition',desc:'National Ignition Facility achieves fusion ignition — energy output exceeds laser input for the first time in history.'},
+  {yr:'2023',title:'Solar Sets Record',desc:'Solar PV adds 350+ GW globally. First year renewable additions exceed fossil fuel capacity additions combined.'},
+  {yr:'2024',title:'Today',desc:'~38% of global electricity from clean sources. 40+ countries exceed 50% clean electricity. The transition accelerates.'},
+  {yr:'2030s',title:'The Clean Grid Era',desc:'Projected: Most developed nations reach 80–90% clean electricity. Green hydrogen emerges as industrial fuel.'},
+  {yr:'2040s–50s',title:'Fusion & Beyond',desc:'First commercial fusion plants projected. Grid-scale storage matures. Energy abundance within reach for all.'},
+];
+
+// ─────────────────────────────────────────────
+//  GLOSSARY DATA
+// ─────────────────────────────────────────────
+const GLOSSARY = [
+  {term:'Levelized Cost of Energy',abbr:'LCOE ($/MWh)',def:'Average net present cost of electricity per MWh over a project\'s lifetime. The standard apples-to-apples metric for comparing energy economics.'},
+  {term:'Carbon Intensity',abbr:'gCO₂eq/kWh',def:'Grams of CO₂-equivalent per kilowatt-hour generated — including full lifecycle (construction, fuel, operations). Lower is better.'},
+  {term:'Terawatt-hour',abbr:'TWh',def:'One trillion watt-hours. Global electricity consumption: ~29,000 TWh/year. One large nuclear plant produces ~10 TWh/year.'},
+  {term:'Gigawatt',abbr:'GW (installed capacity)',def:'One billion watts. 1 GW can power ~700,000 homes. Global installed capacity: ~9,000 GW. Note: capacity ≠ generation (see Capacity Factor).'},
+  {term:'Capacity Factor',abbr:'CF (%)',def:'Actual output ÷ theoretical maximum. Coal: ~50%, Nuclear: ~90%, Solar: ~15–25%, Onshore Wind: ~25–40%, Offshore Wind: ~35–55%.'},
+  {term:'Exajoule',abbr:'EJ (primary energy)',def:'One quintillion joules. Global primary energy: ~580 EJ/year. Electricity is only ~22% — the rest is heat, transport, industrial processes.'},
+  {term:'Baseload',abbr:'(grid operations)',def:'The minimum power demand over 24 hours. Baseload plants run continuously (coal, nuclear, geothermal). Contrasted with peaker and intermediate plants.'},
+  {term:'Dispatchable',abbr:'(grid term)',def:'Can be switched on/off on demand. Coal, gas, hydro, and nuclear are dispatchable. Solar and wind are variable, requiring storage or backup.'},
+  {term:'BECCS',abbr:'Bioenergy + Carbon Capture',def:'Burning biomass for energy while capturing the CO₂ — potentially a net-negative emissions technology. Controversial due to land use requirements.'},
+  {term:'Grid Parity',abbr:'(economics)',def:'When a renewable source matches or beats the LCOE of conventional power. Solar reached grid parity in most markets by 2020.'},
+  {term:'Green Hydrogen',abbr:'H₂ via electrolysis',def:'Hydrogen produced by splitting water using renewable electricity. Zero lifecycle emissions. Currently ~4× the cost of fossil hydrogen but falling fast.'},
+  {term:'Energy Density',abbr:'MJ/kg or MJ/L',def:'Energy per unit of mass or volume. Uranium: 80,000,000 MJ/kg. Diesel: 44 MJ/kg. Lithium battery: ~0.9 MJ/kg. Critical for transport decisions.'},
+];
+
+// ─────────────────────────────────────────────
+//  SVG DIAGRAMS
+// ─────────────────────────────────────────────
+function getDiagram(id, color) {
+  const c = color;
+  const diagrams = {
+    coal: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="25" width="38" height="35" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="29" y="45" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">BOILER</text>
+      <g opacity="0.7">
+        <circle cx="24" cy="18" r="3" fill="${c}" opacity="0.6"><animate attributeName="cy" values="18;8;18" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite"/></circle>
+        <circle cx="32" cy="14" r="2.5" fill="${c}" opacity="0.5"><animate attributeName="cy" values="14;4;14" dur="2.4s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.5;0;0.5" dur="2.4s" begin="0.4s" repeatCount="indefinite"/></circle>
+        <circle cx="40" cy="18" r="2" fill="${c}" opacity="0.4"><animate attributeName="cy" values="18;6;18" dur="1.8s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.4;0;0.4" dur="1.8s" begin="0.8s" repeatCount="indefinite"/></circle>
+      </g>
+      <line x1="50" y1="42" x2="75" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#arr)"/>
+      <circle cx="100" cy="42" r="18" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(100,42)" style="animation:spin 3s linear infinite;transform-origin:0 0">
+        <line x1="0" y1="-14" x2="0" y2="14" stroke="${c}" stroke-width="2"/>
+        <line x1="-14" y1="0" x2="14" y2="0" stroke="${c}" stroke-width="2"/>
+        <line x1="-10" y1="-10" x2="10" y2="10" stroke="${c}" stroke-width="1.5"/>
+        <line x1="10" y1="-10" x2="-10" y2="10" stroke="${c}" stroke-width="1.5"/>
+      </g>
+      <line x1="120" y1="42" x2="145" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#arr)"/>
+      <rect x="147" y="29" width="28" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="161" y="42" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">GEN</text>
+      <line x1="177" y1="42" x2="200" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="220" y="46" text-anchor="middle" fill="${c}" font-size="18">⚡</text>
+      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    gas: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <text x="24" y="28" text-anchor="middle" fill="${c}" font-size="22"><animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>🔥</text>
+      <text x="24" y="55" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">GAS TURBINE</text>
+      <line x1="46" y1="42" x2="70" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a2)"/>
+      <polygon points="90,30 120,38 120,46 90,54" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(90,42)" style="animation:spin 2s linear infinite;transform-origin:0 0">
+        <path d="M0,-12 Q8,-8 0,0 Q-8,-8 0,-12" fill="${c}" opacity="0.8"/>
+        <path d="M0,12 Q8,8 0,0 Q-8,8 0,12" fill="${c}" opacity="0.8"/>
+        <path d="M-12,0 Q-8,8 0,0 Q-8,-8 -12,0" fill="${c}" opacity="0.8"/>
+      </g>
+      <line x1="122" y1="42" x2="146" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a2)"/>
+      <circle cx="168" cy="42" r="16" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="168" y="46" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">STEAM<tspan x="168" dy="8">TURBINE</tspan></text>
+      <line x1="186" y1="42" x2="210" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a2)"/>
+      <text x="232" y="46" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    oil: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(15,8)">
+        <line x1="20" y1="0" x2="20" y2="50" stroke="${c}" stroke-width="2"/>
+        <line x1="0" y1="20" x2="40" y2="20" stroke="${c}" stroke-width="2"/>
+        <g style="animation:spin 2s linear infinite;transform-origin:20px 20px">
+          <line x1="20" y1="20" x2="38" y2="30" stroke="${c}" stroke-width="2.5"/>
+        </g>
+        <rect x="12" y="48" width="16" height="10" rx="2" fill="#1f2937" stroke="${c}" stroke-width="1"/>
+        <text x="20" y="68" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">PUMP JACK</text>
+      </g>
+      <line x1="68" y1="40" x2="92" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="94" y="25" width="36" height="30" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="112" y="43" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">REFINERY</text>
+      <line x1="132" y1="40" x2="155" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a3)"/>
+      <rect x="157" y="26" width="34" height="28" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="174" y="44" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">TURBINE</text>
+      <line x1="193" y1="40" x2="215" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a3)"/>
+      <text x="235" y="46" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    hydro: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="5" width="70" height="20" rx="2" fill="rgba(59,130,246,0.25)" stroke="${c}" stroke-width="1.5"/>
+      <text x="43" y="19" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">RESERVOIR</text>
+      <rect x="40" y="25" width="14" height="30" rx="1" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="47" y="58" text-anchor="middle" fill="${c}" font-size="6" font-family="sans-serif">DAM</text>
+      <g>
+        <circle cx="47" cy="32" r="2" fill="${c}" opacity="0.7"><animate attributeName="cy" values="25;55;25" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite"/></circle>
+        <circle cx="43" cy="32" r="1.5" fill="${c}" opacity="0.5"><animate attributeName="cy" values="25;55;25" dur="1.8s" begin="0.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.8s" begin="0.3s" repeatCount="indefinite"/></circle>
+      </g>
+      <line x1="60" y1="40" x2="85" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a4)"/>
+      <circle cx="108" cy="40" r="18" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(108,40)" style="animation:spin 2.5s linear infinite;transform-origin:0 0">
+        <path d="M0,-15 Q8,-8 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M13,7.5 Q4,10 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-13,7.5 Q-4,10 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="128" y1="40" x2="152" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a4)"/>
+      <rect x="154" y="27" width="30" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="169" y="43" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">GENERATOR</text>
+      <line x1="186" y1="40" x2="210" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a4)"/>
+      <text x="230" y="46" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a4" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    wind: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="65" x2="60" y2="20" stroke="${c}" stroke-width="2.5"/>
+      <circle cx="60" cy="20" r="4" fill="${c}"/>
+      <g transform="translate(60,20)" style="animation:spin 3s linear infinite;transform-origin:0 0">
+        <path d="M0,0 Q6,-8 2,-22" stroke="${c}" fill="rgba(34,211,238,0.25)" stroke-width="1.5"/>
+        <path d="M0,0 Q-12,4 -22,14" stroke="${c}" fill="rgba(34,211,238,0.25)" stroke-width="1.5"/>
+        <path d="M0,0 Q6,4 20,8" stroke="${c}" fill="rgba(34,211,238,0.25)" stroke-width="1.5"/>
+      </g>
+      <text x="60" y="72" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">TURBINE</text>
+      <line x1="90" y1="40" x2="120" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a5)" stroke-dasharray="4 3"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.8s" repeatCount="indefinite"/></line>
+      <rect x="122" y="27" width="50" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="147" y="41" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">GENERATOR</text>
+      <line x1="174" y1="40" x2="198" y2="40" stroke="${c}" stroke-width="1.5" marker-end="url(#a5)"/>
+      <text x="220" y="46" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <text x="10" y="38" fill="${c}" font-size="14" opacity="0.5">≋</text>
+      <text x="20" y="50" fill="${c}" font-size="10" opacity="0.3">≋</text>
+      <defs><marker id="a5" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    solar: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="28" cy="35" r="12" fill="rgba(251,191,36,0.2)" stroke="${c}" stroke-width="1.5"/>
+      <circle cx="28" cy="35" r="7" fill="${c}"/>
+      <g style="animation:pulse 2s ease-in-out infinite">
+        <line x1="28" y1="14" x2="28" y2="8" stroke="${c}" stroke-width="1.5"/>
+        <line x1="28" y1="56" x2="28" y2="62" stroke="${c}" stroke-width="1.5"/>
+        <line x1="7" y1="35" x2="1" y2="35" stroke="${c}" stroke-width="1.5"/>
+        <line x1="49" y1="35" x2="55" y2="35" stroke="${c}" stroke-width="1.5"/>
+        <line x1="14" y1="21" x2="10" y2="17" stroke="${c}" stroke-width="1.5"/>
+        <line x1="42" y1="49" x2="46" y2="53" stroke="${c}" stroke-width="1.5"/>
+        <line x1="42" y1="21" x2="46" y2="17" stroke="${c}" stroke-width="1.5"/>
+        <line x1="14" y1="49" x2="10" y2="53" stroke="${c}" stroke-width="1.5"/>
+      </g>
+      <line x1="58" y1="35" x2="80" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a6)"/>
+      <rect x="82" y="20" width="54" height="30" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <line x1="91" y1="20" x2="91" y2="50" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <line x1="100" y1="20" x2="100" y2="50" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <line x1="109" y1="20" x2="109" y2="50" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <line x1="118" y1="20" x2="118" y2="50" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <line x1="82" y1="30" x2="136" y2="30" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <line x1="82" y1="40" x2="136" y2="40" stroke="${c}" stroke-width="0.8" opacity="0.5"/>
+      <text x="109" y="65" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">SOLAR PANEL</text>
+      <line x1="138" y1="35" x2="162" y2="35" stroke="${c}" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#a6)"><animate attributeName="stroke-dashoffset" from="0" to="-14" dur="0.7s" repeatCount="indefinite"/></line>
+      <rect x="164" y="24" width="38" height="22" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="183" y="38" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">INVERTER</text>
+      <line x1="204" y1="35" x2="225" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a6)"/>
+      <text x="244" y="41" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a6" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    nuclear: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="36" cy="35" r="18" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <circle cx="36" cy="35" r="5" fill="${c}" opacity="0.8"/>
+      <ellipse cx="36" cy="35" rx="16" ry="6" fill="none" stroke="${c}" stroke-width="1" opacity="0.6" transform="rotate(-30 36 35)"/>
+      <circle cx="22" cy="29" r="2.5" fill="${c}" opacity="0.8" style="animation:spin 2s linear infinite;transform-origin:36px 35px"/>
+      <ellipse cx="36" cy="35" rx="16" ry="6" fill="none" stroke="${c}" stroke-width="1" opacity="0.6" transform="rotate(30 36 35)"/>
+      <circle cx="50" cy="29" r="2.5" fill="${c}" opacity="0.6" style="animation:spin 3s linear infinite reverse;transform-origin:36px 35px"/>
+      <ellipse cx="36" cy="35" rx="16" ry="6" fill="none" stroke="${c}" stroke-width="1" opacity="0.6"/>
+      <circle cx="36" cy="19" r="2.5" fill="${c}" opacity="0.7" style="animation:spin 1.5s linear infinite;transform-origin:36px 35px"/>
+      <line x1="57" y1="35" x2="82" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a7)"/>
+      <rect x="84" y="22" width="36" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="102" y="38" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">STEAM<tspan x="102" dy="9">GENERATOR</tspan></text>
+      <line x1="122" y1="35" x2="146" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a7)"/>
+      <circle cx="168" cy="35" r="16" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(168,35)" style="animation:spin 2s linear infinite;transform-origin:0 0">
+        <path d="M0,-13 Q7,-7 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M11,6.5 Q3,9 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-11,6.5 Q-3,9 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="186" y1="35" x2="210" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a7)"/>
+      <text x="232" y="41" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a7" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    biomass: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <text x="22" y="40" font-size="22" text-anchor="middle">🌿</text>
+      <line x1="18" y1="50" x2="28" y2="60" stroke="${c}" stroke-width="1"/>
+      <text x="20" y="28" font-size="12" text-anchor="middle" opacity="0.6"><animate attributeName="opacity" values="0.6;1;0.6" dur="1.8s" repeatCount="indefinite"/>🔥</text>
+      <line x1="46" y1="42" x2="70" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a8)"/>
+      <rect x="72" y="28" width="36" height="28" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="90" y="45" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">BOILER</text>
+      <line x1="110" y1="42" x2="134" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a8)"/>
+      <circle cx="155" cy="42" r="16" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(155,42)" style="animation:spin 2.5s linear infinite;transform-origin:0 0">
+        <path d="M0,-13 Q7,-7 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M11,6.5 Q3,9 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-11,6.5 Q-3,9 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="173" y1="42" x2="197" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a8)"/>
+      <text x="220" y="48" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <text x="30" y="68" text-anchor="middle" fill="${c}" font-size="5.5" font-family="sans-serif">CO₂ cycle</text>
+      <defs><marker id="a8" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    geo: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="45" width="60" height="20" rx="2" fill="rgba(251,113,133,0.15)" stroke="#f43f5e" stroke-width="1"/>
+      <text x="35" y="58" text-anchor="middle" fill="${c}" font-size="6" font-family="sans-serif">HOT ROCK</text>
+      <rect x="5" y="28" width="60" height="17" rx="0" fill="rgba(251,113,133,0.08)" stroke="#f43f5e" stroke-width="0.5" opacity="0.6"/>
+      <text x="35" y="40" text-anchor="middle" fill="${c}" font-size="5.5" font-family="sans-serif">GEOTHERMAL FLUID</text>
+      <g>
+        <path d="M25,28 Q28,18 25,8" stroke="${c}" fill="none" stroke-width="1.5" opacity="0.8"><animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/></path>
+        <path d="M35,28 Q32,16 35,6" stroke="${c}" fill="none" stroke-width="2"><animate attributeName="opacity" values="1;0.4;1" dur="1.6s" begin="0.3s" repeatCount="indefinite"/></path>
+        <path d="M45,28 Q42,18 45,8" stroke="${c}" fill="none" stroke-width="1.5" opacity="0.6"><animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.2s" begin="0.6s" repeatCount="indefinite"/></path>
+      </g>
+      <text x="35" y="70" text-anchor="middle" fill="${c}" font-size="6" font-family="sans-serif">STEAM WELLS</text>
+      <line x1="68" y1="35" x2="92" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a9)"/>
+      <circle cx="114" cy="35" r="17" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(114,35)" style="animation:spin 2s linear infinite;transform-origin:0 0">
+        <path d="M0,-14 Q7,-7 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M12,7 Q3,9 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-12,7 Q-3,9 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="133" y1="35" x2="157" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a9)"/>
+      <rect x="159" y="22" width="36" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="177" y="38" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">GENERATOR</text>
+      <line x1="197" y1="35" x2="220" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a9)"/>
+      <text x="242" y="41" text-anchor="middle" fill="${c}" font-size="16">⚡</text>
+      <defs><marker id="a9" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    tidal: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="260" height="35" rx="0" fill="rgba(14,165,233,0.08)"/>
+      <text x="30" y="20" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">OCEAN SURFACE</text>
+      <path d="M0,35 Q20,25 40,35 Q60,45 80,35 Q100,25 120,35 Q140,45 160,35 Q180,25 200,35 Q220,45 240,35 Q250,30 260,35" fill="none" stroke="${c}" stroke-width="1.5" opacity="0.6">
+        <animate attributeName="d" values="M0,35 Q20,25 40,35 Q60,45 80,35 Q100,25 120,35 Q140,45 160,35 Q180,25 200,35 Q220,45 240,35 Q250,30 260,35;M0,35 Q20,45 40,35 Q60,25 80,35 Q100,45 120,35 Q140,25 160,35 Q180,45 200,35 Q220,25 240,35 Q250,40 260,35;M0,35 Q20,25 40,35 Q60,45 80,35 Q100,25 120,35 Q140,45 160,35 Q180,25 200,35 Q220,45 240,35 Q250,30 260,35" dur="3s" repeatCount="indefinite"/>
+      </path>
+      <line x1="100" y1="35" x2="100" y2="65" stroke="${c}" stroke-width="2"/>
+      <circle cx="100" cy="42" r="12" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(100,42)" style="animation:spin 2s linear infinite;transform-origin:0 0">
+        <path d="M0,-10 Q5,-5 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M8.7,5 Q2,7 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-8.7,5 Q-2,7 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="114" y1="42" x2="150" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a10)"/>
+      <rect x="152" y="29" width="56" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="180" y="42" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">GENERATOR &amp;<tspan x="180" dy="8">GRID CABLE</tspan></text>
+      <line x1="210" y1="42" x2="232" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a10)"/>
+      <text x="250" y="48" text-anchor="middle" fill="${c}" font-size="14">⚡</text>
+      <defs><marker id="a10" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    hydrogen: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <text x="20" y="30" text-anchor="middle" fill="${c}" font-size="9" font-family="sans-serif" font-weight="bold">H₂O</text>
+      <line x1="38" y1="35" x2="60" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a11)"/>
+      <rect x="62" y="20" width="46" height="30" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="85" y="36" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">ELECTRO-<tspan x="85" dy="8">LYZER</tspan></text>
+      <line x1="85" y1="20" x2="85" y2="8" stroke="${c}" stroke-width="1.5"/>
+      <text x="85" y="5" text-anchor="middle" fill="${c}" font-size="7" font-family="sans-serif">⚡ renewables</text>
+      <line x1="110" y1="35" x2="136" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a11)"/>
+      <circle cx="148" cy="35" r="10" fill="rgba(74,222,128,0.15)" stroke="${c}" stroke-width="1.5"/>
+      <text x="148" y="39" text-anchor="middle" fill="${c}" font-size="9" font-family="sans-serif" font-weight="bold">H₂</text>
+      <text x="148" y="58" text-anchor="middle" fill="${c}" font-size="6" font-family="sans-serif">STORAGE</text>
+      <line x1="160" y1="35" x2="182" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a11)"/>
+      <rect x="184" y="22" width="40" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="204" y="36" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">FUEL<tspan x="204" dy="8">CELL</tspan></text>
+      <line x1="226" y1="35" x2="242" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a11)"/>
+      <text x="252" y="41" text-anchor="middle" fill="${c}" font-size="14">⚡</text>
+      <text x="252" y="55" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">+H₂O</text>
+      <defs><marker id="a11" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    fusion: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="60" cy="35" rx="38" ry="20" fill="none" stroke="${c}" stroke-width="2" opacity="0.4"/>
+      <ellipse cx="60" cy="35" rx="38" ry="20" fill="none" stroke="${c}" stroke-width="6" opacity="0.15"/>
+      <ellipse cx="60" cy="35" rx="28" ry="12" fill="rgba(232,121,249,0.1)" stroke="${c}" stroke-width="1" opacity="0.7"/>
+      <circle cx="60" cy="35" r="8" fill="rgba(232,121,249,0.3)"><animate attributeName="r" values="8;11;8" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0.4;0.8" dur="1.5s" repeatCount="indefinite"/></circle>
+      <text x="60" y="70" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">PLASMA TORUS (150M°C)</text>
+      <line x1="102" y1="35" x2="126" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a12)"/>
+      <rect x="128" y="22" width="36" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="146" y="36" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">HEAT<tspan x="146" dy="8">EXCHANGER</tspan></text>
+      <line x1="166" y1="35" x2="188" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a12)"/>
+      <circle cx="208" cy="35" r="14" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(208,35)" style="animation:spin 2s linear infinite;transform-origin:0 0">
+        <path d="M0,-11 Q6,-6 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M9.5,5.5 Q2.5,8 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-9.5,5.5 Q-2.5,8 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="224" y1="35" x2="244" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a12)"/>
+      <text x="255" y="41" fill="${c}" font-size="14">⚡</text>
+      <defs><marker id="a12" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+
+    otec: `<svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="80" height="28" rx="2" fill="rgba(251,191,36,0.1)" stroke="${c}" stroke-width="1"/>
+      <text x="40" y="18" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">WARM SURFACE 25°C</text>
+      <rect x="0" y="42" width="80" height="28" rx="2" fill="rgba(14,165,233,0.1)" stroke="${c}" stroke-width="1"/>
+      <text x="40" y="62" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">COLD DEEP SEA 5°C</text>
+      <line x1="82" y1="14" x2="110" y2="28" stroke="${c}" stroke-width="1.5" marker-end="url(#a13)"/>
+      <line x1="82" y1="56" x2="110" y2="42" stroke="${c}" stroke-width="1.5" marker-end="url(#a13)"/>
+      <rect x="112" y="22" width="44" height="26" rx="3" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <text x="134" y="35" text-anchor="middle" fill="${c}" font-size="6.5" font-family="sans-serif">HEAT<tspan x="134" dy="8">EXCHANGER</tspan></text>
+      <line x1="158" y1="35" x2="180" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a13)"/>
+      <circle cx="198" cy="35" r="14" fill="#1f2937" stroke="${c}" stroke-width="1.5"/>
+      <g transform="translate(198,35)" style="animation:spin 3s linear infinite;transform-origin:0 0">
+        <path d="M0,-11 Q6,-6 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M9.5,5.5 Q2.5,8 0,0" fill="${c}" opacity="0.9"/>
+        <path d="M-9.5,5.5 Q-2.5,8 0,0" fill="${c}" opacity="0.9"/>
+      </g>
+      <line x1="214" y1="35" x2="237" y2="35" stroke="${c}" stroke-width="1.5" marker-end="url(#a13)"/>
+      <text x="252" y="41" fill="${c}" font-size="14">⚡</text>
+      <defs><marker id="a13" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="${c}"/></marker></defs>
+    </svg>`,
+  };
+  return diagrams[id] || `<svg viewBox="0 0 260 70"><text x="130" y="40" text-anchor="middle" fill="${c}" font-size="30">⚡</text></svg>`;
+}
+
+// ─────────────────────────────────────────────
+//  RENDER CARDS
+// ─────────────────────────────────────────────
+function buildCards() {
+  ['fossil','renewables','emerging'].forEach(cat => {
+    const grid = document.getElementById(cat + 'Grid');
+    DATA.filter(d => d.cat === cat).forEach(d => {
+      const maxP = Math.max(...d.countries.map(c => c.p));
+      const growthColor = d.outlook.growth < 0 ? '#ef4444' : d.outlook.growth > 10 ? '#10b981' : '#f59e0b';
+      const growthPct = Math.min(Math.abs(d.outlook.growth) / 50 * 100, 100);
+      const growthLabel = d.outlook.growth === 999 ? '+∞%/yr' : (d.outlook.growth >= 0 ? '+' : '') + d.outlook.growth + '%/yr';
+
+      grid.insertAdjacentHTML('beforeend', `
+        <article class="ecard" id="src-${d.id}">
+          <div class="ch">
+            <div class="cicon" style="background:${d.bg}">${d.emoji}</div>
+            <div class="ctitle">
+              <h3>${d.name}</h3>
+              <span class="ctype" style="color:${d.color}">${d.type}</span>
+            </div>
+            <div class="cshare">
+              <span class="cs" style="color:${d.color}">${d.share > 0.1 ? d.share + '%' : '<0.1%'}</span>
+              <span class="csl">global electricity</span>
+            </div>
+          </div>
+          <div class="cbody">
+            <div class="diag" title="${d.how}">${getDiagram(d.id, d.color)}</div>
+            <div class="mgrid">
+              <div class="met"><div class="ml">Installed Capacity</div><div class="mv">${d.capacity}</div><div class="ms">Cap. factor: ${d.cf}</div></div>
+              <div class="met"><div class="ml">LCOE</div><div class="mv">${d.lcoe}</div><div class="ms">per megawatt-hour</div></div>
+              <div class="met"><div class="ml">Carbon Intensity</div><div class="mv">${d.ci}</div></div>
+              <div class="met"><div class="ml">Water Use</div><div class="mv" style="font-size:0.78rem">${d.water}</div></div>
+            </div>
+            <div class="pc">
+              <div class="pros"><h4>Advantages</h4><ul>${d.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+              <div class="cons"><h4>Drawbacks</h4><ul>${d.cons.map(c=>`<li>${c}</li>`).join('')}</ul></div>
+            </div>
+            <div class="ctry">
+              <h4>Top Producers / Installed Capacity</h4>
+              ${d.countries.map(c=>`
+                <div class="cbar">
+                  <span class="cn">${c.n}</span>
+                  <div class="ctrk"><div class="cfil" data-pct="${Math.round(c.p/maxP*100)}" style="background:${d.color}"></div></div>
+                  <span class="cpct">${c.p}%</span>
+                </div>`).join('')}
+            </div>
+          </div>
+          <div class="cft">
+            <div class="nproj">
+              <strong>📍 Notable Project</strong>
+              <span>${d.project.name} — ${d.project.loc}</span><br>
+              <span style="font-size:0.72rem;color:#64748b">${d.project.desc}</span>
+            </div>
+            <div class="otlk">
+              <span class="otlk-lbl">Outlook</span>
+              <div class="otlk-trk"><div class="otlk-fil" style="width:${growthPct}%;background:${growthColor}"></div></div>
+              <span class="otlk-val" style="color:${growthColor}">${growthLabel}</span>
+            </div>
+          </div>
+        </article>`);
+    });
+  });
+}
+
+// ─────────────────────────────────────────────
+//  DONUT CHART (Canvas)
+// ─────────────────────────────────────────────
+function buildDonut() {
+  const canvas = document.getElementById('heroDonut');
+  const ctx = canvas.getContext('2d');
+  const cx = 150, cy = 150, outerR = 130, innerR = 82;
+  const total = DONUT.reduce((s,d) => s + d.pct, 0);
+  let animProg = 0;
+
+  function draw(prog) {
+    ctx.clearRect(0, 0, 300, 300);
+    let angle = -Math.PI / 2;
+    DONUT.forEach(seg => {
+      const sweep = (seg.pct / total) * Math.PI * 2 * prog;
+      ctx.beginPath();
+      ctx.moveTo(cx + innerR * Math.cos(angle), cy + innerR * Math.sin(angle));
+      ctx.arc(cx, cy, outerR, angle, angle + sweep);
+      ctx.arc(cx, cy, innerR, angle + sweep, angle, true);
+      ctx.closePath();
+      ctx.fillStyle = seg.color;
+      ctx.fill();
+      angle += sweep;
+    });
+  }
+
+  function animate() {
+    animProg += 0.02;
+    draw(Math.min(animProg, 1));
+    if (animProg < 1) requestAnimationFrame(animate);
+  }
+  animate();
+
+  const legendEl = document.getElementById('legend');
+  DONUT.forEach(d => {
+    legendEl.insertAdjacentHTML('beforeend',
+      `<div class="li"><div class="ld" style="background:${d.color}"></div>${d.label} ${d.pct}%</div>`);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  CARBON CLOCK
+// ─────────────────────────────────────────────
+function startCarbonClock() {
+  const el = document.getElementById('ccv');
+  let val = 1800000000000;
+  const rate = 1173; // tonnes/second (37 Gt/yr)
+  function fmt(n) {
+    return Math.floor(n).toLocaleString('en-US');
+  }
+  el.textContent = fmt(val);
+  setInterval(() => {
+    val += rate;
+    el.textContent = fmt(val);
+  }, 1000);
+}
+
+// ─────────────────────────────────────────────
+//  COMPARISON TOOL
+// ─────────────────────────────────────────────
+let selected = new Set();
+
+function buildComparison() {
+  const chipsEl = document.getElementById('chips');
+  DATA.forEach(d => {
+    const label = document.createElement('label');
+    label.className = 'chip';
+    label.setAttribute('tabindex', '0');
+    label.setAttribute('role', 'checkbox');
+    label.setAttribute('aria-checked', 'false');
+    label.innerHTML = `<input type="checkbox" value="${d.id}" aria-hidden="true">${d.emoji} ${d.name}`;
+    label.addEventListener('click', () => toggleSource(d.id, label));
+    label.addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); toggleSource(d.id, label); }});
+    chipsEl.appendChild(label);
+  });
+}
+
+function toggleSource(id, el) {
+  if (selected.has(id)) {
+    selected.delete(id);
+    el.classList.remove('sel');
+    el.setAttribute('aria-checked', 'false');
+  } else {
+    if (selected.size >= 3) return;
+    selected.add(id);
+    el.classList.add('sel');
+    el.setAttribute('aria-checked', 'true');
+  }
+  renderCompTable();
+}
+
+function renderCompTable() {
+  const wrap = document.getElementById('ctblWrap');
+  if (selected.size < 2) {
+    wrap.innerHTML = `<div class="cmp-empty">${selected.size === 0 ? 'Select energy sources above to compare them' : 'Select at least one more source to compare'}</div>`;
+    return;
+  }
+  const sources = DATA.filter(d => selected.has(d.id));
+  const rows = [
+    ['Type', d => d.type],
+    ['Global Electricity Share', d => d.share > 0.1 ? d.share + '%' : '<0.1%'],
+    ['Installed Capacity', d => d.capacity],
+    ['Capacity Factor', d => d.cf],
+    ['LCOE', d => d.lcoe],
+    ['Carbon Intensity', d => d.ci],
+    ['Land Use', d => d.land],
+    ['Water Use', d => d.water],
+    ['Annual Growth', d => d.outlook.growth === 999 ? 'Nascent' : (d.outlook.growth >= 0 ? '+' : '') + d.outlook.growth + '%/yr'],
+    ['Top Producer', d => d.countries[0].n],
+    ['Notable Project', d => d.project.name],
+  ];
+  wrap.innerHTML = `
+    <table class="ctbl" role="grid" aria-label="Energy source comparison">
+      <thead><tr>
+        <th scope="col">Metric</th>
+        ${sources.map(s => `<th scope="col" style="color:${s.color}">${s.emoji} ${s.name}</th>`).join('')}
+      </tr></thead>
+      <tbody>
+        ${rows.map(([label, fn]) => `
+          <tr>
+            <td>${label}</td>
+            ${sources.map(s => `<td>${fn(s)}</td>`).join('')}
+          </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ─────────────────────────────────────────────
+//  TIMELINE
+// ─────────────────────────────────────────────
+function buildTimeline() {
+  const el = document.getElementById('tlContent');
+  TIMELINE.forEach((item, i) => {
+    el.insertAdjacentHTML('beforeend', `
+      <div class="tl-item" style="transition-delay:${i * 40}ms">
+        <div class="tl-dot"></div>
+        <div class="tl-yr">${item.yr}</div>
+        <div class="tl-ttl">${item.title}</div>
+        <div class="tl-desc">${item.desc}</div>
+      </div>`);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  GLOSSARY SIDEBAR
+// ─────────────────────────────────────────────
+function buildGlossary() {
+  const el = document.getElementById('glList');
+  GLOSSARY.forEach(g => {
+    el.insertAdjacentHTML('beforeend', `
+      <div class="gi">
+        <div class="gt">${g.term}</div>
+        <div class="ga">${g.abbr}</div>
+        <div class="gd">${g.def}</div>
+      </div>`);
+  });
+  document.getElementById('sbBtn').addEventListener('click', () => document.getElementById('sb').classList.add('open'));
+  document.getElementById('sbX').addEventListener('click', () => document.getElementById('sb').classList.remove('open'));
+}
+
+// ─────────────────────────────────────────────
+//  NAVIGATION
+// ─────────────────────────────────────────────
+function setupNav() {
+  const hbg = document.getElementById('hbg');
+  const nav = document.getElementById('mainnav');
+  hbg.addEventListener('click', () => {
+    hbg.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+
+  const sections = ['hero','fossil','renewables','emerging','demographics','countries','comparison','timeline'];
+  const links = document.querySelectorAll('.nl');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.nl[href="#${e.target.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  }, {threshold: 0.3, rootMargin: '-80px 0px -50% 0px'});
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) obs.observe(el);
+  });
+}
+
+// ─────────────────────────────────────────────
+//  INTERSECTION OBSERVER (animate on scroll)
+// ─────────────────────────────────────────────
+function setupObservers() {
+  // Timeline items
+  const tlObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.tl-item').forEach(el => tlObs.observe(el));
+
+  // Country bar fills
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.cfil').forEach(bar => {
+          bar.style.width = bar.dataset.pct + '%';
+        });
+        barObs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.2});
+  document.querySelectorAll('.ecard').forEach(el => barObs.observe(el));
+}
+
+// ─────────────────────────────────────────────
+//  PARALLAX
+// ─────────────────────────────────────────────
+function setupParallax() {
+  const headers = document.querySelectorAll('.sec-hdr');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    headers.forEach(hdr => {
+      const rect = hdr.getBoundingClientRect();
+      const offset = (window.innerHeight / 2 - rect.top) * 0.06;
+      hdr.style.transform = `translateY(${offset}px)`;
+    });
+  }, {passive: true});
+}
+
+// ─────────────────────────────────────────────
+//  COUNTRIES
+// ─────────────────────────────────────────────
+function buildCountries() {
+  const tabsEl = document.getElementById('ctabs');
+  const gridEl = document.getElementById('cgrid');
+  const detailEl = document.getElementById('cdetail');
+  let activeCont = 'asia';
+  let activeCard = null;
+
+  CONTINENTS.forEach((cont, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ctab' + (cont.id === activeCont ? ' active' : '');
+    btn.textContent = cont.emoji + ' ' + cont.name;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', String(cont.id === activeCont));
+    btn.addEventListener('click', () => switchContinent(cont.id));
+    tabsEl.appendChild(btn);
+  });
+
+  function switchContinent(id) {
+    activeCont = id;
+    activeCard = null;
+    detailEl.classList.remove('open');
+    detailEl.innerHTML = '';
+    tabsEl.querySelectorAll('.ctab').forEach((t, i) => {
+      const active = CONTINENTS[i].id === id;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', String(active));
+    });
+    renderGrid();
+    gridEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function renderGrid() {
+    gridEl.innerHTML = '';
+    COUNTRIES.filter(c => c.continent === activeCont).forEach(c => {
+      const cleanColor = c.cleanPct >= 70 ? '#10b981' : c.cleanPct >= 40 ? '#f59e0b' : '#ef4444';
+      const card = document.createElement('div');
+      card.className = 'ccard';
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-label', c.name + ' energy profile');
+      const stackSegs = c.mix.map(m =>
+        `<div class="cstack-seg" style="width:${m.p}%;background:${MIX_COLORS[m.s]||'#475569'}" title="${m.s}: ${m.p}%"></div>`
+      ).join('');
+      card.innerHTML =
+        `<div class="cflag">${c.flag}</div>` +
+        `<div class="cname">${c.name}</div>` +
+        `<div class="cco2">${c.co2} gCO₂/kWh · ${c.gen.toLocaleString()} TWh/yr</div>` +
+        `<div class="cclean-row"><span class="cclean-pct" style="color:${cleanColor}">${c.cleanPct}%</span><span class="cclean-lbl">clean</span></div>` +
+        `<div class="cstackbar">${stackSegs}</div>` +
+        `<div class="cgen">${c.mix[0].s}-led · ${c.pop}M people</div>`;
+      card.addEventListener('click', () => openDetail(c, card));
+      card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDetail(c, card); }});
+      gridEl.appendChild(card);
+    });
+  }
+
+  function openDetail(c, cardEl) {
+    if (activeCard === cardEl) {
+      detailEl.classList.remove('open');
+      cardEl.classList.remove('open');
+      activeCard = null;
+      return;
+    }
+    if (activeCard) activeCard.classList.remove('open');
+    activeCard = cardEl;
+    cardEl.classList.add('open');
+
+    const cleanColor = c.cleanPct >= 70 ? '#10b981' : c.cleanPct >= 40 ? '#f59e0b' : '#ef4444';
+    const bigBar = c.mix.map(m => {
+      const col = MIX_COLORS[m.s] || '#475569';
+      return `<div class="cd-seg" style="width:${m.p}%;background:${col}" title="${m.s}: ${m.p}%">${m.p >= 8 ? m.p + '%' : ''}</div>`;
+    }).join('');
+    const legendHtml = c.mix.map(m =>
+      `<div class="cd-leg"><div class="cd-leg-dot" style="background:${MIX_COLORS[m.s]||'#475569'}"></div>${m.s}: ${m.p}%</div>`
+    ).join('');
+
+    detailEl.innerHTML =
+      `<button class="cd-close" id="cdClose">✕ Close</button>` +
+      `<div class="cd-hdr">` +
+        `<div class="cd-flag">${c.flag}</div>` +
+        `<div class="cd-title"><h3>${c.name}</h3><p>Electricity mix — 2024 estimates</p></div>` +
+        `<div class="cd-stats">` +
+          `<div class="cd-stat"><div class="sv">${c.gen.toLocaleString()}</div><div class="sl">TWh/year</div></div>` +
+          `<div class="cd-stat"><div class="sv" style="color:${cleanColor}">${c.cleanPct}%</div><div class="sl">clean energy</div></div>` +
+          `<div class="cd-stat"><div class="sv">${c.co2}</div><div class="sl">gCO₂/kWh</div></div>` +
+          `<div class="cd-stat"><div class="sv">${c.pop}M</div><div class="sl">population</div></div>` +
+        `</div>` +
+      `</div>` +
+      `<div class="cd-bigbar">${bigBar}</div>` +
+      `<div class="cd-legend">${legendHtml}</div>` +
+      `<div class="cd-fact"><strong>⚡ Key Insight</strong>${c.keyFact}</div>` +
+      `<div class="cd-fact"><strong>📈 Trajectory</strong>${c.trend}</div>`;
+
+    detailEl.classList.add('open');
+    document.getElementById('cdClose').addEventListener('click', () => {
+      detailEl.classList.remove('open');
+      cardEl.classList.remove('open');
+      activeCard = null;
+    });
+    setTimeout(() => detailEl.scrollIntoView({behavior:'smooth', block:'nearest'}), 60);
+  }
+
+  renderGrid();
+}
+
+// ─────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  buildCards();
+  buildDonut();
+  startCarbonClock();
+  buildDemographics();
+  buildCountries();
+  buildComparison();
+  buildTimeline();
+  buildGlossary();
+  setupNav();
+  setupParallax();
+  setTimeout(setupObservers, 100);
+});
+</script>
+</body>
+</html>
