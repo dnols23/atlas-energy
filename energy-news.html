@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$79.16</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€42.10</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.20</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$77.85</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€42.50</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.06</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.085</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:79.16, unit:'/bbl',     chg:-0.89, pct:-1.11},
-  {label:'WTI Crude',      val:75.64, unit:'/bbl',     chg:-0.21, pct:-0.28},
-  {label:'Natural Gas TTF',val:42.10, unit:'€/MWh',    chg:+1.57, pct:+3.87},
-  {label:'Henry Hub',      val:3.20,  unit:'/MMBtu',   chg:-0.03, pct:-0.93},
-  {label:'LNG Asia JKM',   val:16.95, unit:'/MMBtu',   chg:-0.35, pct:-2.02},
+  {label:'Brent Crude',    val:77.85, unit:'/bbl',     chg:-1.31, pct:-1.66},
+  {label:'WTI Crude',      val:73.67, unit:'/bbl',     chg:-0.19, pct:-0.26},
+  {label:'Natural Gas TTF',val:42.50, unit:'€/MWh',    chg:+0.40, pct:+0.95},
+  {label:'Henry Hub',      val:3.06,  unit:'/MMBtu',   chg:-0.04, pct:-1.29},
+  {label:'LNG Asia JKM',   val:16.10, unit:'/MMBtu',   chg:-0.30, pct:-1.83},
   {label:'Coal API2',      val:132.0, unit:'/t',       chg:+1.50, pct:+1.15},
-  {label:'EU Carbon ETS',  val:77.46, unit:'€/t CO₂',  chg:+0.46, pct:+0.60},
-  {label:'Uranium',        val:85.00, unit:'/lb U₃O₈', chg:+0.50, pct:+0.59},
+  {label:'EU Carbon ETS',  val:77.80, unit:'€/t CO₂',  chg:+0.34, pct:+0.44},
+  {label:'Uranium',        val:85.00, unit:'/lb U₃O₈', chg:-0.25, pct:-0.29},
   {label:'Solar Module',   val:0.085, unit:'/W',       chg:-0.001,pct:-1.16},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:23200, unit:'/t',       chg:-310,  pct:-1.33},
-  {label:'Copper',         val:13735, unit:'/t',       chg:+120,  pct:+0.88},
+  {label:'Lithium',        val:21800, unit:'/t',       chg:-1424, pct:-6.13},
+  {label:'Copper',         val:13735, unit:'/t',       chg:+95,   pct:+0.70},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,19 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent slides to $79.16 and WTI to $75.64, heading for ~8% weekly drop as Hormuz reopening nears',
-  'US-Iran peace memorandum signed June 17 at Versailles; Tehran pledges to reopen Strait of Hormuz',
-  'Israel-Hezbollah ceasefire holds, draining the last of the war risk premium from oil',
+  'Brent eases to $77.85 and WTI to $73.67 as US-Iran road map and 60-day oil license point to more supply',
+  'US and Iran agree a road map June 22 in Switzerland for a final deal within 60 days; Hormuz hotline to be set up',
+  'Washington grants Iran a 60-day license to sell oil on international markets, fanning supply expectations',
+  'Tehran invites IAEA inspectors back; Vance hails first step toward permanently ending Iran nuclear program',
   'Strait of Hormuz flows recovering from May low of 9.6 mb/d toward ~12 mb/d as blockade eases',
+  'IEA June Oil Market Report: 2026 global supply seen down 3.9 mb/d to 102.4 mb/d, demand off 1.1 mb/d',
+  'Gas eases: TTF near €42.5/MWh, JKM ~$16/MMBtu, Henry Hub ~$3.06 as geopolitical premium fades',
+  'EU carbon price holds near €77.8/t, highest since April; EU gas storage just 45.6% full',
   'OPEC World Oil Outlook 2026 sees oil demand at 124 mb/d by 2050, $17.7T investment needed',
-  'Gas eases: TTF near €42/MWh, JKM ~$17/MMBtu, Henry Hub ~$3.20 as geopolitical premium fades',
-  'EU carbon price climbs to €77.46/t, highest since April',
-  'EIA June STEO pencils in 3.3% US natural gas output growth for 2026',
-  'Newcastle thermal coal hits multi-year high near $144/t after Indonesia tightens export controls',
-  'IEA Electricity 2026 sees global power demand growing 3.6%/yr through 2030; data centers lead',
-  'US Q1 battery storage installs hit record 9.7 GWh, up 32% year-on-year — SEIA',
+  'IEA Electricity 2026 sees global power demand growing 3.6%/yr through 2030; data centers and nuclear lead',
   'OPEC+ compensation cuts triple to 829,000 bpd as UAE, Iraq, Kazakhstan and Oman rein in output',
-  'Copper near record $13,735/t while lithium carbonate cools to CNY 163,000/t',
+  'Lithium carbonate tumbles 6% to CNY 157,000/t on June 22 as idle supply restarts; copper near record $13,735/t',
 ];
 
 function buildBreaking() {
@@ -256,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🤝', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'June 19, 2026', impact:'high',
-   headline:'US-Iran Peace Memorandum Signed at Versailles, but Geneva Follow-Up Talks Stumble',
-   summary:'A memorandum of understanding to end the Strait of Hormuz war was signed June 17, with President Trump and Iran\'s President Masoud Pezeshkian putting pen to paper during a dinner with French President Macron at the Palace of Versailles after the G7 summit. Tehran pledged to promptly reopen the Strait of Hormuz and the US said its blockade of Iranian ports would cease, opening a pathway back to normal commercial shipping. The optimism wobbled June 19 when follow-up talks in Switzerland were abruptly postponed and Vice President Vance dropped his travel plans, a reminder that delivering on the pledges is the hard part. Even so, oil has shed most of its conflict-era premium as traders price the best case for Gulf flows resuming.',
-   source:'Fortune / Reuters', tags:['Hormuz','Iran','Peace Deal']},
+   date:'June 22, 2026', impact:'high',
+   headline:'US and Iran Agree a 60-Day Road Map to a Final Deal as Hormuz Hotline Takes Shape',
+   summary:'High-level talks in Switzerland wrapped up early June 22 with the US and Iran agreeing to a "road map" to reach a final deal within 60 days and to set up a communication line to avoid incidents in the Strait of Hormuz, Qatari and Pakistani mediators said. Vice President JD Vance reported "a lot of good progress" on keeping the strait open and on a coordination mechanism to demine it, and said Tehran had agreed to invite IAEA inspectors back into the country — which he called a first step toward permanently ending Iran\'s nuclear weapons program. Washington has also granted Iran a 60-day license to sell oil on international markets, fanning expectations of faster supply growth. Technical talks are to begin immediately, and oil has shed nearly all of its conflict-era premium as traders price the best case for Gulf flows.',
+   source:'NPR / Reuters', tags:['Hormuz','Iran','Peace Deal']},
 
   {featured:true, emoji:'☀', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 3, 2026', impact:'high',
@@ -269,9 +268,9 @@ const NEWS = [
 
   // REGULAR
   {emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 22, 2026', impact:'high',
-   headline:'Brent Slides to $79 and WTI to $75.6, Heading for ~8% Weekly Drop as Hormuz Reopens',
-   summary:'Brent crude eased to about $79.16/bbl and WTI to $75.64 on June 22, leaving both benchmarks down roughly 8% on the week and near three-month lows. The slide followed the June 17 US-Iran peace memorandum and an Israel-Hezbollah ceasefire, which together drained the war premium that had spiked Brent above $120 in April. Traders are front-running the reopening of the Strait of Hormuz, pricing in a best-case normalisation of Gulf flows even though physical tanker traffic has yet to fully recover. Analysts now see Brent ranging roughly $75-82 in the near term, with an underlying global supply glut capping any rebound.',
+   date:'June 23, 2026', impact:'high',
+   headline:'Brent Slips Toward $78 and WTI to $73.7 as US-Iran Road Map and Oil License Add Supply',
+   summary:'Brent crude stabilised near $77.85/bbl and WTI fell to about $73.67 on June 23 as traders digested fresh progress in US-Iran peace talks and a 60-day US license letting Iran sell oil internationally. Both benchmarks are near three-month lows, having shed almost all of the war premium that spiked Brent above $120 in April after the June 21-22 road map pointed toward a final deal within 60 days. Markets are front-running normalisation of Strait of Hormuz flows even though physical tanker traffic has yet to fully recover. Analysts now see Brent ranging roughly $74-82 in the near term, with an underlying global supply glut capping any rebound.',
    source:'CNBC / Reuters', tags:['Oil Price','Brent','Hormuz']},
 
   {emoji:'📕', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -281,21 +280,21 @@ const NEWS = [
    source:'OPEC', tags:['OPEC','Oil Demand','Outlook']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 15, 2026', impact:'med',
-   headline:'Gas Benchmarks Ease as War Premium Fades: TTF Near €42, JKM ~$17, Henry Hub ~$3.2',
-   summary:'Global gas prices retreated in mid-June as the geopolitical risk premium drained out alongside oil. European TTF fell toward €42/MWh while the Japan-Korea Marker for spot LNG eased to around $17/MMBtu, both well off their conflict-era peaks. US Henry Hub held near $3.20/MMBtu, leaving the transatlantic spread wide enough to keep a healthy LNG arbitrage open to Europe and Asia. Analysts still flag a tight global balance with a multi-million-tonne supply shortfall pencilled in for 2026, so the pullback eases — but does not erase — the fuel-switching pressure pushing Asian utilities back toward coal.',
+   date:'June 22, 2026', impact:'med',
+   headline:'Gas Benchmarks Ease as War Premium Fades: TTF Near €42.5, JKM ~$16, Henry Hub ~$3.06',
+   summary:'Global gas prices stayed soft into late June as the geopolitical risk premium drained out alongside oil. European TTF hovered around €42.5/MWh — after briefly touching €43.4 on US-Iran talks — while the Japan-Korea Marker for spot LNG eased toward $16/MMBtu, both well off their conflict-era peaks. US Henry Hub held near $3.06/MMBtu, leaving the transatlantic spread wide enough to keep a healthy LNG arbitrage open to Europe and Asia. The respite is fragile: EU gas storage is only about 45.6% full, well below the 54.4% a year ago and roughly 14% under the five-year average, keeping refill pressure on through the summer.',
    source:'Global LNG Hub / Trading Economics', tags:['LNG','TTF','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 16, 2026', impact:'med',
-   headline:'EU Carbon Price Climbs to €77.5/Tonne, Highest Since April',
-   summary:'EU Emissions Trading System allowances rose to about €77.5 per tonne in mid-June, the highest level since April, having traded between €60 and €80 over the past year. Firmer power-sector demand, the higher cost of coal-to-gas switching, and tightening allowance supply have all supported the move. Brussels recently adjusted the carbon market\'s rules to dampen price volatility, but the underlying trend remains firm. The strength reinforces the cost signal pushing European utilities toward lower-carbon generation even as gas and coal prices gyrate.',
+   date:'June 18, 2026', impact:'med',
+   headline:'EU Carbon Price Holds Near €77.8/Tonne, Highest Since April',
+   summary:'EU Emissions Trading System allowances held around €77.8 per tonne in mid-to-late June, the highest level since April, having traded between €60 and €80 over the past year. Firmer power-sector demand, the higher cost of coal-to-gas switching, and tightening allowance supply have all supported the move. Brussels recently adjusted the carbon market\'s rules to dampen price volatility, but the underlying trend remains firm. The strength reinforces the cost signal pushing European utilities toward lower-carbon generation even as gas and coal prices gyrate.',
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 18, 2026', impact:'med',
-   headline:'Transition Metals Diverge: Copper Near Record $13,735 While Lithium Cools to CNY 163,000/t',
-   summary:'The metals underpinning the energy transition are moving in opposite directions. Copper is trading near $13,735 per tonne, not far below the all-time high of $14,527 set in late January, as a widening supply-demand gap driven by AI infrastructure and electrification keeps the market structurally tight. Lithium carbonate, by contrast, has slid to about CNY 163,000 ($22,700-23,200) per tonne in China — its lowest in nearly two months — as higher prices coaxed producers to restart idled output, pulling back from a two-year high near CNY 200,500 in May. The split shows how copper\'s grid-and-wiring demand is proving stickier than lithium\'s more volatile battery cycle.',
+   date:'June 22, 2026', impact:'med',
+   headline:'Transition Metals Diverge: Copper Near Record $13,735 While Lithium Tumbles to CNY 157,000/t',
+   summary:'The metals underpinning the energy transition are moving in opposite directions. Copper is trading near $13,735 per tonne, not far below the all-time high of $14,527 set in late January, as a widening supply-demand gap driven by AI infrastructure and electrification keeps the market structurally tight. Lithium carbonate, by contrast, dropped about 6% on June 22 to roughly CNY 157,000 ($21,800) per tonne in China — its lowest in nearly two months — as higher prices coaxed producers to restart idled output, pulling back from a two-and-a-half-year high near CNY 200,500 in May. The split shows how copper\'s grid-and-wiring demand is proving stickier than lithium\'s more volatile battery cycle.',
    source:'Goldman Sachs / Trading Economics', tags:['Copper','Lithium','Metals']},
 
   {emoji:'🌊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
