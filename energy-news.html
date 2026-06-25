@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$77.20</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€42.00</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.10</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.085</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$73.74</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€40.00</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.05</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.084</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:77.20, unit:'/bbl',     chg:-0.65, pct:-0.84},
-  {label:'WTI Crude',      val:73.40, unit:'/bbl',     chg:-0.27, pct:-0.37},
-  {label:'Natural Gas TTF',val:42.00, unit:'€/MWh',    chg:-0.50, pct:-1.18},
-  {label:'Henry Hub',      val:3.10,  unit:'/MMBtu',   chg:+0.04, pct:+1.31},
-  {label:'LNG Asia JKM',   val:16.00, unit:'/MMBtu',   chg:-0.10, pct:-0.62},
-  {label:'Coal API2',      val:132.5, unit:'/t',       chg:+0.50, pct:+0.38},
-  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:+1.20, pct:+1.50},
-  {label:'Uranium',        val:85.85, unit:'/lb U₃O₈', chg:+0.10, pct:+0.12},
-  {label:'Solar Module',   val:0.085, unit:'/W',       chg:-0.001,pct:-1.16},
+  {label:'Brent Crude',    val:73.74, unit:'/bbl',     chg:-3.31, pct:-4.30},
+  {label:'WTI Crude',      val:70.34, unit:'/bbl',     chg:-3.16, pct:-4.30},
+  {label:'Natural Gas TTF',val:40.00, unit:'€/MWh',    chg:-2.00, pct:-4.76},
+  {label:'Henry Hub',      val:3.05,  unit:'/MMBtu',   chg:-0.05, pct:-1.61},
+  {label:'LNG Asia JKM',   val:15.50, unit:'/MMBtu',   chg:-0.50, pct:-3.13},
+  {label:'Coal API2',      val:130.0, unit:'/t',       chg:-2.50, pct:-1.89},
+  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:+0.85, pct:+1.06},
+  {label:'Uranium',        val:86.50, unit:'/lb U₃O₈', chg:+0.65, pct:+0.76},
+  {label:'Solar Module',   val:0.084, unit:'/W',       chg:-0.001,pct:-1.18},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:23500, unit:'/t',       chg:+1700, pct:+7.80},
-  {label:'Copper',         val:13800, unit:'/t',       chg:+65,   pct:+0.47},
+  {label:'Lithium',        val:21900, unit:'/t',       chg:-1600, pct:-6.81},
+  {label:'Copper',         val:13450, unit:'/t',       chg:-415,  pct:-2.99},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent slides to ~$77.2 and WTI to ~$73.4, fresh 3-month lows, after US authorizes Iranian crude sales through August',
-  'US Treasury license lets Iran sell oil internationally through August; traders price faster Gulf supply recovery',
+  'Oil plunges ~4%: Brent settles $73.74, WTI dips below $70 for first time since March 2 as tankers transit Hormuz',
+  'WTI briefly trades under $70/bbl; Brent at lowest since before the US-Israel war on Iran as Gulf supply fears ease',
+  'Tankers resume transiting the Strait of Hormuz, signalling the worst of the Middle East supply disruption may be over',
+  'US Treasury license lets Iran sell oil internationally through August; traders price a faster Gulf supply recovery',
   'US and Iran agree a road map in Switzerland for a final deal within 60 days; Hormuz hotline to be set up',
-  'Tehran invites IAEA inspectors back; Vance hails first step toward permanently ending Iran nuclear program',
-  'Strait of Hormuz flows recovering from May low of 9.6 mb/d toward ~12 mb/d as blockade eases',
+  'Strait of Hormuz flows recover from a May low of 9.6 mb/d toward ~12 mb/d, but full ramp-up not seen before early 2027',
   'IEA June Oil Market Report cuts 2026 oil demand 1.1 mb/d y/y as war-era price spike destroys consumption',
-  'Gas eases: TTF near €42/MWh, JKM ~$16/MMBtu, Henry Hub ~$3.10 as geopolitical premium fades',
-  'EU carbon jumps to €81.35/t, highest since February, on firmer power demand and tighter allowance supply',
-  'OPEC World Oil Outlook 2026 sees oil demand at 124 mb/d by 2050, $17.7T investment needed',
+  'Gas eases with oil: TTF near €40/MWh, JKM ~$15.5/MMBtu, Henry Hub ~$3.05 as geopolitical premium drains away',
+  'EU carbon holds near €81/t, highest since February, on firmer power demand and tighter allowance supply',
+  'OPEC World Oil Outlook 2026 sees oil demand at 124 mb/d by 2050 and $17.7T of investment needed',
   'IEA Electricity 2026 sees global power demand growing 3.6%/yr through 2030; data centers and nuclear lead',
-  'OPEC+ compensation cuts triple to 829,000 bpd as UAE, Iraq, Kazakhstan and Oman rein in output',
-  'Lithium carbonate rebounds to CNY 169,000/t on restocking; copper holds near record ~$13,800/t on AI demand',
+  'Lithium slides toward CNY 157,500/t on CATL Jianxiawo restart talk; copper eases ~3% to ~$13,450/t on a firmer dollar',
 ];
 
 function buildBreaking() {
@@ -255,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🤝', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'June 23, 2026', impact:'high',
-   headline:'US Authorizes Iranian Crude Sales Through August as 60-Day Road Map to a Final Deal Takes Hold',
-   summary:'The US Treasury authorized Iranian crude sales on international markets through August, formalizing a 60-day license that traders read as the clearest signal yet that Gulf supply is set to recover faster. The move follows weekend talks in Switzerland where the US and Iran agreed to a "road map" to reach a final deal within 60 days and to set up a communication line to avoid incidents in the Strait of Hormuz, Qatari and Pakistani mediators said. Vice President JD Vance reported "great progress" on keeping the strait open and on a mechanism to demine it, and said Tehran had agreed to invite IAEA inspectors back into the country. Crude has shed nearly all of its conflict-era premium, though the path remains fragile after talks were briefly postponed earlier in the week.',
-   source:'CNBC / NPR / Reuters', tags:['Hormuz','Iran','Peace Deal']},
+   date:'June 24, 2026', impact:'high',
+   headline:'Tankers Resume Transiting the Strait of Hormuz, Signalling the Worst of the Supply Shock May Be Over',
+   summary:'Oil tankers resumed transiting the Strait of Hormuz, the clearest physical sign yet that the largest supply disruption in the history of the oil market is beginning to unwind. The recovery follows a US Treasury license letting Iran sell crude internationally through August and a weekend "road map" agreed in Switzerland for the US and Iran to reach a final deal within 60 days, complete with a hotline to avoid incidents in the strait. Vice President JD Vance reported "great progress" on keeping the chokepoint open and on a mechanism to demine it, and said Tehran had agreed to invite IAEA inspectors back. The path remains fragile — the IEA warns it could take until early 2027 for flows to fully normalise — but markets are aggressively pricing the return of Gulf barrels.',
+   source:'CNBC / Reuters / IEA', tags:['Hormuz','Iran','Peace Deal']},
 
   {featured:true, emoji:'☀', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 3, 2026', impact:'high',
@@ -269,8 +269,8 @@ const NEWS = [
   // REGULAR
   {emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'June 24, 2026', impact:'high',
-   headline:'Brent Slides to ~$77.2 and WTI to ~$73.4, Fresh 3-Month Lows, as US Clears Iranian Crude Sales',
-   summary:'Brent crude eased to about $77.20/bbl and WTI to roughly $73.40 by June 24, fresh three-month lows, after the US Treasury authorized Iran to sell crude on international markets through August. Brent had fallen 3.3% to settle at $77.90 on Monday and slipped further through Tuesday as the weekend US-Iran road map pointed toward a final deal within 60 days. Both benchmarks have now shed almost all of the war premium that drove Dubai crude to a record $166 in March. Markets are front-running normalisation of Strait of Hormuz flows even though physical tanker traffic has yet to fully recover, with an underlying global supply glut capping any rebound.',
+   headline:'Oil Plunges ~4%: Brent Settles at $73.74 and WTI Dips Below $70 for First Time Since March',
+   summary:'Brent crude tumbled 4.3% to settle at $73.74/bbl on June 24 while WTI fell to $70.34, briefly trading under $70 for the first time since March 2, as tankers resumed transiting the Strait of Hormuz and eased fears that the Gulf supply shock would drag on. The slide leaves both benchmarks at their lowest since before the US and Israel launched their war on Iran in late February, having now shed virtually all of the conflict premium that drove Dubai crude to a record $166 in March. A US Treasury license clearing Iranian crude sales through August and a 60-day road map to a final deal added to the selling. An underlying global supply glut — the IEA sees 2026 supply averaging 102.4 mb/d against softer demand — is capping any rebound.',
    source:'CNBC / Reuters', tags:['Oil Price','Brent','Hormuz']},
 
   {emoji:'📕', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -280,9 +280,9 @@ const NEWS = [
    source:'OPEC', tags:['OPEC','Oil Demand','Outlook']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 23, 2026', impact:'med',
-   headline:'Gas Benchmarks Ease as War Premium Fades: TTF Near €42, JKM ~$16, Henry Hub ~$3.10',
-   summary:'Global gas prices stayed soft into late June as the geopolitical risk premium drained out alongside oil. European TTF hovered around €42/MWh — after briefly touching €43.4 on US-Iran talks — while the Japan-Korea Marker for spot LNG eased toward $16/MMBtu, both well off their conflict-era peaks. US Henry Hub held near $3.10/MMBtu, leaving the transatlantic spread wide enough to keep a healthy LNG arbitrage open to Europe and Asia. The respite is fragile: EU gas storage is only about 45.6% full, well below the 54.4% a year ago and roughly 14% under the five-year average, keeping refill pressure on through the summer.',
+   date:'June 24, 2026', impact:'med',
+   headline:'Gas Benchmarks Slide With Oil as War Premium Drains: TTF Near €40, JKM ~$15.5, Henry Hub ~$3.05',
+   summary:'Global gas prices fell further into late June as the geopolitical risk premium drained out alongside crude. European TTF eased toward €40/MWh while the Japan-Korea Marker for spot LNG slipped toward $15.5/MMBtu, both well off their conflict-era peaks, as tankers began moving again through the Strait of Hormuz. US Henry Hub held near $3.05/MMBtu, leaving the transatlantic spread wide enough to keep a healthy LNG arbitrage open to Europe and Asia. The respite is fragile: EU gas storage is only about 45.6% full, well below the 54.4% a year ago and roughly 14% under the five-year average, keeping refill pressure on through the summer.',
    source:'Global LNG Hub / Trading Economics', tags:['LNG','TTF','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -292,16 +292,16 @@ const NEWS = [
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 23, 2026', impact:'med',
-   headline:'Transition Metals Firm: Copper Holds Near Record ~$13,800 as Lithium Rebounds to CNY 169,000/t',
-   summary:'The metals underpinning the energy transition are firming together again. Copper is trading near $13,800 per tonne, not far below the all-time intraday high above $14,500 set in late January, as a widening supply-demand gap driven by AI infrastructure and electrification keeps the market structurally tight. Lithium carbonate has bounced to roughly CNY 169,000 (about $23,500) per tonne in China, up from a near two-month low of CNY 163,000, as seasonal inventory rebuilding pulled buyers back into the market. Even after the rebound, lithium futures remain well below the two-and-a-half-year high near CNY 200,500 reached in mid-May amid easing supply concerns.',
-   source:'Goldman Sachs / Trading Economics', tags:['Copper','Lithium','Metals']},
+   date:'June 24, 2026', impact:'med',
+   headline:'Transition Metals Pull Back: Copper Eases ~3% to ~$13,450 as Lithium Slides Toward CNY 157,500/t',
+   summary:'The metals underpinning the energy transition retreated together in late June. Copper futures fell more than 3% to about $13,450 per tonne, pressured by a firmer dollar and hawkish Federal Reserve expectations, though the market remains structurally tight on AI-driven electrification and sits not far below the all-time intraday high above $14,500 set in late January. Lithium carbonate slid toward CNY 157,500 (about $21,900) per tonne in China, weighed down by mounting speculation that CATL could restart its giant Jianxiawo mine in Jiangxi, reviving supply-glut worries. Both moves underline how macro and supply headlines, rather than transition demand, are driving battery-metal prices for now.',
+   source:'Trading Economics / SMM', tags:['Copper','Lithium','Metals']},
 
   {emoji:'🌊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 17, 2026', impact:'high',
-   headline:'Strait of Hormuz Flows Recover Toward 12 mb/d as Peace Memorandum Eases the Blockade',
-   summary:'Crude flows through the Strait of Hormuz are rebounding from a May low of about 9.6 million barrels per day toward roughly 12 mb/d as the June 17 US-Iran memorandum opens a path to lifting the blockade on Iranian ports. Saudi supertankers have resumed transiting the strait and Kuwait restarted output, helping normalise Gulf supply that had been throttled through the conflict. Even so, the chokepoint — which in normal times carries about a fifth of seaborne oil — has not fully reopened, and experts warn it could take months for flows and prices to settle back to pre-war levels. The fragile recovery is the single biggest swing factor for crude into the second half.',
-   source:'IEA Oil Market Report / Fortune', tags:['Hormuz','Supply','Gulf Oil']},
+   date:'June 23, 2026', impact:'high',
+   headline:'Strait of Hormuz Flows Recover Toward 12 mb/d, but IEA Sees Full Ramp-Up Slipping to Early 2027',
+   summary:'Crude flows through the Strait of Hormuz are rebounding from a May low of about 9.6 million barrels per day toward roughly 12 mb/d, supported by ship-to-ship transfers in the Gulf of Oman as the US-Iran memorandum opens a path to lifting the blockade on Iranian ports. Saudi supertankers have resumed transiting the strait and Kuwait restarted output, helping normalise Gulf supply that had been throttled through the conflict. The IEA now expects shipments to resume in earnest in the third quarter but warns it will take several months to ramp up, with pre-conflict traffic not fully restored until early 2027. The fragile recovery remains the single biggest swing factor for crude into the second half.',
+   source:'IEA Oil Market Report / Reuters', tags:['Hormuz','Supply','Gulf Oil']},
 
   {emoji:'📉', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'June 12, 2026', impact:'med',
