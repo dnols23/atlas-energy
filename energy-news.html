@@ -131,8 +131,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$70.55</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€43.80</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$72.12</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€44.25</div><div class="sl">TTF Gas/MWh</div></div>
     <div class="h-stat"><div class="sv">$3.24</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.086</div><div class="sl">Solar Module/W</div></div>
   </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:70.55, unit:'/bbl',     chg:-0.59, pct:-0.83},
-  {label:'WTI Crude',      val:68.30, unit:'/bbl',     chg:-0.55, pct:-0.80},
-  {label:'Natural Gas TTF',val:43.80, unit:'€/MWh',    chg:+0.85, pct:+1.98},
+  {label:'Brent Crude',    val:72.12, unit:'/bbl',     chg:+0.55, pct:+0.77},
+  {label:'WTI Crude',      val:68.77, unit:'/bbl',     chg:+0.08, pct:+0.11},
+  {label:'Natural Gas TTF',val:44.25, unit:'€/MWh',    chg:+0.45, pct:+1.03},
   {label:'Henry Hub',      val:3.24,  unit:'/MMBtu',   chg:+0.05, pct:+1.48},
-  {label:'LNG Asia JKM',   val:16.03, unit:'/MMBtu',   chg:-0.03, pct:-0.19},
-  {label:'Coal API2',      val:112.5, unit:'/t',       chg:-1.00, pct:-0.88},
-  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:+0.45, pct:+0.56},
-  {label:'Uranium',        val:86.25, unit:'/lb U₃O₈', chg:+0.25, pct:+0.29},
+  {label:'LNG Asia JKM',   val:16.20, unit:'/MMBtu',   chg:+0.17, pct:+1.06},
+  {label:'Coal API2',      val:112.0, unit:'/t',       chg:-0.50, pct:-0.44},
+  {label:'EU Carbon ETS',  val:81.50, unit:'€/t CO₂',  chg:+0.15, pct:+0.18},
+  {label:'Uranium',        val:86.25, unit:'/lb U₃O₈', chg:+0.10, pct:+0.12},
   {label:'Solar Module',   val:0.086, unit:'/W',       chg:+0.001,pct:+1.18},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:23500, unit:'/t',       chg:+850,  pct:+3.75},
-  {label:'Copper',         val:13170, unit:'/t',       chg:+145,  pct:+1.11},
+  {label:'Lithium',        val:23050, unit:'/t',       chg:-450,  pct:-1.91},
+  {label:'Copper',         val:13450, unit:'/t',       chg:-125,  pct:-0.92},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent slides below $71 to its lowest since late February — near $70.55 — as Hormuz shipping recovers and US-Iran talks make progress',
-  'Oil closes its worst quarter since 2020: WTI shed about $31 over Q2 while Brent lost close to $45, the steepest quarterly drop since 2008',
-  'OPEC+ eight meet July 5 to set August output after a fourth straight monthly hike lifted July quotas by 188,000 b/d',
-  'US and Iran working a 14-point MOU signed June 17; VP Vance says indirect Doha talks are \'going well\' as the Hormuz toll dispute lingers',
-  'Iranian crude exports jump above 40 million barrels after the US lifts its naval blockade; record Russian cargoes swell seaborne stocks',
+  'Brent steadies near $72 and WTI around $69 in thin pre-holiday trade, back near pre-war levels as Hormuz shipping keeps recovering',
+  'Oil just closed its worst quarter since 2020: WTI shed about $31 over Q2 while Brent lost close to $45, the steepest quarterly drop since 2008',
+  'OPEC+ eight meet Sunday July 5 to set August output after a fourth straight monthly hike lifted July quotas by 188,000 b/d',
+  'US-Iran indirect talks in Doha end with \'positive progress\' on the Hormuz-focused MOU but no breakthrough; next round after Khamenei funeral',
+  'Iran issues fresh warning over Strait of Hormuz control even as negotiators agree to open a communication channel with Washington',
   'Saudi exports rebound to ~90% of pre-war levels and the UAE restores flows to pre-war rates as Gulf barrels reach the market again',
   'IEA cuts 2026 oil demand by 1.1 mb/d and warns of a growing 2027 supply overhang as the market swings from shock to glut',
-  'EU carbon climbs to its highest since February above €81/t as firmer power demand and tighter supply lift allowances',
-  'Gas firms on heat: TTF near €44/MWh with storage just 48% full, JKM about $16/MMBtu, Henry Hub up to ~$3.24 on record cooling load',
-  'IEA: battery storage was the fastest-growing power tech in 2025 with 108 GW added (+40%), as renewables overtook coal worldwide',
-  'Copper eases from record highs but holds above $13,000/t; Chinese lithium carbonate rebounds to about CNY 169,000/t on restocking',
-  'DOE hails a third advanced reactor reaching criticality by Trump\'s July 4 deadline as the US nuclear build-out accelerates',
+  'EU carbon holds near €81.50/t, its highest since February, as firmer power demand and tighter allowance supply lift the market',
+  'Gas firms on heat: TTF hits a near three-week high above €44/MWh with storage just 48% full, and Henry Hub climbs to ~$3.24 on record cooling load',
+  'IEA: battery storage was the fastest-growing power technology of 2025 with about 108 GW added (+40%), as renewables overtook coal worldwide',
+  'Copper eases to about $6.1/lb as traders await a US Commerce report that could trigger refined-copper import tariffs; lithium slips on mine-restart talk',
+  'DOE meets Trump\'s July 4 deadline as a third advanced reactor reaches criticality, capping a year of US nuclear acceleration',
 ];
 
 function buildBreaking() {
@@ -255,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🛢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 2, 2026', impact:'high',
-   headline:'Brent Slides to Its Lowest Since February as Hormuz Reopens and US-Iran Talks Advance',
-   summary:'Brent fell below $71 a barrel to around $70.55 on July 2 — its lowest since late February — with WTI near $68, as commercial shipping through the Strait of Hormuz kept recovering and investors welcomed signs of progress in indirect US-Iran talks. The two sides are working a 14-point memorandum of understanding signed on June 17 that maps out a 60-day negotiation on Hormuz navigation, Iran\'s nuclear and missile programmes and sanctions relief; technical teams met in Doha this week and Vice President JD Vance said the discussions were \'going well.\' Iranian crude exports have jumped above 40 million barrels since Washington lifted its naval blockade, and record Russian cargoes have swelled seaborne inventories. The thaw caps oil\'s worst quarter since 2020, though the unresolved Hormuz transit-fee dispute still leaves the truce fragile.',
-   source:'CNN / Trading Economics', tags:['Iran','Oil Price','Hormuz']},
+   date:'July 3, 2026', impact:'high',
+   headline:'Oil Steadies Near Pre-War Levels as Hormuz Recovers and Doha Talks Make \'Positive Progress\'',
+   summary:'Brent held around $72 a barrel and WTI near $69 in thin pre-holiday trading on July 3 — close to levels last seen before the late-February conflict erupted — as commercial shipping through the Strait of Hormuz kept recovering and traders parsed the outcome of indirect US-Iran talks. Negotiators wrapped up two days of meetings in Doha that made \'positive progress\' on the Hormuz navigation and financial-incentive pillars of the memorandum of understanding signed in June, agreeing to open a communication channel, though they reached no breakthrough and left the harder nuclear file largely untouched. Iran issued a fresh warning over its demand for maritime control of the strait, and the next round was pushed back until after funeral processions for former supreme leader Ali Khamenei. Saudi Arabia\'s crude exports have rebounded to about 90% of pre-war levels, capping oil\'s worst quarter since 2020 even as the truce stays fragile.',
+   source:'CNN / Al Jazeera / Trading Economics', tags:['Iran','Oil Price','Hormuz']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 26, 2026', impact:'high',
@@ -274,9 +274,9 @@ const NEWS = [
    source:'CNBC / Trading Economics', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 2, 2026', impact:'med',
-   headline:'European Gas Firms Toward €44/MWh on Heatwave and Low Storage as Henry Hub Climbs',
-   summary:'European gas diverged from crude in early July, with Dutch TTF trading around €44/MWh — after a June that averaged near €45 and touched €50 — as an intense heatwave lifted power-sector cooling demand and refill worries mounted. EU storage was just 48% full, well below the roughly 56% a year earlier and the five-year average of 61%, keeping a firm floor under prices. In the US, Henry Hub rose about 1.5% to $3.24/MMBtu as forecasts for record summer power burn and rising LNG feedgas outweighed a larger-than-expected storage injection. Asian spot LNG, the JKM, hovered near $16/MMBtu, leaving the transatlantic arbitrage open and still pulling record US cargoes toward Europe.',
+   date:'July 3, 2026', impact:'med',
+   headline:'European Gas Hits a Near Three-Week High Above €44/MWh on Heatwave and Low Storage',
+   summary:'European gas diverged from crude into early July, with Dutch TTF climbing back above €44/MWh — its highest in nearly three weeks after dipping to €43 on July 1 — as an intense heatwave lifted power-sector cooling demand and refill worries mounted. EU storage was just 48% full, well below the roughly 56% a year earlier and the five-year average of 61%, stoking concern the bloc could enter winter with its thinnest reserves in 15 years. In the US, Henry Hub rose about 1.5% to $3.24/MMBtu as a severe heat wave — with New York City temperatures forecast toward 100°F — drove record summer power burn from gas plants that supply roughly 40% of US electricity. Asian spot LNG, the JKM, held near $16/MMBtu, keeping the transatlantic arbitrage open and still pulling US cargoes toward Europe.',
    source:'Trading Economics / Global LNG Hub', tags:['LNG','TTF','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -286,9 +286,9 @@ const NEWS = [
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 1, 2026', impact:'med',
-   headline:'Transition Metals Diverge: Copper Eases From Records While Lithium Rebounds on Restocking',
-   summary:'The metals underpinning the energy transition moved in opposite directions into July. LME copper eased to around $13,170 per tonne — down about 5% over the past month but still more than 23% higher than a year ago — as analysts at S&P Global and Goldman Sachs flagged that a rally driven by AI-era grid demand looked overextended in the near term. Chinese lithium carbonate, by contrast, rebounded to roughly CNY 169,000 (about $23,500) per tonne from a two-month low near CNY 163,000 as seasonal inventory rebuilding revived bids, though it stayed well below the two-and-a-half-year high near CNY 200,000 hit in mid-May. The split underlines how copper\'s structural deficit contrasts with lithium\'s lingering oversupply.',
+   date:'July 3, 2026', impact:'med',
+   headline:'Copper Eases as Traders Await US Tariff Report; Lithium Slips on Mine-Restart Talk',
+   summary:'The metals underpinning the energy transition softened into the July 4 weekend. Copper eased to around $6.10 a pound — roughly $13,450 a tonne, still more than 20% higher than a year ago — as investors awaited a US Commerce Department report on the copper market that could pave the way for import tariffs on refined metal, and after S&P Global analysts flagged that the AI-grid-driven rally looked overextended near term. Chinese lithium carbonate slid to about CNY 165,250 (roughly $23,050) per tonne, dipping toward a three-month low, on speculation that one of the world\'s largest lithium mines could soon resume operations. The moves underline how policy and supply headlines are now swinging both markets even as the structural transition-demand story stays intact.',
    source:'Trading Economics / S&P Global', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -298,15 +298,15 @@ const NEWS = [
    source:'Trading Economics / TradeTech', tags:['Uranium','Nuclear Fuel','Prices']},
 
   {emoji:'🌊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 2, 2026', impact:'high',
+   date:'July 3, 2026', impact:'high',
    headline:'Gulf Exports Recover: Saudi Loads Back to ~90% of Pre-War, UAE Fully Restored',
    summary:'Persian Gulf crude exports have staged a broad recovery as commercial shipping through the Strait of Hormuz normalises under the fragile ceasefire, with at least 35 vessels transiting the waterway a day. Saudi Arabia\'s crude exports have rebounded to about 90% of their pre-war levels as more tankers make the passage, while the UAE has restored flows to pre-war rates by routing cargoes through Hormuz and leaning on a pipeline that bypasses the chokepoint. Iran, meanwhile, agreed to waive transit fees for 60 days to let trapped ships exit, though the toll dispute remains the hardest open question in the talks. The waterway carries roughly a fifth of the world\'s seaborne oil and remains the biggest swing factor for crude into the second half.',
    source:'Reuters / Al Jazeera', tags:['Hormuz','Supply','Gulf Oil']},
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 1, 2026', impact:'high',
-   headline:'OPEC+ Eight Meet July 5 to Set August Output After a Fourth Straight Monthly Hike',
-   summary:'Eight core OPEC+ producers are due to meet virtually on July 5 to decide August output, after the group lifted July production quotas by about 188,000 barrels per day in a decision taken on June 7 — the fourth consecutive monthly increase as the alliance unwinds 1.65 million b/d of voluntary cuts agreed in 2023. Ministers have pledged flexibility to accelerate, pause or reverse the additions depending on the market. With Hormuz shipping only partly restored and several members still unable to pump to target, the recent increases have been largely symbolic even as the group signals confidence in demand. Analysts expect the ministers to weigh a softening price backdrop, now near five-month lows, against their push to reclaim market share.',
+   date:'July 3, 2026', impact:'high',
+   headline:'OPEC+ Eight Meet This Sunday to Set August Output After a Fourth Straight Monthly Hike',
+   summary:'Eight core OPEC+ producers are due to meet virtually on Sunday, July 5, to decide August output, after the group lifted July production quotas by about 188,000 barrels per day in a decision taken on June 7 — the fourth consecutive monthly increase as the alliance unwinds 1.65 million b/d of voluntary cuts agreed in 2023. If the group sticks to hikes of that size in August and September, the remaining tranche would be fully restored by the end of September. Ministers have pledged flexibility to accelerate, pause or reverse the additions depending on the market, and with Hormuz shipping only partly restored several members still cannot pump to target. Analysts expect them to weigh a price backdrop that has swung from May\'s $100-plus spike to near pre-war levels against their push to reclaim market share.',
    source:'CNBC / Argus', tags:['OPEC+','Supply','Quotas']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -334,7 +334,7 @@ const NEWS = [
    source:'Brookings / DOE', tags:['AI','Data Centers','Nuclear']},
 
   {emoji:'🌡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'July 1, 2026', impact:'med',
+   date:'July 3, 2026', impact:'med',
    headline:'Heatwaves Across the US and Europe Drive Record Cooling Demand and Gas-Fired Burn',
    summary:'An intense heatwave gripping both sides of the Atlantic is stress-testing power grids and lifting fuel demand as July opens. In the US, meteorologists forecast above-normal temperatures through mid-July — with New York City heat pushing toward 100°F — and the EIA expects summer generation to run about 3% above 2025, met largely by a forecast 19% jump in solar output and 10% in wind. In Europe, the heat is boosting electricity demand for cooling just as gas storage lags the seasonal norm, firming TTF prices. Record air-conditioning load, layered on top of relentless data-center growth, is reshaping summer peaks and leaving grid operators leaning hard on newly added solar and battery capacity.',
    source:'EIA / Reuters', tags:['Power Demand','Heatwave','US Grid']},
@@ -358,9 +358,9 @@ const NEWS = [
    source:'BloombergNEF / pv-magazine', tags:['Solar','Modules','Polysilicon']},
 
   {emoji:'⚛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'July 1, 2026', impact:'high',
-   headline:'DOE Hits Trump\'s July 4 Target as a Third Advanced Reactor Reaches Criticality',
-   summary:'The US Department of Energy said a third DOE-authorized advanced reactor achieved criticality ahead of the July 4 deadline President Trump set in his May 2025 executive orders, with Deployable Energy\'s demonstration unit, Unity, completing a zero-power fueled criticality test at Idaho National Laboratory. The milestone caps a year in which the administration moved to accelerate advanced-reactor licensing, disbursed up to $1.52 billion toward restarting Michigan\'s Palisades plant, and approved a wave of LNG export capacity. Kairos Power, which broke ground on its Google-partnered Hermes 2 demonstration in April, is among the developers racing to serve surging AI data-center load. The push cements nuclear as the centerpiece of the White House\'s energy-dominance agenda.',
+   date:'July 3, 2026', impact:'high',
+   headline:'DOE Meets Trump\'s July 4 Target as a Third Advanced Reactor Reaches Criticality',
+   summary:'The US Department of Energy said a third DOE-authorized advanced reactor achieved criticality by the July 4 deadline President Trump set in his May 2025 executive orders, with Deployable Energy\'s demonstration unit, Unity, joining Antares Nuclear\'s Mark-0 and Valar Atomics\' Ward 250, which reached criticality earlier this month under the Reactor Pilot Program. The milestone caps a year in which the administration moved to fast-track advanced-reactor licensing, stood up a Nuclear Energy Launch Pad on federal land, and approved more LNG export capacity than the world\'s second-largest exporter ships today. Developers from Kairos Power to a wave of AI-backed startups are racing to serve surging data-center load. The push cements nuclear as the centerpiece of the White House\'s energy-dominance agenda.',
    source:'US Department of Energy', tags:['Nuclear','US Policy','Data Centers']},
 
   {emoji:'🇨🇳', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
