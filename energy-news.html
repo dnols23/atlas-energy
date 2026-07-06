@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$71.80</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€43.50</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.20</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$71.92</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€44.25</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.15</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.086</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:71.80, unit:'/bbl',     chg:-0.32, pct:-0.44},
-  {label:'WTI Crude',      val:68.25, unit:'/bbl',     chg:-0.20, pct:-0.29},
-  {label:'Natural Gas TTF',val:43.50, unit:'€/MWh',    chg:-0.75, pct:-1.69},
-  {label:'Henry Hub',      val:3.20,  unit:'/MMBtu',   chg:-0.04, pct:-1.23},
-  {label:'LNG Asia JKM',   val:16.03, unit:'/MMBtu',   chg:-0.17, pct:-1.05},
-  {label:'Coal API2',      val:96.48, unit:'/t',       chg:-1.15, pct:-1.18},
-  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:-0.15, pct:-0.18},
-  {label:'Uranium',        val:86.25, unit:'/lb U₃O₈', chg:+0.05, pct:+0.06},
+  {label:'Brent Crude',    val:71.92, unit:'/bbl',     chg:-0.20, pct:-0.28},
+  {label:'WTI Crude',      val:68.40, unit:'/bbl',     chg:-0.15, pct:-0.22},
+  {label:'Natural Gas TTF',val:44.25, unit:'€/MWh',    chg:+0.65, pct:+1.49},
+  {label:'Henry Hub',      val:3.15,  unit:'/MMBtu',   chg:-0.05, pct:-1.56},
+  {label:'LNG Asia JKM',   val:16.40, unit:'/MMBtu',   chg:-0.20, pct:-1.20},
+  {label:'Coal API2',      val:95.80, unit:'/t',       chg:-0.68, pct:-0.70},
+  {label:'EU Carbon ETS',  val:82.10, unit:'€/t CO₂',  chg:+0.75, pct:+0.92},
+  {label:'Uranium',        val:85.70, unit:'/lb U₃O₈', chg:-0.35, pct:-0.41},
   {label:'Solar Module',   val:0.086, unit:'/W',       chg:+0.001,pct:+1.18},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:23050, unit:'/t',       chg:+380,  pct:+1.69},
-  {label:'Copper',         val:13550, unit:'/t',       chg:+180,  pct:+1.35},
+  {label:'Lithium',        val:23200, unit:'/t',       chg:+150,  pct:+0.65},
+  {label:'Copper',         val:13650, unit:'/t',       chg:+100,  pct:+0.74},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,16 +224,16 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'OPEC+ eight approve a fifth straight 188,000 b/d hike, lifting August quotas as the alliance keeps unwinding 1.65 mb/d of 2023 cuts',
+  'OPEC+ eight approve a fifth straight 188,000 b/d hike for August, leaving roughly 567,000 b/d of the 1.65 mb/d of 2023 cuts still to unwind',
   'Brent holds near $72 and WTI around $68, back close to pre-war levels as Hormuz shipping keeps recovering and the glut narrative firms',
   'Oil just closed its worst quarter since 2020: WTI shed about $31 over Q2 while Brent lost close to $45, the steepest quarterly drop since 2008',
-  'US copper tariffs finalised June 30 send COMEX inventories to a record ~650,000 tons; Goldman sees prices breaching $14,000/t in H2',
+  'US copper tariffs finalised June 30 send COMEX inventories to a record ~652,200 tons; Goldman sees prices breaching $14,000/t in H2',
+  'US court restores the 5% safe-harbor route for wind and solar to prove start-of-construction, easing the scramble around the July 4 tax-credit cliff',
   'US-Iran indirect talks in Doha end with \'positive progress\' on the Hormuz-focused MOU but no breakthrough; next round after Khamenei funeral',
   'Saudi exports rebound to ~90% of pre-war levels and the UAE restores flows to pre-war rates as Gulf barrels reach the market again',
   'IEA cuts 2026 oil demand by 1.1 mb/d and warns of a growing 2027 supply overhang as the market swings from shock to glut',
-  'July 4 begin-construction deadline passes for US wind and solar to lock in full 45Y/48E tax credits under the One Big Beautiful Bill Act',
-  'Coal API2 slides toward $96/t as milder pricing and softer power demand ease Europe\'s fuel bill even with gas storage lagging',
-  'EU carbon holds near €81/t, its highest since February, even as a political rift over the ETS design intensifies in Brussels',
+  'European TTF firms toward €44/MWh on heatwave cooling demand as EU storage lingers near 48% full, well below the five-year norm',
+  'EU carbon climbs toward €82/t, its highest since February, even as a political rift over the ETS design intensifies in Brussels',
   'IEA: battery storage was the fastest-growing power technology of 2025 with about 108 GW added (+40%), as renewables overtook coal worldwide',
   'DOE meets Trump\'s July 4 deadline as a third advanced reactor reaches criticality, capping a year of US nuclear acceleration',
 ];
@@ -255,9 +255,9 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🛢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 5, 2026', impact:'high',
+   date:'July 6, 2026', impact:'high',
    headline:'Oil Steadies Near Pre-War Levels as Hormuz Recovers and Doha Talks Make \'Positive Progress\'',
-   summary:'Brent held around $72 a barrel and WTI near $68 heading into the July 5 OPEC+ meeting — close to levels last seen before the late-February conflict erupted — as commercial shipping through the Strait of Hormuz kept recovering and traders parsed the outcome of indirect US-Iran talks. Negotiators wrapped up two days of meetings in Doha that made \'positive progress\' on the Hormuz navigation and financial-incentive pillars of the memorandum of understanding signed in June, agreeing to open a communication channel, though they reached no breakthrough and left the harder nuclear file largely untouched. Iran issued a fresh warning over its demand for maritime control of the strait, and the next round was pushed back until after funeral processions for former supreme leader Ali Khamenei. Saudi Arabia\'s crude exports have rebounded to about 90% of pre-war levels, capping oil\'s worst quarter since 2020 even as the truce stays fragile.',
+   summary:'Brent held around $72 a barrel and WTI near $68 after OPEC+ waved through another modest August supply hike on July 5 — close to levels last seen before the late-February conflict erupted — as commercial shipping through the Strait of Hormuz kept recovering and traders parsed the outcome of indirect US-Iran talks. Negotiators wrapped up two days of meetings in Doha that made \'positive progress\' on the Hormuz navigation and financial-incentive pillars of the memorandum of understanding signed in June, agreeing to open a communication channel, though they reached no breakthrough and left the harder nuclear file largely untouched. Iran issued a fresh warning over its demand for maritime control of the strait, and the next round was pushed back until after funeral processions for former supreme leader Ali Khamenei. Saudi Arabia\'s crude exports have rebounded to about 90% of pre-war levels, capping oil\'s worst quarter since 2020 even as the truce stays fragile.',
    source:'CNN / Al Jazeera / Trading Economics', tags:['Iran','Oil Price','Hormuz']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
@@ -274,27 +274,27 @@ const NEWS = [
    source:'CNBC / Trading Economics', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 4, 2026', impact:'med',
-   headline:'European Gas Eases Toward €43/MWh as Heat Fades, but Thin Storage Keeps the Market on Edge',
-   summary:'European gas pulled back into the July 4 weekend, with Dutch TTF easing toward €43.50/MWh from its late-June push above €44 as the peak of the heatwave passed and traders looked ahead to refills. The relief is fragile: EU storage was still just 48% full, well below the roughly 56% a year earlier and the five-year average of 61%, stoking concern the bloc could enter winter with its thinnest reserves in 15 years. In the US, Henry Hub slipped to about $3.20/MMBtu even as severe summer heat — with New York City temperatures near 100°F — kept power burn heavy at gas plants that supply roughly 40% of US electricity. Asian spot LNG, the JKM, held near $16/MMBtu, keeping the transatlantic arbitrage open and still pulling US cargoes toward Europe.',
+   date:'July 5, 2026', impact:'med',
+   headline:'European Gas Firms Toward €44/MWh as a Fresh Heatwave Meets Thin Storage',
+   summary:'European gas pushed higher into early July, with Dutch TTF firming toward €44.25/MWh — its highest in more than two weeks — as an intense heatwave lifted cooling demand from power generators just as the bloc struggled to refill depleted stores. The squeeze is real: EU storage was still just 48% full, well below the roughly 56% a year earlier and the five-year average of 61%, stoking concern the bloc could enter winter with its thinnest reserves in 15 years. In the US, Henry Hub slipped to about $3.15/MMBtu even as severe summer heat — with New York City temperatures near 100°F — kept power burn heavy at gas plants that supply roughly 40% of US electricity. Asian spot LNG, the JKM, eased toward $16.40/MMBtu, keeping the transatlantic arbitrage open and still pulling US cargoes toward Europe.',
    source:'Trading Economics / Global LNG Hub', tags:['LNG','TTF','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 1, 2026', impact:'med',
-   headline:'EU Carbon Holds Near Its Highest Since February at €81 as a Political Rift Over the ETS Deepens',
-   summary:'EU Emissions Trading System allowances held near €81.35 per tonne into early July — around their highest level since February 2026 — after firmer power-sector demand, the higher cost of coal-to-gas switching, and tightening allowance supply drove them off spring lows. The market sits comfortably above the €60-80 band that prevailed through 2025, but a widening political rift is stirring volatility: Commission President Ursula von der Leyen and French President Emmanuel Macron are defending the carbon market\'s design against member states critical of its hit to industrial competitiveness. Analysts still expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework to keep upward pressure on carbon through the year.',
+   date:'July 3, 2026', impact:'med',
+   headline:'EU Carbon Climbs to Its Highest Since February Near €82 as a Political Rift Over the ETS Deepens',
+   summary:'EU Emissions Trading System allowances climbed toward €82 per tonne in early July — their highest level since February 2026 — after firmer power-sector demand, the higher cost of coal-to-gas switching, and tightening allowance supply drove them off spring lows. The market sits comfortably above the €60-80 band that prevailed through 2025, but a widening political rift is stirring volatility: Commission President Ursula von der Leyen and French President Emmanuel Macron are defending the carbon market\'s design against member states critical of its hit to industrial competitiveness. Analysts still expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework to keep upward pressure on carbon through the year.',
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 3, 2026', impact:'med',
+   date:'July 4, 2026', impact:'med',
    headline:'US Finalises Refined-Copper Tariffs, Sending COMEX Stocks to a Record; Lithium Rebounds',
-   summary:'The metals underpinning the energy transition split on policy. Washington finalised tariffs on refined copper on June 30, and the prospect of the levies taking effect has pulled metal into the US, driving COMEX warehouse inventories to a record of roughly 650,000 tons even as LME stocks drew down toward 352,000 tonnes. Copper firmed to about $6.15 a pound — near $13,550 a tonne, still more than 20% higher than a year ago — with Goldman Sachs warning prices could breach $14,000 a tonne in the second half once the duties bite. Chinese lithium carbonate, by contrast, rebounded 1.7% to about CNY 165,250 (roughly $23,050) per tonne on July 3, clawing back from a three-month low. The moves underline how policy and supply headlines are now swinging both markets even as the structural transition-demand story stays intact.',
+   summary:'The metals underpinning the energy transition split on policy. Washington finalised tariffs on refined copper on June 30, and the prospect of the levies taking effect has pulled metal into the US, driving COMEX warehouse inventories to a record of roughly 652,200 tons even as LME stocks tightened. Copper firmed toward about $6.20 a pound — near $13,650 a tonne, still more than 20% higher than a year ago — with Goldman Sachs warning prices could breach $14,000 a tonne in the second half once the duties bite. Chinese lithium carbonate, by contrast, rebounded to about CNY 166,000 (roughly $23,200) per tonne, clawing back from a three-month low. The moves underline how policy and supply headlines are now swinging both markets even as the structural transition-demand story stays intact.',
    source:'Trading Economics / S&P Global', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'June 24, 2026', impact:'low',
+   date:'July 2, 2026', impact:'low',
    headline:'Uranium Holds Near $86/lb as Utilities Lean on Long-Term Contracts',
-   summary:'Uranium spot prices held in a narrow range around $86 per pound of U3O8 through June, steady since early April after erasing a speculative surge that had carried the TradeTech indicator above $100 in late January. Muted spot buying by utilities — which have been drawing on long-term contracts signed since the Russia-Ukraine war raised short-term supply uncertainty — has kept the market rangebound. The calm belies robust structural demand as a wave of new reactor projects and data-center power deals lift the long-run outlook for nuclear fuel. Analysts still see the current lull as a pause rather than a peak, given tight secondary supply and constrained conversion and enrichment capacity.',
+   summary:'Uranium spot prices held in a narrow range around $85.70 per pound of U3O8 into early July, steady since early April after erasing a speculative surge that had carried the TradeTech indicator above $100 in late January. Muted spot buying by utilities — which have been drawing on long-term contracts signed since the Russia-Ukraine war raised short-term supply uncertainty — has kept the market rangebound. The calm belies robust structural demand as a wave of new reactor projects and data-center power deals lift the long-run outlook for nuclear fuel. Analysts still see the current lull as a pause rather than a peak, given tight secondary supply and constrained conversion and enrichment capacity.',
    source:'Trading Economics / TradeTech', tags:['Uranium','Nuclear Fuel','Prices']},
 
   {emoji:'🌊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -364,9 +364,9 @@ const NEWS = [
    source:'US Department of Energy', tags:['Nuclear','US Policy','Data Centers']},
 
   {emoji:'🏗', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'July 4, 2026', impact:'high',
-   headline:'US Wind and Solar Race to Beat the July 4 Deadline to Lock In Full Clean-Energy Tax Credits',
-   summary:'A pivotal deadline landed over the holiday weekend: under the One Big Beautiful Bill Act signed a year ago, wind and solar projects generally had to begin construction by July 4, 2026 to secure the full Section 45Y and 48E production and investment tax credits, or else be placed in service by the end of 2027 to still qualify. Developers spent the run-up rushing to satisfy the "physical work of a significant nature" test — recently restored as a route to prove start of construction after IRS guidance had tightened it — triggering a scramble of procurement and site works to bank eligibility. The compressed timeline is reshaping US project pipelines even as surging data-center power demand keeps pulling clean capacity onto the grid. Beyond the deadline, remaining credits phase down sharply, marking a decisive break from the Inflation Reduction Act era.',
+   date:'July 6, 2026', impact:'high',
+   headline:'US Wind and Solar Clear the July 4 Tax-Credit Cliff as a Court Restores the 5% Safe Harbor',
+   summary:'The pivotal deadline landed over the holiday weekend: under the One Big Beautiful Bill Act signed a year ago, wind and solar projects generally had to begin construction by July 4, 2026 to secure the full Section 45Y and 48E production and investment tax credits, or else be placed in service by the end of 2027 to still qualify. In a late reprieve, a federal court vacated Treasury guidance that had scrapped the 5% "safe harbor" spending test, restoring an easier route for developers to prove start of construction and easing the frantic scramble of procurement and site works to bank eligibility. Analysts still warn the phase-down could lift solar costs by up to 55% and onshore wind by up to 63% for projects that miss the window. The compressed timeline is reshaping US pipelines even as surging data-center demand keeps pulling clean capacity onto the grid.',
    source:'Utility Dive / Arnold & Porter', tags:['US Policy','Solar','Tax Credits']},
 
   {emoji:'🇨🇳', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
