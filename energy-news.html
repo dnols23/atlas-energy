@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$72.94</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€44.07</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.18</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$73.10</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€44.40</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.30</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.086</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:72.94, unit:'/bbl',     chg:+0.95, pct:+1.32},
-  {label:'WTI Crude',      val:69.36, unit:'/bbl',     chg:+0.81, pct:+1.18},
-  {label:'Natural Gas TTF',val:44.07, unit:'€/MWh',    chg:-0.18, pct:-0.41},
-  {label:'Henry Hub',      val:3.18,  unit:'/MMBtu',   chg:+0.03, pct:+0.95},
-  {label:'LNG Asia JKM',   val:15.90, unit:'/MMBtu',   chg:-0.50, pct:-3.05},
-  {label:'Coal API2',      val:95.40, unit:'/t',       chg:-0.40, pct:-0.42},
-  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:-0.75, pct:-0.91},
-  {label:'Uranium',        val:85.50, unit:'/lb U₃O₈', chg:-0.20, pct:-0.23},
+  {label:'Brent Crude',    val:73.10, unit:'/bbl',     chg:+1.11, pct:+1.54},
+  {label:'WTI Crude',      val:70.53, unit:'/bbl',     chg:+1.17, pct:+1.69},
+  {label:'Natural Gas TTF',val:44.40, unit:'€/MWh',    chg:-0.20, pct:-0.45},
+  {label:'Henry Hub',      val:3.30,  unit:'/MMBtu',   chg:+0.05, pct:+1.54},
+  {label:'LNG Asia JKM',   val:16.03, unit:'/MMBtu',   chg:+0.13, pct:+0.82},
+  {label:'Coal API2',      val:95.10, unit:'/t',       chg:-0.30, pct:-0.31},
+  {label:'EU Carbon ETS',  val:81.05, unit:'€/t CO₂',  chg:-0.30, pct:-0.37},
+  {label:'Uranium',        val:85.70, unit:'/lb U₃O₈', chg:+0.20, pct:+0.23},
   {label:'Solar Module',   val:0.086, unit:'/W',       chg:+0.001,pct:+1.18},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:23100, unit:'/t',       chg:-100,  pct:-0.43},
-  {label:'Copper',         val:13580, unit:'/t',       chg:-70,   pct:-0.51},
+  {label:'Lithium',        val:22900, unit:'/t',       chg:-100,  pct:-0.43},
+  {label:'Copper',         val:13610, unit:'/t',       chg:+30,   pct:+0.22},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -225,15 +225,15 @@ function jitterPrices() {
 // ─────────────────────────────────────────────
 const BREAKING = [
   'OPEC+ eight approve a fifth straight 188,000 b/d hike for August, leaving roughly 567,000 b/d of the 1.65 mb/d of 2023 cuts still to unwind',
-  'Brent edges up to about $73 and WTI near $69 on Tuesday but holds near four-month lows as rising supply and a recovering Hormuz cap the market',
+  'Brent climbs back above $73 and WTI toward $70.5 on Tuesday, up nearly 2%, but holds near four-month lows as rising supply and a recovering Hormuz cap the market',
   'Saudi Aramco cuts its August Arab Light price for Asia by $11/bbl to a $1.50 discount, its sharpest OSP reduction in years as the market softens',
   'Oil just closed its worst quarter since 2020: WTI shed about $31 over Q2 while Brent lost close to $45, the steepest quarterly drop since 2008',
   'US copper tariffs finalised June 30 send COMEX inventories to a record ~652,200 tons; Goldman sees prices breaching $14,000/t in H2',
   'US court restores the 5% safe-harbor route for wind and solar to prove start-of-construction, easing the scramble around the July 4 tax-credit cliff',
   'US-Iran indirect talks in Doha end with \'positive progress\' on the Hormuz-focused MOU but no breakthrough; next round after Khamenei funeral',
   'Saudi exports rebound to ~90% of pre-war levels and the UAE restores flows to pre-war rates as Gulf barrels reach the market again',
-  'IEA cuts 2026 oil demand by 1.1 mb/d and warns of a growing 2027 supply overhang as the market swings from shock to glut',
-  'European TTF hovers near €44/MWh on heatwave cooling demand as EU storage lingers near 48% full, well below the five-year norm',
+  'EIA July outlook sees Henry Hub averaging about $3.34/MMBtu in H2 2026 and flags a building global oil surplus into 2027',
+  'European TTF eases to about €44.4/MWh on heatwave cooling demand as EU storage lingers near 49% full, well below the five-year norm',
   'EU carbon eases toward €81/t but holds its highest levels since February as a political rift over the ETS design intensifies in Brussels',
   'IEA: battery storage was the fastest-growing power technology of 2025 with about 108 GW added (+40%), as renewables overtook coal worldwide',
 ];
@@ -256,9 +256,9 @@ const NEWS = [
   // FEATURED
   {featured:true, emoji:'🛢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'July 7, 2026', impact:'high',
-   headline:'Oil Ticks Up But Holds Near Four-Month Lows as OPEC+ Supply and a Recovering Hormuz Weigh',
-   summary:'Brent crept back above $72 a barrel and WTI toward $69 on Tuesday, but both benchmarks stayed pinned near their lowest levels in more than four months as the fifth straight OPEC+ output hike and steadily recovering shipping through the Strait of Hormuz kept the glut narrative firmly in charge. Saudi Aramco underscored the softer mood by slashing its August Arab Light price for Asian buyers by $11 a barrel to a $1.50 discount to the regional benchmark, one of its steepest official-price cuts in years. Traffic through the strait keeps climbing since the June 17 memorandum of understanding that ended the war, even as indirect US-Iran talks in Doha made only \'positive progress\' on the Hormuz and financial pillars and left the nuclear file untouched, with the next round pushed back until after funeral processions for former supreme leader Ali Khamenei. Saudi crude exports have rebounded to about 90% of pre-war levels, capping oil\'s worst quarter since 2020 even as the truce stays fragile.',
-   source:'Trading Economics / Fortune / Reuters', tags:['Iran','Oil Price','Hormuz']},
+   headline:'Oil Gains But Holds Near Four-Month Lows as Focus Shifts From Hormuz to Supply and Demand',
+   summary:'Brent climbed back above $73 a barrel and WTI toward $70.5 on Tuesday, up almost 2%, as traders looked past easing Middle East tensions and turned their attention to the fifth straight OPEC+ output hike and the demand outlook. Even after the bounce both benchmarks stayed pinned near their lowest levels in more than four months, with steadily recovering shipping through the Strait of Hormuz keeping the glut narrative firmly in charge. Saudi Aramco underscored the softer mood by slashing its August Arab Light price for Asian buyers by $11 a barrel to a $1.50 discount to the regional benchmark, one of its steepest official-price cuts in years. Traffic through the strait keeps climbing since the June 17 memorandum of understanding that ended the war, even as indirect US-Iran talks in Doha made only \'positive progress\' on the Hormuz and financial pillars and left the nuclear file untouched. Saudi crude exports have rebounded to about 90% of pre-war levels, capping oil\'s worst quarter since 2020 even as the truce stays fragile.',
+   source:'CNBC / Trading Economics / Reuters', tags:['Iran','Oil Price','Hormuz']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'June 26, 2026', impact:'high',
@@ -274,10 +274,10 @@ const NEWS = [
    source:'CNBC / Trading Economics', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 6, 2026', impact:'med',
-   headline:'European Gas Hovers Near €44/MWh as a Fresh Heatwave Meets Thin Storage',
-   summary:'European gas held around €44/MWh into the second week of July, with Dutch TTF near €44.07 after retreating from a two-week high as signs of progress in the US-Iran talks eased supply fears even as an intense heatwave lifted cooling demand from power generators. The storage squeeze is real: EU inventories were still just 48% full, well below the roughly 56% a year earlier and the five-year average of 61%, stoking concern the bloc could enter winter with its thinnest reserves in 15 years. In the US, Henry Hub firmed to about $3.18/MMBtu as severe summer heat — with New York City temperatures near 100°F — kept power burn heavy at gas plants that supply roughly 40% of US electricity. Asian spot LNG, the JKM, eased toward $15.90/MMBtu, keeping the transatlantic arbitrage open and still pulling US cargoes toward Europe.',
-   source:'Trading Economics / Global LNG Hub', tags:['LNG','TTF','Gas Prices']},
+   date:'July 7, 2026', impact:'med',
+   headline:'European Gas Slips to €44.4/MWh as a Fresh Heatwave Meets Thin Storage',
+   summary:'European gas eased to about €44.4/MWh on Tuesday, with Dutch TTF retreating from a three-week high as signs of progress in the US-Iran talks tempered supply fears even as another spell of extreme heat across Northwest Europe lifted cooling demand from power generators. The storage squeeze is real: EU inventories were still just 49% full, well below the roughly 60% a year earlier and the five-year average of 61%, stoking concern the bloc could enter winter with its thinnest reserves in 15 years. In the US, Henry Hub firmed toward $3.30/MMBtu as severe summer heat — with New York City temperatures near 100°F — kept power burn heavy at gas plants that supply roughly 40% of US electricity. Asian spot LNG, the JKM, hovered near $16/MMBtu, keeping the transatlantic arbitrage open and still pulling US cargoes toward Europe. Analysts see TTF trading in a 42-55 EUR/MWh band over the coming weeks, highly sensitive to Hormuz news flow.',
+   source:'Trading Economics / Energy Aspects', tags:['LNG','TTF','Gas Prices']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 3, 2026', impact:'med',
@@ -288,7 +288,7 @@ const NEWS = [
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 4, 2026', impact:'med',
    headline:'US Finalises Refined-Copper Tariffs, Sending COMEX Stocks to a Record; Lithium Rebounds',
-   summary:'The metals underpinning the energy transition split on policy. Washington finalised tariffs on refined copper on June 30, and the prospect of the levies taking effect has pulled metal into the US, driving COMEX warehouse inventories to a record of roughly 652,200 tons even as LME stocks tightened. Copper held above about $6.15 a pound — near $13,580 a tonne, still more than 20% higher than a year ago — with Goldman Sachs warning prices could breach $14,000 a tonne in the second half once the duties bite. Chinese lithium carbonate, by contrast, rebounded to about CNY 166,000 (roughly $23,200) per tonne, clawing back from a three-month low. The moves underline how policy and supply headlines are now swinging both markets even as the structural transition-demand story stays intact.',
+   summary:'The metals underpinning the energy transition split on policy. Washington finalised tariffs on refined copper on June 30, and the prospect of the levies taking effect has pulled metal into the US, driving COMEX warehouse inventories to a record of roughly 652,200 tons even as LME stocks tightened. Copper held above about $6.15 a pound — near $13,600 a tonne, still more than 20% higher than a year ago — with Goldman Sachs warning prices could breach $14,000 a tonne in the second half once the duties bite. Chinese lithium carbonate, by contrast, eased to about CNY 164,500 (roughly $22,900) per tonne but remains up more than 160% from a year earlier. The moves underline how policy and supply headlines are now swinging both markets even as the structural transition-demand story stays intact.',
    source:'Trading Economics / S&P Global', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -316,10 +316,10 @@ const NEWS = [
    source:'Reuters / Bloomberg', tags:['Russia','Iran','Inventories']},
 
   {emoji:'📈', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'June 11, 2026', impact:'med',
-   headline:'EIA: OECD Oil Stocks to Fall to Just 50 Days of Cover by Year-End, Fewest Since 2003',
-   summary:'The EIA\'s June Short-Term Energy Outlook projected that OECD commercial inventories would slide to a low of about 50 days of forward demand cover by the end of 2026 — the tightest since January 2003 — as the Hormuz disruption drained stocks faster than production could recover. The agency estimated Middle East producers cut crude output by more than 11 million barrels per day in May versus pre-conflict levels, stranding Gulf barrels and helping push Brent above $100 before the subsequent collapse. It expects output to rebound through the second half as the strait reopens, feeding into a looming oversupply, but warns that thin inventory buffers leave the market unusually exposed to any renewed shock.',
-   source:'EIA Short-Term Energy Outlook', tags:['Supply','Inventories','EIA']},
+   date:'July 7, 2026', impact:'med',
+   headline:'EIA July Outlook Sees Henry Hub Near $3.34 in H2 and a Building Global Oil Surplus',
+   summary:'The EIA\'s July Short-Term Energy Outlook, released July 7, projected the Henry Hub natural-gas spot price averaging about $3.34/MMBtu in the second half of 2026 and $3.55 in 2H27, even as thin storage and record summer heat keep near-term power burn heavy. On oil, the agency continued to flag a building global surplus into 2027 as OPEC+ unwinds cuts and Gulf output recovers through the reopened Strait of Hormuz, keeping crude prices under pressure despite depleted inventory buffers. It also expects US summer electricity generation to run about 3% above 2025, met largely by forecast jumps of 19% in solar and 10% in wind output. The report cements the market\'s pivot from wartime scarcity toward oversupply.',
+   source:'EIA Short-Term Energy Outlook', tags:['Supply','Gas Prices','EIA']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'June 17, 2026', impact:'high',
