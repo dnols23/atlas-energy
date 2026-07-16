@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$84.73</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€50.08</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.29</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$86.30</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€51.20</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.32</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.090</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:84.73, unit:'/bbl',     chg:+2.85, pct:+3.48},
-  {label:'WTI Crude',      val:79.56, unit:'/bbl',     chg:+1.55, pct:+1.99},
-  {label:'Natural Gas TTF',val:50.08, unit:'€/MWh',    chg:-2.72, pct:-5.15},
-  {label:'Henry Hub',      val:3.29,  unit:'/MMBtu',   chg:-0.01, pct:-0.30},
-  {label:'LNG Asia JKM',   val:18.75, unit:'/MMBtu',   chg:-0.75, pct:-3.85},
-  {label:'Coal API2',      val:108.50,unit:'/t',       chg:-1.50, pct:-1.36},
-  {label:'EU Carbon ETS',  val:81.35, unit:'€/t CO₂',  chg:+0.42, pct:+0.52},
-  {label:'Uranium',        val:85.15, unit:'/lb U₃O₈', chg:-0.45, pct:-0.53},
+  {label:'Brent Crude',    val:86.30, unit:'/bbl',     chg:+1.40, pct:+1.65},
+  {label:'WTI Crude',      val:81.10, unit:'/bbl',     chg:+1.50, pct:+1.88},
+  {label:'Natural Gas TTF',val:51.20, unit:'€/MWh',    chg:+1.12, pct:+2.24},
+  {label:'Henry Hub',      val:3.32,  unit:'/MMBtu',   chg:+0.03, pct:+0.91},
+  {label:'LNG Asia JKM',   val:18.90, unit:'/MMBtu',   chg:+0.15, pct:+0.80},
+  {label:'Coal API2',      val:112.00,unit:'/t',       chg:+3.50, pct:+3.23},
+  {label:'EU Carbon ETS',  val:82.10, unit:'€/t CO₂',  chg:+0.75, pct:+0.92},
+  {label:'Uranium',        val:85.25, unit:'/lb U₃O₈', chg:+0.10, pct:+0.12},
   {label:'Solar Module',   val:0.090, unit:'/W',       chg:+0.001,pct:+1.12},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:21500, unit:'/t',       chg:-350,  pct:-1.60},
-  {label:'Copper',         val:13300, unit:'/t',       chg:-180,  pct:-1.34},
+  {label:'Lithium',        val:21000, unit:'/t',       chg:-500,  pct:-2.33},
+  {label:'Copper',         val:13320, unit:'/t',       chg:+20,   pct:+0.15},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Trump abandons his proposed 20% Hormuz toll but reimposes the US naval blockade on Iran\'s ports at 4pm ET July 14',
-  'Brent hits a one-month high of $85.92/bbl, up 3.8%, as US-Iran fighting runs into a third day',
-  'ADNOC says two of its tankers were hit by projectiles in the Strait of Hormuz, killing one mariner',
-  'Hormuz transits fall more than 50% week-on-week to just 57 from Friday to Sunday, MarineTraffic says',
-  'US Central Command says it helped escort more than 8 million barrels of oil through Hormuz on Sunday',
-  'Asian spot LNG (JKM) eases toward $18.75/MMBtu and European TTF slips near €50/MWh from late-June highs',
+  'Iran\'s Revolutionary Guard threatens to halt ALL Mideast energy exports - \'either for everyone or for no one\' - as the US reimposes its blockade',
+  'US strikes hit an Iranian army barracks, killing at least 7 troops and wounding more than 260 as the air campaign enters a fourth day',
+  'Oil climbs for a fourth session: WTI trades above $80 and Brent holds above $85, more than 15% above pre-war levels',
+  'IMF warns the oil-surplus buffer that kept prices in check is nearly used up as spare capacity is deployed and inventories draw down',
+  'EIA lifts its Henry Hub forecast to $3.67/MMBtu for 2026 and $3.49 for 2027 as Hormuz disruptions stretch into next year',
+  'Qatar keeps maritime activity suspended as Strait of Hormuz tanker transits stay roughly halved week-on-week',
   'OPEC cuts its 2026 oil demand growth forecast to 780,000 b/d, a third straight downgrade, but lifts 2027 to 1.94 mb/d',
   'OPEC+ eight approve a fifth straight 188,000 b/d output hike for August',
-  'Ukrainian drones strike Russia\'s largest refinery at Omsk in a record 3,000 km attack',
+  'Ukrainian drones strike Russia\'s largest refinery at Omsk in a record 3,000 km attack, disabling ~43% of national refining capacity',
   'EU to unveil a 2040 electrification target on July 17, aiming to halve oil use and cut gas demand by two-thirds',
-  'EU carbon climbs to €81.35/t, its highest since February, on firmer power demand and tighter allowance supply',
-  'BloombergNEF lifts its 2026 global energy-storage forecast to a record 158 GW as battery costs hit $78/MWh',
+  'EU carbon climbs above €82/t, its highest since February, on firmer power demand and tighter allowance supply',
+  'EIA sees a record 86 GW of US capacity added in 2026 with solar, wind and storage supplying 99% of the total',
 ];
 
 function buildBreaking() {
@@ -255,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🚢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 14, 2026', impact:'high',
-   headline:'Trump Abandons His Hormuz Toll but Reimposes the Iran Blockade as Oil Hits a One-Month High',
-   summary:'President Trump backed away from his demand that ships transiting the Strait of Hormuz pay a fee for US military protection, even as Washington reimposed a naval blockade on Iran\'s ports and coastal areas at 4pm ET on July 14 and launched fresh airstrikes for a third straight day. The retreat from the 20% cargo toll — which Secretary of State Marco Rubio had warned would breach international law and which Gulf allies said they were never consulted on — did little to calm a market rattled by a weekend in which negotiations collapsed and Iran\'s Revolutionary Guard attacked tankers moving with their transponders switched off. Roughly a fifth of the world\'s seaborne oil and LNG normally transits the two-mile-wide lanes, and Brent leapt as much as 3.8% on Tuesday to $85.92, its highest since June 15, extending a 9.6% surge the day before. Analysts warn the diplomatic track over the world\'s most critical energy corridor has all but broken down.',
-   source:'CNBC / Al Jazeera / Bloomberg', tags:['Hormuz','Iran','Blockade']},
+   date:'July 15, 2026', impact:'high',
+   headline:'Iran Threatens to Halt All Mideast Energy Exports as the US Reimposes Its Blockade and Steps Up Strikes',
+   summary:'Iran\'s Revolutionary Guard threatened on Wednesday to cut off all energy exports from the Middle East in retaliation for a reinstated US naval blockade of Iranian ports, declaring that \'the export of oil and gas from the region will be either for everyone or for no one.\' The threat followed an intensified American air campaign that Iranian officials said struck an army barracks and other sites, killing at least seven troops and wounding more than 260 people, and it threatens to unravel the interim truce reached only weeks earlier. Brent traded above $85 a barrel — more than 15% above its pre-war level but still well below the near-$120 wartime peak — as the roughly one-fifth of global seaborne oil and LNG that moves through the two-mile-wide strait was thrown back into doubt. IMF economists warned that the surplus which had capped prices is nearly exhausted, with spare capacity deployed, demand compressed and inventories drawn down.',
+   source:'NBC News / ITV / Fortune', tags:['Hormuz','Iran','Blockade']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 6, 2026', impact:'high',
@@ -274,33 +274,33 @@ const NEWS = [
    source:'Al Jazeera / CNBC / NBC News', tags:['Iran','Geopolitics','War Risk']},
 
   {emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 14, 2026', impact:'high',
-   headline:'Oil Hits a One-Month High Near $85 as Renewed US-Iran Fighting Clouds the Hormuz Outlook',
-   summary:'Crude climbed to its highest in a month as US-Iran hostilities ran into a third day, with Brent for September delivery rising as much as 3.8% on Tuesday to $85.92 — the highest since June 15 — after a 9.6% jump the previous session. WTI rebounded to around $79.50, up roughly 2% on the day. Brent had briefly slid below $70 on July 1 when the strait reopened and a surplus loomed, only to snap higher as the conflict re-escalated, dragging TTF gas and Asian LNG up in sympathy. The wall of floating inventory built up during June\'s truce, plus Trump\'s decision to drop his proposed 20% Hormuz toll, has so far kept the spike below April\'s $120 wartime peak, but analysts warn a prolonged blockade could drain that buffer within weeks, with diesel and jet fuel — already squeezed by Russia\'s refinery outages — under the greatest pressure.',
-   source:'Al Jazeera / CNBC / Trading Economics', tags:['Oil Price','Brent','Volatility']},
+   date:'July 16, 2026', impact:'high',
+   headline:'Oil Climbs for a Fourth Day With WTI Above $80 as the IMF Warns the Price Buffer Is Nearly Gone',
+   summary:'Crude extended its rally into a fourth session as the US pressed its strikes on Iran to force open shipping through the Strait of Hormuz, with West Texas Intermediate trading above $80 a barrel after adding more than 11% over the previous three days and Brent holding above $85 — more than 15% higher than before the war. Prices remain below April\'s near-$120 wartime peak, cushioned by the wall of floating inventory built up during June\'s truce, but IMF economists cautioned that \'much of that room has now been used up\' as spare capacity is deployed, demand compresses and stocks draw down. Diesel and jet fuel stay the most exposed, squeezed by Russia\'s refinery outages even as flat crude trades rangebound between escalations. Analysts warn any confirmed loss of Gulf barrels could quickly drain the remaining buffer.',
+   source:'Bloomberg / Fortune / IMF', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 13, 2026', impact:'high',
-   headline:'Asian LNG Eases Toward $18.75/MMBtu and European Gas Slips Near €50 After Late-June Spike',
-   summary:'Asian spot LNG (JKM) eased back toward $18.75/MMBtu and European TTF slipped to around €50/MWh in mid-July, cooling from the late-June spike even as the US blockade and Iran\'s Hormuz disruption kept the roughly one-fifth of global LNG that transits the strait firmly at risk. The pullback offered Europe modest relief in its push to refill storage — which entered summer below the five-year average — ahead of winter, though traders warned any escalation in Qatari shipping delays could snap prices higher again. In the US, Henry Hub hovered near $3.29/MMBtu within its recent $3.15-$3.34 range as record summer heat kept power burn heavy and export demand firm. Analysts warn gas benchmarks will stay hyper-sensitive to every Hormuz and Qatar headline for weeks.',
-   source:'LNGPriceIndex / Trading Economics / EIA', tags:['LNG','TTF','Gas Prices']},
+   date:'July 15, 2026', impact:'high',
+   headline:'EIA Lifts Its Henry Hub Forecast as Asian LNG Firms Near $19 and European Gas Holds Around €51',
+   summary:'The EIA raised its Henry Hub outlook in the July Short-Term Energy Outlook, now seeing the US benchmark average $3.67/MMBtu in 2026 and $3.49 in 2027 — up from $3.60 and $3.46 a month earlier — as Hormuz disruptions ripple into next year even with record Permian-led production keeping inventories high. Spot Henry Hub held near $3.32 within its recent $3.15-$3.34 band as summer heat kept power burn heavy. In Asia, spot LNG (JKM) firmed toward $18.90/MMBtu and European TTF held around €51/MWh, both underpinned by the risk to the roughly one-fifth of global LNG that transits the strait and by Qatar\'s continued suspension of maritime activity. Traders warn any escalation in Gulf shipping delays could snap prices sharply higher again just as Europe races to refill storage that entered summer below the five-year average.',
+   source:'EIA STEO / Rigzone / LNGPriceIndex', tags:['LNG','TTF','Henry Hub']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 10, 2026', impact:'med',
-   headline:'EU Carbon Climbs to €81.35, Its Highest Since February, on Firm Power Demand and Tighter Supply',
-   summary:'EU Emissions Trading System allowances rose to €81.35 per tonne in the second week of July — the highest level since February 2026 — after firmer power-sector demand, the higher cost of coal-to-gas switching amid the summer heat, and tightening allowance supply drove them off spring lows. The benchmark has gained about 5.3% over the past four weeks and 10.3% over the past year, sitting comfortably above the €60-80 band that prevailed through 2025. Europe\'s Carbon Border Adjustment Mechanism, whose definitive regime began this year, is extending the carbon signal to imported steel, cement and aluminium. Analysts still expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework to keep upward pressure on carbon, with a scheduled review of the ETS directive and Market Stability Reserve firmly in focus.',
+   date:'July 14, 2026', impact:'med',
+   headline:'EU Carbon Climbs Above €82, Its Highest Since February, on Firm Power Demand and Tighter Supply',
+   summary:'EU Emissions Trading System allowances rose above €82 per tonne in mid-July — the highest level since February 2026 — after firmer power-sector demand, the higher cost of coal-to-gas switching amid the summer heat, and tightening allowance supply drove them off spring lows. The benchmark has gained more than 5% over the past four weeks and about 10% over the past year, sitting comfortably above the €60-80 band that prevailed through 2025. Europe\'s Carbon Border Adjustment Mechanism, whose definitive regime began this year, is extending the carbon signal to imported steel, cement and aluminium. Analysts still expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework to keep upward pressure on carbon, with a scheduled review of the ETS directive and Market Stability Reserve firmly in focus.',
    source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 10, 2026', impact:'med',
-   headline:'Copper Steadies Near $13,300/t as Risk Appetite Returns While Lithium Slides on Ample Supply',
-   summary:'The metals underpinning the energy transition are swinging on every headline. Copper reversed earlier losses to steady near $13,300 a tonne on the LME — about 4.5% below its early-June level — as investor appetite for risk assets improved on a rebound in semiconductor and AI-related stocks, with COMEX futures trading around $6.26 a pound. The prospect of finalised US tariffs on refined copper, confirmed on June 30, has pulled metal into the country and driven COMEX warehouse inventories to record highs, and analysts still see upside once the duties fully bite. Chinese lithium carbonate, meanwhile, traded around 154,000 yuan a tonne (roughly $21,500), down almost 10% over the past month on ample supply though still well above year-ago levels. The moves underline how policy and geopolitics now swing both markets even as the structural transition-demand story stays intact.',
+   date:'July 15, 2026', impact:'med',
+   headline:'Copper Steadies Near $13,300/t and Tops $6.30/lb as Lithium Drifts Lower on Ample Supply',
+   summary:'The metals underpinning the energy transition are swinging on every headline. Copper firmed toward $13,320 a tonne on the LME and around $6.34 a pound on COMEX — about 2% lower over the past month but still up roughly 16% on the year — as investor appetite for risk assets improved on a rebound in semiconductor and AI-related stocks. The prospect of finalised US tariffs on refined copper, confirmed on June 30, has pulled metal into the country and driven COMEX warehouse inventories to record highs, and analysts still see upside once the duties fully bite. Chinese lithium carbonate, meanwhile, traded near 150,000 yuan a tonne (roughly $21,000), easing on ample supply though still well above year-ago levels. The moves underline how policy and geopolitics now swing both markets even as the structural transition-demand story stays intact.',
    source:'Trading Economics / LME', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 14, 2026', impact:'low',
+   date:'July 15, 2026', impact:'low',
    headline:'Uranium Holds Near $85/lb as Utilities Lean on Long-Term Contracts',
-   summary:'Uranium spot prices held in a narrow range around $85 per pound of U3O8 into mid-July, easing to $85.15 on July 14, broadly steady since the spring after erasing a speculative surge that had carried the price above $101 in late January. Muted spot buying by utilities — which have been drawing on long-term contracts signed since the Russia-Ukraine war raised short-term supply uncertainty — has kept the market rangebound even as US domestic production climbs. The calm belies robust structural demand: Citi expects upside momentum to push prices toward $100 a pound as tight enrichment dynamics and dwindling inventories bite, and a wave of AI data-center power deals is lifting the long-run outlook for nuclear fuel. Analysts still see the current lull as a pause rather than a peak, given tight secondary supply and constrained conversion and enrichment capacity.',
+   summary:'Uranium spot prices held in a narrow range around $85 per pound of U3O8 into mid-July, edging to $85.25 on July 15, broadly steady since the spring after erasing a speculative surge that had carried the price above $100 in late January. Muted spot buying by utilities — which have been drawing on long-term contracts signed since the Russia-Ukraine war raised short-term supply uncertainty — has kept the market rangebound even as US domestic production climbs. The calm belies robust structural demand: Citi expects upside momentum to push prices toward $100 a pound as tight enrichment dynamics and dwindling inventories bite, and a wave of AI data-center power deals is lifting the long-run outlook for nuclear fuel. Analysts still see the current lull as a pause rather than a peak, given tight secondary supply and constrained conversion and enrichment capacity.',
    source:'Trading Economics / Citi', tags:['Uranium','Nuclear Fuel','Prices']},
 
   {emoji:'🛑', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
