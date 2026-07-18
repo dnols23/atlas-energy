@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$84.63</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€55.00</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.37</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.090</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$88.10</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€56.30</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.92</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.098</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,17 +168,17 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:84.63, unit:'/bbl',     chg:-0.31, pct:-0.37},
-  {label:'WTI Crude',      val:79.63, unit:'/bbl',     chg:+0.03, pct:+0.04},
-  {label:'Natural Gas TTF',val:55.00, unit:'€/MWh',    chg:+1.20, pct:+2.23},
-  {label:'Henry Hub',      val:3.37,  unit:'/MMBtu',   chg:+0.02, pct:+0.60},
-  {label:'LNG Asia JKM',   val:19.93, unit:'/MMBtu',   chg:+3.12, pct:+18.54},
-  {label:'Coal API2',      val:108.00,unit:'/t',       chg:-0.50, pct:-0.46},
-  {label:'EU Carbon ETS',  val:79.05, unit:'€/t CO₂',  chg:-2.11, pct:-2.60},
+  {label:'Brent Crude',    val:88.10, unit:'/bbl',     chg:+3.87, pct:+4.60},
+  {label:'WTI Crude',      val:83.20, unit:'/bbl',     chg:+3.55, pct:+4.46},
+  {label:'Natural Gas TTF',val:56.30, unit:'€/MWh',    chg:+1.30, pct:+2.36},
+  {label:'Henry Hub',      val:2.92,  unit:'/MMBtu',   chg:+0.06, pct:+2.03},
+  {label:'LNG Asia JKM',   val:20.30, unit:'/MMBtu',   chg:+0.37, pct:+1.86},
+  {label:'Coal API2',      val:113.90,unit:'/t',       chg:-0.90, pct:-0.78},
+  {label:'EU Carbon ETS',  val:80.50, unit:'€/t CO₂',  chg:+1.15, pct:+1.45},
   {label:'Uranium',        val:85.45, unit:'/lb U₃O₈', chg:+0.20, pct:+0.23},
-  {label:'Solar Module',   val:0.090, unit:'/W',       chg:+0.001,pct:+1.12},
+  {label:'Solar Module',   val:0.098, unit:'/W',       chg:+0.001,pct:+1.03},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
-  {label:'Lithium',        val:21100, unit:'/t',       chg:-420,  pct:-1.95},
+  {label:'Lithium',        val:21050, unit:'/t',       chg:-410,  pct:-1.91},
   {label:'Copper',         val:13650, unit:'/t',       chg:-230,  pct:-1.65},
 ];
 
@@ -224,15 +224,15 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'US launches a fifth straight day of strikes on Iran, hitting a tanker near the country\'s main export terminal as Hormuz shipping traffic slumps',
-  'Iran fires at US bases in Kuwait and Jordan; the IRGC warns \'not a single drop of oil or gas will be exported\' while Hormuz stays contested',
-  'Brent trades near $84.60 and WTI near $79.60 - up more than 6% over the month as the Iran-US conflict revives supply-disruption fears',
-  'European TTF gas jumps above €55/MWh, its highest since March 30, as Asian spot LNG (JKM) rockets ~18% in a day to near $20/MMBtu',
-  'EU to unveil its Electrification Action Plan on July 17, targeting a 46% electricity share by 2040 to halve oil use and cut gas demand two-thirds',
-  'EIA lifts its 2026 Henry Hub forecast to about $3.70/MMBtu even as record Permian output keeps US inventories above the five-year average',
-  'OPEC+ eight approve a fifth straight 188,000 b/d output hike for August as the alliance keeps unwinding its 2023 cuts',
-  'IEA July report: global oil supply rebounded 4.1 mb/d to 98.8 mb/d in June but stays ~9.4 mb/d below pre-war levels',
-  'EU carbon eases to about €79/t, still up ~12% on the year as CBAM extends the carbon price to imported steel, cement and aluminium',
+  'US completes a sixth straight night of strikes on Iran as Kuwait says Iran hit a power and water desalination plant, driving Brent to an $88.10 close',
+  'Just six vessels cross the Strait of Hormuz overnight, down from 18-22 daily earlier in July, as Iran attacks tankers to force ships through its waters',
+  'Brent settles near $88.10 (+4.6%) and WTI near $83 - up more than 7% over the month as the Iran-US conflict revives supply-disruption fears',
+  'European TTF gas climbs above €56/MWh, its highest in nearly four months, after Qatar halts plans to boost LNG output near Hormuz',
+  'Asian spot LNG (JKM) jumps ~18% toward $20/MMBtu and is up ~26% over the month as roughly a fifth of global LNG stays at risk through Hormuz',
+  'EU unveils its Electrification Action Plan targeting a 46% electricity share by 2040 to cut the fossil-fuel import bill by about €260bn a year',
+  'European Commission presents its EU ETS reform package alongside the electrification plan as carbon holds near €80/t',
+  'OPEC+ seven approve a fifth straight 188,000 b/d output hike for August as the alliance keeps unwinding its 2023 cuts',
+  'US Henry Hub spot eases near $2.92/MMBtu as record Permian output keeps inventories above the five-year average',
   'Copper slips to $6.19/lb and lithium falls to a four-month low near 151,000 yuan/t as CATL clears its Jianxiawo mine to restart',
   'Uranium holds near $85/lb as utilities lean on long-term contracts and AI data-center deals lift the long-run nuclear outlook',
   'EIA sees a record 86 GW of US capacity added in 2026 with solar, wind and storage supplying 99% of the total',
@@ -255,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🚢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 16, 2026', impact:'high',
-   headline:'US Strikes Iran for a Fifth Straight Day, Hitting a Tanker Near Its Main Export Terminal as Hormuz Traffic Slumps',
-   summary:'The US launched fresh strikes against Iran on Thursday — the fifth consecutive day of attacks — hitting an oil tanker near the country\'s main export terminal as shipping traffic slumped through the critical Strait of Hormuz. Iran retaliated by firing at American bases in Kuwait and Jordan, with Kuwait\'s armed forces reporting explosions as air defences intercepted incoming targets, and the Revolutionary Guard vowed that as long as US action in the strait continues, \'not a single drop of oil or gas will be exported from the region.\' President Trump pledged to keep intensifying the campaign until Tehran stops attacking ships and agrees to reopen the waterway, through which roughly a fifth of the world\'s seaborne oil and LNG moves. Brent settled near $84.60 and WTI near $79.60 — more than 6% higher over the month — as traders repriced the risk of a prolonged loss of Gulf barrels.',
-   source:'Bloomberg / CNN / NPR', tags:['Hormuz','Iran','Blockade']},
+   date:'July 17, 2026', impact:'high',
+   headline:'US Completes a Sixth Straight Night of Strikes on Iran as Kuwait Reports an Attack on a Power and Desalination Plant',
+   summary:'US Central Command said it had completed its sixth consecutive night of strikes against Iran, hitting dozens of military targets including logistics infrastructure and maritime capabilities, as the Persian Gulf standoff escalated. Oil jumped Friday after Kuwait said Iran attacked a power and water desalination plant, and Iran has repeatedly struck tankers over the past week as it tries to force civilian ships to transit the Strait of Hormuz through its own waters. Maritime traffic has collapsed: just six vessels were tracked crossing the strait between 18:00 GMT Thursday and 06:00 GMT Friday, against 18-22 daily crossings earlier this month, choking the corridor that normally carries roughly a fifth of the world\'s seaborne oil and LNG. Brent surged about 4.6% to settle at $88.10 a barrel — more than 7% higher over the month — as traders repriced the risk of a prolonged loss of Gulf barrels.',
+   source:'CNBC / Al Jazeera / Reuters', tags:['Hormuz','Iran','Blockade']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 6, 2026', impact:'high',
@@ -274,22 +274,22 @@ const NEWS = [
    source:'CNN / Al Jazeera / CNBC', tags:['Iran','Geopolitics','War Risk']},
 
   {emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 16, 2026', impact:'high',
-   headline:'Oil Hovers Near One-Month Highs With Brent About $84.60 as the Iran-US Conflict Grinds On',
-   summary:'Crude held near one-month highs as the US pressed its strikes on Iran to force open shipping through the Strait of Hormuz, with Brent settling around $84.63 a barrel and West Texas Intermediate near $79.63. Prices are up more than 6% over the past month and roughly 22% higher than a year ago, having reversed about a third of the second-quarter decline that followed the collapsed interim peace deal. The advance remains below April\'s near-$120 wartime peak, cushioned by the wall of floating inventory built up during June\'s truce, but analysts warn any confirmed loss of Gulf barrels could quickly drain the remaining buffer. Diesel and jet fuel stay the most exposed, squeezed by Russia\'s refinery outages even as flat crude trades rangebound between escalations.',
-   source:'Bloomberg / Fortune / Trading Economics', tags:['Oil Price','Brent','WTI']},
+   date:'July 17, 2026', impact:'high',
+   headline:'Brent Jumps 4.6% to Close at $88.10 as the Iran-US Conflict Chokes the Strait of Hormuz',
+   summary:'Crude surged to fresh one-month highs as the US pressed a sixth night of strikes on Iran and Kuwait reported an attack on a power and desalination plant, with Brent advancing about 4.6% to settle at $88.10 a barrel and West Texas Intermediate near $83.20. Prices are up more than 7% over the past month and roughly 24% higher than a year ago, having reversed much of the second-quarter decline that followed the collapsed interim peace deal. The advance remains below April\'s near-$120 wartime peak, cushioned by the wall of floating inventory built up during June\'s brief truce, but with just six vessels crossing Hormuz overnight, analysts warn any confirmed loss of Gulf barrels could quickly drain the remaining buffer. Diesel and jet fuel stay the most exposed, squeezed by Russia\'s refinery outages even as flat crude whipsaws between escalations.',
+   source:'CNBC / Al Jazeera / Trading Economics', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 16, 2026', impact:'high',
-   headline:'Asian LNG Rockets 18% in a Day Toward $20 and European Gas Tops €55 as the Gulf Crisis Bites',
-   summary:'Gas prices lurched higher as the widening Gulf conflict threatened the roughly one-fifth of global LNG that transits the Strait of Hormuz. Asian spot LNG (JKM) surged about 18% in a single session toward $19.93/MMBtu — up roughly 26% over the month — while European TTF climbed above €55/MWh for the first time since March 30 as continued US strikes on Iran heightened fears over regional flows. The EIA had already raised its Henry Hub outlook in the July Short-Term Energy Outlook, now seeing the US benchmark average about $3.70/MMBtu in 2026, up from $3.60 a month earlier, even as record Permian-led production keeps inventories above the five-year average. With Qatar\'s exports at risk and Europe still racing to refill storage that entered summer below its seasonal norm, traders warn any escalation in Gulf shipping delays could snap prices sharply higher again.',
-   source:'EIA STEO / Rigzone / Trading Economics', tags:['LNG','TTF','Henry Hub']},
+   headline:'European Gas Tops €56 to a Four-Month High and Asian LNG Nears $20 as Qatar Halts an Output Boost',
+   summary:'Gas prices lurched higher as the widening Gulf conflict threatened the roughly one-fifth of global LNG that transits the Strait of Hormuz. European TTF climbed above €56/MWh — its highest in nearly four months — after Qatar, the Middle East\'s largest LNG exporter, halted plans to boost production when one of its tankers was attacked near Hormuz, while Asian spot LNG (JKM) jumped about 18% toward $20/MMBtu and is up roughly 26% over the month. In the US, the Henry Hub spot benchmark eased near $2.92/MMBtu as record Permian-led production kept inventories above the five-year average, insulating American gas from the Gulf shock. With Qatari cargoes at risk and Europe still racing to refill storage that entered summer below its seasonal norm, traders warn any further escalation in Gulf shipping delays could snap prices sharply higher again.',
+   source:'Trading Economics / Rigzone / Reuters', tags:['LNG','TTF','Henry Hub']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 16, 2026', impact:'med',
-   headline:'EU Carbon Eases to About €79 but Holds Double-Digit Annual Gains as CBAM Widens the Price Signal',
-   summary:'EU Emissions Trading System allowances slipped to about €79 per tonne on July 16, down 2.6% on the day and little changed over the past month, easing back after a mid-year run higher on firmer power-sector demand and the cost of coal-to-gas switching in the summer heat. The benchmark is still up roughly 12% over the past year, sitting above the €60-80 band that prevailed through 2025. Europe\'s Carbon Border Adjustment Mechanism, whose definitive regime began this year with a first official price of €75.36/t published in April, is extending the carbon signal to imported steel, cement and aluminium. Analysts still expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework to keep upward pressure on carbon, with a scheduled review of the ETS directive and Market Stability Reserve firmly in focus.',
-   source:'Trading Economics / ICE', tags:['EU ETS','Carbon Price','Europe']},
+   date:'July 17, 2026', impact:'med',
+   headline:'EU Carbon Holds Near €80 as the Commission Presents Its Long-Awaited ETS Reform Package',
+   summary:'EU Emissions Trading System allowances held near €80 per tonne into mid-July, fluctuating between about €79.4 and €82 as speculative long positions built ahead of the Commission\'s reform package. On July 17 Brussels unveiled that overhaul alongside its Electrification Action Plan, aiming to turn the carbon market into a stronger investment engine for clean technologies. The benchmark is up roughly 12% over the past year, and the Carbon Border Adjustment Mechanism — whose Q2 2026 reference price was set at €75.28/t — is extending the carbon signal to imported steel, cement and aluminium. Analysts expect the tightening supply trajectory under the bloc\'s Fit-for-55 framework, together with the reform details, to keep upward pressure on carbon.',
+   source:'IndexBox / S&P Global / EEX', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 16, 2026', impact:'med',
@@ -311,8 +311,8 @@ const NEWS = [
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'July 6, 2026', impact:'high',
-   headline:'OPEC+ Eight Approve Another 188,000 b/d Hike for August as the Alliance Presses On With Unwinding Cuts',
-   summary:'Eight core OPEC+ producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria, Oman and the UAE — agreed at a virtual meeting on Sunday, July 5, to raise August output quotas by about 188,000 barrels per day, a fifth consecutive monthly increase as the alliance keeps unwinding the voluntary cuts agreed in 2023. The group framed the modest hike as a response to energy markets showing tentative signs of recovery from the fallout of the US-Iran war and the earlier Hormuz closure. Some analysts have dismissed the latest increases as \'essentially meaningless\' in the short term, since with Gulf shipping again seizing up several members still cannot pump to target, keeping much of the paper increase theoretical. The renewed flare-up in Middle East tensions now complicates the calculus.',
+   headline:'OPEC+ Seven Approve Another 188,000 b/d Hike for August as the Alliance Presses On With Unwinding Cuts',
+   summary:'Seven core OPEC+ producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman — agreed at a virtual meeting on Sunday, July 5, to raise August output quotas by about 188,000 barrels per day, a fifth consecutive monthly increase as the alliance keeps unwinding the voluntary cuts agreed in 2023. Saudi Arabia takes the largest single share, adding 62,000 b/d to reach 10.4 million b/d, with Russia matching that to 9.88 million b/d. The group framed the modest hike as a response to energy markets showing tentative signs of recovery from the fallout of the US-Iran war and the earlier Hormuz closure. Analysts have dismissed the increases as barely material in the short term, since with Gulf shipping again seizing up several members still cannot pump to target, keeping much of the paper increase theoretical.',
    source:'Al Jazeera / CNBC / Reuters', tags:['OPEC+','Supply','Quotas']},
 
   {emoji:'📈', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -360,8 +360,8 @@ const NEWS = [
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'July 17, 2026', impact:'high',
    headline:'EU Unveils Electrification Action Plan Targeting a 46% Electricity Share by 2040 to Slash Fossil Imports',
-   summary:'The European Commission unveiled its Electrification Action Plan on Friday, setting out a target for electricity to reach about 46% of the bloc\'s final energy consumption by 2040 — roughly double today\'s share — as part of a drive to cut dependence on imported oil and gas after the Middle East crisis. The Commission estimates that faster electrification could replace around two-thirds of EU gas demand and halve oil consumption by 2040, trimming the fossil-fuel import bill by some €200 billion over the period. The headline goal is slated to be embedded in a binding law within a post-2030 energy framework due later this year, alongside measures to speed grid build-out, heat pumps and electric transport. The Hormuz shock has sharpened the political case for weaning Europe off volatile hydrocarbon imports.',
-   source:'Bloomberg / Euronews / Carbon Brief', tags:['EU Policy','Electrification','Oil & Gas']},
+   summary:'The European Commission unveiled its Electrification Action Plan on Friday, July 17, setting out an indicative target for electricity to reach about 46% of the bloc\'s final energy consumption by 2040 — roughly double today\'s 23% share — as part of a drive to cut dependence on imported oil and gas after the Middle East crisis. The Commission estimates that reaching that level could cut the EU\'s fossil-fuel import bill by around €260 billion a year by 2040. The plan, presented alongside a reform of the EU carbon market, bundles lower network charges for some consumers, tax changes so electricity is not taxed more heavily than gas, wider smart-meter roll-out and support for heat pumps, EVs and batteries. The Hormuz shock has sharpened the political case for weaning Europe off volatile hydrocarbon imports.',
+   source:'European Commission / Euronews / WRI', tags:['EU Policy','Electrification','Oil & Gas']},
 
   {emoji:'🏗', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'July 6, 2026', impact:'high',
