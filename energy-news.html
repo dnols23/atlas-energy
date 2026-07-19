@@ -169,7 +169,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
   {label:'Brent Crude',    val:88.10, unit:'/bbl',     chg:+3.87, pct:+4.60},
-  {label:'WTI Crude',      val:83.20, unit:'/bbl',     chg:+3.55, pct:+4.46},
+  {label:'WTI Crude',      val:82.49, unit:'/bbl',     chg:+3.53, pct:+4.48},
   {label:'Natural Gas TTF',val:56.30, unit:'€/MWh',    chg:+1.30, pct:+2.36},
   {label:'Henry Hub',      val:2.92,  unit:'/MMBtu',   chg:+0.06, pct:+2.03},
   {label:'LNG Asia JKM',   val:20.30, unit:'/MMBtu',   chg:+0.37, pct:+1.86},
@@ -179,7 +179,7 @@ const BASE_PRICES = [
   {label:'Solar Module',   val:0.098, unit:'/W',       chg:+0.001,pct:+1.03},
   {label:'Wind Turbine',   val:0.81,  unit:'/W (OEM)', chg:-0.01, pct:-1.20},
   {label:'Lithium',        val:21050, unit:'/t',       chg:-410,  pct:-1.91},
-  {label:'Copper',         val:13650, unit:'/t',       chg:-230,  pct:-1.65},
+  {label:'Copper',         val:13720, unit:'/t',       chg:-175,  pct:-1.25},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,16 +224,17 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'US completes a sixth straight night of strikes on Iran as Kuwait says Iran hit a power and water desalination plant, driving Brent to an $88.10 close',
-  'Just six vessels cross the Strait of Hormuz overnight, down from 18-22 daily earlier in July, as Iran attacks tankers to force ships through its waters',
-  'Brent settles near $88.10 (+4.6%) and WTI near $83 - up more than 7% over the month as the Iran-US conflict revives supply-disruption fears',
+  'Just nine vessels cross the Strait of Hormuz overnight into Sunday - four flying the Iranian flag - as the US-Iran standoff over the waterway grinds into the weekend',
+  'UK Maritime Trade Operations reports two tankers hit by projectiles on the Oman transit route as Iran attacks civilian ships to force them through its waters',
+  'Brent settles near $88.10 (+4.6%) and WTI near $82.49 (+4.5%) - up more than 7% over the month as the Iran-US conflict revives supply-disruption fears',
+  'TankerTrackers estimates Iran has exported roughly 80 million barrels worth over $6bn since the blockade was briefly lifted, even as other Gulf exporters stall',
   'European TTF gas climbs above €56/MWh, its highest in nearly four months, after Qatar halts plans to boost LNG output near Hormuz',
   'Asian spot LNG (JKM) jumps ~18% toward $20/MMBtu and is up ~26% over the month as roughly a fifth of global LNG stays at risk through Hormuz',
   'EU unveils its Electrification Action Plan targeting a 46% electricity share by 2040 to cut the fossil-fuel import bill by about €260bn a year',
   'European Commission presents its EU ETS reform package alongside the electrification plan as carbon holds near €80/t',
   'OPEC+ seven approve a fifth straight 188,000 b/d output hike for August as the alliance keeps unwinding its 2023 cuts',
   'US Henry Hub spot eases near $2.92/MMBtu as record Permian output keeps inventories above the five-year average',
-  'Copper slips to $6.19/lb and lithium falls to a four-month low near 151,000 yuan/t as CATL clears its Jianxiawo mine to restart',
+  'Copper slips to $6.22/lb and lithium falls to a four-month low near 151,000 yuan/t as CATL clears its Jianxiawo mine to restart',
   'Uranium holds near $85/lb as utilities lean on long-term contracts and AI data-center deals lift the long-run nuclear outlook',
   'EIA sees a record 86 GW of US capacity added in 2026 with solar, wind and storage supplying 99% of the total',
 ];
@@ -255,10 +256,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🚢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 17, 2026', impact:'high',
-   headline:'US Completes a Sixth Straight Night of Strikes on Iran as Kuwait Reports an Attack on a Power and Desalination Plant',
-   summary:'US Central Command said it had completed its sixth consecutive night of strikes against Iran, hitting dozens of military targets including logistics infrastructure and maritime capabilities, as the Persian Gulf standoff escalated. Oil jumped Friday after Kuwait said Iran attacked a power and water desalination plant, and Iran has repeatedly struck tankers over the past week as it tries to force civilian ships to transit the Strait of Hormuz through its own waters. Maritime traffic has collapsed: just six vessels were tracked crossing the strait between 18:00 GMT Thursday and 06:00 GMT Friday, against 18-22 daily crossings earlier this month, choking the corridor that normally carries roughly a fifth of the world\'s seaborne oil and LNG. Brent surged about 4.6% to settle at $88.10 a barrel — more than 7% higher over the month — as traders repriced the risk of a prolonged loss of Gulf barrels.',
-   source:'CNBC / Al Jazeera / Reuters', tags:['Hormuz','Iran','Blockade']},
+   date:'July 19, 2026', impact:'high',
+   headline:'Hormuz Traffic Stays Choked Into the Weekend as Two Tankers Are Hit Off Oman and the US-Iran Standoff Grinds On',
+   summary:'The battle for the Strait of Hormuz ground on through the weekend, with just nine vessels tracked crossing between 18:00 GMT Saturday and 06:00 GMT Sunday — four of them flying the Iranian flag — against 18-22 daily crossings earlier this month. The UK Maritime Trade Operations centre reported two tankers hit by projectiles on the Oman transit route as Iran keeps attacking civilian ships to force them through its own waters, days after US Central Command said it had completed a sixth consecutive night of strikes on Iranian targets. TankerTrackers estimates Iran has still exported roughly 80 million barrels of crude and products worth more than $6 billion since the blockade was briefly lifted, even as other Gulf exporters struggle to move cargoes through the contested corridor that normally carries about a fifth of the world\'s seaborne oil and LNG. Brent settled Friday at $88.10 a barrel, up about 4.6% and more than 7% higher over the month, as traders priced in a prolonged loss of Gulf barrels.',
+   source:'Al Jazeera / CNBC / Reuters', tags:['Hormuz','Iran','Tankers']},
 
   {featured:true, emoji:'🔋', bgColor:'rgba(251,191,36,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 6, 2026', impact:'high',
@@ -276,7 +277,7 @@ const NEWS = [
   {emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 17, 2026', impact:'high',
    headline:'Brent Jumps 4.6% to Close at $88.10 as the Iran-US Conflict Chokes the Strait of Hormuz',
-   summary:'Crude surged to fresh one-month highs as the US pressed a sixth night of strikes on Iran and Kuwait reported an attack on a power and desalination plant, with Brent advancing about 4.6% to settle at $88.10 a barrel and West Texas Intermediate near $83.20. Prices are up more than 7% over the past month and roughly 24% higher than a year ago, having reversed much of the second-quarter decline that followed the collapsed interim peace deal. The advance remains below April\'s near-$120 wartime peak, cushioned by the wall of floating inventory built up during June\'s brief truce, but with just six vessels crossing Hormuz overnight, analysts warn any confirmed loss of Gulf barrels could quickly drain the remaining buffer. Diesel and jet fuel stay the most exposed, squeezed by Russia\'s refinery outages even as flat crude whipsaws between escalations.',
+   summary:'Crude surged to fresh one-month highs as the US pressed a sixth night of strikes on Iran and Kuwait reported an attack on a power and desalination plant, with Brent advancing about 4.6% to settle at $88.10 a barrel and West Texas Intermediate up about 4.5% to $82.49. Prices are up more than 7% over the past month and roughly 24% higher than a year ago, having reversed much of the second-quarter decline that followed the collapsed interim peace deal. The advance remains below April\'s near-$120 wartime peak, cushioned by the wall of floating inventory built up during June\'s brief truce, but with just six vessels crossing Hormuz overnight, analysts warn any confirmed loss of Gulf barrels could quickly drain the remaining buffer. Diesel and jet fuel stay the most exposed, squeezed by Russia\'s refinery outages even as flat crude whipsaws between escalations.',
    source:'CNBC / Al Jazeera / Trading Economics', tags:['Oil Price','Brent','WTI']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
@@ -293,8 +294,8 @@ const NEWS = [
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 16, 2026', impact:'med',
-   headline:'Copper Slips Toward $6.19/lb and Lithium Hits a Four-Month Low as Supply Returns',
-   summary:'The metals underpinning the energy transition softened as fresh supply loomed and Middle East tensions kept rate-hike expectations in focus. Copper fell toward $6.19 a pound (about $13,650 a tonne) — down roughly 3% over the past month though still some 12% higher on the year — as traders weighed finalised US tariffs on refined copper, confirmed on June 30, that have pulled metal into the country and driven COMEX warehouse inventories to record highs. Chinese lithium carbonate, meanwhile, dropped to about 151,000 yuan a tonne (roughly $21,100), its lowest in nearly four months, after CATL cleared security permits to restart its suspended Jianxiawo mine and Australian producers reopened the Bald Hill and Finniss projects. The moves underline how policy and geopolitics now swing both markets even as the structural transition-demand story stays intact.',
+   headline:'Copper Slips Toward $6.22/lb and Lithium Hits a Four-Month Low as Supply Returns',
+   summary:'The metals underpinning the energy transition softened as fresh supply loomed and the escalating US-Iran conflict triggered a broad selloff across metals markets. Copper fell below $6.22 a pound (about $13,720 a tonne) — a one-week low, down roughly 2.5% over the past month though still some 12% higher on the year — even as a powerful storm that struck top producer Chile, causing widespread power outages, lent some support. Traders are also weighing finalised US tariffs on refined copper, confirmed on June 30, that have pulled metal into the country and driven COMEX warehouse inventories to record highs. Chinese lithium carbonate, meanwhile, dropped to about 151,000 yuan a tonne (roughly $21,100), its lowest in nearly four months, after CATL cleared security permits to restart its suspended Jianxiawo mine and Australian producers reopened the Bald Hill and Finniss projects. The moves underline how policy and geopolitics now swing both markets even as the structural transition-demand story stays intact.',
    source:'Trading Economics / LME', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
