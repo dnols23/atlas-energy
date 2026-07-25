@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$100.39</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€61.95</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.90</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.088</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$96.78</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€64.02</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.92</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.087</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:100.39,unit:'/bbl',     chg:+6.26, pct:+6.65},
-  {label:'WTI Crude',      val:89.01, unit:'/bbl',     chg:+5.10, pct:+6.08},
-  {label:'Natural Gas TTF',val:61.95, unit:'€/MWh',    chg:+1.15, pct:+1.89},
-  {label:'Henry Hub',      val:2.90,  unit:'/MMBtu',   chg:+0.07, pct:+2.47},
-  {label:'LNG Asia JKM',   val:21.33, unit:'/MMBtu',   chg:+0.30, pct:+1.43},
-  {label:'Coal API2',      val:120.25,unit:'/t',       chg:+0.75, pct:+0.63},
-  {label:'EU Carbon ETS',  val:81.20, unit:'€/t CO₂',  chg:+0.60, pct:+0.74},
-  {label:'Uranium',        val:86.25, unit:'/lb U₃O₈', chg:+0.51, pct:+0.59},
-  {label:'Solar Module',   val:0.088, unit:'/W',       chg:-0.001,pct:-1.12},
+  {label:'Brent Crude',    val:96.78, unit:'/bbl',     chg:-3.61, pct:-3.60},
+  {label:'WTI Crude',      val:88.90, unit:'/bbl',     chg:-2.75, pct:-3.00},
+  {label:'Natural Gas TTF',val:64.02, unit:'€/MWh',    chg:+2.07, pct:+3.34},
+  {label:'Henry Hub',      val:2.92,  unit:'/MMBtu',   chg:+0.02, pct:+0.69},
+  {label:'LNG Asia JKM',   val:23.60, unit:'/MMBtu',   chg:+2.27, pct:+10.65},
+  {label:'Coal API2',      val:122.50,unit:'/t',       chg:+2.25, pct:+1.87},
+  {label:'EU Carbon ETS',  val:84.10, unit:'€/t CO₂',  chg:+2.90, pct:+3.57},
+  {label:'Uranium',        val:85.90, unit:'/lb U₃O₈', chg:-0.35, pct:-0.41},
+  {label:'Solar Module',   val:0.087, unit:'/W',       chg:-0.001,pct:-1.14},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-1.23},
-  {label:'Lithium',        val:21600, unit:'/t',       chg:-50,   pct:-0.23},
-  {label:'Copper',         val:13850, unit:'/t',       chg:+50,   pct:+0.36},
+  {label:'Lithium',        val:21500, unit:'/t',       chg:-100,  pct:-0.46},
+  {label:'Copper',         val:13890, unit:'/t',       chg:-7,    pct:-0.05},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent rockets past $100 and WTI tops $89, up about 7% on the day, after Houthis torch two Saudi oil tankers in the Red Sea',
-  'Trump vows to hold Iran \'fully responsible\' for the Houthi attacks as Saudi Arabia suspends all Red Sea oil shipments',
-  'Ukrainian drones halt Caspian Pipeline Consortium loadings at Novorossiysk, choking roughly 1% of world crude supply',
-  'Kazakhstan cuts oil output as the CPC halt backs up storage; Astana tells Kyiv to stop striking the terminal',
-  'European TTF gas holds near €62/MWh after a Russian drone barrage and the Gulf war squeeze supply',
-  'Asian spot LNG (JKM) climbs above $21/MMBtu as buyers scramble for cargoes clear of the Gulf and Red Sea',
-  'Five tankers divert in the Red Sea, two rerouting to the Suez Canal, after Houthi warnings to avoid Saudi ports',
-  'OPEC+ seven approve another 188,000 b/d hike for August, a fifth straight monthly increase',
-  'Russia\'s diesel export ban holds as Ukrainian strikes keep refinery runs pinned at multi-year lows',
+  'Brent slips back toward $97 and WTI near $89 as Pakistan and China push to revive US-Iran talks, but crude still books its biggest weekly gain in months',
+  'European gas vaults above €63/MWh to a three-year high, up more than 45% since the start of July as Gulf LNG flows thin',
+  'Mideast war enters Day 14 as Iran renews threats to the Strait of Hormuz and diplomats scramble for an off-ramp',
+  'Kazakhstan\'s oil output falls 21% with the CPC terminal still shut after Ukrainian drone strikes near Novorossiysk',
+  'Saudi Arabia resumes Red Sea oil shipments after a brief halt following Houthi attacks on two tankers',
+  'EU carbon tops €85/t, its highest since January, lifted by surging energy prices and war-risk premia',
+  'Asian spot LNG (JKM) holds in the $20s/MMBtu as buyers chase cargoes clear of the Gulf and Red Sea',
+  'OPEC+ seven confirm another 188,000 b/d hike for August, a fifth straight monthly increase',
+  'Russia\'s diesel export ban stays in force as Ukrainian strikes keep refinery runs at multi-year lows',
   'IEA: world oil demand set for its first annual decline since 2020 even as war keeps prices bid',
-  'Copper holds near $13,800/t while lithium eases toward 146,000 yuan on ample supply',
-  'EU carbon hovers near €82/t as traders position for the Commission\'s ETS reform package',
+  'Copper holds near a multi-year high as LME stocks drain and the Yangshan premium hits $115/t',
+  'Gas-plant construction booms to feed AI data centers as renewables allies push cleaner alternatives',
 ];
 
 function buildBreaking() {
@@ -255,53 +255,47 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🛢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 23, 2026', impact:'high',
-   headline:'Oil Rockets Past $100 as Houthis Torch Two Saudi Tankers and Trump Vows to Hold Iran Responsible',
-   summary:'Crude blew through triple digits after Yemen\'s Iran-aligned Houthis struck two Saudi oil tankers in the Red Sea, with Brent leaping more than 7% to around $100 a barrel — its highest since May 22 — and US WTI jumping over 6% to near $89. President Trump said Washington would hold Iran \'fully responsible\' for the attacks, which the Houthis said enforced a naval blockade on Saudi Arabia, while Riyadh suspended all oil shipments through the Red Sea. The strikes ignited fires on the tankers Encelia and Layla and prompted at least five vessels to change course, two rerouting toward the Suez Canal. Coming on top of a separate halt to Kazakh crude exports, the twin shocks have stripped the market of its remaining cushion and left traders braced for a deeper supply squeeze.',
-   source:'CNBC / Al Jazeera / TWZ', tags:['Iran','Red Sea','Oil Price']},
+   date:'July 24, 2026', impact:'high',
+   headline:'Oil Retreats From $100 as Pakistan and China Push to Revive US-Iran Talks',
+   summary:'Crude tumbled about 4% on July 24, with Brent settling near $96.78 a barrel and WTI sliding toward $89, after reports that Pakistan — with Beijing\'s backing — was pressing to restart negotiations between Washington and Tehran, raising hopes of a diplomatic off-ramp on the war\'s 14th day. Momentum traders had also flagged an overdue pause after oil\'s blistering month, in which Brent vaulted more than 30% and briefly topped $100 for the first time since spring. Even after the pullback, both benchmarks were still on course for their biggest weekly gain in months — Brent up roughly 10% — as the Red Sea and Black Sea shipping shocks kept a war premium locked into the market. Iran\'s renewed threats to the Strait of Hormuz left the détente fragile and prices hostage to the next headline.',
+   source:'CNBC / Reuters / Invezz', tags:['Iran','Diplomacy','Oil Price']},
 
   {featured:true, emoji:'🚢', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 19, 2026', impact:'high',
-   headline:'Ukrainian Drones Halt Kazakhstan\'s Main Export Pipeline, Choking ~1% of World Crude',
-   summary:'The Caspian Pipeline Consortium suspended loadings at its Black Sea terminal near Novorossiysk after Ukrainian drones struck two tankers, the Asia and the Nissos Ios, sparking a fire that was later brought under control. The CPC carries roughly 80% of Kazakhstan\'s crude exports — about 1.58 million barrels a day, or close to 1% of global supply — down a 1,510-km line from the Tengiz fields to the coast. With incoming oil backing up, Kazakhstan cut production in what officials called a \'purely technical\' move to stop storage tanks from overflowing, and Astana urged Kyiv to stop striking the terminal in what was the fifth attack on CPC facilities. The halt landed just as Red Sea and Gulf shipping disruptions were already draining the market\'s buffer.',
-   source:'Bloomberg / Reuters / Astana Times', tags:['Kazakhstan','CPC','Supply']},
+   date:'July 23, 2026', impact:'high',
+   headline:'Kazakh Oil Output Falls 21% as the CPC Terminal Stays Shut After Drone Strikes',
+   summary:'Kazakhstan\'s crude production dropped about 21% after the Caspian Pipeline Consortium suspended loadings at its Black Sea terminal near Novorossiysk, with output at the giant Tengiz field more than halved. Ukrainian drones had struck two tankers, the Asia and the Nissos Ios, forcing the halt on a route that carries 80-90% of Kazakh exports — roughly 1.5 million barrels a day, or close to 1% of world supply. The consortium said all facilities remained intact and ready to resume shipments \'as soon as conditions normalise,\' but gave no timeline as Astana urged Kyiv to stop striking the terminal. With the Gulf and Red Sea already snarled, the loss of a third major artery stripped the market of its last cushion.',
+   source:'S&P Global / Astana Times / Times of Central Asia', tags:['Kazakhstan','CPC','Supply']},
 
   // REGULAR
-  {emoji:'🔥', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'July 22, 2026', impact:'high',
-   headline:'Houthis Claim Two Saudi Tankers and Impose a Red Sea Blockade, Rerouting Global Shipping',
-   summary:'Yemen\'s Houthi movement said it attacked two Saudi oil tankers with ballistic and cruise missiles and drones, declaring the vessels had violated a naval blockade the group imposed on the kingdom in the Red Sea. Saudi Arabia confirmed one tanker, the Encelia, was left ablaze at the bow, though all crew were reported safe. Owners responded fast: five tankers changed course on the day of the attack, with two signalling the Suez Canal as their new destination after the Houthis warned ships to steer clear of Saudi ports. The assault opens a second maritime front alongside the Strait of Hormuz risk, threatening to lengthen voyages around Africa and keep a war premium locked into freight and crude alike.',
-   source:'Al Jazeera / U.S. News / Reuters', tags:['Houthis','Red Sea','Shipping']},
-
   {emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 23, 2026', impact:'high',
-   headline:'Brent Tops $100 and WTI Nears $89 as a Two-Chokepoint Shock Reignites the Risk Premium',
-   summary:'Oil posted one of its sharpest single-day jumps of the year on July 23, with Brent surging more than 7% to about $100.39 a barrel — the highest since May 22 — and WTI climbing over 6% to near $89.01. Both benchmarks have added roughly a fifth of their value in a month as the Middle East conflict roared back and shipping lanes seized: the Houthi strike on Saudi tankers in the Red Sea landed just days after Ukrainian drones forced Kazakhstan to suspend crude exports through the CPC terminal. With two separate supply arteries hit at once, traders say the floating inventory built during June\'s calm is draining fast, leaving prices hostage to the next shipping headline.',
-   source:'Vantage / Forbes / Investing.com', tags:['Brent','WTI','Oil Price']},
+   date:'July 24, 2026', impact:'high',
+   headline:'Brent Books Its Biggest Weekly Gain in Months Even After Sliding From $100',
+   summary:'Oil is closing one of its most turbulent weeks of the year, with Brent set for a gain of about 10% and WTI up nearly 9% despite Friday\'s roughly 4% retreat to near $96.78 and $89 respectively. The benchmark had powered above $100 for the first time since May as a Houthi strike on Saudi tankers and Ukrainian drone attacks on Kazakhstan\'s export pipeline hit two supply arteries at once. Friday\'s reversal came as diplomacy flickered back to life and momentum indicators signalled an overdue pause. Traders say the floating inventory built during June\'s calm is draining fast, leaving prices unusually sensitive to each shipping and ceasefire headline.',
+   source:'Invezz / Offshore Technology / Reuters', tags:['Brent','WTI','Oil Price']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 22, 2026', impact:'high',
-   headline:'European Gas Holds Near €62 as a Russian Drone Barrage and the Gulf War Squeeze Supply',
-   summary:'European TTF gas traded around €62/MWh in late July after a Russian drone attack on July 17 layered a fresh risk premium onto a market already rattled by the widening Gulf war. Benchmark TTF had climbed steadily through the month — from about $16.4/MMBtu on July 8 to $19.2 after the strike — as unplanned Norwegian maintenance and Hormuz worries slowed the flow of gas just when Europe needs to refill storage before winter. Asian spot LNG (JKM) tracked the same anxiety, rising above $21/MMBtu as buyers scrambled for cargoes clear of the Gulf and Red Sea. Storage lagging the seasonal norm leaves the winter supply math unusually tight.',
+   date:'July 24, 2026', impact:'high',
+   headline:'European Gas Vaults Above €63 to a Three-Year High as Gulf LNG Flows Thin',
+   summary:'Dutch TTF gas climbed above €63/MWh on July 24 — its highest level since January 2023 — capping a surge of more than 45% since the start of the month. Escalating US-Iran tensions and reduced LNG flows from the Persian Gulf have intensified Europe\'s competition with Asian buyers for scarce cargoes just as the bloc races to refill storage before winter. Asian spot LNG (JKM) tracked the same anxiety, pushing into the $20s/MMBtu. With storage lagging the seasonal norm and Hormuz risk unresolved, the winter supply math has turned unusually tight.',
    source:'Trading Economics / Global LNG Hub / Reuters', tags:['TTF','LNG','Gas Price']},
 
-  {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 22, 2026', impact:'med',
-   headline:'Copper Holds Near $13,800 While Lithium Eases Toward 146,000 Yuan on Ample Supply',
-   summary:'The metals underpinning the energy transition stayed detached from the oil spike, with tariffs and inventories setting the tone. LME copper traded near $13,800 a tonne and is up around 12% on the year, as finalised US tariffs on refined copper pulled metal into the country and lifted COMEX warehouse stocks. Lithium kept sliding: Chinese carbonate spot prices eased toward about 146,000 yuan a tonne (roughly $21,600) on persistent oversupply and mixed EV demand, down modestly from earlier in the month. The split shows how policy and stockpiles now swing both markets in the near term even as the structural transition-demand story stays intact.',
-   source:'LME / SMM / MetalCharts', tags:['Copper','Lithium','Metals']},
-
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 20, 2026', impact:'med',
-   headline:'EU Carbon Hovers Near €82 as Traders Position for the ETS Reform',
-   summary:'EU Emissions Trading System allowances fluctuated between about €79.4 and €82 a tonne through July, holding above €80 for much of the month as speculative long positions built ahead of the Commission\'s reform package; the peak so far was €81.8 on July 6. Brussels is widely expected to pair the ETS overhaul with its electrification push, and analysts are split on whether a looser post-2030 trajectory would ease or merely defer the market\'s structural tightening. The Carbon Border Adjustment Mechanism, meanwhile, is extending the carbon signal to imported steel, cement and aluminium. The benchmark remains firm as the bloc leans harder on carbon pricing to fund the transition.',
-   source:'IndexBox / GMK Center / S&P Global', tags:['EU ETS','Carbon Price','Europe']},
+   date:'July 23, 2026', impact:'med',
+   headline:'EU Carbon Tops €85, Its Highest Since January, on Energy Prices and War Risk',
+   summary:'EU Emissions Trading System allowances climbed to their highest level since January, with the benchmark rising to about €82.67 on July 23 and intraday prints topping €85 a tonne. The rally has been powered by surging gas and power prices and a broad war-risk bid across energy markets, as well as speculative positioning ahead of the Commission\'s looming ETS reform package. Brussels is expected to pair the overhaul with its electrification drive, while the Carbon Border Adjustment Mechanism extends the carbon signal to imported steel, cement and aluminium. The firm price underscores how heavily the bloc now leans on carbon pricing to fund the transition.',
+   source:'Trading Economics / Carbon Credits / S&P Global', tags:['EU ETS','Carbon Price','Europe']},
+
+  {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'July 24, 2026', impact:'med',
+   headline:'Copper Holds Near a Multi-Year High as LME Stocks Drain and Lithium Slips',
+   summary:'Copper hovered around $6.30 a pound (near $13,900 a tonne) on July 24, up roughly 9% on the year, as exchange inventories thinned sharply and the Yangshan import premium hit a multi-year high of about $115 a tonne. Traders kept rushing metal to the United States ahead of a potential tariff on refined copper, while smelter maintenance and thin scrap supply in China tightened the market further. Lithium moved the other way, with Chinese carbonate spot prices easing toward about 146,000 yuan a tonne (roughly $21,500) on persistent oversupply. The split shows how tariffs and stockpiles now drive the transition metals in the near term.',
+   source:'LME / Trading Economics / SMM', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 23, 2026', impact:'low',
+   date:'July 22, 2026', impact:'low',
    headline:'Uranium Steady Near $86/lb as Utilities Lean on Long-Term Contracts',
-   summary:'Uranium spot prices held around $86 per pound of U3O8 in late July, with industry consultant TradeTech assessing the spot market unchanged at $86.25 and other trackers near $85.8. The market has been broadly stable since spring after erasing a speculative surge that carried the price above $100 in late January, as muted spot buying by utilities — drawing on long-term contracts — keeps it rangebound. The calm belies robust structural demand: a widening wave of nuclear-for-AI deals to revive and co-locate reactors with data centers is lifting the long-run outlook, and some analysts still see prices pushing back toward $100 as tight enrichment and thin inventories bite.',
-   source:'TradeTech / Uranium Tracker / MetalCharts', tags:['Uranium','Nuclear Fuel','Prices']},
+   summary:'Uranium spot prices held around $86 per pound of U3O8 in late July, broadly stable since spring after erasing a speculative surge that carried the price above $101 in late January. Muted spot buying by utilities — drawing on long-term contracts — keeps the market rangebound even as term prices stay firm. The calm belies robust structural demand: a widening wave of nuclear-for-AI deals to revive and co-locate reactors with data centers is lifting the long-run outlook. Some analysts still see prices pushing back toward $100 as tight enrichment and thin inventories bite.',
+   source:'TradeTech / Investing News / MetalCharts', tags:['Uranium','Nuclear Fuel','Prices']},
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'July 6, 2026', impact:'high',
@@ -324,7 +318,7 @@ const NEWS = [
   {emoji:'⛴', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'July 20, 2026', impact:'med',
    headline:'Red Sea Disruption Reroutes Cargoes and Sends Buyers Rushing for US LNG',
-   summary:'The renewed seizing of Red Sea and Gulf shipping is lengthening voyages and stalling flows just as Europe and Asia compete to refill gas storage before winter, threatening to keep the market tight well into 2027. With tankers diverting around Africa and Qatari LNG exposed to Hormuz risk, spot LNG in Asia (JKM) held above $21/MMBtu while European TTF pushed toward €62 as the supply cushion thinned. The strain is redirecting investment: importers are accelerating deals to lock in US cargoes from a supplier insulated from the Middle East, fuelling a fresh wave of American LNG offtake agreements. Analysts say the balance has been reset by geopolitics for years, not months.',
+   summary:'The renewed seizing of Red Sea and Gulf shipping is lengthening voyages and stalling flows just as Europe and Asia compete to refill gas storage before winter, threatening to keep the market tight well into 2027. With tankers diverting around Africa and Qatari LNG exposed to Hormuz risk, spot LNG in Asia (JKM) pushed into the $20s/MMBtu while European TTF vaulted toward a three-year high as the supply cushion thinned. The strain is redirecting investment: importers are accelerating deals to lock in US cargoes from a supplier insulated from the Middle East, fuelling a fresh wave of American LNG offtake agreements. Analysts say the balance has been reset by geopolitics for years, not months.',
    source:'S&P Global / QC Intel / Reuters', tags:['LNG','Shipping','Gas Supply']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -335,8 +329,8 @@ const NEWS = [
 
   {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'July 15, 2026', impact:'high',
-   headline:'AI Data-Center Power Demand on Track to Double by 2027 as Nuclear Deals Multiply',
-   summary:'The scramble to power artificial intelligence is reshaping electricity demand, with global data-center consumption projected to double by 2027 and AI workloads responsible for more than 60% of that growth. Hyperscalers are turning to nuclear at scale: Microsoft has locked in the Three Mile Island Unit 1 restart via a 20-year deal, Amazon has backed X-energy for a fleet of small modular reactors, Google has committed to Kairos Power, and Meta is pursuing up to 6.6 GW across multiple partnerships. Yet analysts caution the reactors cannot arrive fast enough — Goldman Sachs estimates 85-90 GW of new nuclear would be needed to cover data-center growth by 2030, with under 10% of that available globally in time. The gap is pulling gas, and the grid, into the breach.',
+   headline:'AI Data-Center Power Demand on Track to Double by 2030 as Nuclear Deals Multiply',
+   summary:'The scramble to power artificial intelligence is reshaping electricity demand, with global data-center consumption projected to double by 2030 and AI workloads responsible for the bulk of that growth. Hyperscalers are turning to nuclear at scale: Microsoft has locked in the Three Mile Island Unit 1 restart via a 20-year deal, Amazon has backed X-energy for a fleet of small modular reactors, Google has committed to Kairos Power, and Meta has signed a 20-year PPA with Vistra for more than 2,600 MW of nuclear output. Yet analysts caution the reactors cannot arrive fast enough — Goldman Sachs estimates 85-90 GW of new nuclear would be needed to cover data-center growth by 2030, with under 10% of that available globally in time. The gap is pulling gas, and the grid, into the breach.',
    source:'IEA / Brookings / Goldman Sachs', tags:['AI','Data Centers','Nuclear']},
 
   {emoji:'🌡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -347,9 +341,9 @@ const NEWS = [
 
   {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 16, 2026', impact:'high',
-   headline:'Renewables Keep Setting Records as Solar Output Leaps Nearly 30% Year-on-Year',
-   summary:'Renewable power is delivering its fastest growth on record, with solar the standout as its output jumps close to 30% year-on-year, according to industry data highlighted this week. Solar and storage are setting fresh generation records across major markets, and plunging equipment costs continue to drive the fastest capacity additions the industry has ever seen. But the buildout is colliding with the grid: data centers are pushing regulators into faster decisions, and capacity markets warn that wires, storage, flexible demand and firm capacity are all needed to turn record generation into reliable power in the hours that matter. The transition is now as much about integration as it is about installation.',
-   source:'IRENA / Global Electricity', tags:['Renewables','Solar','Grid']},
+   headline:'Renewables Set Records but a Gas-Plant Boom Rises to Feed AI',
+   summary:'Renewable power is delivering its fastest growth on record, with solar the standout as output jumps close to 30% year-on-year and clean sources now supplying nearly a fifth of global electricity. Yet the buildout can no longer keep pace with AI: tech giants are demanding power at such speed and scale that wind and solar construction cannot keep up, triggering the biggest-ever wave of new gas-fired plants and moves to keep aging coal units running past retirement. Renewable-energy allies are pushing back, arguing storage, geothermal and demand flexibility can meet the load faster and cleaner. The clash marks a new phase of the transition, in which integration and firm capacity — not installation — set the pace.',
+   source:'IRENA / Washington Times / Global Electricity', tags:['Renewables','Gas','AI']},
 
   {emoji:'🔆', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 10, 2026', impact:'med',
@@ -380,6 +374,12 @@ const NEWS = [
    headline:'US Wind and Solar Clear the July 4 Tax-Credit Cliff Under the One Big Beautiful Bill',
    summary:'A pivotal deadline landed over the holiday weekend: under the One Big Beautiful Bill Act, wind and solar projects generally had to begin construction by July 4, 2026 to lock in the full Section 45Y and 48E production and investment tax credits, or else be in service by the end of 2027 to still qualify. Developers rushed to bank eligibility, while battery storage keeps its credits for projects starting by 2035 but faces tighter foreign-content rules. Analysts warn the phase-out could lift solar costs by up to 55% and onshore wind by up to 63% for projects that miss the window, reshaping US pipelines even as record data-center demand keeps pulling clean capacity onto the grid.',
    source:'Utility Dive / DOE / Canary Media', tags:['US Policy','Tax Credits','Solar']},
+
+  {emoji:'🔥', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
+   date:'July 22, 2026', impact:'high',
+   headline:'Houthis Blockade the Red Sea and Saudi Arabia Briefly Halts Oil Shipments',
+   summary:'Yemen\'s Houthi movement said it struck two Saudi oil tankers with missiles and drones, declaring the vessels had violated a naval blockade it imposed on the kingdom in the Red Sea and leaving the tanker Encelia ablaze at the bow, though all crew were reported safe. Saudi Arabia temporarily suspended oil shipments through the Bab al-Mandeb strait before announcing it would resume exports once the coalition put fresh protection measures in place. At least five tankers changed course on the day of the attack, two signalling the Suez Canal as their new destination. The assault opened a second maritime front alongside the Hormuz risk, threatening to lengthen voyages and keep a war premium in freight and crude.',
+   source:'Al Jazeera / Gulf News / Reuters', tags:['Houthis','Red Sea','Shipping']},
 ];
 
 // ─────────────────────────────────────────────
