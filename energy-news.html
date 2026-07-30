@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$89.53</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€58.20</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.94</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$88.51</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€57.90</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.28</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.084</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:89.53, unit:'/bbl',     chg:+2.56, pct:+2.94},
-  {label:'WTI Crude',      val:84.90, unit:'/bbl',     chg:+2.81, pct:+3.42},
-  {label:'Natural Gas TTF',val:58.20, unit:'€/MWh',    chg:+1.30, pct:+2.28},
-  {label:'Henry Hub',      val:2.94,  unit:'/MMBtu',   chg:+0.05, pct:+1.73},
-  {label:'LNG Asia JKM',   val:21.30, unit:'/MMBtu',   chg:+0.90, pct:+4.41},
-  {label:'Coal API2',      val:130.40,unit:'/t',       chg:+1.50, pct:+1.16},
-  {label:'EU Carbon ETS',  val:81.40, unit:'€/t CO₂',  chg:-0.60, pct:-0.73},
-  {label:'Uranium',        val:86.50, unit:'/lb U₃O₈', chg:+0.40, pct:+0.46},
+  {label:'Brent Crude',    val:88.51, unit:'/bbl',     chg:+0.42, pct:+0.48},
+  {label:'WTI Crude',      val:80.90, unit:'/bbl',     chg:+0.35, pct:+0.43},
+  {label:'Natural Gas TTF',val:57.90, unit:'€/MWh',    chg:+0.30, pct:+0.52},
+  {label:'Henry Hub',      val:3.28,  unit:'/MMBtu',   chg:+0.07, pct:+2.18},
+  {label:'LNG Asia JKM',   val:21.33, unit:'/MMBtu',   chg:-0.05, pct:-0.23},
+  {label:'Coal API2',      val:130.20,unit:'/t',       chg:-0.20, pct:-0.15},
+  {label:'EU Carbon ETS',  val:80.60, unit:'€/t CO₂',  chg:-0.50, pct:-0.62},
+  {label:'Uranium',        val:85.80, unit:'/lb U₃O₈', chg:+0.30, pct:+0.35},
   {label:'Solar Module',   val:0.084, unit:'/W',       chg:-0.001,pct:-1.18},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-1.23},
-  {label:'Lithium',        val:20300, unit:'/t',       chg:-160,  pct:-0.78},
-  {label:'Copper',         val:13860, unit:'/t',       chg:-90,   pct:-0.65},
+  {label:'Lithium',        val:20900, unit:'/t',       chg:-150,  pct:-0.71},
+  {label:'Copper',         val:13820, unit:'/t',       chg:-130,  pct:-0.93},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,19 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Oil jumps for a second day: Brent tops $89 and WTI nears $85 as US-Iran strikes resume after a brief pause',
-  'Iran fires ballistic missiles at US forces as the US and Saudi Arabia strike Tehran-backed sites in Iraq',
-  'Brent climbed 3.4% to $86.97 on July 28 before extending gains — analysts call it escalation within a fragile truce',
-  'Hormuz traffic slides again as renewed fighting threatens the strait\'s reopening; roughly a fifth of world oil at risk',
-  'European gas firms toward €58/MWh as the renewed Gulf flare-up revives the LNG-supply war premium',
-  'Wood Mackenzie: EU gas storage at risk of ending the injection season below 70%, lowest since 2018',
-  'OPEC+ seven approve another ~188,000 b/d hike for August, a fifth straight monthly increase',
-  'IEA: global oil supply rebounded 4.1 mb/d to 98.8 mb/d in June as Gulf flows partly recovered',
-  'IEA flags a first annual drop in world oil demand since 2020 — and warns of a looming 2027 glut',
-  'US utility-scale solar on track for a record 43.4 GW in 2026, up ~60% on last year as AI load surges',
-  'Copper holds near a US record on tariff front-running as lithium sinks to a five-month low',
-  'Nvidia and Valar Atomics fire up the first micro-reactor-powered AI data center in a Utah demo',
-  'US data-center power demand seen jumping from ~41 GW in 2026 to ~66 GW in 2027',
+  'Oil steadies near $88 as an uneasy US-Iran truce wobbles: Brent swung 8.7% lower on July 27 before rebounding on fresh strikes',
+  'US military says it intercepted a surprise Iranian attack on its forces as Iran-backed militias drone Saudi oil sites for a second day',
+  'Iran signals it will hold fire while the US pause endures; Araghchi holds talks with Saudi and Omani envoys on reopening Hormuz',
+  'Strait of Hormuz still effectively shut: only ~10 ships transited on July 23 versus ~88 a day normally, convoys under naval escort',
+  'OPEC+ set to pause its monthly output hikes after September, leaving about 2 mb/d of cuts in place through end-2026',
+  'OPEC+ approves a fifth straight increase — roughly 188,000 b/d for August — and agrees a mechanism to reset production baselines',
+  'European gas hovers near €58/MWh as EU storage sits at just 55.7%, about 20 points below the seasonal norm',
+  'IEA: global electricity demand set to grow 3.6% in 2026 and 3.8% in 2027 as EU and Japan spot power prices jump over 30% year on year',
+  'US solar generation outstripped coal for the first time ever in May 2026 as the country heads for 90+ GW of new capacity',
+  'Copper holds near a US record around $6.27/lb on tariff front-running as lithium slides to a four-month low',
+  'IEA flags a looming 2027 oil glut even as it sees the first annual demand decline since 2020',
+  'Uranium steady near $86/lb as hyperscaler nuclear power deals keep term prices at 18-year highs',
 ];
 
 function buildBreaking() {
@@ -257,58 +256,58 @@ const NEWS = [
   // FEATURED
   {featured:true, emoji:'🛢', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'July 29, 2026', impact:'high',
-   headline:'Oil Jumps for a Second Day as US-Iran Strikes Resume After a Brief Pause',
-   summary:'Crude climbed again on July 29, with Brent near $89.53 a barrel, after a fragile pause in the US-Iran conflict broke down and both sides traded fresh blows. Iran launched a ballistic-missile attack on American forces while the United States, alongside Saudi Arabia, struck Tehran-backed sites in Iraq — reviving fears for the Strait of Hormuz just as traffic had begun to recover. The move extended a 3.4% jump on July 28 that had carried Brent to $86.97 and WTI to $82.09, unwinding the de-escalation rally of the prior sessions. Analysts framed the flare-up as an escalation within a fragile truce rather than a full collapse of the ceasefire, but warned that any sustained disruption to the strait — a conduit for about a fifth of the world\'s oil — could quickly push Brent back above $100.',
+   headline:'Oil Steadies Near $88 as the Fragile US-Iran Truce Wobbles Again',
+   summary:'Crude settled around $88 a barrel late in the week after a whipsaw few days that captured the market\'s fragile calm. Brent had tumbled about 8.7% on July 27 to close near $88.36 when Iran signalled it would suspend attacks so long as a US pause in hostilities held, only to rebound as the US military said it intercepted a surprise Iranian strike on its forces and Iran-backed militias droned Saudi oil facilities in the Eastern Province for a second straight day. Iranian Foreign Minister Abbas Araghchi held separate talks with his Saudi and Omani counterparts on restoring security in the strait, and President Trump touted \'good talks\' with Tehran while warning strikes could resume if diplomacy fails. Traders kept a war premium in the price, wary that any fresh blow to Hormuz — a conduit for about a fifth of the world\'s oil — could send Brent back toward $100.',
    source:'CNBC / Reuters / Al Jazeera', tags:['Iran','Oil Price','Hormuz']},
 
   {featured:true, emoji:'🚢', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'July 28, 2026', impact:'high',
-   headline:'Renewed Gulf Strikes Threaten the Strait of Hormuz Reopening',
-   summary:'Just as tankers had started returning to the Strait of Hormuz, renewed exchanges of fire between the United States and Iran sent maritime traffic sliding again, threatening to derail the reopening of the world\'s most important oil chokepoint. Roughly a fifth of global oil and LNG passes through the strait, and shipowners and insurers pulled back sharply after Iran struck vessels earlier in the month and the latest attacks reignited safety fears. Qatar has still not fully revived output at Ras Laffan, the world\'s largest LNG complex, after the July 7 strike on the tanker Al-Rekayyat forced QatarEnergy to halt a planned ramp-up. With winter storage lagging, buyers are again scrambling to lock in US cargoes insulated from Gulf risk as the war premium rebuilds.',
-   source:'Al Jazeera / Bloomberg / Reuters', tags:['Hormuz','LNG','Shipping']},
+   headline:'Strait of Hormuz Stays Effectively Shut as Convoys Creep Through Under Escort',
+   summary:'The Strait of Hormuz remained all but closed to normal commerce in late July, with only about 10 vessels transiting on July 23 against a pre-crisis norm nearer 88 a day, and the few ships that moved doing so in naval-escorted convoys. A Saudi products tanker was reported struck by Houthi forces on July 28, days after being flagged as a target, extending a wave of attacks that has killed seafarers and driven war-risk insurance sharply higher. Roughly 20 million barrels a day of oil normally passes through the chokepoint, and Qatar has still not fully revived output at Ras Laffan, the world\'s largest LNG complex, after an earlier strike forced a halt to its ramp-up. With winter storage lagging, buyers keep scrambling to lock in US cargoes insulated from Gulf risk as the supply premium rebuilds.',
+   source:'Al Jazeera / Bloomberg / Lloyd\'s List', tags:['Hormuz','LNG','Shipping']},
 
   // REGULAR
   {emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 29, 2026', impact:'high',
-   headline:'Brent Tops $89 as the War Premium Roars Back for a Second Session',
-   summary:'Oil resumed its wild swings as Brent pushed to about $89.53 and WTI to roughly $85 on July 29, reversing a slide that had briefly returned prices to pre-war levels. The rebound was driven entirely by geopolitics: fresh missile exchanges between Washington and Tehran, and US-Saudi strikes on Iran-backed sites in Iraq, revived fears of a Hormuz shutdown. Refinery margins and diesel cracks firmed alongside crude as traders rebuilt the risk premium they had stripped out days earlier. With OPEC+ still lifting quotas into a market several members cannot physically supply, analysts said the price would stay hostage to each shipping and ceasefire headline into August.',
-   source:'CNBC / Bloomberg / Reuters', tags:['Brent','WTI','Oil Price']},
+   date:'July 30, 2026', impact:'high',
+   headline:'Brent Whipsaws Around $88 as the Truce Premium Refuses to Deflate',
+   summary:'Oil kept swinging on every ceasefire and shipping headline, with Brent trading roughly $86.80-$89.50 and settling near $88.51 while WTI hovered around $81 a barrel. The benchmark had shed nearly 9% on July 27 as Iran signalled restraint, then clawed the loss back within 48 hours on renewed strikes — a pattern analysts say leaves a stubborn geopolitical premium baked into the curve. The unusually wide Brent-WTI spread reflects a Gulf still gummed up while US barrels flow freely. With OPEC+ lifting quotas into a market several members cannot physically supply, forecasters see prices staying hostage to headlines even as some banks pencil in a slide toward $70 by the fourth quarter if the truce holds.',
+   source:'CNBC / Bloomberg / Trading Economics', tags:['Brent','WTI','Oil Price']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 29, 2026', impact:'high',
-   headline:'European Gas Firms Toward €58/MWh as the Gulf Flare-Up Revives the LNG Premium',
-   summary:'Dutch TTF gas firmed back toward €58/MWh as renewed US-Iran fighting rekindled fears for Gulf LNG flows, only days after the benchmark had plunged more than 8% on hopes the conflict was winding down. Spot prices remain well above €55/MWh and up sharply since mid-June, when the strait crisis effectively threatened a fifth of global LNG supply. Asian spot LNG (JKM) firmed back above $21/MMBtu as buyers competed with Europe for scarce cargoes, with no significant new supply expected for nine to twelve months and fresh Qatari capacity not due before the second half of 2027. Analysts warned prices would stay volatile until Hormuz traffic durably normalises.',
-   source:'Trading Economics / ICIS / Reuters', tags:['TTF','LNG','Gas Price']},
+   date:'July 28, 2026', impact:'high',
+   headline:'European Gas Hovers Near €58/MWh as Storage Refill Lags and Gulf Risk Lingers',
+   summary:'Dutch TTF gas held near €58/MWh in late July, easing about 9% from its mid-month spike but still sharply higher than in June as Hormuz risk and a sluggish storage refill kept the market on edge. The front-month contract had climbed roughly 29% month-to-date by July 17 on Gulf-shipping fears and hot weather before pulling back on truce hopes. Asian spot LNG (JKM) held around $21/MMBtu as buyers competed with Europe for scarce cargoes, with no major new supply due for nine to twelve months and fresh Qatari capacity not expected before late 2027. Analysts warned prices would stay volatile until Hormuz traffic durably normalises and injections into European storage catch up.',
+   source:'Trading Economics / ICIS / Global LNG Hub', tags:['TTF','LNG','Gas Price']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 27, 2026', impact:'med',
-   headline:'EU Carbon Hovers Near €82 as Traders Await the Details of the ETS Overhaul',
-   summary:'EU Emissions Trading System allowances fluctuated between about €79 and €82 a tonne through July, holding above €80 for much of the month as speculative long positions built ahead of the Commission\'s reform package. The firmness has been powered by strong gas and power prices and a broad war-risk bid across energy markets, keeping carbon tightly coupled to the wider energy complex. On July 17 Brussels unveiled a major overhaul of the ETS, pairing changes to the post-2030 cap with an electrification drive, while the Carbon Border Adjustment Mechanism extends the carbon signal to imported steel, cement and aluminium. Allowances eased marginally late in the month as the market digested the proposal.',
-   source:'Trading Economics / IndexBox / GMK Center', tags:['EU ETS','Carbon Price','Europe']},
+   date:'July 24, 2026', impact:'med',
+   headline:'EU Carbon Holds in the €80 Range as Traders Digest the ETS Overhaul',
+   summary:'EU Emissions Trading System allowances traded between about €79 and €82 a tonne through July, holding around €80 as the market weighed the Commission\'s reform package against strong gas and power prices and a broad war-risk bid. The high for the month, close to €82, was set on July 6 before allowances drifted lower into the back half of the month. Carbon stays tightly coupled to the wider energy complex, and the July 17 overhaul — pairing changes to the post-2030 cap with an electrification drive — has so far kept speculative positioning cautious. The Carbon Border Adjustment Mechanism, meanwhile, continues to extend the carbon signal to imported steel, cement and aluminium.',
+   source:'Trading Economics / GMK Center / S&P Global', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 28, 2026', impact:'med',
-   headline:'Copper Holds Near a US Record on Tariff Front-Running as Lithium Sinks to a 5-Month Low',
-   summary:'Copper hovered near a US record in late July even after slipping to about $6.29 a pound, as traders kept rushing metal to the United States ahead of a phased tariff on refined imports set to begin in January 2027, leaving Comex at a premium of nearly $600 a tonne over London. Lithium moved the other way, with carbonate in China falling below 145,000 yuan a tonne — near $20,300 a tonne and its lowest in five months — as ample global supply met soft demand and Beijing signalled an end to tax breaks that had fuelled a race to the bottom among battery makers. The transition metals are now driven by tariffs, stockpiles and battery demand far more than by the Middle East war.',
+   date:'July 29, 2026', impact:'med',
+   headline:'Copper Holds Near a US Record on Tariff Front-Running as Lithium Sinks to a 4-Month Low',
+   summary:'Copper hovered near a US record even after slipping to about $6.27 a pound on July 29, up nearly 36% year on year, as traders kept rushing metal to the United States ahead of a phased tariff on refined imports set to begin in January 2027, leaving Comex at a fat premium over London. Lithium moved the other way, with carbonate in China falling to around 151,000 yuan a tonne — near $20,900 and its lowest in nearly four months — as ample global supply met soft demand. The transition metals are now driven far more by tariffs, stockpiles and battery demand than by the Middle East war, even as the wider energy complex stays gripped by Gulf risk.',
    source:'Trading Economics / SMM / Mining.com', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'July 23, 2026', impact:'low',
    headline:'Uranium Steady Near $86/lb as Term Prices Sit at 18-Year Highs',
-   summary:'Uranium spot prices held around $86 per pound of U3O8 in late July, broadly stable since spring even as the long-term price reached about $93 a pound — its highest in more than 18 years. Muted spot buying by utilities, which lean on long-term contracts, keeps the market rangebound while term prices stay firm. The calm belies robust structural demand as a widening wave of nuclear-for-AI deals and advanced-reactor startups compete for fuel. Some analysts still see prices pushing back toward $100 as tight enrichment capacity and thin inventories bite.',
-   source:'TradeTech / ANS Nuclear Newswire / MetalCharts', tags:['Uranium','Nuclear Fuel','Prices']},
+   summary:'Uranium spot prices held around $85.80 per pound of U3O8 in late July, broadly stable since spring even as the long-term price sat near multi-year highs. Muted spot buying by utilities, which lean on long-term contracts, keeps the market rangebound while term prices stay firm. The calm belies robust structural demand as a widening wave of nuclear-for-AI deals — hyperscalers signing power purchase agreements to fuel data centres — and advanced-reactor startups compete for fuel. Some analysts still see prices pushing back toward $100 as tight enrichment capacity and thin inventories bite.',
+   source:'TradeTech / carboncredits.com / MetalCharts', tags:['Uranium','Nuclear Fuel','Prices']},
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 6, 2026', impact:'high',
-   headline:'OPEC+ Seven Approve Another ~188,000 b/d Hike for August, a Fifth Straight Increase',
-   summary:'Seven core OPEC+ producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman — agreed at a July 5 virtual meeting to raise August output quotas by about 188,000 barrels per day, a fifth consecutive monthly increase as the alliance keeps unwinding the cuts agreed in 2023. The additions build on similar hikes for June and July, and the group pledged flexibility to increase, pause or reverse the unwinding to stabilise the market. Analysts called the latest step barely material: with Gulf and Black Sea shipping seizing up, several members cannot physically pump to target, leaving much of the paper barrel theoretical. The group meets again in early August to weigh the trajectory for September.',
-   source:'Al Jazeera / CNBC / Rigzone', tags:['OPEC+','Quotas','Supply']},
+   date:'July 29, 2026', impact:'high',
+   headline:'OPEC+ Set to Pause Its Monthly Output Hikes After September',
+   summary:'OPEC+ is now expected to pause its run of monthly production increases after September, according to reporting late in the month, halting the incremental hikes that had unwound the 2023 cuts month after month. The pause would leave roughly 2 million barrels a day of cuts in place through the end of 2026, a signal that the group wants to steady prices as an uneasy US-Iran truce keeps the market jittery. The move follows a fifth straight increase of about 188,000 b/d approved for August and a newly agreed mechanism to set fresh production baselines. Analysts note that with Gulf and Black Sea shipping still snarled, much of the paper barrel is theoretical — several members cannot physically pump to target.',
+   source:'Argus / CNBC / Reuters', tags:['OPEC+','Quotas','Supply']},
 
   {emoji:'🏭', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 27, 2026', impact:'high',
-   headline:'Wood Mackenzie Warns EU Gas Storage Risks Ending Below 70% Before Winter',
-   summary:'Europe is heading into the winter of 2026/27 with its thinnest gas buffer in years, Wood Mackenzie warned, with storage at risk of finishing the injection season below 70% of capacity against a five-year average nearer 90%. Sites sat just above 54% in late July — historically low for the time of year — after the region entered the injection season with its least gas in store since 2018. High prices, the Hormuz crisis choking off a fifth of global LNG, and revived Asian competition for cargoes have all slowed the refill, and Brussels has relaxed the mandatory storage target from 90% to 80% under ACER flexibility provisions. With no major new LNG supply due for nine to twelve months, analysts warned the continent could inch toward a genuine winter squeeze.',
-   source:'Wood Mackenzie / Columbia CGEP / Euronews', tags:['Europe','Gas Storage','Winter']},
+   date:'July 28, 2026', impact:'high',
+   headline:'EU Gas Storage Sits at Just 55.7%, Some 20 Points Below the Seasonal Norm',
+   summary:'Europe is heading toward winter with its thinnest gas buffer in years: underground storage stood at about 55.7% of capacity on July 28, against a five-year seasonal norm nearer 75%, with July injections running at a six-year low. High prices, the Hormuz crisis choking off a fifth of global LNG, and revived Asian competition for cargoes have all slowed the refill. Brussels has relaxed the mandatory storage target from 90% to 80% under ACER flexibility provisions, and ACER warns the bloc will need markedly higher LNG imports to get there by November 1. With no major new LNG supply due for nine to twelve months, analysts warn the continent could inch toward a genuine winter squeeze.',
+   source:'ACER / AGSI+ / TASS', tags:['Europe','Gas Storage','Winter']},
 
   {emoji:'📉', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'July 15, 2026', impact:'high',
@@ -317,9 +316,9 @@ const NEWS = [
    source:'IEA / EIA / Reuters', tags:['IEA','Oil Supply','Glut']},
 
   {emoji:'⛴', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'July 24, 2026', impact:'med',
-   headline:'Thermal Coal Firms Toward a One-Month High as Dry Weather Snarls Indonesian Exports',
-   summary:'Thermal coal firmed to around $130 a tonne in late July, approaching its highest level in a month after touching a four-month low in late June, as supply concerns in Indonesia supported prices. Dry weather disrupted coal-barging operations along the Barito River in Kalimantan, a key transport artery for the world\'s largest thermal coal exporter, raising the prospect of shipment delays and tighter near-term availability. Gains were capped by subdued demand in China, where high inventories and cautious utility buying continued to weigh on imports. The bounce came as gas-price strength and Red Sea reroutings nudged some Asian buyers back toward coal to hedge LNG supply risk through winter.',
+   date:'July 29, 2026', impact:'med',
+   headline:'Thermal Coal Steadies Near $130 as Indonesian Supply Snags Meet Soft China Demand',
+   summary:'Thermal coal held around $130 a tonne in late July, near a one-month high after touching a four-month low in late June, as supply concerns in Indonesia supported prices. Dry weather disrupted coal-barging operations along the Barito River in Kalimantan, a key artery for the world\'s largest thermal coal exporter, raising the prospect of shipment delays and tighter near-term availability. Gains were capped by subdued demand in China, where high inventories and cautious utility buying continued to weigh on imports. The steadiness came as gas-price strength and Red Sea reroutings nudged some Asian buyers back toward coal to hedge LNG supply risk through winter.',
    source:'Trading Economics / Montel / Reuters', tags:['Coal','Indonesia','Supply']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -328,23 +327,23 @@ const NEWS = [
    summary:'The IEA expects global oil demand to contract in 2026 — its first annual fall since the depths of the pandemic in 2020 — as a war that repeatedly disrupts Gulf and Black Sea shipping destroys consumption across Asia and beyond. The agency sees the sharpest weakness earlier in the year easing before demand returns to growth late in 2026, then a modest rebound in 2027 that still runs well below historical trend. The forecast leaves the IEA and OPEC — which trims its own view month after month — far apart on the 2026 balance, capturing the paradox of a live war keeping prices bid even as the underlying demand signal weakens.',
    source:'IEA / CNBC / Argus', tags:['Oil Demand','IEA','Recession']},
 
-  {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'July 24, 2026', impact:'high',
-   headline:'US Data-Center Power Demand Set to Jump From 41 GW in 2026 to 66 GW in 2027',
-   summary:'The scramble to power artificial intelligence is reshaping US electricity demand, with data-center load projected to climb from about 31 GW in 2025 to 41 GW in 2026 and 66 GW in 2027, according to industry trackers. Data centers\' share of US peak summer power demand is seen rising from 4.1% in 2025 to 5.3% this year and 8.5% next, and the Department of Energy projects they could reach up to 12% of US electricity demand by 2028. Renewables currently meet about 27% of the power consumed by data centers worldwide and are growing fast enough to cover nearly half of the anticipated demand growth to 2030 — but hyperscalers are still turning to nuclear and gas at scale to close the gap, pulling firm capacity into the breach.',
-   source:'Belfer Center / 24/7 Wall St. / DOE', tags:['AI','Data Centers','Power Demand']},
+  {emoji:'⚡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'July 22, 2026', impact:'high',
+   headline:'IEA Sees Global Electricity Demand Accelerating to 3.6% Growth This Year',
+   summary:'Global electricity demand is set to grow 3.6% in 2026 and a further 3.8% in 2027, up from 3% in 2025, the IEA said in its Electricity Mid-Year Update, as industry, cooling, electric vehicles and data centres keep power consumption on a firm upward path. The war-driven jump in gas prices has pushed generation costs higher in many regions — average spot power prices in the EU and Japan rose more than 30% year on year in the second quarter — even as low-emissions sources set fresh records. The agency flagged growing affordability strains, noting household electricity bills in many countries have been rising faster than incomes since 2019.',
+   source:'IEA / Reuters / Utility Dive', tags:['Electricity','Demand','IEA']},
 
-  {emoji:'⚛', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'July 24, 2026', impact:'med',
-   headline:'Nvidia and Valar Atomics Demonstrate the First Micro-Reactor-Powered AI Data Center',
-   summary:'Nvidia and nuclear startup Valar Atomics said they had run an AI data-center demonstration powered by a micro nuclear reactor at a site in Utah, connecting Valar\'s Ward250 reactor to an Nvidia Blackwell chip in what the companies billed as a first. The pair are studying a roughly 30-megawatt, nearly waterless data center pairing the reactor\'s helium cooling with Nvidia\'s water-efficient cooling technology. The Ward250 went critical in mid-June and is generating about 100 kilowatts. The tie-up is the latest in a widening wave of nuclear-for-AI deals — from hyperscaler offtake agreements to SMR startups — as tech firms chase round-the-clock, weather-independent power that solar and wind alone cannot yet guarantee, even as critics question SMR economics.',
-   source:'Bloomberg / Deseret News / gCaptain', tags:['Nuclear','AI','Data Centers']},
+  {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'July 29, 2026', impact:'high',
+   headline:'Renewable Growth Is Trailing the AI Data-Center Demand Surge, Analysts Warn',
+   summary:'The scramble to power artificial intelligence is outrunning the pace of clean-energy construction, analysts warned, with US data-center electricity demand projected to grow about 133% by 2030 to some 426 TWh and Goldman Sachs seeing global data-center power up 165% by 2030 versus 2023. US data-center load is on track to climb from roughly 41 GW in 2026 toward 66 GW in 2027, and the Department of Energy sees data centres reaching as much as 12% of US electricity by 2028. With wind and solar unable to keep up in the regions where load is concentrating, hyperscalers are turning to nuclear and gas at scale — triggering a wave of new gas plants and moves to keep aging coal units running past retirement.',
+   source:'NaturalNews / Goldman Sachs / DOE', tags:['AI','Data Centers','Power Demand']},
 
   {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'July 24, 2026', impact:'high',
-   headline:'US Solar Heads for a Record 43.4 GW in 2026 as AI Load Pulls It Onto the Grid',
-   summary:'US developers are on track to add a record 43.4 GW of new utility-scale solar capacity in 2026 — a 60% jump over 2025 and more than 12 GW above 2024\'s prior record — as booming data-center demand keeps pulling clean megawatts onto the grid. American solar farms have already logged their highest monthly output on record, up about 21% year on year, and in Europe solar delivered a record 52 TWh in June, a quarter of EU electricity. The rush comes even as the July 4 tax-credit deadline reshapes the US pipeline, with developers front-loading projects to lock in eligibility. Analysts say solar and storage remain the fastest capacity to build, but firming that variable output is now the transition\'s central challenge.',
-   source:'24/7 Wall St. / Ember / EIA', tags:['Solar','Renewables','AI']},
+   date:'July 29, 2026', impact:'high',
+   headline:'US Solar Outstripped Coal for the First Time Ever as the Grid Adds 90+ GW',
+   summary:'US monthly solar generation exceeded coal-fired output for the first time in the country\'s history in May 2026, a milestone underscoring how fast clean megawatts are reshaping the grid. Wind and solar together made up about 96% of all new US generating capacity added this year — the highest share for renewables on record — as the country heads toward more than 90 GW of new capacity in 2026, including roughly 51 GW of solar, 26 GW of battery storage and 13 GW of wind. Surging data-center demand keeps pulling those projects onto the grid even as the July 4 tax-credit deadline reshapes the pipeline. Analysts say solar and storage remain the fastest capacity to build, but firming that variable output is now the transition\'s central challenge.',
+   source:'Seeking Alpha / EIA / TheCoolDown', tags:['Solar','Renewables','Grid']},
 
   {emoji:'🏭', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 16, 2026', impact:'high',
@@ -353,15 +352,15 @@ const NEWS = [
    source:'Ember / Euronews / Global Electricity', tags:['Renewables','Solar','AI']},
 
   {emoji:'🔆', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'July 11, 2026', impact:'med',
+   date:'July 10, 2026', impact:'med',
    headline:'Global Module Prices Hold Near $0.085/W as a Polysilicon Glut Persists',
-   summary:'Solar module prices stayed at rock-bottom levels, with China FOB Tier-1 panels quoted around $0.084-0.095 per watt as a persistent polysilicon glut leaves ample slack worldwide; polysilicon still trades at just $8-12 per kilogram. Inventories topped 570,000 tonnes earlier in 2026 — equivalent to roughly 300 GW of latent module supply — keeping downward pressure on prices even as the sector edges toward a bottom. US-assembled modules remained a world apart, holding steady near $0.30/W as tariffs, Foreign Entity of Concern rules and a fresh petition against South Korean imports kept domestic pricing elevated. The gap underscores how policy, not manufacturing cost, now sets solar prices across regions.',
-   source:'pv magazine / Anza / IMARC', tags:['Solar','Module Prices','Polysilicon']},
+   summary:'Solar module prices stayed at rock-bottom levels, with China FOB Tier-1 panels quoted around $0.085-0.095 per watt as a persistent polysilicon glut leaves ample slack worldwide; polysilicon still trades at just $8-12 per kilogram. Inventories topped 570,000 tonnes earlier in 2026 — equivalent to roughly 300 GW of latent module supply — keeping downward pressure on prices even as the sector edges toward a bottom. US-assembled modules remained a world apart, holding steady near $0.30/W as tariffs, Foreign Entity of Concern rules and a fresh petition against imports kept domestic pricing elevated. The gap underscores how policy, not manufacturing cost, now sets solar prices across regions.',
+   source:'pv magazine USA / Bernreuter / IMARC', tags:['Solar','Module Prices','Polysilicon']},
 
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'July 17, 2026', impact:'high',
    headline:'Brussels Unveils an ETS Overhaul Paired With an Electrification Push to Cut Fossil Imports',
-   summary:'The European Commission on July 17 unveiled a reform of its Emissions Trading System alongside a wider electrification drive aimed at weaning the bloc off imported oil and gas after the Middle East crisis exposed its exposure to volatile hydrocarbon flows. The package bundles changes to the post-2030 emissions cap with measures to lower network charges, rebalance taxes so electricity is not penalised versus gas, and speed the roll-out of heat pumps, EVs, batteries and data-center capacity. Officials frame electrification as the durable answer to a fossil import bill that swelled again as Brent vaulted back above $100, and the Carbon Border Adjustment Mechanism will extend the carbon signal to imported steel, cement and aluminium. The month\'s shipping shocks have only sharpened the political case for accelerating the shift.',
+   summary:'The European Commission on July 17 unveiled a reform of its Emissions Trading System alongside a wider electrification drive aimed at weaning the bloc off imported oil and gas after the Middle East crisis exposed its exposure to volatile hydrocarbon flows. The package bundles changes to the post-2030 emissions cap with measures to lower network charges, rebalance taxes so electricity is not penalised versus gas, and speed the roll-out of heat pumps, EVs, batteries and data-center capacity. Officials frame electrification as the durable answer to a fossil import bill that swelled again during the Gulf crisis, and the Carbon Border Adjustment Mechanism will extend the carbon signal to imported steel, cement and aluminium. The month\'s shipping shocks have only sharpened the political case for accelerating the shift.',
    source:'European Commission / Euronews / OPIS', tags:['EU Policy','Electrification','ETS']},
 
   {emoji:'🏗', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
@@ -372,9 +371,9 @@ const NEWS = [
 
   {emoji:'🔥', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'July 28, 2026', impact:'high',
-   headline:'Hormuz Traffic Slides Again as the Houthi Red Sea Threat Persists',
-   summary:'Traffic through the Strait of Hormuz slid back toward a standstill as renewed fighting shattered the brief pause, after Lloyd\'s List Intelligence had counted just 78 transits between July 13 and July 26 against 174 the week before, with one 24-hour stretch seeing a single general-cargo ship and zero tankers. At least a dozen tankers were struck in and around the strait during the month, killing at least two seafarers, as Iran attacked vessels off Oman and the UAE. Tehran\'s Houthi allies kept a second front open, firing on Saudi tankers in the Red Sea and declaring a maritime embargo on Riyadh, with missiles targeting Jizan and Yanbu. Insurers and traders warn a Red Sea risk premium on Gulf shipping could persist well beyond any eventual ceasefire.',
-   source:'USNI News / Al Jazeera / Lloyd\'s List', tags:['Hormuz','Red Sea','Shipping']},
+   headline:'Houthi Red Sea Threat Keeps a Second Front Open on Gulf Shipping',
+   summary:'As traffic through the Strait of Hormuz slid back toward a standstill, Tehran\'s Houthi allies kept a second front open, striking a Saudi products tanker on July 28 and pressing a declared maritime embargo on Riyadh with missiles aimed at Red Sea terminals. At least a dozen tankers were struck in and around the Gulf during the month, killing seafarers, as Iran attacked vessels off Oman and the UAE. Shipowners diverting around the Red Sea face longer voyages and soaring war-risk premiums, and insurers and traders warn that a persistent risk premium on Gulf and Red Sea shipping could linger well beyond any eventual ceasefire. The dual-chokepoint threat keeps a floor under freight rates and the oil price alike.',
+   source:'USNI News / Al Jazeera / Windward', tags:['Hormuz','Red Sea','Shipping']},
 ];
 
 // ─────────────────────────────────────────────
