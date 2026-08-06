@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$79.30</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€54.80</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.69</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.093</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$79.08</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€53.20</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.78</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.092</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:79.30, unit:'/bbl',     chg:-2.47, pct:-3.02},
-  {label:'WTI Crude',      val:75.40, unit:'/bbl',     chg:-2.30, pct:-2.96},
-  {label:'Natural Gas TTF',val:54.80, unit:'€/MWh',    chg:-1.85, pct:-3.27},
-  {label:'Henry Hub',      val:2.69,  unit:'/MMBtu',   chg:+0.01, pct:+0.42},
-  {label:'LNG Asia JKM',   val:19.80, unit:'/MMBtu',   chg:-1.20, pct:-5.71},
-  {label:'Coal API2',      val:132.00,unit:'/t',       chg:+1.50, pct:+1.15},
-  {label:'EU Carbon ETS',  val:80.20, unit:'€/t CO₂',  chg:-0.30, pct:-0.37},
-  {label:'Uranium',        val:86.63, unit:'/lb U₃O₈', chg:+0.10, pct:+0.12},
-  {label:'Solar Module',   val:0.093, unit:'/W',       chg:+0.001,pct:+1.09},
+  {label:'Brent Crude',    val:79.08, unit:'/bbl',     chg:-0.42, pct:-0.53},
+  {label:'WTI Crude',      val:74.69, unit:'/bbl',     chg:-0.52, pct:-0.69},
+  {label:'Natural Gas TTF',val:53.20, unit:'€/MWh',    chg:-1.60, pct:-2.92},
+  {label:'Henry Hub',      val:2.78,  unit:'/MMBtu',   chg:+0.02, pct:+0.72},
+  {label:'LNG Asia JKM',   val:18.75, unit:'/MMBtu',   chg:-0.55, pct:-2.85},
+  {label:'Coal API2',      val:130.50,unit:'/t',       chg:-1.00, pct:-0.76},
+  {label:'EU Carbon ETS',  val:80.60, unit:'€/t CO₂',  chg:+0.40, pct:+0.50},
+  {label:'Uranium',        val:86.63, unit:'/lb U₃O₈', chg:+0.13, pct:+0.15},
+  {label:'Solar Module',   val:0.092, unit:'/W',       chg:-0.001,pct:-1.07},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-1.23},
-  {label:'Lithium',        val:19600, unit:'/t',       chg:+200,  pct:+1.03},
-  {label:'Copper',         val:14570, unit:'/t',       chg:+305,  pct:+2.14},
+  {label:'Lithium',        val:21700, unit:'/t',       chg:+300,  pct:+1.40},
+  {label:'Copper',         val:14150, unit:'/t',       chg:+180,  pct:+1.29},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,16 +224,16 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Oil slides for a third straight session — Brent below $80 and WTI near $75, down more than 10% on the week — on optimism the Strait of Hormuz will reopen',
-  'Trump calls his talks proposal Tehran\'s \'final opportunity\'; Iran denies direct US talks but says Oman-brokered efforts to widen Hormuz shipping are progressing',
+  'Iran and Oman reach a Strait of Hormuz navigation agreement — oil holds a three-day drop, Brent near $79 and WTI near $75',
+  'Trump and Bessent say a US-Iran Hormuz deal could land \'today or tomorrow\'; Rubio cites \'progress made but not finality\'',
   'OPEC+ approves a ~188,000 b/d September hike, completing the rollback of 2023\'s voluntary cuts, and is expected to pause further increases in Q4',
-  'European TTF gas eases toward €55/MWh as Hormuz shipping fears fade, though storage sits only ~55% full ahead of winter',
-  'Qatar resumes LNG through Hormuz — tanker Al Areesh bound for Pakistan — with more than a dozen carriers idling off Ras Laffan',
+  'EU winter gas buffer hits an 18-year seasonal low near 57% full as Brussels eyes extra LNG imports to refill before November',
+  'European TTF gas eases toward €53/MWh as Hormuz shipping fears fade, but storage lags the pace needed for winter',
+  'Copper touches $14,178/t on the LME — the highest since May 13 — as tariff uncertainty pulls metal into the US and Comex hits a record',
   'US Strategic Petroleum Reserve holds just 308 million barrels — the lowest level since 1983',
-  'Copper hits a two-month high near $6.61/lb, up ~46% on the year, on tight Chinese stocks and AI-driven demand',
   'Solar out-generated both coal and wind in the US in May for the first time on record — 47,147 GWh versus 45,119 GWh of coal',
-  'EU carbon holds near €80/t as traders digest the Commission\'s July 17 ETS reform and electrification package',
-  'IEA sees global electricity demand growing ~3.6% in 2026 as AI data-center power use heads toward doubling by 2030',
+  'EU carbon trades above €80/t as the market prices in the Commission\'s July 17 ETS reform and a structural deficit ahead',
+  'IEA sees global electricity demand growing ~3.6% in 2026 as AI data-center power use heads toward 1,000+ TWh by 2030',
   'Uranium holds near $87/lb U3O8 as hyperscaler nuclear deals tighten a structurally short market',
   'US developers plan a record 86 GW of new capacity in 2026 — 51% solar, 28% batteries and 14% wind',
 ];
@@ -255,10 +255,10 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'🕊', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 5, 2026', impact:'high',
-   headline:'Oil Plunges More Than 10% on the Week as Traders Bet the Strait of Hormuz Will Reopen',
-   summary:'Crude extended its slide for a third straight session on August 5, with Brent falling below $80 and WTI dropping toward $75 a barrel — a weekly loss of more than 10% — as the war-risk premium that drove July\'s rally rapidly unwound. President Trump said his latest proposal represented Tehran\'s \'final opportunity\' for a deal and voiced confidence the Strait of Hormuz would reopen soon, while Iran denied that any direct US talks were under way but said Oman-brokered efforts to widen shipping through the strait were making progress. Qatar\'s resumption of LNG cargoes through Hormuz and OPEC+\'s completed supply restoration added to the bearish tone. The move reflects relief rather than resolution: with the détente still unratified and Iran disputing the terms, analysts warn prices will stay hostage to political rhetoric until Gulf traffic durably normalises.',
-   source:'Trading Economics / The National / Gulf News', tags:['Hormuz','Iran','De-escalation']},
+   date:'August 6, 2026', impact:'high',
+   headline:'Oil Holds a Three-Day Drop as Iran and Oman Reach a Strait of Hormuz Navigation Deal',
+   summary:'Crude held its three-session slide on August 6 after Iran said it had reached an agreement with Oman on the coordinates of a proposed shipping route through the Strait of Hormuz, with the two sides working on a joint statement. Brent slipped about 0.5% to around $79 a barrel and WTI eased toward $74.70, both trading inside the range set after June\'s interim peace plan and down more than 10% from July\'s war-driven peak. US officials fanned the optimism: Treasury Secretary Bessent said \'there is a chance we may have a deal\' within hours and President Trump teased an announcement this week, though Secretary of State Rubio cautioned there was \'progress made but not finality.\' The deal would give Tehran more say over vessels transiting the strait and is expected to hinge on the US easing its blockade of Iranian ports — leaving traders braced for a durable return of Gulf barrels even as the fine print stays unsettled.',
+   source:'AGBI / France 24 / CNBC', tags:['Hormuz','Iran','De-escalation']},
 
   {featured:true, emoji:'🛢', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 2, 2026', impact:'high',
@@ -268,28 +268,28 @@ const NEWS = [
 
   // REGULAR
   {emoji:'📉', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 5, 2026', impact:'high',
-   headline:'Brent Drops Below $80 and WTI Near $75 as the War Premium Keeps Unwinding',
-   summary:'Oil kept surrendering July\'s gains through the first week of August, with Brent falling under $80 a barrel and WTI sliding toward $75 as the war-risk premium faded and the weekly loss stretched past 10%. WTI had shed more than 5% on August 4 alone as markets read Trump\'s push for Iran talks and hopes of a Hormuz reopening as decisively bearish. The reversal unwound a month in which crude had staged its strongest run since March, driven higher by US-Iran tensions and the effective closure of the strait. Improving Gulf shipping conditions and OPEC+\'s completed supply restoration pulled barrels back toward fundamentals. J.P. Morgan still sees Brent averaging in the mid-$80s in the third quarter before easing toward the high $70s by year-end if disruptions keep fading.',
+   date:'August 6, 2026', impact:'high',
+   headline:'Brent Holds Near $79 and WTI Near $75 as the War Premium Keeps Unwinding',
+   summary:'Oil kept surrendering July\'s gains through the first week of August, with Brent settling near $79 a barrel and WTI around $74.70 as the war-risk premium faded and the weekly loss stretched past 10%. WTI had shed roughly 5% in each of the two sessions before August 5 as markets read the push for a US-Iran deal and hopes of a Hormuz reopening as decisively bearish, and prices held their drop after Iran and Oman agreed a navigation route on August 6. The reversal unwound a month in which crude had staged its strongest run since March, driven higher by Gulf tensions and the effective closure of the strait. Improving shipping conditions and OPEC+\'s completed supply restoration pulled barrels back toward fundamentals. J.P. Morgan still sees Brent averaging in the mid-$80s in the third quarter before easing toward the high $70s by year-end if disruptions keep fading.',
    source:'Trading Economics / J.P. Morgan / Gulf News', tags:['Brent','WTI','Oil Price']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 5, 2026', impact:'high',
-   headline:'European Gas Eases Toward €55/MWh as Hormuz Fears Fade, but Storage Lags',
-   summary:'Dutch TTF gas eased toward €55/MWh in the first week of August, extending its retreat from a volatile July as shipping conditions through the Strait of Hormuz improved and Qatar resumed cargoes. The pullback follows a roughly 36% surge in July driven by fears over Gulf LNG supply. The relief is tempered by fundamentals: European storage sites ended last month only about 55% full, lagging the pace needed to hit pre-winter targets before the November heating season. Asian spot LNG (JKM) slipped back toward $20/MMBtu from a near three-year high above $21, while US Henry Hub softened to around $2.69. Analysts caution prices will stay headline-driven until Gulf traffic durably normalises and European injections catch up.',
-   source:'Trading Economics / ICIS / Yahoo Finance', tags:['TTF','LNG','Gas Price']},
+   headline:'European Gas Eases Toward €53/MWh as Hormuz Fears Fade, but Storage Sits at an 18-Year Low',
+   summary:'Dutch TTF gas eased toward €53/MWh in the first week of August, retreating from a 3-1/2-year high of €63.7/MWh reached on July 24 as shipping through the Strait of Hormuz improved and Gulf LNG fears drained away. The relief is tempered by fundamentals: EU storage stood only about 57% full on August 2, the lowest early-August level in records back to at least 2009, and net injections must reach roughly 68 bcm to hit even the relaxed 80% pre-winter target. Asian spot LNG (JKM) slipped back toward $18.75/MMBtu from a near three-year high, while US Henry Hub firmed to around $2.78. With the buffer so thin, analysts warn TTF will stay headline-driven and vulnerable to any cold snap until European injections catch up.',
+   source:'Trading Economics / Bloomberg / ICIS', tags:['TTF','LNG','Gas Price']},
 
   {emoji:'🇪🇺', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'July 31, 2026', impact:'med',
-   headline:'EU Carbon Holds Near €80 as Traders Digest the ETS Reform Package',
-   summary:'EU Emissions Trading System allowances held near €80 a tonne through late July, trading in a roughly €78-82 band as the market absorbed the Commission\'s July 17 reform proposal and firm gas and power prices lent support. Speculative long positions built through the month in anticipation of the overhaul, which pairs changes to the post-2030 cap with a wider electrification drive. Carbon stayed tightly coupled to the broader energy complex through the war-risk episode, while the Carbon Border Adjustment Mechanism continued to extend the price signal to imported steel, cement and aluminium. Some analysts still flag a path toward the high €80s if the reform tightens allowance supply as expected.',
-   source:'Sandbag / CarbonCredits / IndexBox', tags:['EU ETS','Carbon Price','Europe']},
+   date:'August 3, 2026', impact:'med',
+   headline:'EU Carbon Trades Above €80 as the Market Prices In a Structural Deficit',
+   summary:'EU Emissions Trading System allowances pushed back above €80 a tonne at the start of August, after the December contract had touched a six-month high of €86.6 on July 22 and then corrected. The market is increasingly pricing in the Commission\'s July 17 reform proposal, which analysts say will open a structural allowance deficit over the next few years by tightening the post-2030 cap while pairing it with a wider electrification drive. Firm gas and power prices lent additional support, keeping carbon tightly coupled to the broader energy complex, while the Carbon Border Adjustment Mechanism extended the price signal to imported steel, cement and aluminium. A survey of nine analysts still pegs the 2026 average near €80, with upside if the overhaul bites as expected.',
+   source:'GMK Center / Sandbag / TradingEconomics', tags:['EU ETS','Carbon Price','Europe']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 4, 2026', impact:'med',
-   headline:'Copper Climbs to a Two-Month High as AI Demand and Tight Stockpiles Bite',
-   summary:'Copper climbed toward $6.61 a pound — roughly $14,570 a tonne — on August 4, its highest in two months and up about 46% year on year as AI-driven electrification and tight Chinese stockpiles kept the market on edge. Shortages of copper concentrate and scrap in top consumer China lifted treatment charges and market spreads, while positioning for possible US tariffs on refined metal kept Comex at a premium to London and Shanghai inventories stayed depleted. Lithium firmed on the other side of the battery trade, with Northeast Asian carbonate near $21,700 a tonne as J.P. Morgan lifted its Q4 target to $18,000, citing resilient storage demand. The transition metals are now driven far more by tariffs, stockpiles and battery demand than by Gulf headlines.',
-   source:'Trading Economics / MetalCharts / CME Group', tags:['Copper','Lithium','Metals']},
+   date:'August 6, 2026', impact:'med',
+   headline:'Copper Hits a 12-Week High as Tariff Bets Pull Metal Into the US',
+   summary:'Benchmark three-month copper on the LME touched $14,178 a tonne in early trade on August 6, its highest since May 13, before easing to around $14,100 as tariff uncertainty kept drawing metal into the United States. The front-month Comex contract hit a record on the day, maintaining a wide premium over London, while Shanghai inventories stayed depleted and tight concentrate and scrap in top consumer China lifted treatment charges and spreads. Lithium firmed on the other side of the battery trade, with Northeast Asian carbonate near $21,700 a tonne on resilient EV and grid-storage demand, though forecasters remain split on how far the recovery runs. The transition metals are now driven far more by tariffs, stockpiles and battery demand than by Gulf headlines.',
+   source:'Business Recorder / SMM / CME Group', tags:['Copper','Lithium','Metals']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 4, 2026', impact:'low',
@@ -334,9 +334,9 @@ const NEWS = [
    source:'IEA / Reuters / Electrek', tags:['Electricity','Demand','IEA']},
 
   {emoji:'🤖', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'July 24, 2026', impact:'high',
+   date:'August 4, 2026', impact:'high',
    headline:'AI Data-Center Load Keeps Outrunning Clean Power as Nuclear Deals Multiply',
-   summary:'Big Tech\'s scramble to power AI continues to outpace clean-energy construction, and the IEA expects data-center electricity use to roughly double between 2024 and 2030. Meta, Microsoft, Google and Amazon have locked in a widening set of nuclear commitments — from Meta\'s January agreements for up to 6.6 GW of firm 24/7 power, including a 20-year Vistra PPA and forward deals with TerraPower and Oklo, to a fresh 20-year Constellation contract that begins in mid-2027. Yet most of that firm power arrives only in the early 2030s, and where load concentrates fastest, wind and solar cannot keep pace alone, triggering new gas plants and delayed coal retirements. Critics note SMR electricity still looks costlier than solar and wind, keeping the economics contested.',
+   summary:'Big Tech\'s scramble to power AI continues to outpace clean-energy construction: the IEA expects data-center electricity use to climb from about 460 TWh in 2024 to more than 1,000 TWh by 2030. Meta, Microsoft, Google and Amazon have locked in over $50 billion of nuclear commitments — from Meta\'s January deals for up to 6.6 GW of firm power to Google\'s August selection of Tennessee for a Kairos Power advanced reactor due to feed its data centers around 2030. Yet most of that firm supply arrives only in the early 2030s, and where load concentrates fastest, wind and solar cannot keep pace alone, triggering new gas plants and delayed coal retirements. Critics note SMR electricity still looks costlier than solar and wind, keeping the economics contested.',
    source:'IEA / Bulletin of the Atomic Scientists / AOL', tags:['AI','Nuclear','Data Centers']},
 
   {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
@@ -370,10 +370,10 @@ const NEWS = [
    source:'Utility Dive / DOE / Canary Media', tags:['US Policy','Tax Credits','Solar']},
 
   {emoji:'🤝', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 4, 2026', impact:'high',
-   headline:'US-Iran Talks Stay Murky as Trump Presses a \'Final Opportunity\' and Tehran Denies Direct Contact',
-   summary:'The fragile US-Iran détente turned murkier in early August as President Trump described his latest proposal as Tehran\'s \'final opportunity\' for a deal and voiced confidence the Strait of Hormuz would reopen soon. Iran publicly denied that any direct talks with Washington were under way, though it said Oman-brokered efforts to widen shipping through the strait were making progress. The interim 14-point framework first floated in June — which codifies the tenuous ceasefires, reopens Hormuz and points toward sanctions waivers that could let Iran sell oil again — remains unratified and disputed. Traders still read a durable return of Iranian barrels as a bearish weight on crude just as OPEC+ finishes restoring its own cuts, but the conflicting signals leave implementation, and the extra barrels, far from certain.',
-   source:'Gulf News / The National / CSIS', tags:['US-Iran','Sanctions','Diplomacy']},
+   date:'August 6, 2026', impact:'high',
+   headline:'Iran and Oman Agree a Hormuz Navigation Route as a Broader US-Iran Deal Nears',
+   summary:'Iran said on August 6 that it had reached agreement with Oman on the coordinates of a shipping route through the Strait of Hormuz, with a joint statement being drafted — the clearest sign yet that Gulf traffic is edging back toward normal. US officials signalled a wider deal was close: Treasury Secretary Bessent said \'there is a chance we may have a deal\' within hours and President Trump teased an announcement this week, while Secretary of State Rubio warned of \'progress made but not finality.\' The arrangement, likely contingent on Washington easing its blockade of Iranian ports, would give Tehran more say over vessels transiting the strait and points toward sanctions waivers that could let Iran sell more oil. Traders read a durable return of Iranian barrels as a bearish weight on crude just as OPEC+ finishes restoring its cuts, though the terms remain unratified.',
+   source:'AGBI / CNBC / NBC News', tags:['US-Iran','Sanctions','Diplomacy']},
 ];
 
 // ─────────────────────────────────────────────
