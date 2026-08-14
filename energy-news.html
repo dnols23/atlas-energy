@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$88.37</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€60.57</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.66</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$87.11</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€61.02</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.78</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.088</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:88.37, unit:'/bbl',     chg:-0.54, pct:-0.61},
-  {label:'WTI Crude',      val:79.85, unit:'/bbl',     chg:+0.35, pct:+0.44},
-  {label:'Natural Gas TTF',val:60.57, unit:'€/MWh',    chg:+1.84, pct:+3.13},
-  {label:'Henry Hub',      val:2.66,  unit:'/MMBtu',   chg:-0.03, pct:-1.12},
+  {label:'Brent Crude',    val:87.11, unit:'/bbl',     chg:-0.89, pct:-1.01},
+  {label:'WTI Crude',      val:82.14, unit:'/bbl',     chg:-0.78, pct:-0.94},
+  {label:'Natural Gas TTF',val:61.02, unit:'€/MWh',    chg:+0.45, pct:+0.74},
+  {label:'Henry Hub',      val:2.78,  unit:'/MMBtu',   chg:-0.04, pct:-1.42},
   {label:'LNG Asia JKM',   val:21.19, unit:'/MMBtu',   chg:-0.07, pct:-0.33},
-  {label:'Coal API2',      val:121.80,unit:'/t',       chg:+1.30, pct:+1.08},
-  {label:'EU Carbon ETS',  val:79.40, unit:'€/t CO₂',  chg:+0.85, pct:+1.08},
-  {label:'Uranium',        val:86.55, unit:'/lb U₃O₈', chg:+0.05, pct:+0.06},
+  {label:'Coal API2',      val:122.00,unit:'/t',       chg:+0.20, pct:+0.16},
+  {label:'EU Carbon ETS',  val:79.55, unit:'€/t CO₂',  chg:+0.15, pct:+0.19},
+  {label:'Uranium',        val:86.48, unit:'/lb U₃O₈', chg:-0.02, pct:-0.02},
   {label:'Solar Module',   val:0.088, unit:'/W',       chg:-0.001,pct:-1.12},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-0.62},
-  {label:'Lithium',        val:21940, unit:'/t',       chg:+525,  pct:+2.45},
-  {label:'Copper',         val:14700, unit:'/t',       chg:+205,  pct:+1.41},
+  {label:'Lithium',        val:21940, unit:'/t',       chg:+230,  pct:+1.06},
+  {label:'Copper',         val:14484, unit:'/t',       chg:-64,   pct:-0.44},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent whipsaws near $88.4/bbl as the US-Iran Hormuz standoff drags into a 166th day',
-  'Trump insists the US has \'total control\' of Hormuz; Iran declares the strait blocked and vows it could \'prolong\' the war',
-  'IEA warns global oil stockpiles are draining fast with about 8.3 mb/d of Gulf output still shut in',
-  'European TTF gas climbs above €60/MWh on Aug 12 as Qatari LNG stays stranded behind Hormuz',
-  'OPEC+ lifts September output ~188,000 b/d — a fifth straight monthly hike completing the 2023 cut rollback',
-  'IEA sees global oil demand falling ~1.6 mb/d in 2026 as high prices and the Hormuz closure bite',
-  'COMEX copper hits a record $6.77/lb; LME copper trades near $14,700/t on tariff hoarding and AI demand',
-  'Lithium rebounds to about $21,900/t as record Chinese EV sales drain inventories',
+  'Brent slips below $87/bbl on Aug 13 after five straight sessions of gains as demand worries meet the Hormuz standoff',
+  'Only 8 vessels crossed the Strait of Hormuz on Monday versus about 120 before the war, Kpler says',
+  'IEA warns global oil stockpiles are draining fast and cuts its 2026 demand outlook by a further 510 kb/d',
+  'Trump insists the US controls an \'open\' Hormuz; Tehran says the strait stays shut until its conditions are met',
+  'OPEC+ lifts output ~188,000 b/d in a fifth straight monthly hike, completing the 2023 cut rollback',
+  'OPEC slashes its 2026 oil-demand growth forecast to 580,000 b/d, down from 780,000 b/d in July',
+  'European TTF gas holds near €61/MWh as Qatari LNG stays bottled up behind Hormuz',
+  'COMEX copper eases to ~$6.57/lb after setting an all-time record $6.77/lb on Aug 7',
+  'Lithium advances to about $21,940/t as record Chinese EV sales accelerate destocking',
+  'US commercial crude stocks jump 17.4 million barrels in the week to Aug 7 as trade flows reshuffle',
+  'IEA: renewables set to overtake coal as the world\'s top power source in 2026 as solar leads the buildout',
   'Atlantic Basin refining margins hit all-time highs in July as diesel and jet cracks surge',
-  'Uranium holds near $86.5/lb as Big Tech nuclear deals and reactor restarts underpin demand',
-  'IEA: renewables overtake coal as the world\'s top power source in 2026 as solar adds ~600 TWh',
-  'Texas trims 2027 power-demand growth to 5.6% from 14% after pausing a wave of data-center projects',
 ];
 
 function buildBreaking() {
@@ -255,59 +255,59 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'⚔', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 12, 2026', impact:'high',
-   headline:'Trump Insists US Controls Hormuz; Iran Says It Could \'Prolong\' the War',
-   summary:'The standoff over the Strait of Hormuz hardened again on August 12 as President Trump insisted the United States has \'total control\' of the waterway and warned Iran would \'get blown away\' if it tried anything, even as vessel traffic through the strait stayed minuscule. Tehran flatly rejected the claim, declaring the strait blocked until its conditions are met, and an adviser to the Revolutionary Guard commander said Iran could \'prolong\' the war with the US until Trump leaves office. Iran is also demanding compensation for decades of pollution in Gulf waters, adding a fresh sticking point to any deal. With the two sides talking past each other, hopes for a near-term reopening have faded and the Gulf risk premium on oil and gas remains firmly in place.',
-   source:'CNN / Fox News / Reuters', tags:['Iran','Hormuz','Trump']},
+   date:'August 13, 2026', impact:'high',
+   headline:'Hormuz Traffic Stays Near Zero as the World Burns Through Oil Stockpiles',
+   summary:'Traffic through the Strait of Hormuz remains a trickle nearly six months into the crisis, with maritime intelligence firm Kpler counting just eight vessels crossing on Monday against an average of about 120 before the war. Tehran has effectively kept the strait shut since fighting erupted in late February, even as President Trump insists it is open and under Washington\'s control. The waterway normally carries around 20 million barrels of oil a day — roughly a fifth of global seaborne crude trade — so the paralysis is forcing the world to draw hard on inventories. Efforts to broker a US-Iran arrangement have repeatedly stalled, and the IEA warns global stockpiles are now draining at a rapid clip.',
+   source:'CNN / Kpler / IEA', tags:['Hormuz','Iran','Oil Security']},
 
   {featured:true, emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 12, 2026', impact:'high',
-   headline:'Oil Whipsaws Near $88 as IEA Warns Global Stockpiles Are Draining Fast',
-   summary:'Brent crude swung around $88 a barrel on August 12, easing toward $88.4 after trading as high as $89.3, as investors weighed conflicting signals over a possible US-Iran arrangement on the Strait of Hormuz. In its August report the IEA warned that global oil inventories are being drawn down at a rapid clip, with roughly 8.3 mb/d of Gulf output still shut in and world supply now seen falling by 4.3 mb/d across 2026. Brent has ranged violently this year, sinking as low as $69 in early July before renewed tanker attacks drove it back above $105 in late July. With little slack left in the system, the agency cautions that any further escalation could send prices sharply higher again.',
-   source:'IEA / Reuters / Investing.com', tags:['Brent','IEA','Stockpiles']},
+   date:'August 13, 2026', impact:'high',
+   headline:'Oil Slips Below $87 as Demand Worries Meet the Hormuz Standoff',
+   summary:'Brent crude fell below $87 a barrel on August 13, snapping a run of five consecutive higher sessions, as investors shifted their attention to weakening demand prospects even with the Strait of Hormuz still disrupted. Prices had spiked earlier in the week — oil jumped about 5% on Monday, with WTI settling near $82.13 — as doubts grew that Washington and Tehran would reach a deal to reopen the strait. In its August report the IEA warned that global oil inventories are being drawn down fast and cut its 2026 demand outlook by a further 510 kb/d, while OPEC trimmed its own demand-growth forecast to 580,000 b/d. With supply risk and demand weakness pulling in opposite directions, Brent has stayed pinned in a volatile $87-$89 band.',
+   source:'Reuters / CNBC / IEA', tags:['Brent','WTI','IEA']},
 
   // REGULAR
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 12, 2026', impact:'high',
-   headline:'European Gas Climbs Above €60/MWh as Qatari LNG Stays Stranded',
-   summary:'Dutch TTF gas rose 3.1% to about €60.6/MWh on August 12, extending a jump above €60 the previous week, as doubts grew over any deal to resume energy flows through the Strait of Hormuz. Middle East LNG shipments have been severely constrained, with cargoes from major exporter Qatar significantly delayed and forcing Europe onto pricier, farther-travelled US supply. The rally comes with EU storage running well below the seasonal norm and the lowest injection-season level in years, leaving the bloc scrambling to refill before winter. Analysts warn TTF will stay headline-driven and exposed to any fresh escalation in the Gulf.',
-   source:'Trading Economics / GuruFocus / Reuters', tags:['TTF','LNG','Gas Price']},
+   date:'August 13, 2026', impact:'high',
+   headline:'European Gas Holds Near €61/MWh as Qatari LNG Stays Bottled Up',
+   summary:'Dutch TTF gas hovered around €61/MWh in mid-August, holding above the €60 mark it cleared earlier in the month, as doubts persisted over any deal to resume energy flows through the Strait of Hormuz. Middle East LNG shipments remain severely constrained, with cargoes from major exporter Qatar bottled up and forcing Europe onto pricier, farther-travelled US supply. The strength comes even as EU storage runs below the seasonal norm, leaving the bloc scrambling to refill before winter. Analysts warn TTF will stay headline-driven and exposed to any fresh escalation in the Gulf.',
+   source:'Investing.com / Reuters / ICIS', tags:['TTF','LNG','Gas Price']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 7, 2026', impact:'high',
-   headline:'Copper Sets a Record $6.77/lb as Tariff Hoarding Meets Shrinking Supply',
-   summary:'COMEX copper touched an all-time high of about $6.77 a pound in early August, surpassing its May peak, while US futures spiked near $6.90 and the LME three-month contract climbed toward $14,700 a tonne. The rally reflects bets on US import tariffs pulling metal into the country even as supply outside the US deteriorates, layered on top of deep demand from electrification and the AI data-center buildout. This time lithium joined the move higher, rebounding to about $21.9k a tonne as record Chinese EV sales and accelerating destocking drained inventories. Together the metals underscore how the energy transition and AI now set the tone for critical-mineral prices.',
-   source:'CNBC / Mining.com / Trading Economics', tags:['Copper','Lithium','Metals']},
+   date:'August 13, 2026', impact:'high',
+   headline:'Copper Pulls Back to $6.57/lb After Setting a Record $6.77 Days Earlier',
+   summary:'COMEX copper eased to about $6.57 a pound on August 13, down 0.44% on the day, after touching an all-time high of roughly $6.77 on August 7 that surpassed its May peak. On the London Metal Exchange the three-month contract had climbed toward $14,258 a tonne at the height of the squeeze, the sharpest in over a year. The rally reflected bets on US import tariffs pulling metal into the country even as supply outside the US deteriorated, layered on top of deep demand from electrification and the AI data-center buildout. Lithium moved higher alongside it, advancing to about $21,940 a tonne as record Chinese EV sales accelerated destocking.',
+   source:'Mining.com / CNBC / Benchmark Mineral Intelligence', tags:['Copper','Lithium','Metals']},
 
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 12, 2026', impact:'high',
    headline:'Diesel and Jet Cracks Drive Atlantic Basin Refining Margins to Record Highs',
-   summary:'Increasingly tight product markets pushed Atlantic Basin refining margins to all-time highs in July, the IEA said in its August report, as diesel, jet fuel and gasoline cracks surged on seasonally higher demand, supply shortfalls and depleted stocks. Global refinery throughput rose to 101.5 mb/d of supply in July but remained well below year-earlier levels, held down by Middle East product-export disruptions and attacks on Russian refineries. The squeeze in middle distillates is feeding straight through to pump and freight costs across Europe and the Atlantic. With stocks thin, margins are likely to stay elevated into the autumn.',
+   summary:'Increasingly tight product markets pushed Atlantic Basin refining margins to all-time highs in July, the IEA said in its August report, as diesel, jet fuel and gasoline cracks surged on seasonally higher demand, supply shortfalls and depleted stocks. Global refinery throughput remained well below year-earlier levels, held down by Middle East product-export disruptions and attacks on Russian refineries. The squeeze in middle distillates is feeding straight through to pump and freight costs across Europe and the Atlantic. With stocks thin, margins are likely to stay elevated into the autumn.',
    source:'IEA / Argus / Reuters', tags:['Diesel','Refining','Margins']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 8, 2026', impact:'low',
    headline:'Uranium Holds Near $86.5/lb as AI-Driven Nuclear Demand Underpins the Market',
-   summary:'Uranium spot prices held near $86.5 a pound of U3O8 in early August, barely changed on the week, as hyperscaler power deals and reactor restarts keep structural demand firm against lean inventories. Long-term contract pricing has meanwhile surged to multi-year highs as buyers lock in supply against a widening deficit. Big Tech nuclear commitments and the World Nuclear Association\'s bullish demand outlook continue to support uranium equities. Analysts still see spot prices grinding higher through the rest of 2026 as the shortfall bites.',
-   source:'TradeTech / carboncredits.com / WNA', tags:['Uranium','Nuclear','Prices']},
+   summary:'Uranium spot prices held near $86.5 a pound of U3O8 in early August, essentially unchanged on the week, as hyperscaler power deals and reactor restarts keep structural demand firm against lean inventories. TradeTech assessed the spot market at about $86.25 while other indicators sat near $86.5, and long-term contract pricing has surged to multi-year highs as buyers lock in supply against a widening deficit. Big Tech nuclear commitments and the World Nuclear Association\'s bullish demand outlook continue to support uranium equities. Analysts still see spot prices grinding higher through the rest of 2026 as the shortfall bites.',
+   source:'TradeTech / UxC / WNA', tags:['Uranium','Nuclear','Prices']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 3, 2026', impact:'high',
-   headline:'OPEC+ Lifts September Output ~188,000 b/d in a Fifth Straight Monthly Hike',
-   summary:'Seven OPEC+ producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman — agreed to raise output by about 188,000 barrels a day from September, the fifth consecutive monthly increase and the step that completes the unwinding of the 1.65 million b/d of voluntary cuts first announced in 2023. Sources say the alliance is now leaning toward holding quotas steady into early next year while it hashes out new targets for 2027. With the Hormuz conflict already curbing exports from key Gulf members, delegates note that nominal quota hikes have had little real effect on barrels reaching the market. Spare capacity, not fresh supply, remains the market\'s main hedge.',
-   source:'Al Jazeera / Reuters / Energy Connects', tags:['OPEC+','Quotas','Supply']},
+   headline:'OPEC+ Lifts Output ~188,000 b/d in a Fifth Straight Monthly Hike',
+   summary:'Seven OPEC+ producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman — agreed to raise output by about 188,000 barrels a day, the fifth consecutive monthly increase and the step that completes the unwinding of the 1.65 million b/d of voluntary cuts first announced in 2023. In its latest report OPEC also slashed its 2026 oil-demand growth forecast to 580,000 b/d, down from 780,000 b/d a month earlier. With the Hormuz conflict already curbing exports from key Gulf members, delegates note that nominal quota hikes have had little real effect on barrels reaching the market. Spare capacity, not fresh supply, remains the market\'s main hedge.',
+   source:'Al Jazeera / Reuters / OilPrice', tags:['OPEC+','Quotas','Supply']},
 
   {emoji:'⛴', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 11, 2026', impact:'high',
-   headline:'Qatari LNG Stays Stranded as Hormuz Transits Hold in the Low Teens',
-   summary:'Attempts to restart Qatari LNG through the Strait of Hormuz have failed to take hold, with vessel-tracking data showing only low-teens transits a day versus a normal flow near 88. QatarEnergy remains largely bottled up behind the standoff and has leaned on US spot cargoes to honour Asian contracts. Middle East LNG flows to Europe have slumped to their lowest since 2019, reshaping global trade even as Asian JKM prices hold near $21/MMBtu. Until Washington and Tehran bridge their differences, roughly a fifth of global LNG trade stays hostage to the chokepoint.',
-   source:'Bloomberg / straits.live / S&P Global', tags:['Qatar','LNG','Hormuz']},
+   headline:'Qatari LNG Stays Stranded as Hormuz Transits Collapse',
+   summary:'Attempts to restart Qatari LNG through the Strait of Hormuz have failed to take hold, with vessel-tracking data showing only a handful of transits a day versus a normal flow well above 100 ships. QatarEnergy remains largely bottled up behind the standoff and has leaned on US spot cargoes to honour Asian contracts. Middle East LNG flows to Europe have slumped to their lowest since 2019, reshaping global trade even as Asian JKM prices hold near $21/MMBtu. Until Washington and Tehran bridge their differences, roughly a fifth of global LNG trade stays hostage to the chokepoint.',
+   source:'Bloomberg / Kpler / S&P Global', tags:['Qatar','LNG','Hormuz']},
 
-  {emoji:'🛡', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'August 5, 2026', impact:'med',
-   headline:'US Strategic Petroleum Reserve Near 308 Million Barrels — Around a 1980s Low',
-   summary:'The US Strategic Petroleum Reserve is hovering near 308 million barrels, less than half its capacity and around its lowest level since the 1980s, leaving Washington little room to lean on emergency stocks if the Hormuz disruption drags on. The EIA\'s latest outlook flags that petroleum markets have been shaped by continued disruptions to crude and product flows through the strait, adding to higher and more volatile prices. Refill efforts remain slow with Brent near $88, and the depleted buffer is one reason the market keeps a heavy risk premium on Gulf crude. Any fresh escalation would find strategic cushions unusually thin.',
-   source:'EIA / Reuters / Energy Intelligence', tags:['SPR','US Crude','Inventories']},
+  {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
+   date:'August 13, 2026', impact:'med',
+   headline:'US Crude Stocks Jump 17.4 Million Barrels as Trade Flows Reshuffle',
+   summary:'US commercial crude inventories surged by 17.4 million barrels in the week to August 7, the EIA reported, lifting stockpiles to 424.4 million barrels — now only about 2% below the five-year average for the time of year. The build reflects how the Hormuz disruption is scrambling global trade, keeping some barrels closer to home even as afloat inventories elsewhere drain. The data offered a brief counterweight to the IEA\'s warning of tightening global stocks and helped nudge prices lower mid-week. Analysts caution that the strait\'s continued closure still leaves the wider market unusually exposed.',
+   source:'EIA / Reuters / Energy Intelligence', tags:['US Crude','Inventories','EIA']},
 
   {emoji:'🏭', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 10, 2026', impact:'med',
@@ -318,13 +318,13 @@ const NEWS = [
   {emoji:'🚢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 8, 2026', impact:'med',
    headline:'US LNG Becomes Europe\'s Lifeline as Middle East Cargoes Vanish',
-   summary:'With Middle East LNG flows to Europe at their lowest since 2019, US export terminals have become the bloc\'s critical backstop, and regulators say EU LNG imports must rise sharply over 2025 levels to refill storage before winter. QatarEnergy has leaned on US spot cargoes to keep supplying Asia, tightening the pool of flexible volumes available to European buyers and helping push TTF above €60/MWh. The rerouting has stretched shipping and lifted freight costs as cargoes travel farther to reach both markets. Rising US Gulf and Guyana crude output is likewise helping offset the Hormuz and Black Sea disruptions.',
+   summary:'With Middle East LNG flows to Europe at their lowest since 2019, US export terminals have become the bloc\'s critical backstop, and regulators say EU LNG imports must rise sharply over 2025 levels to refill storage before winter. QatarEnergy has leaned on US spot cargoes to keep supplying Asia, tightening the pool of flexible volumes available to European buyers and helping hold TTF above €60/MWh. The rerouting has stretched shipping and lifted freight costs as cargoes travel farther to reach both markets. Rising US Gulf and Guyana crude output is likewise helping offset the Hormuz and Black Sea disruptions.',
    source:'ACER / Reuters / S&P Global', tags:['US LNG','Europe','Supply']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'August 12, 2026', impact:'high',
    headline:'IEA Cuts Its 2026 Oil Demand Forecast as the Hormuz Closure Bites',
-   summary:'The IEA now expects global oil demand to fall by an average of 1.6 mb/d in 2026, cutting its estimate by a further 510 kb/d as the ongoing closure of the Strait of Hormuz and elevated fuel prices weigh on consumption. The agency sees the annual contraction easing from 4.9 mb/d in the second quarter to 2.8 mb/d in the third before demand returns to growth in the final quarter. It is a rare outright annual decline, driven more by supply-side disruption and high prices than by weak underlying activity. The IEA expects consumption to recover as and when the strait reopens.',
+   summary:'The IEA now expects global oil demand to fall by an average of 1.6 mb/d in 2026, cutting its estimate by a further 510 kb/d as the ongoing closure of the Strait of Hormuz and elevated fuel prices weigh on consumption. The agency sees the annual contraction easing over the second half of the year before demand returns to growth in the final quarter. It is a rare outright annual decline, driven more by supply-side disruption and high prices than by weak underlying activity. The IEA expects consumption to recover as and when the strait reopens.',
    source:'IEA / Reuters / Argus', tags:['Oil Demand','IEA','Hormuz']},
 
   {emoji:'🖥', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -341,20 +341,20 @@ const NEWS = [
 
   {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 22, 2026', impact:'high',
-   headline:'Renewables Overtake Coal as the World\'s Top Power Source, IEA Says',
-   summary:'Wind, solar, hydro and bioenergy together will generate more electricity than coal-fired plants for the first time in 2026, making renewables the world\'s largest source of power generation, the IEA said. Solar leads the charge, forecast to grow by around 600 TWh this year — matching its record 2025 increase — and on track to overtake wind and nuclear in the generation mix. Cumulative solar capacity has passed roughly 2,800 GW, the largest installed base of any technology. The milestone shows how fast the mix is shifting even as total demand climbs well above its long-term trend.',
+   headline:'Renewables Set to Overtake Coal as the World\'s Top Power Source, IEA Says',
+   summary:'Wind, solar, hydro and bioenergy together are on track to generate more electricity than coal-fired plants for the first time in 2026, making renewables the world\'s largest source of power generation, the IEA said. Solar leads the charge, forecast to grow by around 600 TWh this year and on track to overtake wind and nuclear in the generation mix. Cumulative solar capacity has passed roughly 2,800 GW, the largest installed base of any technology. The milestone shows how fast the mix is shifting even as total demand climbs well above its long-term trend.',
    source:'IEA / Electrek / Carbon Brief', tags:['Renewables','Solar','Coal']},
 
-  {emoji:'🏗', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'July 21, 2026', impact:'high',
-   headline:'US Set for a Record ~86 GW of New Capacity in 2026, More Than Half Solar',
-   summary:'US developers plan to add about 86 gigawatts of new utility-scale generating capacity in 2026 — a record if realised — with solar making up around 51%, battery storage 28% and wind 14%, according to EIA data. Solar, wind and storage together dominate the interconnection queue even as record data-center demand strains the grid, while fossil and nuclear capacity edges lower on net. The buildout still cannot fully keep pace with AI-driven load growth in the fastest-growing regions, sustaining a role for new gas plants. The figures confirm renewables and batteries as the workhorses of near-term US capacity additions, even as federal policy turns against them.',
-   source:'EIA / Power Engineering / Energy Central', tags:['Renewables','Storage','Capacity']},
+  {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'August 10, 2026', impact:'med',
+   headline:'US Solar, Wind and Hydro Generation Jumps in the First Half of 2026',
+   summary:'US solar generation climbed 21% in the first half of 2026 versus a year earlier, with hydropower up 9% and wind up 6%, according to EIA data, as a record pipeline of new capacity comes online. Battery storage was the fastest-growing power technology worldwide in 2025, with about 108 GW added — a 40% jump on the prior year — helping smooth the surge in solar output. Solar, wind and storage together now dominate the US interconnection queue even as record data-center demand strains the grid. The IEA still expects solar generation to overtake wind and nuclear this year.',
+   source:'EIA / IEA / Power Engineering', tags:['Solar','Storage','Generation']},
 
   {emoji:'🌍', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'July 30, 2026', impact:'med',
    headline:'Global Renewable Additions Hit a Record 800 GW as Solar Tops 600 GW',
-   summary:'The world added a record 800 gigawatts of renewable capacity in 2025, up 16% on the year and the 23rd straight year of record expansion, the IEA said in its Global Energy Review. Solar PV supplied more than three-quarters of the additions, topping 600 GW for the first time, while wind jumped nearly 40% to around 160 GW despite lingering supply-chain strains. For the first time on record a single renewable source — solar — met the largest share of global energy-demand growth, covering more than a quarter of the world\'s additional needs. The agency expects solar generation to overtake wind and nuclear this year and hydropower by 2029.',
+   summary:'The world added a record 800 gigawatts of renewable capacity in 2025, up 16% on the year and the 23rd straight year of record expansion, the IEA said in its Global Energy Review. Solar PV supplied more than three-quarters of the additions, topping 600 GW for the first time, while wind rose to around 160 GW despite lingering supply-chain strains. For the first time on record a single renewable source — solar — met the largest share of global energy-demand growth, covering more than a quarter of the world\'s additional needs. The agency expects solar generation to overtake wind and nuclear this year and hydropower by 2029.',
    source:'IEA / Energy Digital / Carbon Brief', tags:['Renewables','Solar','Wind']},
 
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
@@ -363,17 +363,17 @@ const NEWS = [
    summary:'Washington\'s policy tilt against renewables is sharpening: under the One Big Beautiful Bill Act, wind and solar projects generally lose the 45Y and 48E clean-electricity tax credits if they begin construction after July 4, 2026, or are placed in service after 2027, and foreign-content rules have tightened. Developers warn the accelerated phase-out raises costs and clouds the project pipeline just as AI-driven power demand surges. Even so, the EIA still expects a record buildout in 2026 as corporate buyers and cheap modules keep projects moving. The combination leaves federal policy and market economics pulling in opposite directions across the US power sector.',
    source:'Congress.gov / Utility Dive / pv magazine', tags:['OBBBA','Tax Credits','US Policy']},
 
-  {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'August 2, 2026', impact:'med',
-   headline:'EU Leans on Flexible Storage Rules as Winter Refills Lag',
-   summary:'With EU gas storage running well below the seasonal norm and the lowest injection-season level in years, member states are leaning on flexibility built into the Gas Storage Regulation, which relaxes the mandatory fill target to 80% by November rather than the usual 90%. Regulators warn the bloc must still lift LNG imports sharply over 2025 levels to get there, an expensive task with Middle East cargoes diverted by the Hormuz crisis. The narrowing summer-to-winter price spread has also weakened the incentive to inject. The moves sit alongside the Commission\'s push on carbon and electrification to cut exposure to volatile gas.',
-   source:'ACER / Columbia CGEP / Reuters', tags:['EU Policy','Gas Storage','Winter']},
+  {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
+   date:'August 5, 2026', impact:'med',
+   headline:'New EU Energy Market Rules Take Effect as Grid Queues Swell',
+   summary:'The EU\'s overhauled energy market rules are now in force, with the reformed electricity-market provisions applying from July 17 and the new gas-market rules from August 5, aimed at boosting renewables, protecting consumers and making the system more resilient to price shocks. The rollout lands amid intense strain: grid-connection queues are backed up in at least 16 member states, with some 120 GW of mature renewable projects at risk of missing timely access by 2030. Regulators are also leaning on storage-fill flexibility as Middle East LNG diversions make winter refills expensive. The reforms sit alongside the Commission\'s push on carbon and electrification to cut exposure to volatile gas.',
+   source:'European Commission / ACER / Reuters', tags:['EU Policy','Market Reform','Grid']},
 
   {emoji:'🚢', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 11, 2026', impact:'high',
-   headline:'Strait of Hormuz Closed for a 166th Day as Houthi Attacks Add Risk',
-   summary:'The Strait of Hormuz has now been effectively shut for more than 165 days since fighting erupted in late February, with daily transits stuck in the low teens against a normal baseline near 88 ships. The waterway has swung between full closure, partial reopening and closure again several times, and the risk has spread: Houthi forces claimed an attack on a Saudi oil tanker in early August, keeping insurers and shippers on edge. The IEA warns that continued disruption is curbing product availability and lifting price volatility worldwide. With about a fifth of global oil and LNG normally passing through, each week of closure deepens the reshaping of global energy trade.',
-   source:'CNN / straits.live / IEA', tags:['Hormuz','Shipping','Oil Security']},
+   date:'August 13, 2026', impact:'high',
+   headline:'ADNOC Says Two of Its Tankers Attacked in Hormuz as Strikes Persist',
+   summary:'Abu Dhabi National Oil Company said two of its vessels were attacked while transiting the Strait of Hormuz on Thursday evening, reporting no injuries and saying the situation was under control. The strikes dashed hopes for a near-term reopening and helped push oil prices higher earlier in the week, underscoring how exposed even Gulf-flagged shipping has become. Periodic Iranian attacks and retaliatory US strikes have disrupted the waterway for most of the past five months, keeping insurers and shippers on edge. The IEA warns that continued disruption is curbing product availability and lifting price volatility worldwide.',
+   source:'Reuters / Al Jazeera / CNN', tags:['Hormuz','Shipping','ADNOC']},
 ];
 
 // ─────────────────────────────────────────────
