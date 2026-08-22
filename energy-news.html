@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$93.40</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€61.15</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.79</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.085</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$94.09</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€62.40</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.88</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.084</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:93.40, unit:'/bbl',     chg:+0.39, pct:+0.42},
-  {label:'WTI Crude',      val:86.20, unit:'/bbl',     chg:-0.38, pct:-0.44},
-  {label:'Natural Gas TTF',val:61.15, unit:'€/MWh',    chg:+0.60, pct:+0.99},
-  {label:'Henry Hub',      val:2.79,  unit:'/MMBtu',   chg:-0.02, pct:-0.71},
-  {label:'LNG Asia JKM',   val:22.05, unit:'/MMBtu',   chg:+0.65, pct:+3.04},
-  {label:'Coal API2',      val:125.00,unit:'/t',       chg:+1.00, pct:+0.81},
-  {label:'EU Carbon ETS',  val:74.80, unit:'€/t CO₂',  chg:+0.55, pct:+0.74},
-  {label:'Uranium',        val:88.29, unit:'/lb U₃O₈', chg:+0.65, pct:+0.74},
-  {label:'Solar Module',   val:0.085, unit:'/W',       chg:-0.001,pct:-1.16},
+  {label:'Brent Crude',    val:94.09, unit:'/bbl',     chg:+0.69, pct:+0.74},
+  {label:'WTI Crude',      val:86.90, unit:'/bbl',     chg:+0.55, pct:+0.64},
+  {label:'Natural Gas TTF',val:62.40, unit:'€/MWh',    chg:+1.25, pct:+2.04},
+  {label:'Henry Hub',      val:2.88,  unit:'/MMBtu',   chg:+0.09, pct:+3.23},
+  {label:'LNG Asia JKM',   val:22.40, unit:'/MMBtu',   chg:+0.35, pct:+1.59},
+  {label:'Coal API2',      val:126.00,unit:'/t',       chg:+1.00, pct:+0.80},
+  {label:'EU Carbon ETS',  val:75.20, unit:'€/t CO₂',  chg:+0.40, pct:+0.53},
+  {label:'Uranium',        val:88.90, unit:'/lb U₃O₈', chg:+0.61, pct:+0.69},
+  {label:'Solar Module',   val:0.084, unit:'/W',       chg:-0.001,pct:-1.18},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-0.62},
-  {label:'Lithium',        val:21100, unit:'/t',       chg:-90,   pct:-0.43},
-  {label:'Copper',         val:14280, unit:'/t',       chg:+400,  pct:+2.88},
+  {label:'Lithium',        val:20900, unit:'/t',       chg:-200,  pct:-0.95},
+  {label:'Copper',         val:14420, unit:'/t',       chg:+140,  pct:+0.98},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent holds above $93/bbl, on pace for a weekly gain of more than 5% as the US moves to isolate Iran\'s economy',
-  'Trump says oil is still flowing through the Strait of Hormuz and signals he is open to resuming talks with Tehran “at some point”',
-  'WTI edges toward $86 after a five-session run of gains as Gulf tensions keep a risk premium in the market',
+  'Brent climbs above $94/bbl, on track for a second straight weekly gain of nearly 6% as Washington readies its Iran squeeze',
+  'Treasury\'s Bessent says details of a new plan to isolate Iran\'s economy — Trump\'s “economic D-Day” — land Monday',
+  'US measures could target countries still buying Iranian crude, including China, Tehran\'s biggest customer',
+  'US military says it has helped move more than 660 million barrels of crude through the Strait of Hormuz since early May',
+  'WTI holds near $87 after a six-session run of gains as Gulf tensions keep a risk premium in the market',
   'US Strategic Petroleum Reserve falls to 298.7 million barrels, its lowest level since January 1983',
-  'Surprise 17.4 million-barrel build in US commercial crude stocks caps oil\'s advance mid-month',
   'IEA and OPEC both slash their 2026 oil-demand outlooks; the IEA now sees demand falling 1.6 mb/d this year',
   'EIA lifts its Middle East shut-in estimate, seeing Hormuz disruption of ~0.6 mb/d persist into early 2027',
   'OPEC+ lifts September output 188,000 b/d, completing the rollback of its 2023 voluntary cuts',
   'Copper cash contracts hit a record near $14,500/t as an LME warehouse bidding war looms',
-  'Uranium spot climbs to about $88/lb U3O8 as reactor restarts and AI power demand tighten the market',
+  'Uranium spot grinds toward $89/lb U3O8 as reactor restarts and AI power demand tighten the market',
   'US wind and solar supply 20% of the nation\'s electricity in the first half of 2026, outpacing coal and nuclear',
-  'Atlantic Basin diesel and jet cracks hit record highs on Hormuz disruption and thin distillate stocks',
 ];
 
 function buildBreaking() {
@@ -255,15 +255,15 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'⚔', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 21, 2026', impact:'high',
-   headline:'US Moves to Isolate Iran\'s Economy, Keeping the Hormuz Risk Premium Alive',
-   summary:'Oil headed for a substantial weekly gain on Friday — up more than 5% — as a fresh US push to isolate Iran\'s economy revived fears of further supply disruption around the Strait of Hormuz. In a shift from earlier in the week, President Trump said crude continues to flow through the waterway and added that he would be open to resuming talks with Tehran “at some point,” tempering the war-premium even as the two sides stay locked in confrontation. Traders remain wary that any new sanctions squeeze or naval flare-up could once again choke the chokepoint through which roughly a fifth of the world\'s seaborne oil and LNG passes. Six months into the crisis, the market is pricing a slow, fragile normalisation rather than a clean resolution.',
-   source:'Bloomberg / Reuters / Al Jazeera', tags:['Hormuz','Iran','Oil Supply']},
+   date:'August 22, 2026', impact:'high',
+   headline:'Washington Readies an “Economic D-Day” Against Iran, Keeping the Hormuz Premium Alive',
+   summary:'Oil headed for a second straight weekly gain as the White House prepared to unveil its most sweeping move yet to isolate Iran\'s economy, a package President Trump has called an “economic D-Day.” Treasury Secretary Scott Bessent said the details will be announced Monday and could hit countries that keep trading with Tehran — chief among them China, the largest buyer of Iranian crude. Traders fear the escalation could trigger fresh retaliation around the Strait of Hormuz, through which roughly a fifth of the world\'s seaborne oil and LNG passes. Six months into the crisis, the market is bracing for confrontation to deepen before any path to normalisation opens.',
+   source:'Reuters / Bloomberg / Al Jazeera', tags:['Hormuz','Iran','Oil Supply']},
 
   {featured:true, emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 21, 2026', impact:'high',
-   headline:'Brent Holds Above $93 for a 5% Weekly Gain as a 43-Year-Low Reserve Adds Fuel',
-   summary:'Brent crude held above $93 a barrel on Friday, on track for a weekly advance of more than 5%, as Gulf tension collided with a dangerously thin US emergency cushion. The Strategic Petroleum Reserve has fallen to 298.7 million barrels — its lowest since January 1983 — after Washington drew it down by well over 100 million barrels this year to blunt the Hormuz disruption. US WTI eased toward $86 a barrel after a five-session run of gains, while European TTF gas firmed to about €61/MWh, leaving both oil and gas acutely exposed to any further escalation. A surprise 17.4 million-barrel build in US commercial crude stocks briefly capped the rally before geopolitics reasserted the risk premium.',
+   date:'August 22, 2026', impact:'high',
+   headline:'Brent Tops $94 for a Second Weekly Gain as a 43-Year-Low Reserve Adds Fuel',
+   summary:'Brent crude climbed above $94 a barrel, on track for a weekly advance of nearly 6% and a second consecutive weekly rise, as Gulf tension collided with a dangerously thin US emergency cushion. The Strategic Petroleum Reserve has fallen to 298.7 million barrels — its lowest since January 1983 — after Washington drew it down by well over 100 million barrels this year to blunt the Hormuz disruption. US WTI held near $87 a barrel after a six-session run of gains, while European TTF gas firmed above €62/MWh, leaving both oil and gas acutely exposed to any further escalation. With Washington set to unveil new pressure on Tehran on Monday, the risk premium looks unlikely to fade soon.',
    source:'Bloomberg / EIA / Reuters', tags:['Brent','SPR','Oil Price']},
 
   // REGULAR
@@ -286,9 +286,9 @@ const NEWS = [
    source:'IEA / Argus / Reuters', tags:['Diesel','Refining','Margins']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 20, 2026', impact:'low',
-   headline:'Uranium Climbs to a Fresh High Near $88/lb as Lithium Steadies',
-   summary:'Uranium spot has ground higher to about $88.3 a pound of U3O8, up from roughly $86 in late July, as reactor restarts and AI-driven power demand tighten a market that had been range-bound for months; the long-term price indicator now sits near $97/lb, a clear premium to spot. Lithium, meanwhile, has steadied after a summer bounce, with China\'s most-traded carbonate contract around 151,000 yuan a tonne — roughly $21,100 — still up nearly 5% on the month and more than 75% on the year. Producer equities including Albemarle and SQM remain well off their lows. The two critical-materials markets underscore how electrification and AI power demand keep reshaping the outlook for battery and fuel inputs.',
+   date:'August 21, 2026', impact:'low',
+   headline:'Uranium Grinds Toward $89/lb as Lithium Cools From Its Summer Bounce',
+   summary:'Uranium spot has ground higher to about $88.9 a pound of U3O8, up from roughly $86 in late July, as reactor restarts and AI-driven power demand tighten a market that had been range-bound for months; the long-term price indicator now sits near $97/lb, a clear premium to spot. Lithium, meanwhile, has cooled after a summer bounce, with China\'s most-traded carbonate contract slipping toward 149,000 yuan a tonne — roughly $20,900 — though still well above its spring lows. Producer equities including Albemarle and SQM remain off their bottoms even as the metal eases. The two critical-materials markets underscore how electrification and AI power demand keep reshaping the outlook for battery and fuel inputs.',
    source:'TradeTech / SunSirs / Nuclear Newswire', tags:['Uranium','Lithium','Metals']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -298,15 +298,15 @@ const NEWS = [
    source:'Al Arabiya / World Oil / Reuters', tags:['OPEC+','Quotas','Supply']},
 
   {emoji:'🏦', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'August 13, 2026', impact:'high',
-   headline:'US Strategic Reserve Slips to a 43-Year Low Even as Commercial Stocks Swell',
-   summary:'The US Strategic Petroleum Reserve fell to 298.7 million barrels in the week to August 7, its lowest level in 43 years, after this year\'s coordinated release of 172 million barrels to counter Iran\'s Hormuz blockade drew the stockpile down from about 415 million in February. Commercial crude inventories, by contrast, stood at a hefty 424.4 million barrels as the disruption scrambled trade flows and kept some barrels closer to home. The split picture — a hollowed-out emergency cushion against swollen commercial tanks — has become a defining feature of the crisis. Analysts warn the thin reserve leaves Washington with little room to respond to a further supply shock.',
+   date:'August 20, 2026', impact:'high',
+   headline:'US Strategic Reserve Sits at a 43-Year Low Even as 660M Barrels Clear Hormuz',
+   summary:'The US Strategic Petroleum Reserve remains at 298.7 million barrels, its lowest level in 43 years, after this year\'s coordinated release of about 172 million barrels to counter Iran\'s Hormuz blockade drew the stockpile down from roughly 415 million in February. Yet crude is still moving: the US military said it has helped escort more than 660 million barrels through the Strait of Hormuz since early May, evidence that substantial volumes keep flowing despite the standoff. Commercial crude inventories, meanwhile, stood at a hefty 424.4 million barrels as the disruption scrambled trade flows and kept some barrels closer to home. Analysts warn the hollowed-out emergency cushion leaves Washington with little room to respond to a further supply shock.',
    source:'EIA / BigGo Finance / Reuters', tags:['SPR','US Crude','EIA']},
 
   {emoji:'⛴', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'August 15, 2026', impact:'high',
-   headline:'Qatari LNG Stays Stranded as Hormuz Transits Collapse',
-   summary:'Attempts to restart Qatari LNG through the Strait of Hormuz have failed to take hold, with vessel-tracking data showing only a handful of transits a day versus a normal flow well above 100 ships. QatarEnergy remains largely bottled up behind the standoff and has leaned on US spot cargoes to honour Asian contracts. Middle East LNG flows to Europe have slumped to their lowest since 2019, reshaping global trade even as Asian JKM prices hold near $21/MMBtu. Until Washington and Tehran bridge their differences, roughly a fifth of global LNG trade stays hostage to the chokepoint.',
+   date:'August 18, 2026', impact:'high',
+   headline:'Qatari LNG Stays Stranded as Hormuz Transits Stay Thin',
+   summary:'Attempts to restart Qatari LNG through the Strait of Hormuz have failed to take hold, with vessel-tracking data showing only a handful of transits a day versus a normal flow well above 100 ships. QatarEnergy remains largely bottled up behind the standoff and has leaned on US spot cargoes to honour Asian contracts. Middle East LNG flows to Europe have slumped to their lowest since 2019, reshaping global trade even as Asian JKM prices firm toward $22.40/MMBtu and European TTF climbs above €62/MWh. Until Washington and Tehran bridge their differences, roughly a fifth of global LNG trade stays hostage to the chokepoint.',
    source:'Bloomberg / Kpler / S&P Global', tags:['Qatar','LNG','Hormuz']},
 
   {emoji:'🌡', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -316,9 +316,9 @@ const NEWS = [
    source:'EIA / Reuters / Energy Intelligence', tags:['EIA','Hormuz','Supply']},
 
   {emoji:'🏭', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'August 18, 2026', impact:'med',
+   date:'August 19, 2026', impact:'med',
    headline:'Coal Prices Firm as Asia Leans on Coal to Fill the LNG Gap',
-   summary:'Thermal coal benchmarks firmed in mid-August, with API2 Rotterdam around $124 a tonne and Newcastle back near $130 after a brief dip to four-week lows, as the Middle East LNG squeeze pushed Asian and European buyers back toward the fuel to keep baseload power running. With Qatari cargoes stranded behind Hormuz, analysts expect regional coal demand to stay elevated through 2026 as generation shifts to coal where gas has grown too scarce or costly. The episode is a reminder that when gas tightens abruptly, coal — not renewables — is still the marginal swing fuel for much of Asia. Firmer coal prices are helping lift the floor under power costs heading into winter.',
+   summary:'Thermal coal benchmarks firmed in mid-August, with API2 Rotterdam around $126 a tonne and Newcastle back near $131 after a brief dip to four-week lows, as the Middle East LNG squeeze pushed Asian and European buyers back toward the fuel to keep baseload power running. With Qatari cargoes stranded behind Hormuz, analysts expect regional coal demand to stay elevated through 2026 as generation shifts to coal where gas has grown too scarce or costly. The episode is a reminder that when gas tightens abruptly, coal — not renewables — is still the marginal swing fuel for much of Asia. Firmer coal prices are helping lift the floor under power costs heading into winter.',
    source:'Trading Economics / Wood Mackenzie / OilPrice', tags:['Coal','LNG','Asia']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -370,7 +370,7 @@ const NEWS = [
    source:'European Commission / ACER / Reuters', tags:['EU Policy','Market Reform','Grid']},
 
   {emoji:'🤝', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 8, 2026', impact:'high',
+   date:'August 12, 2026', impact:'high',
    headline:'Emerging Hormuz Deal Would Recognize Iran\'s Control of the Strait — Then It Stalls',
    summary:'For a few days in early August, Washington, Tehran and Omani mediators appeared close to an interim accord to reopen the Strait of Hormuz, with reports that the emerging framework effectively recognized some form of Iranian authority over the waterway. Iran, however, demanded steep concessions before traffic could return to normal — lifting the US naval blockade, withdrawing forces, permanently ending the war and releasing frozen assets. By mid-month the optimism had unravelled as fresh attacks on shipping resumed and Trump said no talks were underway. The whipsaw sent crude down more than 10% and then sharply back up, underscoring how fragile any path to de-escalation remains.',
    source:'Axios / Fortune / Al Jazeera', tags:['Hormuz','Iran','Diplomacy']},
