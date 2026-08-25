@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$93.09</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€65.20</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.24</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.082</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$92.06</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€61.15</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.75</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.081</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:93.09, unit:'/bbl',     chg:-1.30, pct:-1.38},
-  {label:'WTI Crude',      val:85.65, unit:'/bbl',     chg:-1.41, pct:-1.62},
-  {label:'Natural Gas TTF',val:65.20, unit:'€/MWh',    chg:-1.10, pct:-1.66},
-  {label:'Henry Hub',      val:3.24,  unit:'/MMBtu',   chg:+0.06, pct:+1.89},
-  {label:'LNG Asia JKM',   val:21.61, unit:'/MMBtu',   chg:+0.20, pct:+0.93},
-  {label:'Coal API2',      val:128.00,unit:'/t',       chg:+1.00, pct:+0.79},
-  {label:'EU Carbon ETS',  val:73.30, unit:'€/t CO₂',  chg:-0.40, pct:-0.54},
-  {label:'Uranium',        val:86.00, unit:'/lb U₃O₈', chg:-0.50, pct:-0.58},
-  {label:'Solar Module',   val:0.082, unit:'/W',       chg:-0.001,pct:-1.20},
+  {label:'Brent Crude',    val:92.06, unit:'/bbl',     chg:-2.36, pct:-2.50},
+  {label:'WTI Crude',      val:84.89, unit:'/bbl',     chg:-2.18, pct:-2.50},
+  {label:'Natural Gas TTF',val:61.15, unit:'€/MWh',    chg:-1.85, pct:-2.94},
+  {label:'Henry Hub',      val:2.75,  unit:'/MMBtu',   chg:-0.12, pct:-4.18},
+  {label:'LNG Asia JKM',   val:22.05, unit:'/MMBtu',   chg:+0.44, pct:+2.04},
+  {label:'Coal API2',      val:127.00,unit:'/t',       chg:-1.00, pct:-0.78},
+  {label:'EU Carbon ETS',  val:74.00, unit:'€/t CO₂',  chg:+0.70, pct:+0.95},
+  {label:'Uranium',        val:98.00, unit:'/lb U₃O₈', chg:+0.50, pct:+0.51},
+  {label:'Solar Module',   val:0.081, unit:'/W',       chg:-0.001,pct:-1.22},
   {label:'Wind Turbine',   val:0.80,  unit:'/W (OEM)', chg:-0.01, pct:-0.62},
-  {label:'Lithium',        val:20600, unit:'/t',       chg:+100,  pct:+0.49},
-  {label:'Copper',         val:14150, unit:'/t',       chg:-300,  pct:-2.08},
+  {label:'Lithium',        val:19500, unit:'/t',       chg:-300,  pct:-1.52},
+  {label:'Copper',         val:14200, unit:'/t',       chg:-200,  pct:-1.39},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent slips toward $93/bbl and WTI to about $86 as traders brace for the toughest-ever US sanctions on Iran',
-  'Treasury\'s Bessent vows an \'economic D-Day\', promising to sever every economic lifeline that sustains Iran',
-  'Iran warns it may fine, detain or confiscate any vessel crossing the Strait of Hormuz without a permit',
-  'Security chief Mohsen Rezaei threatens to halt all oil flow through Hormuz if neighbours join the US crackdown',
-  'Ship traffic through the Strait of Hormuz is stuck near 20% of its pre-war average six months into the crisis',
+  'Brent drops about 2.5% to roughly $92/bbl and WTI to near $85 as Washington rolls out its global Iran sanctions',
+  'US unveils the \'single greatest financial offensive ever\' against Iran, with officials warning China will not be exempt',
+  'Iran warns any vessel crossing the Strait of Hormuz without its permit could face fines, seizure or confiscation',
+  'Iran\'s President Pezeshkian concedes the country \'cannot continue with war forever\' even as commanders vow no surrender',
+  'Hormuz throughput is running near 8-9 mb/d, well below the roughly 20 mb/d that flowed before the war',
   'IEA now sees a 1.8 mb/d global oil-market deficit in Q3 2026, more than double its earlier estimate',
   'IEA and OPEC both cut their 2026 oil-demand outlooks; the IEA sees demand falling 1.6 mb/d this year',
   'US commercial crude stocks jump 17.4 million barrels to 424.4 million after a surprise weekly build',
-  'Copper eases toward $14,150/t as LME inventories rebuild from record-tight levels',
-  'Uranium holds near $86/lb U3O8 with the long-term price at an 18-year high of $97',
+  'Henry Hub slides below $2.80/MMBtu as Lower 48 gas output hits a record 111.5 bcfd',
+  'Uranium spot climbs toward $98/lb U3O8 with the long-term price at a multi-year high',
+  'Copper eases and China lithium carbonate slips to a six-month low near 140,000 yuan a tonne',
   'EU gas storage crosses just 60% in mid-August, on track for its lowest winter fill since 2013',
-  'US wind and solar supplied about 20% of first-half 2026 power, outpacing coal and nuclear despite fading credits',
 ];
 
 function buildBreaking() {
@@ -256,14 +256,14 @@ const NEWS = [
   // FEATURED
   {featured:true, emoji:'💥', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'August 24, 2026', impact:'high',
-   headline:'US Readies Its \'Toughest Ever\' Sanctions on Iran as Tehran Threatens to Seize Hormuz Tankers',
-   summary:'Washington moved to unveil what Treasury Secretary Scott Bessent billed as an \'economic D-Day\' against Iran on Monday, vowing to \'sever every economic lifeline\' that sustains the government in what officials called the single greatest financial offensive ever mounted against Tehran. Iran responded in kind: its assembly advanced plans to charge service fees on Strait of Hormuz transits, and top security chief Mohsen Rezaei threatened to halt all oil flow through the waterway if neighbouring states join the US crackdown. Tehran also warned it could fine, detain or confiscate any vessel that crosses without its permit. Six months into the crisis, ship traffic through the strait is stuck near 20% of its pre-war average.',
-   source:'Reuters / CNN / Al Jazeera', tags:['Sanctions','Iran','Hormuz']},
+   headline:'US Rolls Out Its \'Greatest Financial Offensive Ever\' on Iran as Tehran Threatens to Seize Hormuz Tankers',
+   summary:'Washington began rolling out a sweeping global sanctions plan against Iran on Monday, days after Treasury Secretary Scott Bessent billed it as an \'economic D-Day\' and vowed to \'sever every economic lifeline\' that sustains the government — a package officials called the single greatest financial offensive ever mounted against Tehran. Crucially, the US signalled that China, Iran\'s biggest oil buyer, would not be exempt from the measures. Iran responded in kind, warning that any vessel crossing the Strait of Hormuz without its permit could face fines, seizure or confiscation, and advancing plans to charge service fees on transits. Six months into the crisis, throughput through the strait is running near 8-9 million barrels a day, well below the roughly 20 mb/d that flowed before the war.',
+   source:'Reuters / CNN / Bloomberg', tags:['Sanctions','Iran','Hormuz']},
 
   {featured:true, emoji:'🛢', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 24, 2026', impact:'high',
-   headline:'Brent Slips Toward $93 as Traders Weigh Fresh US Sanctions Against a Still-Elevated War Premium',
-   summary:'Brent crude fell about 1.4% to $93.09 a barrel and US WTI lost 1.6% to $85.65 on Monday as investors awaited details of Washington\'s toughest-ever sanctions push on Iran and Tehran shrugged off the threat of intensified pressure. Even after the pullback, both benchmarks sit well above where they traded before the US-Israel war on Iran erupted in late February, a measure of how deeply the Hormuz crisis remains lodged in prices. European TTF gas hovered near €65/MWh and Asian JKM LNG around $21.6/MMBtu as utilities kept scrambling to refill storage before winter. With emergency reserves thin, any sanctions-driven escalation could send crude sharply higher again.',
+   headline:'Oil Falls About 2.5% as US Sanctions Rollout Offers Little Clarity on the Hormuz Deadlock',
+   summary:'Brent crude dropped about 2.5% to $92.06 a barrel and US WTI fell a similar amount to $84.89 on Monday as Washington ramped up economic pressure on Iran but offered traders little clarity on how or when energy flows through the Strait of Hormuz might resume. Even after the pullback, both benchmarks sit well above where they traded before the US-Israel war on Iran erupted in late February, a measure of how deeply the Hormuz crisis remains lodged in prices. European TTF gas eased to around €61/MWh while Asian JKM LNG firmed near $22/MMBtu as utilities kept scrambling to refill storage before winter. With emergency reserves thin, any sanctions-driven escalation could send crude sharply higher again.',
    source:'CNBC / Reuters / Bloomberg', tags:['Brent','Oil Price','WTI']},
 
   // REGULAR
@@ -273,28 +273,28 @@ const NEWS = [
    summary:'Crude prices fell over the middle of August after the IEA and OPEC each cut their 2026 demand forecasts within days of each other. The IEA now sees global oil demand falling 1.6 mb/d this year, a further 510 kb/d cut, while OPEC trimmed its 2026 growth estimate to 580,000 b/d from 780,000 b/d in July. Both cited the ongoing closure of the Strait of Hormuz and elevated fuel prices as the drag on consumption. The rare downside alignment of the two agencies briefly outweighed the market\'s supply anxieties before sanctions jitters and thin reserves steadied prices.',
    source:'OilPrice / IEA / Reuters', tags:['Brent','WTI','Demand']},
 
-  {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 20, 2026', impact:'high',
-   headline:'Copper Eases From Its Record Toward $14,150 as LME Inventories Rebuild',
-   summary:'Copper retreated toward US$14,150 a tonne after a run to a record near $14,500 earlier in the summer, as a build-up in exchange inventories eased fears of near-term supply tightness. LME-monitored stocks stood at 238,575 tonnes on August 20, roughly 16% above their February low, cooling the physical squeeze that had pinned spot contracts at steep premiums. Even after the pullback the metal is up nearly 14% on the year, still riding data-center electricity demand and heavy grid investment. Copper remains the clearest market barometer of the AI-driven electrification boom.',
-   source:'Mining.com / Trading Economics / Reuters', tags:['Copper','Metals','LME']},
-
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'August 13, 2026', impact:'high',
-   headline:'Diesel and Jet Cracks Drive Atlantic Basin Refining Margins to Record Highs',
-   summary:'Atlantic Basin distillate crack spreads surged to record highs this month as Strait of Hormuz disruptions, Ukrainian drone strikes on Russian refineries and depleted US distillate stocks converged, the IEA noted in its August Oil Market Report. Diesel, jet fuel and gasoline cracks all climbed on seasonally higher demand and thin inventories, while global refinery throughput ran well below year-earlier levels. The squeeze in middle distillates is feeding straight through to pump and freight costs across Europe and the Atlantic. With stocks lean, margins are likely to stay elevated into the autumn.',
-   source:'IEA / Argus / Reuters', tags:['Diesel','Refining','Margins']},
+   date:'August 24, 2026', impact:'high',
+   headline:'Henry Hub Slides Below $2.80 as Lower 48 Gas Output Hits a Record 111.5 Bcf/d',
+   summary:'US natural gas fell to around $2.75/MMBtu at the Henry Hub as domestic production overwhelmed demand, output in the Lower 48 states averaging a record 111.5 bcf/d so far in August, up from 110.7 bcf/d in July. Inventories now sit about 6.7% above their five-year seasonal average, cushioning the US market even as the rest of the world scrambles for gas. The split with global benchmarks is stark: European TTF and Asian JKM have both roughly doubled since the Iran war began, while US prices stay anchored by the shale glut. Cheap, abundant domestic gas keeps the US the world\'s cost outlier and its swing LNG supplier.',
+   source:'EIA / Reuters / AGA', tags:['Henry Hub','Natural Gas','Shale']},
 
   {emoji:'💰', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'August 20, 2026', impact:'med',
-   headline:'Uranium Holds Near $86 With Long-Term Prices at an 18-Year High as Lithium Steadies',
-   summary:'Uranium spot has held near US$86 a pound of U3O8 while the long-term price indicator sits at US$97 — its highest in more than 18 years — as reactor restarts and AI-driven power demand tighten the market. Big Tech\'s widening string of nuclear deals continues to underwrite the rally in nuclear-fuel equities. Lithium, meanwhile, has steadied after a summer bounce, with China\'s benchmark carbonate contract around ¥148,000 a tonne — roughly $20,600 — up modestly on the month but far below its former peaks. The two critical-materials markets underscore how electrification and AI power demand keep reshaping battery and fuel inputs.',
-   source:'TradeTech / SunSirs / Farmonaut', tags:['Uranium','Lithium','Metals']},
+   headline:'Uranium Spot Climbs Toward $98 as the Long-Term Price Hits a Multi-Year High',
+   summary:'Uranium spot has climbed toward US$98 a pound of U3O8 while the long-term price indicator sits near its highest in more than a decade, as reactor restarts and AI-driven power demand tighten the market. Big Tech\'s widening string of nuclear deals continues to underwrite the rally in nuclear-fuel equities, and utilities have moved to lock in fuel well ahead of need. The move extends a steady grind higher that has taken spot up from the mid-$80s earlier in the summer. The tightening fuel market underscores how the nuclear revival tied to data-center power demand is feeding straight through to raw-material prices.',
+   source:'TradeTech / uranium.info / Reuters', tags:['Uranium','Nuclear','Metals']},
+
+  {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
+   date:'August 24, 2026', impact:'med',
+   headline:'Copper Eases and China Lithium Carbonate Slips to a Six-Month Low',
+   summary:'The battery- and grid-metals complex softened in late August, with copper easing back from its summer record toward US$14,200 a tonne as risk-off trading and a rebuild in exchange inventories cooled the physical squeeze. Lithium fell harder: China\'s benchmark carbonate contract dropped to about ¥140,000 a tonne — roughly $19,500 — its lowest in nearly six months, as ample supply met softer downstream demand. Even so, copper remains up strongly on the year, still riding data-center electricity demand and heavy grid investment. The divergence captures a market where AI-driven power buildout supports the wire while EV-battery raw materials stay oversupplied.',
+   source:'Trading Economics / SunSirs / Mining.com', tags:['Copper','Lithium','Metals']},
 
   {emoji:'🚫', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 24, 2026', impact:'high',
-   headline:'Hormuz Traffic Stuck at a Fifth of Normal as Iran Floats Transit \'Service Fees\'',
-   summary:'Ship traffic through the Strait of Hormuz is running near 20% of its pre-war average as Tehran clings to the chokepoint as leverage, threatening to strike any unauthorised tanker that attempts to cross. Iran\'s assembly has advanced plans to levy service fees on transits and warned that vessels breaching its arrangements could face fines, detention or confiscation. The waterway normally carries about a fifth of the world\'s oil and much of its LNG, so the near-halt remains the single largest energy-supply disruption on record. Analysts say normalisation now hinges entirely on the outcome of the sanctions standoff.',
+   headline:'Hormuz Throughput Stuck Near Half of Normal as Iran Warns of Tanker Seizures',
+   summary:'Oil moving through the Strait of Hormuz is running at roughly 8-9 million barrels a day, the US Department of Energy estimates, well below the some 20 mb/d that transited before the war as Tehran clings to the chokepoint as leverage. Iran has warned that vessels crossing without its permit could face fines, detention or confiscation, and its assembly has advanced plans to levy service fees on transits. The waterway normally carries about a fifth of the world\'s oil and much of its LNG, so the disruption remains the single largest energy-supply shock on record. Analysts say normalisation now hinges entirely on the outcome of the sanctions standoff.',
    source:'Al Jazeera / Reuters / Kpler', tags:['Hormuz','Iran','Shipping']},
 
   {emoji:'🏦', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -306,7 +306,7 @@ const NEWS = [
   {emoji:'⛴', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'August 10, 2026', impact:'high',
    headline:'Middle East LNG Flows to Europe Slump to Their Lowest Since 2019',
-   summary:'With Hormuz throttled, Middle East LNG flows to Europe have slumped to their weakest since 2019, forcing utilities into costly competition with Asian buyers for scarce flexible cargoes. Asian JKM LNG has firmed around $21.6/MMBtu and European TTF gas near €65/MWh, both elevated as the winter heating season approaches. Qatari volumes that would normally transit the strait have been diverted or delayed, tightening an already stretched market. The squeeze is a direct channel through which the oil-shipping crisis is now driving up European power and heating costs.',
+   summary:'With Hormuz throttled, Middle East LNG flows to Europe have slumped to their weakest since 2019, forcing utilities into costly competition with Asian buyers for scarce flexible cargoes. Asian JKM LNG has firmed near $22/MMBtu while European TTF gas has eased to around €61/MWh, both still far above pre-war levels as the winter heating season approaches. Qatari volumes that would normally transit the strait have been diverted or delayed, tightening an already stretched market. The squeeze is a direct channel through which the oil-shipping crisis is now driving up European power and heating costs.',
    source:'Kpler / ICIS / Bloomberg', tags:['LNG','Hormuz','Europe']},
 
   {emoji:'🌡', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -342,25 +342,25 @@ const NEWS = [
   {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'August 18, 2026', impact:'high',
    headline:'US Wind and Solar Supply About 20% of First-Half Power, Outpacing Coal and Nuclear',
-   summary:'Wind and solar together generated roughly 20% of US electricity in the first half of 2026, overtaking both coal and nuclear as combined output climbed about 10% on the year, despite the phase-out of federal incentives. Plunging module costs and higher power prices kept new capacity coming online, and utility-scale solar continues to lead US additions for the year. Pattern Energy\'s 3,650 MW SunZia project in New Mexico — the largest renewable facility ever built in the US — came fully online mid-year. Offshore wind remains the exception, its outlook trimmed amid policy changes and rising costs.',
-   source:'EIA / MarketScale / Reuters', tags:['Solar','Wind','SunZia']},
+   summary:'Wind and solar together generated roughly 20% of US electricity in the first half of 2026, overtaking both coal and nuclear as combined output climbed about 10% on the year, despite the phase-out of federal incentives. Over the past 20 years wind and utility-scale solar have grown from under 1% of US generation to about 17%, and utility-scale solar continues to lead new additions for the year. Plunging module costs and higher power prices kept fresh capacity coming online through the first half. Offshore wind remains the exception, its outlook trimmed amid policy changes and rising costs.',
+   source:'EIA / MarketScale / Reuters', tags:['Solar','Wind','Generation']},
+
+  {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
+   date:'August 21, 2026', impact:'high',
+   headline:'US Battery Boom Rolls On as Storage Is Procured Like Capacity, Not Just Energy',
+   summary:'Grid-scale batteries are increasingly being bought the way utilities buy firm capacity rather than as pure energy, a shift underscored by first-half data showing 368 utility-scale plants entering US service — 207 of them solar and 95 batteries, far ahead of any fossil category by project count. On August 18, LG Energy Solution opened a new battery factory in Lansing, Michigan, adding to a domestic manufacturing push. A key support has been the preservation of the 30%-plus federal investment tax credit for qualifying storage, which survived this year\'s broader rollback of clean-energy incentives. Storage is fast becoming the flexibility backbone that lets solar-heavy grids firm up their output.',
+   source:'MarketScale / CleanTechnica / Utility Dive', tags:['Storage','Batteries','Grid']},
 
   {emoji:'🇨🇳', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'August 12, 2026', impact:'high',
    headline:'China Curtailed a Record 360 TWh of Solar and Wind in the First Half of 2026',
-   summary:'China\'s clean-power boom is running into its grid: the country curtailed as much as 360 terawatt-hours of solar and wind generation between January and June, up 49% on the year, according to GEM and CREA estimates. Using weather-adjusted data, the analysts reckon China rejected about 26.1% of its total wind and solar output over the six months — a record share lost to insufficient transmission and flexibility. The strain follows a blistering buildout, with China commissioning nearly 370 GW of solar and 117 GW of wind last year, over 60% of global additions. The mismatch between generation and grid capacity is now the binding constraint on the world\'s largest renewables market.',
+   summary:'China\'s clean-power boom is running into its grid: the country curtailed as much as 360 terawatt-hours of solar and wind generation between January and June, up 49% on the year, according to GEM and CREA estimates. Using weather-adjusted data, the analysts reckon China rejected about 26.1% of its total wind and solar output over the six months — a record share lost to insufficient transmission and flexibility. The strain follows a blistering buildout, with China commissioning nearly 500 GW of renewable capacity last year, over 60% of global additions. The mismatch between generation and grid capacity is now the binding constraint on the world\'s largest renewables market.',
    source:'GEM / CREA / OilPrice', tags:['China','Curtailment','Grid']},
-
-  {emoji:'☀', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'August 21, 2026', impact:'med',
-   headline:'Cheap Modules Push Solar Into New Frontiers as the UK Clears a 400 MW Fen Project',
-   summary:'Plunging equipment costs and higher power prices are making solar viable in places once written off as too dark, cold or remote to pay off, reshaping who can access the technology. In Britain, the government granted planning permission to Low Carbon\'s 400 MW Beacon Fen solar farm on August 21, one of the largest in England. The IEA has said solar delivered the single largest share of global energy-demand growth for the first time last year, with PV additions topping 600 GW. The economics increasingly carry the buildout even where subsidies are thin.',
-   source:'Reuters / reNEWS / IEA', tags:['Solar','UK','Beacon Fen']},
 
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'August 19, 2026', impact:'high',
    headline:'US Bans Imported Power Inverters as Clean-Energy Credits Wind Down Under OBBBA',
-   summary:'Washington\'s tilt against imported clean-tech is sharpening: the FCC has moved to bar new internationally manufactured power inverters — the devices at the heart of solar PV and battery-storage systems — from being imported into the US, a fresh blow to supply chains dominated by Chinese makers. It lands alongside the One Big Beautiful Bill Act, under which wind and solar projects generally lose the 45Y and 48E tax credits if they start construction after July 4, 2026, or enter service after 2027. Developers warn the combination raises costs and clouds the pipeline just as AI-driven power demand surges. Even so, the EIA still expects a record 2026 buildout as cheap modules and corporate buyers keep projects moving.',
+   summary:'Washington\'s tilt against imported clean-tech is sharpening: regulators have moved to bar new internationally manufactured power inverters — the devices at the heart of solar PV and battery-storage systems — from entering the US, a fresh blow to supply chains dominated by Chinese makers. It lands alongside the One Big Beautiful Bill Act, under which wind and solar projects generally lose the 45Y and 48E tax credits if they start construction after July 4, 2026, or enter service after 2027. Developers warn the combination raises costs and clouds the pipeline just as AI-driven power demand surges. Even so, the EIA still expects a record 2026 buildout as cheap modules and corporate buyers keep projects moving.',
    source:'Congress.gov / Utility Dive / pv magazine', tags:['OBBBA','Inverters','US Policy']},
 
   {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
@@ -370,9 +370,9 @@ const NEWS = [
    source:'European Commission / ACER / Reuters', tags:['EU Storage','Gas','Winter']},
 
   {emoji:'⚔', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 22, 2026', impact:'high',
-   headline:'Iran Vows It \'Will Not Submit\' as Washington Prepares Its Economic Squeeze',
-   summary:'Iranian military leaders declared that Tehran \'will not submit\' as the US finalised plans for an unprecedented economic squeeze, keeping hostile rhetoric running hot on both sides in the days before the sanctions rollout. Iran has repeatedly tied any reopening of the Strait of Hormuz to sanctions relief and war reparations, and diplomats say an interim framework floated with Oman has yet to bridge those demands. The standoff has whipsawed crude, sending prices sliding and rebounding within weeks as each threat and counter-threat lands. Six months in, a durable path to de-escalation remains elusive.',
+   date:'August 24, 2026', impact:'high',
+   headline:'Pezeshkian Concedes Iran \'Cannot Continue With War Forever\' Even as Commanders Vow No Surrender',
+   summary:'A rare public split emerged in Tehran as President Masoud Pezeshkian acknowledged that Iran \'cannot continue with war forever,\' hinting at appetite for a deal even as military leaders insisted the country \'will not submit\' to Washington\'s economic squeeze. Iran has repeatedly tied any reopening of the Strait of Hormuz to sanctions relief and war reparations, and diplomats say an interim framework floated with Oman has yet to bridge those demands. The mixed signals whipsawed crude, which slid on the sanctions rollout but stayed alert to any sign of escalation. Six months in, a durable path to de-escalation remains elusive.',
    source:'CNN / NBC News / Al Jazeera', tags:['Iran','Sanctions','Hormuz']},
 ];
 
