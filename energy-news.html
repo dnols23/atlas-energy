@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$97.31</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€75.00</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.97</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$99.30</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€78.71</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.95</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.109</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:97.31, unit:'/bbl',     chg:+0.86, pct:+0.89},
-  {label:'WTI Crude',      val:92.37, unit:'/bbl',     chg:+0.82, pct:+0.90},
-  {label:'Natural Gas TTF',val:75.00, unit:'€/MWh',    chg:+1.70, pct:+2.32},
-  {label:'Henry Hub',      val:2.97,  unit:'/MMBtu',   chg:-0.01, pct:-0.34},
-  {label:'LNG Asia JKM',   val:24.30, unit:'/MMBtu',   chg:+0.55, pct:+2.31},
-  {label:'Coal API2',      val:130.50,unit:'/t',       chg:-0.40, pct:-0.31},
-  {label:'EU Carbon ETS',  val:82.10, unit:'€/t CO₂',  chg:+0.60, pct:+0.74},
-  {label:'Uranium',        val:89.50, unit:'/lb U₃O₈', chg:-0.10, pct:-0.11},
+  {label:'Brent Crude',    val:99.30, unit:'/bbl',     chg:+2.85, pct:+2.96},
+  {label:'WTI Crude',      val:94.44, unit:'/bbl',     chg:+2.76, pct:+3.01},
+  {label:'Natural Gas TTF',val:78.71, unit:'€/MWh',    chg:+2.88, pct:+3.79},
+  {label:'Henry Hub',      val:2.95,  unit:'/MMBtu',   chg:+0.04, pct:+1.37},
+  {label:'LNG Asia JKM',   val:22.70, unit:'/MMBtu',   chg:+0.40, pct:+1.79},
+  {label:'Coal API2',      val:131.00,unit:'/t',       chg:+0.50, pct:+0.38},
+  {label:'EU Carbon ETS',  val:82.50, unit:'€/t CO₂',  chg:+0.40, pct:+0.49},
+  {label:'Uranium',        val:89.49, unit:'/lb U₃O₈', chg:-0.10, pct:-0.11},
   {label:'Solar Module',   val:0.109, unit:'/W',       chg:+0.001,pct:+0.46},
   {label:'Wind Turbine',   val:0.79,  unit:'/W (OEM)', chg:-0.002,pct:-0.25},
-  {label:'Lithium',        val:20500, unit:'/t',       chg:-300,  pct:-1.44},
-  {label:'Copper',         val:14420, unit:'/t',       chg:+140,  pct:+0.98},
+  {label:'Lithium',        val:19750, unit:'/t',       chg:-160,  pct:-0.80},
+  {label:'Copper',         val:14703, unit:'/t',       chg:+170,  pct:+1.17},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,18 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent tops $97 as US-Iran strikes and a shut Strait of Hormuz keep the oil rally alive',
-  'WTI holds near $92.4 with the Hormuz supply premium showing no sign of fading',
-  'European TTF gas near €75/MWh, its highest in more than three years, on renewed Gulf supply fears',
-  'Qatar extends its LNG force majeure into early November as Hormuz traffic stays halted',
-  'Asian LNG spot prices run more than 80% above pre-war levels after the Ras Laffan hit',
-  'EU gas storage stuck near 66% — its lowest for the date since 2018 — heading into winter',
-  'Russia logs a record 21 drone strikes on refineries in August; diesel export ban extended to Sept 30',
-  'US diesel holds near a record $5.85 a gallon as refinery outages ripple through freight costs',
-  'OPEC+ keeps output policy steady at its Sept 6 meeting after finishing its cut rollback',
-  'Uranium spot near $89.5/lb as utilities lock in long-term nuclear fuel',
-  'Copper trades above $14,300/t near record highs on AI-driven grid demand',
-  'IEA: data-center electricity use set to more than double by 2030 to ~945 TWh on the AI boom',
+  'Brent nears $99 and WTI tops $94 as fresh strikes on Saudi energy sites reignite the rally',
+  'Six months into the Hormuz blockade, Qatar has lost about $24bn in LNG sales, exports down ~96%',
+  'European TTF gas jumps toward €79/MWh, its highest in more than three and a half years',
+  'A laden Qatari LNG tanker makes a rare attempt to exit the Strait of Hormuz after weeks stuck',
+  'Copper sets a fresh record above $14,700/t on AI data-center demand and supply shocks',
+  'EU gas storage near 65% — a 15-year low for the date — as winter refill stays costly',
+  'Ukraine strikes Russia\'s giant Ryazan refinery; Moscow weighs extending its diesel ban to year-end',
+  'US diesel holds near a record ~$5.85 a gallon; pump gasoline topped $4 over Labor Day',
+  'OPEC+ leaves output policy unchanged for October after completing its cut rollback',
+  'US installed a record 20.2 GWh of battery storage in Q2, up 108% from the first quarter',
+  'China curtailed ~360 TWh of wind and solar in H1 as coal generation still edged up ~3%',
+  'IEA: data-center electricity use on track to top 1,000 TWh in 2026 as the AI boom accelerates',
 ];
 
 function buildBreaking() {
@@ -255,70 +255,70 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'📈', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 7, 2026', impact:'high',
-   headline:'Brent Holds Above $97 as US-Iran Strikes Keep the Oil Rally Alive',
-   summary:'Brent crude traded near $97.31 a barrel and WTI held around $92.37 in early September, sustaining a rally driven by renewed US-Iran strikes and a Strait of Hormuz that remains effectively shut to much of its traffic. Traders continue to price a hefty supply-risk premium as the world\'s most important oil chokepoint, which handles roughly a fifth of global crude and LNG, stays throttled. OPEC+ has finished restoring its 2023 cuts, but export disruptions and the loss of Iranian and Gulf barrels leave little spare capacity to calm the market. Both benchmarks are sharply higher on the year with no clear off-ramp in sight.',
-   source:'Reuters / Trading Economics / Fortune', tags:['Brent','WTI','Oil Price']},
+   date:'September 8, 2026', impact:'high',
+   headline:'Brent Nears $99 as Fresh Strikes on Saudi Energy Sites Reignite the Rally',
+   summary:'Brent crude climbed toward $99.30 a barrel and WTI topped $94.44 on September 8, up about 3% on the day and near a three-month high, after renewed strikes on Saudi energy infrastructure added to a supply premium already inflated by the shut Strait of Hormuz. Both benchmarks now sit close to 40% above pre-war levels, with the world\'s most important oil chokepoint — normally a fifth of global crude and LNG flows — still effectively closed. OPEC+ has finished restoring its 2023 cuts but has little usable spare capacity to calm the market. Traders see no clear off-ramp while the US-Iran conflict grinds on.',
+   source:'Reuters / Trading Economics / Vantage', tags:['Brent','WTI','Oil Price']},
 
   {featured:true, emoji:'⛴', bgColor:'rgba(249,115,22,0.15)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 4, 2026', impact:'high',
-   headline:'Qatar Extends LNG Force Majeure Into November as Hormuz Stays Halted',
-   summary:'QatarEnergy has extended its force majeure on LNG cargoes into early November, keeping much of the world\'s largest LNG exporter offline as tanker traffic through the Strait of Hormuz remains halted. Iranian strikes on the Ras Laffan complex earlier this year knocked out roughly 17% of Qatar\'s export capacity, sidelining about 12.8 million tonnes a year of production for what could be three to five years. Italy\'s Edison and other buyers have been told the outage now runs past September. Asian spot LNG prices are more than 80% above pre-war levels as buyers scramble for scarce cargoes.',
-   source:'Bloomberg / CNBC / Al Jazeera', tags:['Qatar','LNG','Hormuz']},
+   date:'September 8, 2026', impact:'high',
+   headline:'Six Months Into the Hormuz Blockade, Qatar Has Lost $24 Billion in LNG Sales',
+   summary:'Half a year after Iranian strikes on the Ras Laffan complex and the closure of the Strait of Hormuz crippled its exports, Qatar has lost roughly $24 billion in LNG sales as shipments tumbled by as much as 96%, according to figures cited by Euronews. QatarEnergy managed just 18 cargoes in the first six months of the war, against 509 in the same period a year earlier, and has widened force majeure to 24 shipments running into November. Qatar and the UAE are now testing convoy escorts and rare transit windows to keep some gas moving. Asian and European buyers continue to scramble for scarce cargoes at multiples of pre-war prices.',
+   source:'Euronews / Bloomberg / CSIS', tags:['Qatar','LNG','Hormuz']},
 
   // REGULAR
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 4, 2026', impact:'high',
-   headline:'US Diesel Holds Near an All-Time Record $5.85 a Gallon',
-   summary:'The national average diesel price is hovering near an all-time record around $5.85 a gallon, above the previous $5.82 peak set in June 2022, as a roughly six-month war with Iran keeps disrupting the world\'s flow of fuel. Reduced refining capacity abroad and tight global inventories are compounding the squeeze, with regular gasoline averaging about $4.15 a gallon, up from $2.98 before the war. Higher diesel is pushing up transportation and freight costs across a long list of goods. Refinery outages in Russia and the Middle East leave little slack to bring prices down.',
+   date:'September 5, 2026', impact:'high',
+   headline:'US Diesel Holds Near an All-Time Record as Gasoline Tops $4 Over Labor Day',
+   summary:'The national average diesel price is hovering near an all-time record around $5.85 a gallon, above the previous $5.82 peak set in June 2022, as a roughly six-month war with Iran keeps disrupting the world\'s flow of fuel. Retail gasoline pushed above $4 a gallon over the Labor Day weekend, up sharply from around $2.98 before the war. Reduced refining capacity abroad and tight global inventories are compounding the squeeze and lifting transport and freight costs across a long list of goods. Refinery outages in Russia and the Middle East leave little slack to bring prices down.',
    source:'GasBuddy / NPR / Reuters', tags:['Diesel','Refining','Prices']},
 
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 8, 2026', impact:'high',
-   headline:'European Gas Climbs Toward €75/MWh, Highest in Over Three Years',
-   summary:'Dutch TTF, Europe\'s benchmark gas price, rose above €75/MWh on September 8, up more than 2% on the day and its highest level in over three and a half years, as the extended Qatari LNG outage and renewed US-Iran fighting stoked supply fears. Gulf cargoes remain throttled just as the continent struggles to refill storage before winter. Prices are multiples of US Henry Hub, underscoring Europe\'s exposure to seaborne gas. Analysts warn any early cold snap could push the market sharply higher from an already stretched base.',
+   date:'September 9, 2026', impact:'high',
+   headline:'European Gas Jumps Toward €79/MWh, Highest in More Than Three Years',
+   summary:'Dutch TTF, Europe\'s benchmark gas price, rose to about €78.71/MWh on September 9, up nearly 4% on the day and its highest level in more than three and a half years, as the extended Qatari LNG outage and renewed US-Iran fighting kept supply fears alive. TTF is now up roughly 30% over the past month and more than double its level a year ago. Reduced Gulf deliveries have slowed storage injections just as the continent tries to build a winter buffer. Analysts warn any early cold snap could push the market sharply higher from an already stretched base.',
    source:'Trading Economics / Euronews / ICIS', tags:['TTF','Gas','Europe']},
 
   {emoji:'🌍', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 4, 2026', impact:'med',
-   headline:'EU Carbon Firms Above €82/t on the Bullish Gas Impulse',
-   summary:'EU carbon permits firmed toward €82 a tonne, tracking the surge in gas prices that makes coal-to-gas switching costlier and lifts the cost of compliance. Permits have traded in a roughly €60-€82 band through 2025-26 and have pushed to the upper end with the energy-price squeeze. A shrinking cap and falling free allocations add to the structural bid. Some analysts see permits testing higher still if the gas market stays elevated into winter.',
-   source:'ICE / Carbon Pulse / CarbonCredits', tags:['Carbon','EU ETS','Policy']},
+   headline:'EU Carbon Firms Near €82.5/t on the Bullish Gas Impulse',
+   summary:'EU carbon permits firmed toward €82.5 a tonne, tracking the surge in gas prices that makes coal-to-gas switching costlier and lifts the cost of compliance. The benchmark rallied to a six-month high near €86.6 in July before easing, and has held the upper end of its range through the energy-price squeeze. A shrinking cap and falling free allocations add to a structural bid that some analysts see carrying permits toward €100 by year-end. Sustained strength in the gas market keeps upside risk in play into winter.',
+   source:'ICE / ABN AMRO / CarbonCredits', tags:['Carbon','EU ETS','Policy']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 3, 2026', impact:'med',
-   headline:'Copper Trades Above $14,300/t Near Record as AI Grid Demand Bites',
-   summary:'Copper held above $14,300 a tonne on the LME in early September, close to record highs and up around 15% on the year, as structural demand from grid electrification and the AI data-center buildout underpins prices. Individual hyperscale AI facilities can consume 40,000-50,000 tonnes of copper apiece, and analysts see data centers absorbing more than half a million tonnes a year by 2030. Tight mine supply and drawn-down exchange inventories reinforce the squeeze. The IEA continues to flag copper as a key bottleneck for the energy transition.',
-   source:'Mining.com / IEA / Fastmarkets', tags:['Copper','Metals','Grid']},
+   date:'September 9, 2026', impact:'high',
+   headline:'Copper Sets a Fresh Record Above $14,700/t on AI and Supply Shocks',
+   summary:'Three-month copper on the LME hit a record around $14,703 a tonne on September 9, eclipsing the prior day\'s peak as tariff expectations, mine disruptions and the AI data-center boom collided. Weak Chilean output, a shut Indonesian smelter and a new Congolese export ban have tightened supply just as hyperscale facilities ramp copper demand; LME warehouse stocks have shed nearly 40% since late May. Analysts see data centers absorbing more than half a million tonnes a year by 2030. The IEA continues to flag copper as a key bottleneck for the energy transition.',
+   source:'Business Recorder / SCMP / Fastmarkets', tags:['Copper','Metals','Grid']},
 
   {emoji:'⚛', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 3, 2026', impact:'med',
    headline:'Uranium Spot Holds Near $89.5/lb as Utilities Lock In Supply',
-   summary:'Uranium\'s spot price held around $89.5 a pound of U3O8 in early September, with the long-term indicator higher still near $97 as utilities move to secure future supply. Reactor restarts, new builds and Big Tech nuclear deals are pulling buyers into the market well ahead of need, while constrained mined output tightens the balance. Surging AI data-center power demand has sharpened the structural deficit. That imbalance keeps the fuel market bid after a multi-year recovery.',
+   summary:'Uranium\'s spot price held around $89.49 a pound of U3O8 in early September, with the long-term indicator higher still as utilities move to secure future supply. Reactor restarts, new builds and Big Tech nuclear deals are pulling buyers into the market well ahead of need, while constrained mined output tightens the balance. Surging AI data-center power demand has sharpened the structural deficit. That imbalance keeps the fuel market bid after a multi-year recovery.',
    source:'UxC / Sprott / TradeTech', tags:['Uranium','Nuclear','Utilities']},
 
   {emoji:'🎯', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 6, 2026', impact:'high',
-   headline:'Russia\'s Refinery Crisis Deepens as Diesel Ban Runs Toward Year-End',
-   summary:'A record 21 Ukrainian drone strikes on Russian refineries in August drove crude processing to about 3.8 million b/d, its lowest in more than two decades, cutting gasoline output about 20% and diesel roughly 23%. Moscow has extended its diesel and marine-fuel export ban through September 30 and is weighing a further extension to year-end, and the strikes have continued into September with a hit on the Ryazan refinery on the 6th. Russia normally supplies around 10% of the world\'s diesel, so the curbs tighten a market already strained by the Middle East war. At least 26 Russian refineries have faced shutdowns as seasonal maintenance compounds the damage.',
-   source:'Reuters / Kyiv Post / RFE-RL', tags:['Russia','Refining','Ukraine']},
+   headline:'Ukraine Strikes Russia\'s Giant Ryazan Refinery as Diesel Ban Runs On',
+   summary:'Ukrainian drones struck the Ryazan refinery — one of Russia\'s largest, with capacity near 17 million tonnes of crude a year — on September 6, extending a campaign that pushed Russian refining volumes to about 3.6 million b/d in July, the lowest since 2002. Moscow has extended its diesel and marine-fuel export ban through September 30 and is weighing pushing it to year-end as domestic shortages persist and dozens of refineries stay offline. Russia normally supplies around 10% of the world\'s diesel, so the curbs tighten a market already strained by the Middle East war. Moscow has even struck a deal to process some crude at a private refinery in Kazakhstan.',
+   source:'Reuters / Kyiv Independent / RFE-RL', tags:['Russia','Refining','Ukraine']},
 
   {emoji:'❄', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 5, 2026', impact:'high',
-   headline:'EU Gas Storage Stuck Near 66% — Lowest for the Date Since 2018',
-   summary:'European gas storage sat around 66% of capacity heading into September, well below the seasonal norm and the lowest for the time of year since 2018, according to analysts tracking GIE data. A costly, disrupted refill season — squeezed by the extended Qatari LNG force majeure and the loss of Gulf cargoes — has left the bloc with its thinnest winter buffer in years, around 31 bcm. Stocks are far under last year\'s level for the same date. Analysts warn the market is acutely exposed to any early cold snap.',
-   source:'GIE AGSI+ / Columbia CGEP / Reuters', tags:['EU Storage','Gas','Winter']},
+   date:'September 3, 2026', impact:'high',
+   headline:'Europe Enters Winter With Gas Storage at a 15-Year Low',
+   summary:'European gas storage sat near 65% of capacity in early September, the lowest for the time of year in about 15 years, as delayed purchases and renewed Iran-US fighting drove LNG prices to a three-and-a-half-year high. A costly, disrupted refill season — squeezed by the extended Qatari force majeure and lost Gulf cargoes — has left the bloc with its thinnest winter buffer in years and well below the 90% target once sought for November. Analysts note expanded regasification capacity should help offset the low stocks, but the system has little margin for error. Any early cold snap could stress the market sharply.',
+   source:'Columbia CGEP / Bloomberg / Reuters', tags:['EU Storage','Gas','Winter']},
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 6, 2026', impact:'med',
-   headline:'OPEC+ Holds Output Policy Steady at Its September Meeting',
-   summary:'OPEC+ kept its output policy unchanged at its September 6 meeting, having completed the rollback of its 2023 voluntary cuts with a final 188,000 b/d hike for September. Delegates signalled the group will likely hold quotas steady through the rest of the year amid continued Middle East supply uncertainty, before turning to 2027 quota talks. In practice many members cannot pump to their allotments because of technical limits and export disruptions, so the nominal restoration adds little real crude to a tight market. The alliance is now focused on managing any surplus as flows normalize.',
-   source:'Reuters / OPEC / CNBC', tags:['OPEC+','Quotas','Supply']},
+   headline:'OPEC+ Leaves Output Policy Unchanged for October',
+   summary:'The eight-nation OPEC+ core agreed at a virtual meeting on September 6 to keep required production levels steady for October, having completed the rollback of its 2023 voluntary cuts with a final 188,000 b/d hike for September. Delegates signalled the group will likely hold quotas through the rest of the year amid continued Middle East supply uncertainty before turning to 2027 talks. In practice many members cannot pump to their allotments because of technical limits and export disruptions, so the nominal restoration adds little real crude to a tight market. The alliance is focused on managing flows as it defends market share.',
+   source:'Energy Connects / Reuters / OPEC', tags:['OPEC+','Quotas','Supply']},
 
   {emoji:'🖥', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'September 2, 2026', impact:'high',
-   headline:'IEA: Data-Center Electricity Use Set to More Than Double by 2030',
-   summary:'Global electricity demand from data centers is on course to more than double by 2030 to around 945 terawatt-hours — slightly more than Japan\'s entire electricity consumption today — with AI the single biggest driver, the IEA says. Data-center power use grew 17% in 2025, and consumption from AI-focused facilities surged about 50%. In the US, data centers are set to account for almost half of electricity-demand growth through 2030. The strain is now rippling through power, gas, uranium and copper markets alike as hyperscalers scramble for generation.',
+   headline:'IEA: Data-Center Electricity Use on Track to Top 1,000 TWh in 2026',
+   summary:'Global electricity demand from data centers is on course to exceed 1,000 terawatt-hours in 2026 — roughly Japan\'s entire electricity consumption — and to roughly double by 2030 to around 945 TWh above today\'s level, with AI the single biggest driver, the IEA says. Data-center power use grew about 17% in 2025, and consumption from AI-focused facilities surged some 50%. In the US, data centers are set to account for almost half of electricity-demand growth through 2030. The strain is now rippling through power, gas, uranium and copper markets alike as hyperscalers scramble for generation.',
    source:'IEA / Reuters', tags:['Data Centers','AI','Electricity']},
 
   {emoji:'🛑', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -328,19 +328,19 @@ const NEWS = [
    source:'Bloomberg / Reuters / IEA', tags:['Demand','Oil','Prices']},
 
   {emoji:'🇨🇳', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'September 7, 2026', impact:'high',
-   headline:'China\'s Clean-Energy Surge Is Starting to Squeeze Out Coal',
-   summary:'China\'s rapid build-out of wind and solar is finally denting coal, with the first absolute decline in coal-fired generation since 2015 as thermal output slipped even while electricity demand jumped about 5%. Wind and solar reached 22% of the country\'s power mix in 2025, up from 18% a year earlier, and for the first month ever topped 25% in early 2026. Solar generation alone grew about 40% year on year. Analysts say the world\'s largest power market may be nearing the point where clean energy starts to cover most incremental demand.',
-   source:'Electrek / Ember / Reuters', tags:['China','Solar','Coal']},
+   date:'September 8, 2026', impact:'high',
+   headline:'China Wasted Enough Clean Power to Cut Coal — but Curtailment Soared Instead',
+   summary:'China curtailed about 360 terawatt-hours of wind and solar in the first half of 2026, up 49% year on year and enough to have covered all of the country\'s power-demand growth and let coal generation fall, analysts say. Instead, grid bottlenecks meant coal-fired output still edged up around 3% as some 30 GW of new coal capacity came online. Even so, wind and solar capacity has now overtaken coal for the first time, and clean energy is set to reach nearly two-thirds of total generating capacity by year-end. The gap between capacity and usable output has become the defining challenge for the world\'s largest power market.',
+   source:'Climate Home / Global Energy Monitor / Ember', tags:['China','Solar','Coal']},
 
   {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'September 2, 2026', impact:'high',
-   headline:'US Battery Storage Set to Jump From 44 GW to 68 GW in 2026',
-   summary:'Utility-scale battery storage is on track to expand from about 44 GW at the end of 2025 to roughly 68 GW in 2026 and 89 GW in 2027, cementing its place as the fastest-growing source of new US grid capacity. Developers are racing to firm solar output and capture peak-price windows as loads climb. Solar, wind and storage together are set to supply the overwhelming majority of new US generating capacity this year. The buildout is holding up even as federal clean-energy tax credits begin to wind down.',
-   source:'EIA / Environment America / ENR', tags:['Batteries','Storage','Grid']},
+   date:'September 4, 2026', impact:'high',
+   headline:'US Installs a Record 20.2 GWh of Battery Storage in the Second Quarter',
+   summary:'The US installed a record 20.2 GWh of grid battery storage in the second quarter of 2026, up 108% from the first quarter, cementing storage as the fastest-growing source of new capacity, according to industry trackers. Developers are racing to firm solar output and capture peak-price windows as AI-driven loads climb, with the full year on track for roughly 71 GWh. The EIA sees US solar, wind and storage together adding more than 80 GW of capacity in the year ahead. The buildout is holding up even as federal clean-energy tax credits begin to wind down.',
+   source:'EIA / Wood Mackenzie / ENR', tags:['Batteries','Storage','Grid']},
 
   {emoji:'🌱', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'August 27, 2026', impact:'high',
+   date:'August 27, 2026', impact:'med',
    headline:'Solar, Wind and Storage on Track for 99% of 2026 US Capacity Additions',
    summary:'Solar, wind and battery storage are forecast to make up about 99% of new US electricity-generating capacity in 2026, according to EIA data highlighted by clean-energy groups. The US is projected to add 43.4 GW of solar (about 51% of the total), 24.3 GW of battery storage (28%) and 11.8 GW of wind (14%) this year. Cheap equipment, corporate power demand and the AI-driven load surge are keeping the pipeline near record levels despite political headwinds. Developers caution that winding-down tax credits and new sourcing rules could slow the pace after 2027.',
    source:'Environment America / EIA / ASES', tags:['Solar','Wind','Storage']},
@@ -354,26 +354,26 @@ const NEWS = [
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'August 22, 2026', impact:'high',
    headline:'US Clean-Energy Credits Wind Down Under OBBBA as FEOC Rules Bite',
-   summary:'Federal tax credits for wind and solar generally end for projects placed in service after 2027 unless construction began by July 4, 2026, under the One Big Beautiful Bill Act. Expanded \'foreign entity of concern\' rules deny credits to projects that buy components from or are controlled by Chinese-linked entities, reshaping supply chains. Developers say the uncertainty has paused or shrunk some utility-scale pipelines. Even so, cheap equipment and corporate demand are keeping 2026 additions near record levels.',
-   source:'Congress.gov / Latham & Watkins / Utility Dive', tags:['OBBBA','Policy','Solar']},
+   summary:'Federal tax credits for wind and solar generally end for projects placed in service after 2027 unless construction began by July 4, 2026, under the One Big Beautiful Bill Act. Expanded \'foreign entity of concern\' rules deny credits to projects that buy components from or are controlled by Chinese-linked entities, reshaping supply chains, while nuclear keeps most of its incentives through 2032. Developers say the uncertainty has paused or shrunk some utility-scale pipelines. Even so, cheap equipment and corporate demand are keeping 2026 additions near record levels.',
+   source:'Congress.gov / Mintz / Utility Dive', tags:['OBBBA','Policy','Solar']},
 
-  {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'September 5, 2026', impact:'high',
-   headline:'EU Formally Joins the US-Led Sanctions Campaign Against Iran',
-   summary:'The European Union has formally joined the US-led sanctions campaign against Iran over its attacks on shipping in the Strait of Hormuz, hardening the West\'s response to the conflict. The move layers additional pressure on Tehran\'s oil and shipping networks alongside continued US measures targeting the shadow trade that moves Iranian barrels. South Korea has said it is weighing a military role, while Washington has ruled out peace talks until the Hormuz attacks stop. The coordinated stance signals a protracted standoff with lasting implications for energy flows.',
-   source:'Bloomberg / Reuters / European Commission', tags:['Sanctions','Iran','EU']},
+  {emoji:'🇰🇷', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
+   date:'September 4, 2026', impact:'med',
+   headline:'US and South Korea Agree on More Than $20 Billion Texas Gas Investment',
+   summary:'Washington and Seoul agreed on a package of more than $20 billion in South Korean investment in a Texas gas-power complex, part of a broader energy and industrial deal as the two allies deepen cooperation amid the global supply squeeze. The plan channels Korean capital into US generation and LNG-linked infrastructure at a moment when American gas exports are in high demand. It underscores how the Hormuz crisis is redrawing energy trade toward Atlantic and US Gulf suppliers. Backers say it should firm long-term offtake for US LNG and power.',
+   source:'Reuters / Rigzone / Energy Intelligence', tags:['LNG','US-Korea','Investment']},
 
   {emoji:'⚔', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'September 3, 2026', impact:'high',
    headline:'Analysts See Hormuz Disruption Persisting Past Year-End',
-   summary:'Shipping and commodity analysts warn that disruption at the Strait of Hormuz is likely to last longer than earlier hoped after renewed escalation between the US and Iran. Damage to refineries in the Middle East and Russia, with too little spare capacity elsewhere, is expected to keep global fuel prices elevated well into next year. BMI still holds a base case for a preliminary deal to reopen the strait, but tanker owners are weighing steep war-risk premiums against convoy escorts. Some fear the standoff could grind on deep into 2027.',
-   source:'Reuters / BMI / OilPrice.com', tags:['Iran','Hormuz','Oil']},
+   summary:'Shipping and commodity analysts warn that disruption at the Strait of Hormuz is likely to last longer than earlier hoped after renewed escalation between the US and Iran, with about 0.6 million b/d of Middle East crude expected to stay shut in through the end of next year. Damage to refineries in the Middle East and Russia, with too little spare capacity elsewhere, is set to keep global fuel prices elevated well into 2027. Some analysts still hold a base case for a preliminary deal to reopen the strait, but tanker owners are weighing steep war-risk premiums against convoy escorts. The standoff hinges on competing US and Iranian visions for control of the waterway.',
+   source:'Reuters / BMI / CRS', tags:['Iran','Hormuz','Oil']},
 
   {emoji:'🚢', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'August 3, 2026', impact:'high',
-   headline:'Second Qatari LNG Tanker Struck in Hormuz Within a Month',
-   summary:'A second LNG tanker carrying a Qatari cargo was struck by a projectile while transiting the Strait of Hormuz, with security consultancies identifying the vessel as the Gaslog Shanghai, deepening the shipping crisis that has frozen Gulf gas exports. The attacks prompted Qatar to pause efforts to revive production and widen its force majeure on cargoes. Almost 90% of the LNG that transited Hormuz in 2025 was bound for Asia, and the waterway remains closed to Qatari LNG. War-risk insurance and rerouting costs have surged for the few owners still willing to sail.',
-   source:'Euronews / Bloomberg / Daily News Egypt', tags:['Hormuz','LNG','Shipping']},
+   date:'September 7, 2026', impact:'high',
+   headline:'A Laden Qatari LNG Tanker Makes a Rare Attempt to Exit Hormuz',
+   summary:'A loaded Qatari LNG tanker made a rare attempt to transit out of the Strait of Hormuz in early September after weeks in which the waterway stayed effectively closed to gas cargoes, Bloomberg reported. The move — shadowed by heavy war-risk insurance and escort arrangements — is being watched as a test of whether even a trickle of Gulf LNG can resume. Almost 90% of the LNG that transited Hormuz in 2025 was bound for Asia, and buyers there and in Europe remain starved of supply. Owners still willing to sail face soaring premiums and rerouting costs.',
+   source:'Bloomberg / Euronews / Vantage', tags:['Hormuz','LNG','Shipping']},
 ];
 
 // ─────────────────────────────────────────────
