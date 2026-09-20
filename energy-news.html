@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$99.29</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€78.50</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.91</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.107</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$103.21</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€79.52</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.88</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.106</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:99.29, unit:'/bbl',     chg:+1.16, pct:+1.18},
-  {label:'WTI Crude',      val:95.60, unit:'/bbl',     chg:+1.05, pct:+1.11},
-  {label:'Natural Gas TTF',val:78.50, unit:'€/MWh',    chg:+1.54, pct:+2.00},
-  {label:'Henry Hub',      val:2.91,  unit:'/MMBtu',   chg:+0.01, pct:+0.34},
-  {label:'LNG Asia JKM',   val:28.50, unit:'/MMBtu',   chg:+0.20, pct:+0.71},
-  {label:'Coal API2',      val:149.00,unit:'/t',       chg:+0.50, pct:+0.34},
-  {label:'EU Carbon ETS',  val:84.93, unit:'€/t CO₂',  chg:+0.85, pct:+1.01},
-  {label:'Uranium',        val:89.99, unit:'/lb U₃O₈', chg:+0.49, pct:+0.55},
-  {label:'Solar Module',   val:0.107, unit:'/W',       chg:-0.001,pct:-0.92},
+  {label:'Brent Crude',    val:103.21,unit:'/bbl',     chg:-1.62, pct:-1.54},
+  {label:'WTI Crude',      val:100.30,unit:'/bbl',     chg:-1.61, pct:-1.58},
+  {label:'Natural Gas TTF',val:79.52, unit:'€/MWh',    chg:+3.16, pct:+4.14},
+  {label:'Henry Hub',      val:2.88,  unit:'/MMBtu',   chg:-0.03, pct:-1.03},
+  {label:'LNG Asia JKM',   val:28.70, unit:'/MMBtu',   chg:+0.20, pct:+0.70},
+  {label:'Coal API2',      val:144.65,unit:'/t',       chg:-0.10, pct:-0.07},
+  {label:'EU Carbon ETS',  val:84.20, unit:'€/t CO₂',  chg:+0.30, pct:+0.36},
+  {label:'Uranium',        val:89.99, unit:'/lb U₃O₈', chg:+0.10, pct:+0.11},
+  {label:'Solar Module',   val:0.106, unit:'/W',       chg:-0.001,pct:-0.93},
   {label:'Wind Turbine',   val:0.79,  unit:'/W (OEM)', chg:-0.001,pct:-0.13},
-  {label:'Lithium',        val:21900, unit:'/t',       chg:+170,  pct:+0.78},
-  {label:'Copper',         val:14300, unit:'/t',       chg:-233,  pct:-1.60},
+  {label:'Lithium',        val:18900, unit:'/t',       chg:-160,  pct:-0.84},
+  {label:'Copper',         val:14480, unit:'/t',       chg:-53,   pct:-0.36},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,19 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Trump signs the Graham Act, arming Washington with up to 100% tariffs on big buyers of Russian oil; India pushes back within a day',
-  'Oil eases on Sept 19 — Brent near $99, WTI near $96 — after surging to about $113 on Sept 9',
-  'IEA says over 10 million b/d of Gulf output remains shut in — the largest supply disruption in the history of the oil market',
-  'Asian LNG spot (JKM) holds in the high-$28s/MMBtu, its strongest in about two and a half years, as Gulf outages divert cargoes',
-  'European TTF gas steadies near €78/MWh after a five-week rally as supply edges up',
-  'Half of Russia\'s six biggest diesel refineries halt or slash output after Ukrainian drone strikes; Kinef shuts completely',
-  'US average diesel stays above $6 a gallon as the global distillate squeeze moves downstream',
+  'Saudi Arabia shuts its East-West pipeline after drone strikes and reroutes crude back through the contested Strait of Hormuz',
+  'Oil eases on Sept 18 — Brent near $103, WTI near $100 — as a Saudi export workaround calms supply fears',
+  'IEA says more than 10 million b/d of Gulf output remains shut in — the largest supply disruption in the history of the oil market',
+  'Saudi crude output falls to its lowest since 1990 as Hormuz tanker flows stay choked, EIA says',
+  'European TTF gas jumps past €79/MWh, its highest since December 2022, on thin winter storage',
+  'Asian LNG spot (JKM) holds in the high-$28s/MMBtu, near a two-and-a-half-year high, as Gulf outages divert cargoes',
+  'OPEC+ holds October output steady after completing the rollback of its 2023 voluntary cuts',
   'IEA deepens its 2026 oil-demand cut to 2.5M b/d, the steepest annual drop since 2020',
-  'US battery storage sets a Q2 record of 20.2 GWh and is on track for about 71 GWh of installs in 2026',
-  'OPEC+ completes the rollback of its 2023 voluntary cuts, then signals it will hold output steady',
-  'EU carbon climbs to about €85/t, its highest since July, as the CBAM takes full effect on imports',
-  'Copper hits a record $14,533/t on Sept 8 before easing on US tariff and supply concerns',
+  'US average diesel stays above $6 a gallon as the global distillate squeeze moves downstream',
+  'Copper hits a record $14,875/t on Sept 12 before its first losing week since June',
+  'US DOE closes a $1.9B loan to restart the Duane Arnold nuclear plant, with Google as anchor customer',
+  'EU carbon firms near €84/t as a looming 2026-27 supply deficit lifts the market',
+  'Lithium slides to its lowest of 2026, under 135,000 CNY/t, on a more comfortable supply outlook',
 ];
 
 function buildBreaking() {
@@ -254,47 +255,47 @@ function buildBreaking() {
 // ─────────────────────────────────────────────
 const NEWS = [
   // FEATURED
-  {featured:true, emoji:'✍️', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'September 18, 2026', impact:'high',
-   headline:'Trump Signs the Graham Act, Arming Washington With 100% Tariffs on Buyers of Russian Oil',
-   summary:'President Trump signed the Lindsey O. Graham Sanctioning Russia and Iran Act on September 18, handing Washington the power to impose tariffs of up to 100% on any country that buys large volumes of Russian oil and gas. The House had cleared the bill 262-159 on September 16 after the Senate passed it 86-11 in August. India, the world\'s single largest buyer of Russian crude at roughly 1.6 million barrels a day, pushed back within a day, warning that fresh tariffs would damage bilateral trade. The law creates the authority but does not automatically levy the duty, leaving a tense window for negotiation.',
-   source:'Reuters / US News / OilPrice', tags:['Sanctions','Russia','India']},
-
   {featured:true, emoji:'📉', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 19, 2026', impact:'high',
-   headline:'Oil Eases Toward $99 as the Hormuz Risk Premium Cools From Its September Peak',
-   summary:'Brent crude traded near $99 a barrel on September 19 and US West Texas Intermediate eased to around $96, well off the roughly $113 spike hit on September 9 as traders banked profits from a month-long, war-driven surge. Even after the pullback both benchmarks remain far above their early-2026 levels, held up by a heavy risk premium tied to the near-total blockage of the Strait of Hormuz and more than 10 million barrels a day of Gulf output still shut in. The IEA has called the disruption the largest in the history of the global oil market. Any fresh escalation could quickly send prices back toward their recent highs.',
-   source:'Reuters / Trading Economics / Fortune', tags:['Brent','WTI','Hormuz']},
+   date:'September 18, 2026', impact:'high',
+   headline:'Oil Eases Toward $103 as Saudi Arabia Reroutes Crude Through Hormuz After Pipeline Attack',
+   summary:'Brent crude slipped to about $103 a barrel on September 18 and US West Texas Intermediate eased toward $100, both down more than 1.5% on the day, after Saudi Arabia moved to funnel more crude through the Strait of Hormuz to offset the loss of its attacked East-West pipeline. The workaround calmed fears that the outage would trigger another leg of the supply shock, though both benchmarks remain up roughly 13% over the past month. A heavy war-risk premium persists with more than 10 million barrels a day of Gulf output still shut in and Hormuz traffic choked. Any fresh escalation could quickly send prices back toward their September highs above $110.',
+   source:'Reuters / Trading Economics / CNBC', tags:['Brent','WTI','Hormuz']},
+
+  {featured:true, emoji:'🚨', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
+   date:'September 16, 2026', impact:'high',
+   headline:'Saudi East-West Pipeline Struck, Forcing Kingdom to Push Crude Back Through Contested Hormuz',
+   summary:'Saudi Arabia was forced to shut its onshore East-West crude pipeline in mid-September after drone attacks launched from Iraqi territory near the Iranian border, cutting the main route it had used to bypass the Strait of Hormuz and load barrels from the Red Sea port of Yanbu. In response, Aramco ramped up shuttle shipping through the contested strait and arranged ship-to-ship transfers at Ras Tanura and at Sohar in Oman, just outside the waterway, selling as much as 60 million barrels for September and October loadings. The move underscores how thin Saudi Arabia\'s export options have become during the Iran war. It leaves the kingdom\'s crude flows dangerously exposed to any further attacks on Hormuz shipping.',
+   source:'Bloomberg / OilPrice / Gulf News', tags:['Saudi','Hormuz','Pipeline']},
 
   // REGULAR
   {emoji:'🌏', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 14, 2026', impact:'high',
    headline:'Asian LNG Spot Holds in the High-$28s/MMBtu, Its Strongest in About Two and a Half Years',
-   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, rose into the high-$28s per MMBtu by September 11 from the mid-$25s the previous weekend, its strongest level in roughly two and a half years. Gulf outages tied to the Hormuz crisis keep diverting scarce winter cargoes as Asian and European buyers chase the same molecules. The spike widens the gap to US Henry Hub prices, which remain near $2.9/MMBtu on robust production and ample inventories. Analysts warn a cold northern-hemisphere winter could push JKM sharply higher again.',
+   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, climbed into the high-$28s per MMBtu by September 11 from the mid-$25s the previous weekend, its strongest level in roughly two and a half years. Gulf outages tied to the Hormuz crisis keep diverting scarce winter cargoes as Asian and European buyers chase the same molecules. The spike widens the gap to US Henry Hub prices, which have slipped near $2.9/MMBtu on robust production and ample inventories. Analysts warn a cold northern-hemisphere winter could push JKM sharply higher again.',
    source:'Canada LNG Group / S&P Global / Trading Economics', tags:['JKM','LNG','Asia']},
 
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 18, 2026', impact:'high',
-   headline:'European Gas Steadies Near €78/MWh as a Five-Week Rally Cools',
-   summary:'Dutch TTF, Europe\'s benchmark gas price, steadied around €78 a megawatt-hour on September 18 as rising supply ended a five-week, war-driven rally, before ticking back up about 2% toward €78.5 on September 19. Curtailed LNG flows from the Persian Gulf keep fears alive as Europe competes with Asia for winter cargoes. EU storage is filling but still leaves a thinner buffer than usual ahead of the heating season. Analysts warn an early cold snap could push prices sharply higher from an already stretched base.',
-   source:'Tradingpedia / Investing.com / ICIS', tags:['TTF','Gas','Europe']},
+   headline:'European Gas Jumps Past €79/MWh to Its Highest Since December 2022',
+   summary:'Dutch TTF, Europe\'s benchmark gas price, rose about 4% to €79.5 a megawatt-hour on September 18, its highest level since December 2022 and up roughly 25% over the past month. Curtailed LNG flows from the Persian Gulf keep Europe competing with Asia for winter cargoes just as the heating season nears. EU storage sits only around 68% full, well below the bloc\'s 80% target after record summer heat hampered restocking. Analysts warn an early cold snap could push prices sharply higher from an already stretched base.',
+   source:'Trading Economics / Investing.com / ICIS', tags:['TTF','Gas','Europe']},
 
   {emoji:'⛽', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 10, 2026', impact:'high',
    headline:'US Diesel Holds Above $6 a Gallon as the Distillate Squeeze Deepens',
-   summary:'The US national average diesel price topped $6 a gallon for the first time on September 10 and has stayed there, GasBuddy data show, as a global distillate crunch moves downstream. Crude is still available, but diesel is not: Ukrainian strikes on Russian refineries, Moscow\'s export ban and the Middle East war have stripped runs out of the system just as heating season nears. Atlantic Basin refining margins hit record levels in August, led by sharply higher diesel cracks. US refiners are already running flat out, leaving little slack to rebuild stocks.',
+   summary:'The US national average diesel price topped $6 a gallon in early September and has stayed there, GasBuddy data show, as a global distillate crunch moves downstream. Crude is still moving, but diesel is not: Ukrainian strikes on Russian refineries, Moscow\'s export ban and the Middle East war have stripped runs out of the system just as heating season nears. The EIA now expects US distillate inventories to fall below 100 million barrels this month and stay near five-year lows through much of 2027. US refiners are already running flat out, leaving little slack to rebuild stocks.',
    source:'GasBuddy / EIA / IEA', tags:['Diesel','Refining','Inflation']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 8, 2026', impact:'med',
-   headline:'Copper Hits a Record $14,533/t Before Easing on Tariff and Supply Jitters',
-   summary:'The LME three-month copper contract set an all-time high of about $14,533 a tonne on September 8, surpassing the previous record from January, before slipping back toward $14,300 later in the week. The rally was driven by speculation over US import tariffs and mounting concern about long-term supply, and the pullback unwound trades that had pulled metal into US warehouses. Even so, the metal remains sharply higher on the year as AI, EV and grid demand collide with constrained mine supply. Analysts still see structural demand outrunning mined output for years.',
-   source:'Benchmark Mineral Intelligence / Mining.com.au / LME', tags:['Copper','Metals','AI']},
+   date:'September 12, 2026', impact:'med',
+   headline:'Copper Hits a Record $14,875/t Before Its First Losing Week Since June',
+   summary:'The LME three-month copper contract touched an all-time intraday high near $14,875 a tonne on September 12, days after setting a record $14,533 close, before sliding back toward $14,300-14,500 for its first losing week since June. The rally was driven by US import-tariff speculation and mounting concern over long-term supply, and the pullback unwound trades that had pulled metal into US warehouses. Even so, the metal remains sharply higher on the year as AI, EV and grid demand collide with constrained mine supply from Chile and Peru. Analysts still see structural demand outrunning mined output for years.',
+   source:'Bloomberg / Rio Times / LME', tags:['Copper','Metals','AI']},
 
   {emoji:'⚛', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 11, 2026', impact:'med',
    headline:'Uranium Holds Near $90/lb as Utilities and Tech Buyers Scramble for Supply',
-   summary:'Uranium\'s spot price held around $89.99 a pound of U3O8 in mid-September, up from about $89.50 at the start of the month, as utilities and tech buyers scramble to lock in future supply. Reactor restarts, new builds across Asia, Europe and North America, and Big Tech nuclear deals are pulling demand forward as constrained mined output tightens the balance. Surging AI data-center power needs have sharpened the structural deficit. The fuel has drifted steadily higher through 2026 after a multi-year recovery.',
+   summary:'Uranium\'s spot price held around $89.99 a pound of U3O8 in mid-September as utilities and tech buyers scramble to lock in future supply. Reactor restarts, new builds across Asia, Europe and North America, and Big Tech nuclear deals are pulling demand forward as constrained mined output tightens the balance. TradeTech\'s long-term indicator reached $95/lb earlier in 2026, underscoring the structural deficit sharpened by AI data-center power needs. The fuel has drifted steadily higher through 2026 after a multi-year recovery.',
    source:'TradeTech / metalcharts.org / ANS', tags:['Uranium','Nuclear','AI']},
 
   {emoji:'🎯', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
@@ -311,9 +312,9 @@ const NEWS = [
 
   {emoji:'🛑', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 11, 2026', impact:'high',
-   headline:'IEA Says Over 10 mb/d of Gulf Output Remains Shut In as Supply Sinks',
-   summary:'Global oil production fell 1.6 million b/d month-on-month to about 100.1 million b/d in August as more than 10 million b/d of Gulf output stayed shut in amid heightened security risks, the IEA said in its September report. Oil-on-water volumes fell by 65 million barrels as tanker traffic out of the Middle East came under renewed attack. Global observed inventories have plunged 507 million barrels since the war began, an average draw of 2.8 million b/d that has so far kept the market balanced. The agency calls it the largest supply disruption in the history of the oil market.',
-   source:'IEA / Reuters / CNBC', tags:['IEA','Supply','Gulf']},
+   headline:'IEA Says Over 10 mb/d of Gulf Output Remains Shut In as Saudi Pumping Sinks',
+   summary:'More than 10 million b/d of Gulf output stayed shut in through August amid heightened security risks, the IEA said in its September report, with Saudi crude production falling to its lowest since 1990 as choked Hormuz tanker flows leave barrels stranded. Oil-on-water volumes fell sharply as Middle East tanker traffic came under renewed attack. Global observed inventories have plunged hundreds of millions of barrels since the war began, an average draw that has so far kept the market barely balanced. The agency calls it the largest supply disruption in the history of the oil market.',
+   source:'IEA / EIA / Reuters', tags:['IEA','Supply','Saudi']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 12, 2026', impact:'high',
@@ -323,9 +324,9 @@ const NEWS = [
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 6, 2026', impact:'med',
-   headline:'OPEC+ Completes Rollback of Its Voluntary Cuts, Then Holds Steady',
-   summary:'OPEC+ completed the phased unwinding of its 2023 voluntary production cuts in September with a final 188,000 b/d increment, restoring roughly 1.65 million b/d of quota on paper, and has since signalled it will hold output steady. In practice many members cannot pump to target because of technical limits and regional disruptions, so the restoration adds little real crude to a market squeezed by Gulf outages. A larger 2 million b/d cut from 2022 stays in place until year-end. The group cited concern over attacks on energy infrastructure.',
-   source:'OPEC / Reuters / Forbes', tags:['OPEC+','Quotas','Supply']},
+   headline:'OPEC+ Holds October Output Steady After Completing Its Voluntary-Cut Rollback',
+   summary:'The eight OPEC+ countries in the voluntary-cut group agreed at a virtual meeting on September 6 to keep October production unchanged from September levels, pausing after a final 188,000 b/d increment in September completed the unwinding of their 2023 cuts. In practice many members cannot pump to target because of technical limits and regional disruptions, so the restoration adds little real crude to a market squeezed by Gulf outages. The group cited concern over attacks on energy infrastructure and signalled it expects to hold quotas steady for the rest of 2026. Ministers next meet on October 4 to reassess.',
+   source:'OPEC / Reuters / Energy Connects', tags:['OPEC+','Quotas','Supply']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'September 11, 2026', impact:'high',
@@ -336,7 +337,7 @@ const NEWS = [
   {emoji:'🖥', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
    date:'September 12, 2026', impact:'high',
    headline:'Data-Center Power Use Jumped 17% in 2025 and Is Set to Double by 2030',
-   summary:'Electricity demand from data centers surged 17% in 2025, far outpacing the roughly 3% growth in overall power use, and is set to double by 2030 as AI workloads expand, the IEA said in its Electricity 2026 report. US data-center load alone has climbed from about 23 GW in 2023 to 42 GW in 2026, straining grids in PJM, MISO and ERCOT. Global electricity demand is forecast to grow more than 3.5% a year through 2030, at least 2.5 times as fast as total energy use. The strain is rippling through power, gas, uranium and copper markets alike.',
+   summary:'Electricity demand from data centers surged 17% in 2025, far outpacing the roughly 3% growth in overall power use, and is set to double by 2030 as AI workloads expand, the IEA has warned. US data-center load alone has climbed from about 23 GW in 2023 to 42 GW in 2026, straining grids in PJM, MISO and ERCOT. Global electricity demand is forecast to grow more than 3.5% a year through 2030, at least 2.5 times as fast as total energy use. The strain is rippling through power, gas, uranium and copper markets alike.',
    source:'IEA / S&P Global / GreentechLead', tags:['Data Centers','AI','Grid']},
 
   {emoji:'🔌', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
@@ -347,15 +348,15 @@ const NEWS = [
 
   {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'September 10, 2026', impact:'high',
-   headline:'US Battery Storage Sets a Q2 Record of 20.2 GWh, on Track for ~71 GWh in 2026',
-   summary:'The US energy-storage industry deployed a record 20.2 GWh of battery systems in the second quarter of 2026, a 108% jump on the prior three months, industry data show. The country is now on track to install about 71 GWh for the full year, an all-time high, as the boom tracks a rapid solar build-out and surging AI-driven power demand. Utility-scale storage keeps expanding fast, increasingly paired with solar to firm evening output and with data centers to smooth swings in load. Cheap LFP equipment keeps the pace near record levels even as federal incentives wind down.',
-   source:'Renewables Now / EnergyConnects / Utility Dive', tags:['Batteries','Storage','Grid']},
+   headline:'US Battery Storage on Track for a Record ~24 GW of Installs in 2026',
+   summary:'A record roughly 24 GW of grid-scale battery storage is starting up in the US in 2026, industry data show, as developers race to bring solar and other renewables online faster and to meet AI-driven power demand. Utility-scale storage keeps expanding fast, increasingly paired with solar to firm evening output and with data centers to smooth swings in load. BloombergNEF says battery-storage costs hit fresh record lows in 2025 even as solar and wind equipment costs rose. Cheap LFP hardware keeps the pace near record levels even as federal incentives wind down.',
+   source:'Renewables Now / BloombergNEF / Utility Dive', tags:['Batteries','Storage','Grid']},
 
   {emoji:'⚡', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'September 8, 2026', impact:'med',
    headline:'Over 90 GW of New US Capacity, Led by Solar and Storage, Comes Online in 2026',
-   summary:'More than 90 GW of new US generating capacity is set to come online in 2026, with roughly 51 GW of solar and 26 GW of storage together making up over 85% of planned additions, developers say. The surge is testing grid reliability even as it helps meet exploding data-center demand. Batteries are increasingly co-located with solar and with data centers to smooth output and load. The pace shows how cheap solar and storage remain the fastest way to add power, despite policy headwinds.',
-   source:'S&P Global / Utility Dive / E&E News', tags:['Solar','Storage','Grid']},
+   summary:'More than 90 GW of new US generating capacity is set to come online in 2026, with roughly 51 GW of solar and 26 GW of storage together making up over 85% of planned additions, developers say. The surge is testing grid reliability even as it helps meet exploding data-center demand. Global renewable investment is on track for about $665 billion this year, with solar alone drawing roughly $365 billion. The pace shows how cheap solar and storage remain the fastest way to add power, despite policy headwinds.',
+   source:'S&P Global / GreentechLead / Utility Dive', tags:['Solar','Storage','Grid']},
 
   {emoji:'🐉', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'September 5, 2026', impact:'med',
@@ -365,20 +366,20 @@ const NEWS = [
 
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'September 12, 2026', impact:'med',
-   headline:'IEA Electricity 2026: Demand to Grow 3.5%/yr as Nuclear Regains Ground',
-   summary:'The IEA\'s Electricity 2026 report projects global power demand growing more than 3.5% a year through 2030, with renewables, natural gas and nuclear all expanding to keep pace. Nuclear generation set a new record in 2025 and is set to keep rising, led by reactor restarts in Japan, higher French output and new builds in China, India and beyond. The report puts a special focus on grids and flexibility, warning that systems need far more investment to integrate a diversifying mix. Small modular reactors are drawing heavy public and private interest.',
-   source:'IEA / Reuters', tags:['IEA','Nuclear','Grid']},
+   headline:'DOE Closes a $1.9B Loan to Restart the Duane Arnold Nuclear Plant for Google',
+   summary:'The US Department of Energy closed a $1.9 billion loan to NextEra Energy to restart the 615-megawatt Duane Arnold nuclear plant in Iowa, with Google signed on as the primary customer to power its cloud and AI infrastructure. The deal is the latest in a wave of tech-backed nuclear revivals as data-center operators chase firm, carbon-free power. The IEA sees plans for up to 25 GW of small modular reactor capacity globally, much of it driven by data centers, and expects nuclear and renewables together to supply about half of world electricity by 2030. Big Tech is increasingly underwriting the financial risk of new and restarted reactors.',
+   source:'DOE / IEA / Reuters', tags:['Nuclear','Data Centers','Policy']},
 
   {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
    date:'September 15, 2026', impact:'med',
-   headline:'EU Carbon Climbs to About €85, Its Highest Since July, as CBAM Takes Full Effect',
-   summary:'EU carbon allowances rose to about €84.93 a tonne in September, their highest level since July, recovering from earlier-year weakness as the market firms. The move keeps prices within reach of forecasts that had pencilled in a roughly 16% rise for 2026 toward €87. Traders are also digesting the Carbon Border Adjustment Mechanism, now fully in force on imports of steel, aluminium, cement and other carbon-intensive goods. Attention is turning to how tighter allowance supply later in the decade could push prices higher still.',
-   source:'Trading Economics / carboncredits.com / Reuters', tags:['ETS','CBAM','Carbon']},
+   headline:'EU Carbon Firms Near €84/t as a Looming Supply Deficit Lifts the Market',
+   summary:'EU carbon allowances traded around €84 a tonne in September, extending an upward trend on expectations of a looming supply deficit in 2026 and 2027. Analysts had pencilled in a roughly 16% rise for allowances this year toward €87 as tighter caps bite. Traders are also digesting the Carbon Border Adjustment Mechanism, now fully in force on imports of steel, aluminium, cement and other carbon-intensive goods. Attention is turning to how shrinking allowance supply later in the decade could push prices higher still.',
+   source:'ABN AMRO / carboncredits.com / Reuters', tags:['ETS','CBAM','Carbon']},
 
   {emoji:'🚢', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'September 9, 2026', impact:'high',
-   headline:'US-Iran Tanker War Grinds On With Hormuz Shipping Blocked Since February',
-   summary:'US and Iranian forces have traded escalating strikes at sea for months, with Washington targeting Iranian oil tankers and Tehran hitting vessels and laying mines near the Strait of Hormuz. Traffic through the waterway has been largely blocked since the US-Israeli air war on Iran began on February 28, choking the artery that normally carries about a fifth of the world\'s oil. Fresh cross-border strikes between Saudi Arabia and Iran-backed Houthi forces in Yemen added to the tension in mid-September. Analysts see no quick off-ramp as diplomacy repeatedly stalls.',
+   headline:'US-Iran Tanker War Grinds On With Hormuz Shipping Choked Since February',
+   summary:'US and Iranian forces have traded escalating strikes at sea for months, with Washington targeting Iranian oil tankers and Tehran hitting vessels and laying mines near the Strait of Hormuz. Traffic through the waterway has been largely blocked since the US-Israeli air war on Iran began on February 28, choking the artery that normally carries about a fifth of the world\'s oil. Brent briefly spiked above $110 in early September as attacks intensified before easing as Gulf producers scrambled for workarounds. Analysts see no quick off-ramp as diplomacy repeatedly stalls.',
    source:'Al Jazeera / Reuters / CNBC', tags:['Iran','Hormuz','Shipping']},
 ];
 
