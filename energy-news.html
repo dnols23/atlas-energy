@@ -131,9 +131,9 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$104.10</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€80.50</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$2.95</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$102.90</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€80.80</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$2.98</div><div class="sl">Henry Hub/MMBtu</div></div>
     <div class="h-stat"><div class="sv">$0.100</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:104.10,unit:'/bbl',     chg:+1.51, pct:+1.47},
-  {label:'WTI Crude',      val:91.30, unit:'/bbl',     chg:+1.92, pct:+2.15},
-  {label:'Natural Gas TTF',val:80.50, unit:'€/MWh',    chg:+0.85, pct:+1.07},
-  {label:'Henry Hub',      val:2.95,  unit:'/MMBtu',   chg:-0.04, pct:-1.34},
-  {label:'LNG Asia JKM',   val:26.10, unit:'/MMBtu',   chg:+0.66, pct:+2.59},
-  {label:'Coal API2',      val:131.45,unit:'/t',       chg:-1.35, pct:-1.02},
-  {label:'EU Carbon ETS',  val:82.40, unit:'€/t CO₂',  chg:+0.30, pct:+0.37},
-  {label:'Uranium',        val:88.50, unit:'/lb U₃O₈', chg:-0.25, pct:-0.28},
+  {label:'Brent Crude',    val:102.90,unit:'/bbl',     chg:-0.55, pct:-0.53},
+  {label:'WTI Crude',      val:90.85, unit:'/bbl',     chg:-0.45, pct:-0.49},
+  {label:'Natural Gas TTF',val:80.80, unit:'€/MWh',    chg:+0.30, pct:+0.37},
+  {label:'Henry Hub',      val:2.98,  unit:'/MMBtu',   chg:+0.03, pct:+1.02},
+  {label:'LNG Asia JKM',   val:25.40, unit:'/MMBtu',   chg:-0.70, pct:-2.68},
+  {label:'Coal API2',      val:132.05,unit:'/t',       chg:+0.60, pct:+0.46},
+  {label:'EU Carbon ETS',  val:83.10, unit:'€/t CO₂',  chg:+0.40, pct:+0.48},
+  {label:'Uranium',        val:89.20, unit:'/lb U₃O₈', chg:+0.70, pct:+0.79},
   {label:'Solar Module',   val:0.100, unit:'/W',       chg:+0.001,pct:+1.01},
   {label:'Wind Turbine',   val:0.79,  unit:'/W (OEM)', chg:-0.001,pct:-0.13},
-  {label:'Lithium',        val:19550, unit:'/t',       chg:-200,  pct:-1.01},
-  {label:'Copper',         val:14760, unit:'/t',       chg:+40,   pct:+0.27},
+  {label:'Lithium',        val:19400, unit:'/t',       chg:-150,  pct:-0.77},
+  {label:'Copper',         val:14680, unit:'/t',       chg:-80,   pct:-0.54},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,17 +224,17 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Brent steadies near $104 and WTI near $91 as a volatile week leaves Middle East supply risk priced in ahead of OPEC+',
-  'OPEC+ set to hold November output steady at its October 4 meeting after completing the rollback of its 1.65 mb/d cut',
-  'WTI trades about $13 below Brent, the widest spread since May, as US crude stays better supplied than seaborne grades',
-  'Trump urges Ukraine to halt strikes on Russian refineries, saying the attacks are causing a global diesel shortage',
-  'Oil flows through the Strait of Hormuz hover near a seven-day average of 13 mb/d, about 77% of pre-war levels',
-  'Qatar extends its LNG force majeure again, with Ras Laffan repairs expected to take three to five years',
-  'European TTF gas holds near €80/MWh — the highest since early 2023 — as storage lags and winter risk builds',
-  'Asian JKM LNG eases to about $26/MMBtu after touching a four-year high of $29.56 in mid-September',
-  'Copper retreats toward $14,760/t after Comex hit a record $6.95/lb on September 22 and the squeeze eased',
-  'US diesel holds at record highs above $6 a gallon after averaging $6.20 as the distillate crunch deepens',
-  'Uranium holds near $88/lb U3O8 with long-term contract prices at an 18-year high around $97',
+  'Brent steadies near $103 and WTI near $91 as traders brace for this weekend\'s OPEC+ meeting and a still-shut Strait of Hormuz',
+  'OPEC+ now expected to approve another ~137,000 b/d output hike for November when the eight core producers meet online on October 5',
+  'WTI trades about $12 below Brent, the widest spread since spring, as US crude stays better supplied than seaborne grades',
+  'US diesel hits a record $6.31 a gallon as analysts warn of a $7 milestone heading into the fall harvest',
+  'Strait of Hormuz stays effectively shut, with IMF PortWatch logging a single transit against a pre-crisis baseline near 85 a day',
+  'Qatar extends its LNG force majeure into mid-October as Ras Laffan repairs stretch on after the March strike',
+  'European TTF gas holds near €80/MWh as storage lags, though Goldman says prices could fall up to 30% if supply risks ease',
+  'Asian JKM LNG eases toward $25/MMBtu after touching a four-year high above $29 in mid-September',
+  'Copper slips toward $14,700/t after hitting a record near $14,850 in August as the near-term squeeze loosens',
+  'Russia\'s diesel export ban runs through September 30 as Ukrainian drone strikes keep refining near a two-decade low',
+  'Uranium holds near $89/lb U3O8 with long-term contract prices at an 18-year high around $97',
   'IEA: renewables set to overtake coal in 2026 as solar PV adds another ~600 TWh and cumulative capacity nears 2,800 GW',
 ];
 
@@ -255,53 +255,53 @@ function buildBreaking() {
 const NEWS = [
   // FEATURED
   {featured:true, emoji:'📉', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 30, 2026', impact:'high',
-   headline:'Oil Steadies Near $104 After a Whipsaw Week as Traders Brace for Sunday\'s OPEC+ Meeting',
-   summary:'Crude steadied to end a volatile September, with Brent hovering near $104 a barrel and US WTI around $91 after a week that swung from an intraday spike above $107 to a sharp $102.59 settle as Gulf exports recovered. The Brent-WTI spread has blown out to roughly $13, its widest since May, reflecting far tighter seaborne supply than at the better-stocked US hub. Attention now turns to the October 4 OPEC+ meeting, where the eight core producers are expected to hold November output steady after completing the rollback of their 1.65 mb/d cut. Traders caution that physical distillate supply stays acutely tight even as headline crude churns sideways.',
+   date:'October 1, 2026', impact:'high',
+   headline:'Oil Holds Near $103 as Traders Brace for an OPEC+ Meeting Expected to Add More November Barrels',
+   summary:'Crude held near $103 a barrel for Brent and about $91 for US WTI at the start of October, steadying after a volatile September that swung from an intraday spike above $107 to settles near $102.59 as Gulf exports partially recovered. The Brent-WTI spread remains near $12, among its widest of the year, reflecting far tighter seaborne supply than at the better-stocked US hub. Attention now turns to this weekend\'s OPEC+ gathering: delegates say the eight core producers meeting online on October 5 are likely to approve another output increase of at least 137,000 b/d for November as rising prices tempt the group to keep clawing back market share. Traders caution that physical distillate supply stays acutely tight even as headline crude churns sideways.',
    source:'Reuters / CNBC / Bloomberg', tags:['Brent','Hormuz','WTI']},
 
   {featured:true, emoji:'⚔', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'September 29, 2026', impact:'high',
-   headline:'Oil Wavers as US-Iran Hormuz Talks Stall After Trump Rejects a Conditional Reopening',
-   summary:'Oil prices swung sharply in late September after President Trump on September 26 rejected Iran\'s conditional proposal to reopen the Strait of Hormuz within seven days, sending Brent back above $107 before it eased again. The chokepoint carried roughly a fifth of global oil and LNG before the war, and its disruption remains what the IEA calls the largest oil-supply shock on record. Continued Houthi attacks and an uneven truce kept a risk premium in the market even as Gulf producers cautiously restored exports. A durable pullback in prices still hinges on a full, sustained reopening that has yet to materialise.',
+   date:'September 30, 2026', impact:'high',
+   headline:'Strait of Hormuz Stays Shut as US-Iran Talks Stall After Trump Rejects a Conditional Reopening',
+   summary:'The Strait of Hormuz remained effectively closed to commercial traffic at the end of September, with IMF PortWatch logging just a single tanker transit against a pre-crisis baseline near 85 a day. Oil swung sharply after President Trump on September 26 rejected Iran\'s conditional offer to reopen the chokepoint within seven days, sending Brent back above $107 before it eased toward $103. Tehran\'s security chief says the strait stays shut until Iran\'s full conditions are met, keeping what the IEA calls the largest oil-supply shock on record firmly in place. A durable pullback in prices still hinges on a full, sustained reopening that has yet to materialise.',
    source:'The National / Reuters / Al Jazeera', tags:['Hormuz','Iran','Diplomacy']},
 
   // REGULAR
   {emoji:'⛽', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 14, 2026', impact:'high',
-   headline:'US Diesel Stays at Record Highs Above $6 a Gallon as the Distillate Crisis Deepens',
-   summary:'US diesel has held at record national averages above $6 a gallon through September — peaking around $6.20, roughly 68% higher than a year earlier — the highest since the EIA began publishing the series in 1994, after first topping $6 on September 11. Analysts blame overlapping supply shocks: the Strait of Hormuz disruption, relentless Ukrainian drone strikes on Russian refineries, Russian fuel-export controls and tight Chinese quotas. US distillate inventories remain deep below their five-year average heading into the peak-demand fall harvest. The squeeze has become acute enough that farm-state lawmakers are pressing Washington to curb US diesel exports.',
-   source:'AAA / EIA / NBC News', tags:['Diesel','Fuel Crisis','Records']},
+   date:'September 16, 2026', impact:'high',
+   headline:'US Diesel Hits a Record $6.31 a Gallon as Analysts Warn of a $7 Milestone',
+   summary:'US diesel surged to a record national average of $6.31 a gallon in mid-September — roughly 68% higher than a year earlier and the highest since the EIA began the series in 1994 — after first blowing past the old 2022 peak of $5.82 at the start of the month. Analysts now warn a $7 handle is within reach as the fall harvest pulls on already depleted stocks. The blame lies with overlapping supply shocks: the Strait of Hormuz disruption, relentless Ukrainian drone strikes on Russian refineries, and Moscow\'s ban on diesel exports running through September 30. US distillate inventories remain deep below their five-year average, and farm-state lawmakers are pressing Washington to curb US diesel exports.',
+   source:'AAA / EIA / Kitco', tags:['Diesel','Fuel Crisis','Records']},
 
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'September 29, 2026', impact:'med',
-   headline:'European Gas Holds Near €80/MWh, the Highest Since Early 2023, as Winter Risk Builds',
-   summary:'Dutch TTF, Europe\'s benchmark gas price, held around €80 a megawatt-hour at the end of September, near an early-September peak close to €84 that was the highest since December 2022. Prices are still up sharply year on year, and front-quarter contracts point to a tight winter. EU storage is only about 68% full — some 16 points below the five-year average near 84% and the lowest volume since 2013 — after a refill season crippled by curtailed Gulf LNG. Morgan Stanley pegs the winter average near €85/MWh, warning a cold snap or further Qatari disruption could drive spot prices above €100.',
-   source:'Trading Economics / Euronext / Morgan Stanley', tags:['TTF','Gas','Europe']},
+   date:'October 1, 2026', impact:'med',
+   headline:'European Gas Holds Near €80/MWh, Though Goldman Flags Up to 30% Downside',
+   summary:'Dutch TTF, Europe\'s benchmark gas price, held around €80 a megawatt-hour into early October, near an early-September peak close to €84 that was the highest since December 2022. EU storage is only about 68% full — some 16 points below the five-year average near 84% and the lowest volume since 2013 — after a refill season crippled by curtailed Gulf LNG. Not everyone is bearish on supply: Goldman Sachs argues prices could fall as much as 30% in the coming months if a mild winter and recovering LNG flows loosen the balance. For now, front-quarter contracts still point to a tight, costly winter if a cold snap or further Qatari disruption hits.',
+   source:'Trading Economics / Euronext / Goldman Sachs', tags:['TTF','Gas','Europe']},
 
   {emoji:'🌏', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 29, 2026', impact:'med',
-   headline:'Asian JKM LNG Eases to About $26/MMBtu After a Four-Year High',
-   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, eased to about $26 per MMBtu at the end of September, down from a four-year high of $29.56 hit on September 15, as a handful of Qatari cargoes running dark through Hormuz gave the market partial supply relief. Subdued northeast Asian demand also weighed, with Asian LNG imports set for a second straight annual decline as high prices ration consumption. China has largely stepped back from spot purchases while cost-sensitive South and Southeast Asian buyers defer volumes or switch to coal. A cold northern-hemisphere winter could reignite the rally as Europe competes for the same cargoes.',
+   headline:'Asian JKM LNG Eases Toward $25/MMBtu After a Four-Year High',
+   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, eased toward $25 per MMBtu at the start of October, down from a four-year high of $29.56 hit on September 15, as a handful of Qatari cargoes running dark through Hormuz gave the market partial supply relief. Subdued northeast Asian demand also weighed, with Asian LNG imports set for a second straight annual decline as high prices ration consumption. China has largely stepped back from spot purchases while cost-sensitive South and Southeast Asian buyers defer volumes or switch to coal. A cold northern-hemisphere winter could reignite the rally as Europe competes for the same cargoes.',
    source:'Trading Economics / S&P Global / Kpler', tags:['JKM','LNG','Asia']},
 
   {emoji:'🔩', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 24, 2026', impact:'high',
-   headline:'Copper Retreats Toward $14,760/t After Setting Back-to-Back Records',
-   summary:'LME three-month copper eased to around $14,760 a tonne by late September, off a record $14,875 set on September 10, while Comex touched an all-time $6.95 a pound on September 22. The rally was driven by supply shocks at the Grasberg mine in Indonesia and Kamoa-Kakula in the Democratic Republic of Congo, alongside US tariff expectations that inflated the Comex premium. The metal has since given back ground as LME warehouse stocks rose and the cash-to-three-month spread flipped into contango, signalling the near-term squeeze has loosened. Structural demand from AI data centers, EVs and grid build-outs continues to outrun new supply.',
+   headline:'Copper Retreats Toward $14,680/t After Setting Back-to-Back Records',
+   summary:'LME three-month copper eased to around $14,680 a tonne by late September, off a record near $14,850 set in late summer, while Comex touched an all-time $6.95 a pound on September 22. The rally was driven by supply shocks at the Grasberg mine in Indonesia and Kamoa-Kakula in the Democratic Republic of Congo, alongside US tariff expectations that inflated the Comex premium. The metal has since given back ground as LME warehouse stocks rose and the cash-to-three-month spread flipped into contango, signalling the near-term squeeze has loosened. Structural demand from AI data centers, EVs and grid build-outs continues to outrun new supply.',
    source:'Mining.com / Trading Economics / Discovery Alert', tags:['Copper','Metals','AI']},
 
   {emoji:'⚛', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'September 22, 2026', impact:'med',
-   headline:'Uranium Holds Near $90/lb With Long-Term Prices at an 18-Year High',
-   summary:'Uranium\'s spot price held around $88.50 a pound of U3O8 in late September — up more than 30% in 2026 and near five times its post-Fukushima lows — as utilities move to lock in future fuel. TradeTech\'s long-term indicator has reached about $97 a pound, its highest in at least 18 years, underscoring a structural deficit sharpened by AI data-center power needs. Fresh deals keep pulling demand forward, including Fortum\'s agreement to power Google data centers in Finland and Equinix\'s nuclear procurement for its global sites. Reactor restarts and new builds across Asia, Europe and North America add to the pull as mined output stays constrained.',
+   headline:'Uranium Holds Near $89/lb With Long-Term Prices at an 18-Year High',
+   summary:'Uranium\'s spot price held around $89 a pound of U3O8 in late September — up more than 30% in 2026 and near five times its post-Fukushima lows — as utilities move to lock in future fuel. TradeTech\'s long-term indicator has reached about $97 a pound, its highest in at least 18 years, underscoring a structural deficit sharpened by AI data-center power needs. Fresh deals keep pulling demand forward, including Fortum\'s agreement to power Google data centers in Finland and Equinix\'s nuclear procurement for its global sites. Reactor restarts and new builds across Asia, Europe and North America add to the pull as mined output stays constrained.',
    source:'TradeTech / Sprott / SightLine U3O8', tags:['Uranium','Nuclear','AI']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 30, 2026', impact:'high',
-   headline:'OPEC+ Set to Hold November Output Steady at Sunday Meeting',
-   summary:'OPEC+ oil producers are likely to keep their output targets unchanged for November when seven core members — Saudi Arabia, Russia, Iraq, Kuwait, Algeria, Kazakhstan and Oman — meet online on October 4, delegates say. The group raised targets through most of 2026 and completed the phased rollback of a 1.65 million-barrel-a-day cut in September before holding steady for October. It is now expected to keep policy flat through the fourth quarter as it turns to 2027 quota negotiations. Gulf members are still lifting exports disrupted for months by the Iran war, yet most continue pumping well below their formal output ceilings.',
-   source:'Reuters / US News / Trading Economics', tags:['OPEC+','Supply','Quotas']},
+   date:'October 1, 2026', impact:'high',
+   headline:'OPEC+ Set to Approve Another ~137,000 b/d Output Hike for November',
+   summary:'OPEC+ is likely to approve a further output increase of at least 137,000 barrels a day for November — matching the October step — when its eight core producers meet online on October 5, delegates tell Reuters. After pausing hikes for October, the group is tilting back toward adding barrels as elevated prices tempt it to keep clawing back market share lost during years of restraint. The eight have already unwound more than 2.5 million b/d of earlier cuts in 2026. Gulf members are still restoring exports disrupted for months by the Iran war, yet most continue pumping well below their formal output ceilings, limiting how much extra crude actually reaches the market.',
+   source:'Reuters / Yahoo Finance / Trading Economics', tags:['OPEC+','Supply','Quotas']},
 
   {emoji:'🏭', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
    date:'September 25, 2026', impact:'high',
@@ -310,15 +310,15 @@ const NEWS = [
    source:'Reuters / S&P Global / IEA', tags:['Russia','Refineries','Diesel']},
 
   {emoji:'🚢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 28, 2026', impact:'high',
-   headline:'Qatar Extends LNG Force Majeure Again as Ras Laffan Repairs Stretch Into Years',
-   summary:'QatarEnergy extended force majeure on LNG shipments to Asian and European customers by another month on September 28, keeping a key pillar of global supply offline. An Iranian strike in March damaged two of the 14 production lines at the Ras Laffan complex, and the company says repairs will take three to five years, sidelining about 12.8 million tonnes a year of capacity. At least 13 QatarEnergy carriers transited the Strait of Hormuz in September — several running dark — as the producer probes the corridor in cautious batches rather than reopening at scale. The extension keeps Asian and European buyers competing for scarce flexible US cargoes as heating demand nears.',
-   source:'Reuters / Discovery Alert / Korea JoongAng Daily', tags:['Qatar','LNG','Force Majeure']},
+   date:'September 29, 2026', impact:'high',
+   headline:'Qatar Extends LNG Force Majeure Into Mid-October as Ras Laffan Repairs Drag On',
+   summary:'QatarEnergy has again extended force majeure on LNG shipments — now running into mid-October — keeping a key pillar of global supply offline for buyers across South Korea, India, Bangladesh and Italy. An Iranian missile strike in March damaged production lines at the Ras Laffan complex, sidelining about 12.8 million tonnes a year, or roughly 17% of Qatar\'s output. Only a handful of QatarEnergy carriers have transited the Strait of Hormuz, several running dark, as the producer probes the corridor in cautious batches rather than reopening at scale. The extension keeps Asian and European buyers competing for scarce flexible US cargoes as heating demand nears.',
+   source:'Reuters / Doha News / The National', tags:['Qatar','LNG','Force Majeure']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'September 29, 2026', impact:'med',
-   headline:'Henry Hub Holds Near $2.95/MMBtu as Record US Output Cushions the Global Crisis',
-   summary:'US natural gas held around $2.95 per MMBtu at the end of September, easing slightly on the day and staying largely insulated from the global supply crisis. Domestic output remains elevated at roughly 112 bcf/d while storage sits only modestly above the five-year norm, keeping the market comfortable heading into winter. Feedgas flows to the nine major US export plants averaged about 18 bcf/d in September, up from 17.3 bcf/d in August, tightening the balance at the margin. Record LNG export demand on one side and record production on the other continue to define the domestic outlook.',
+   date:'October 1, 2026', impact:'med',
+   headline:'Henry Hub Holds Near $3/MMBtu as Record US Output Cushions the Global Crisis',
+   summary:'US natural gas held around $2.98 per MMBtu into early October, firming slightly but staying largely insulated from the global supply crisis. Domestic output remains elevated at roughly 112 bcf/d while storage sits only modestly above the five-year norm, keeping the market comfortable heading into winter. Feedgas flows to the nine major US export plants averaged about 18 bcf/d in September, up from 17.3 bcf/d in August, tightening the balance at the margin. Record LNG export demand on one side and record production on the other continue to define the domestic outlook.',
    source:'Trading Economics / EIA / Reuters', tags:['Henry Hub','Storage','LNG']},
 
   {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
