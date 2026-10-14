@@ -131,10 +131,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
     <p>Real-time analysis of prices, supply chains, geopolitical events, and the clean energy transition shaping the world's power systems.</p>
   </div>
   <div class="hero-stats">
-    <div class="h-stat"><div class="sv">$105.60</div><div class="sl">Brent Crude/bbl</div></div>
-    <div class="h-stat"><div class="sv">€81.79</div><div class="sl">TTF Gas/MWh</div></div>
-    <div class="h-stat"><div class="sv">$3.12</div><div class="sl">Henry Hub/MMBtu</div></div>
-    <div class="h-stat"><div class="sv">$0.090</div><div class="sl">Solar Module/W</div></div>
+    <div class="h-stat"><div class="sv">$105.69</div><div class="sl">Brent Crude/bbl</div></div>
+    <div class="h-stat"><div class="sv">€79.00</div><div class="sl">TTF Gas/MWh</div></div>
+    <div class="h-stat"><div class="sv">$3.20</div><div class="sl">Henry Hub/MMBtu</div></div>
+    <div class="h-stat"><div class="sv">$0.086</div><div class="sl">Solar Module/W</div></div>
   </div>
 </div>
 
@@ -168,18 +168,18 @@ header{position:sticky;top:0;z-index:100;background:rgba(8,12,24,0.96);backdrop-
 //  MARKET PRICES
 // ─────────────────────────────────────────────
 const BASE_PRICES = [
-  {label:'Brent Crude',    val:105.60,unit:'/bbl',     chg:-1.06, pct:-1.00},
-  {label:'WTI Crude',      val:92.80, unit:'/bbl',     chg:-0.94, pct:-1.00},
-  {label:'Natural Gas TTF',val:81.79, unit:'€/MWh',    chg:+1.54, pct:+1.92},
-  {label:'Henry Hub',      val:3.12,  unit:'/MMBtu',   chg:+0.03, pct:+0.97},
-  {label:'LNG Asia JKM',   val:25.79, unit:'/MMBtu',   chg:+0.36, pct:+1.42},
-  {label:'Coal API2',      val:136.00,unit:'/t',       chg:+1.10, pct:+0.81},
-  {label:'EU Carbon ETS',  val:85.20, unit:'€/t CO₂',  chg:-0.60, pct:-0.70},
-  {label:'Uranium',        val:89.70, unit:'/lb U₃O₈', chg:-0.05, pct:-0.06},
-  {label:'Solar Module',   val:0.090, unit:'/W',       chg:-0.001,pct:-1.09},
+  {label:'Brent Crude',    val:105.69,unit:'/bbl',     chg:-0.96, pct:-0.90},
+  {label:'WTI Crude',      val:94.14, unit:'/bbl',     chg:-0.85, pct:-0.89},
+  {label:'Natural Gas TTF',val:79.00, unit:'€/MWh',    chg:+0.45, pct:+0.57},
+  {label:'Henry Hub',      val:3.20,  unit:'/MMBtu',   chg:+0.08, pct:+2.57},
+  {label:'LNG Asia JKM',   val:26.27, unit:'/MMBtu',   chg:+0.40, pct:+1.55},
+  {label:'Coal API2',      val:123.50,unit:'/t',       chg:+1.20, pct:+0.98},
+  {label:'EU Carbon ETS',  val:88.34, unit:'€/t CO₂',  chg:+1.10, pct:+1.26},
+  {label:'Uranium',        val:89.38, unit:'/lb U₃O₈', chg:-0.32, pct:-0.36},
+  {label:'Solar Module',   val:0.086, unit:'/W',       chg:-0.001,pct:-1.15},
   {label:'Wind Turbine',   val:0.78,  unit:'/W (OEM)', chg:-0.001,pct:-0.13},
-  {label:'Lithium',        val:16680, unit:'/t',       chg:-571,  pct:-3.31},
-  {label:'Copper',         val:14620, unit:'/t',       chg:+120,  pct:+0.83},
+  {label:'Lithium',        val:16680, unit:'/t',       chg:-217,  pct:-1.28},
+  {label:'Copper',         val:14730, unit:'/t',       chg:-70,   pct:-0.47},
 ];
 
 let livePrices = BASE_PRICES.map(p => ({...p, liveVal: p.val}));
@@ -224,18 +224,20 @@ function jitterPrices() {
 //  BREAKING HEADLINES
 // ─────────────────────────────────────────────
 const BREAKING = [
-  'Oil falls as Russian diesel supply offers relief — Brent slips to about $105.6, WTI near $92.8',
-  'Trump insists the Russia-Ukraine "energy ceasefire" holds even as Ukraine reports fresh strikes on a Kharkiv energy site',
-  'US Treasury issues a temporary license allowing Russian diesel imports through April 7, 2027; seven senators call it illegal',
-  'Trump says Russia will supply global markets with more than 4.8 million tonnes of diesel',
-  'OPEC+ core producers keep November output targets steady for a second month; ministers next meet November 1',
-  'EU gas storage just 73% full on Oct 7 versus 83% a year earlier as TTF firms near €82/MWh',
-  'Houthi drones and missiles strike Saudi Arabia\'s main airport as tanker attacks continue near the Strait of Hormuz',
-  'Uranium spot holds near $89.7/lb as the long-term contract price hits a record $97 on nuclear and AI demand',
-  'Newcastle thermal coal climbs to a 23-month high near $149/t on winter restocking and gas-to-coal switching',
+  'Brent settles near $105.7 and WTI near $94.1 as Russian diesel supply prospects counter Gulf supply risks',
+  'Trump insists the Russia-Ukraine "energy ceasefire" holds; Ukraine says Russia hit six energy facilities in a day, wounding 33',
+  'US Treasury lifts sanctions to allow Russian diesel to flow; bipartisan lawmakers call the deal illegal under the 2022 import ban',
+  'OPEC cuts its 2026 oil demand growth forecast for a sixth straight month, while lifting its 2027 view to about +2.6 million b/d',
+  'IEA October Oil Market Report sees world oil demand falling year on year as renewed Gulf attacks leave the recovery fragile',
+  'EU gas storage only about 72% full entering winter — roughly 15 points below the five-year norm',
+  'ENTSOG warns tight LNG supply could drain EU storage toward 13% by the end of March 2027',
+  'Asian JKM LNG climbs near $26.3/MMBtu on winter buying and Strait of Hormuz risk',
+  'Uranium spot holds near $89.4/lb as the long-term contract price sets a record near $96',
+  'Newcastle thermal coal near $149/t, a 23-month high, on winter restocking and gas-to-coal switching',
+  'EU carbon allowances hit multi-month highs near €88/t as the Q3 CBAM certificate is set at €82.32',
   'Wood Mackenzie: four-hour batteries now undercut open-cycle gas turbines in all 43 markets it modeled',
-  'EIA October STEO lifts the Q4 Brent forecast to $105 and sees US power use up about 4% in Q3',
-  'ENTSOG warns the EU could face up to a 15% gas shortfall if a severe winter hits weakened supply',
+  'EU adopts its largest sanctions package since the 2022 invasion as the US targets Iran\'s shadow-fleet tankers',
+  'China set to resume October refined-fuel exports, easing tight global diesel, gasoline and jet fuel markets',
 ];
 
 function buildBreaking() {
@@ -256,124 +258,124 @@ const NEWS = [
   // FEATURED
   {featured:true, emoji:'📉', bgColor:'rgba(245,158,11,0.15)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'October 13, 2026', impact:'high',
-   headline:'Oil Slips as Russian Diesel Supply Offers Relief — Brent Near $105.6, WTI Near $92.8',
-   summary:'Crude eased about 1% to start the week, with Brent trading around $105.6 a barrel and WTI near $92.8, as the prospect of more Russian diesel reaching a tight global market tempered a war-driven risk premium. The pullback followed a run-up to roughly $106-107 last week on Hurricane Isaias Gulf shut-ins and fresh Houthi strikes near the Strait of Hormuz. Analysts doubt Moscow can deliver the promised volumes quickly and note Middle East tensions are still keeping Brent above $100. Per one tracker, the benchmark trades about 75% above year-ago levels even after the dip.',
-   source:'Reuters / Bloomberg / HDFC Sky', tags:['Brent','WTI','Diesel']},
+   headline:'Oil Slides as OPEC Flags Saudi Supply Rebound — Brent Settles Near $105.7, WTI Near $94.1',
+   summary:'Crude eased again on Tuesday as the prospect of more Russian diesel reaching a tight global market countered a war-driven risk premium from fresh attacks on Saudi Arabia. December Brent settled down about 0.9% at $105.69 a barrel while November WTI settled near $94.14, according to Bloomberg-sourced reporting. OPEC\'s monthly report added to the softer tone, flagging a rebound in Saudi supply and trimming its 2026 demand outlook even as it raised its 2027 view. Analysts doubt Moscow can deliver the promised diesel volumes quickly, and Middle East tensions are still keeping Brent above $100.',
+   source:'Reuters / Bloomberg / Rigzone', tags:['Brent','WTI','OPEC']},
 
   {featured:true, emoji:'🤝', bgColor:'rgba(239,68,68,0.15)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
    date:'October 13, 2026', impact:'high',
    headline:'Trump Insists the Russia-Ukraine "Energy Ceasefire" Holds as Kyiv Reports Fresh Strikes',
-   summary:'President Trump maintained on October 13 that a Russia-Ukraine "energy ceasefire" he announced on Sunday was in effect, even as Ukraine reported new Russian strikes — including on an energy facility outside Kharkiv — in the hours after his Truth Social post. President Zelensky said the announcement "was news for me," adding that Kyiv would agree if Moscow did, while the Kremlin said only that "contacts are ongoing." The claim followed a diesel arrangement in which Trump says Russia will supply global markets with more than 4.8 million tonnes of diesel. It echoed a similar announcement a month earlier that failed to halt the aerial war.',
-   source:'Al Jazeera / Axios / NBC News', tags:['Russia','Ukraine','Ceasefire']},
+   summary:'President Trump maintained on October 13 that a Russia-Ukraine "energy ceasefire" he announced over the weekend was in effect, even as Ukraine reported new Russian strikes on its energy grid in the hours afterward. President Zelenskyy said Ukraine backed a halt to attacks on energy infrastructure but accused Russia of hitting six energy facilities in a single day, wounding 33 people, while Foreign Minister Sergey Lavrov vowed to press on with the military campaign. The claim followed a controversial US move to lift wartime sanctions on Russian diesel, which Trump has tied to lowering domestic fuel prices. Neither side has formally confirmed a truce.',
+   source:'Al Jazeera / PBS NewsHour / The Hill', tags:['Russia','Ukraine','Ceasefire']},
 
   // REGULAR
   {emoji:'🔥', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'October 12, 2026', impact:'high',
-   headline:'European Gas Pushes Toward Multi-Year Highs Near €82/MWh as Winter Storage Runs Low',
-   summary:'Dutch TTF, Europe\'s benchmark gas price, traded around €80-84 a megawatt-hour in mid-October — one tracker put it at €81.79 on October 12, up about 1.9% on the day — its highest since early 2023 as the market braced for winter. EU storage was only about 73% full on October 7, well below the roughly 83% seen a year earlier and some 16-17 points under the seasonal norm, leaving a thin cushion before heating season. ENTSOG\'s winter outlook warned a severe cold snap could open a gas shortfall of up to 15% if supply is disrupted. A full ban on Russian LNG is due to take effect on January 1, 2027.',
-   source:'TFTC / EnergyRiskIQ / Euronews', tags:['TTF','Gas','Europe']},
+   headline:'European Gas Stays Elevated Near €79/MWh as Winter Storage Runs Historically Low',
+   summary:'Dutch TTF, Europe\'s benchmark gas price, held near €79 a megawatt-hour in mid-October as the market braced for a tight winter. EU storage was only about 72% full on October 1 and roughly 73% by October 7 — around 15 percentage points below the five-year average and well under the level seen a year earlier — leaving a thin cushion before heating season. Member states and the Commission agreed that reaching 80% would be sufficient this winter, down from the original 90% target. A full ban on Russian LNG under long-term contracts is due to take effect early in 2027.',
+   source:'GIE / ENTSOG / LNG Industry', tags:['TTF','Gas','Europe']},
 
   {emoji:'🌏', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'October 5, 2026', impact:'med',
-   headline:'Asian JKM LNG Jumps to Near $25.8/MMBtu as Hormuz Risk and Winter Buying Return',
-   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, rose about 7% to roughly $25.8 per MMBtu in early October as Strait of Hormuz disruption risk and the approach of winter lifted demand. European TTF for November was quoted near $24.5/MMBtu, keeping the JKM-TTF spread narrow and the Atlantic and Pacific basins tightly linked. China has largely stepped back from spot purchases while cost-sensitive South and Southeast Asian buyers defer cargoes or switch to coal. The loss of Middle East LNG continues to tighten global balances heading into the peak-demand months.',
-   source:'Global LNG Hub / LNG Insights', tags:['JKM','LNG','Asia']},
+   date:'October 13, 2026', impact:'med',
+   headline:'Asian JKM LNG Climbs Near $26.3/MMBtu as Hormuz Risk and Winter Buying Return',
+   summary:'The Japan-Korea Marker, Asia\'s benchmark LNG spot price, rose to about $26.3 per MMBtu on October 13, up nearly 5% over the prior month and more than double its level a year earlier, as Strait of Hormuz disruption risk and the approach of winter lifted demand. European TTF was quoted near $24/MMBtu in early October, keeping the Atlantic and Pacific basins tightly linked. China has largely stepped back from spot purchases while cost-sensitive South and Southeast Asian buyers defer cargoes or switch to coal. The loss of Middle East supply continues to tighten global balances heading into the peak-demand months.',
+   source:'Trading Economics / LNG Insights', tags:['JKM','LNG','Asia']},
 
   {emoji:'☢', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'October 13, 2026', impact:'med',
-   headline:'Uranium Holds Near $89.7/lb as Long-Term Contract Prices Hit a Record $97',
-   summary:'TradeTech\'s spot uranium indicator eased five cents to $89.70 a pound on October 13 on three transactions, consolidating near $90 while the long-term contract price climbed to a record $97 — a widening gap that reflects utilities\' scramble to lock in future supply. A structural supply crunch continues to collide with rising demand from new reactors and the race to power AI data centers. Sprott and others frame the record term price as marking a new phase for the fuel, with financial buyers still accumulating pounds as mine output and enrichment capacity struggle to keep pace. The nuclear fuel chain remains among the clearest winners of the energy-security panic.',
-   source:'TradeTech / Sprott / Uranium Unleashed', tags:['Uranium','Nuclear','Supply']},
+   date:'October 2, 2026', impact:'med',
+   headline:'Uranium Holds Near $89.4/lb as the Long-Term Contract Price Sets a Record $96',
+   summary:'TradeTech\'s spot uranium indicator sat around $89.40 a pound in early October, consolidating near $90 while the long-term contract price climbed to a record $96 — surpassing the previous $95 high last seen in 2008 and underscoring utilities\' scramble to lock in future supply. A structural supply crunch continues to collide with rising demand from new reactors and the race to power AI data centers. Analysts frame the record term price as marking a new phase for the fuel, with financial buyers still accumulating pounds as mine output and enrichment capacity struggle to keep pace. The nuclear fuel chain remains among the clearest winners of the energy-security panic.',
+   source:'TradeTech / Uranium Unleashed / Nuclear News', tags:['Uranium','Nuclear','Supply']},
 
   {emoji:'🟤', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
    date:'October 13, 2026', impact:'med',
-   headline:'Copper Firms Near $14,600/t on China Buying and Grid Investment; Lithium Stays Soft',
-   summary:'Copper held near record territory in mid-October, with the World Bank\'s September benchmark around $14,474 a tonne — up about 1% on the month and roughly 45% year over year — supported by renewed Chinese buying and heavy power-grid investment. Lithium, by contrast, stayed under pressure: Guangzhou Futures Exchange lithium carbonate traded near $16,680 a tonne on October 13, down more than 3% on the day and hovering near yearly lows after holding flat through China\'s National Day holiday. BloombergNEF still projects the copper balance swinging toward a sizeable deficit as data centers, grids and electric vehicles pull hard on the red metal. Analysts call the split a divergence within the electrification wave rather than a trend change.',
-   source:'World Bank / Guangzhou Futures Exchange / Mysteel', tags:['Copper','Lithium','Metals']},
+   headline:'Copper Holds Near $14,700/t on Grid Investment; Lithium Stays Soft',
+   summary:'Copper held near record territory in mid-October, trading around $14,700 a tonne on October 13 — supported by renewed Chinese buying and heavy power-grid investment — with the LME three-month contract quoted near $14,420 earlier in the month. Lithium, by contrast, stayed under pressure: Guangzhou Futures Exchange lithium carbonate traded near $16,680 a tonne, down more than 1% on the day and off almost 20% over the past month as oversupply persisted. BloombergNEF still projects the copper balance swinging toward a sizeable deficit as data centers, grids and electric vehicles pull hard on the red metal. Analysts call the split a divergence within the electrification wave rather than a trend change.',
+   source:'LME / COMEX / Guangzhou Futures Exchange', tags:['Copper','Lithium','Metals']},
 
   {emoji:'🌫', bgColor:'rgba(245,158,11,0.1)', cat:'prices', catColor:'#fbbf24', catLabel:'PRICES',
-   date:'October 9, 2026', impact:'med',
-   headline:'EU Carbon Holds in the Mid-€80s as the Q3 CBAM Certificate Is Set at €82.32',
-   summary:'EU emission allowances held in the mid-€80s in early-to-mid October, with trackers putting the EUA in a roughly €83-87 range over the prior month. The Commission set the Q3 2026 CBAM certificate price at €82.32 in a notice published October 5 — up from €75.28 in Q2 — and pegged the April-September average EUA price at €78.93. Importers of steel, cement and aluminium remain exposed as the carbon border mechanism ramps up, while Italy and Czechia press for temporary ETS relief ahead of the October 15-16 EU summit. The separate ETS2 market for buildings and road transport is due to begin auctions in January 2027.',
-   source:'Carbon Credits / European Commission / Belektron', tags:['Carbon','EU ETS','CBAM']},
+   date:'October 13, 2026', impact:'med',
+   headline:'EU Carbon Hits Multi-Month Highs Near €88/t as the Q3 CBAM Certificate Is Set at €82.32',
+   summary:'EU emission allowances pushed to multi-month highs in mid-October, with the December 2026 contract reported settling at €88.34 a tonne on October 13 after holding in the mid-€80s for much of the prior month. The Commission set the Q3 2026 CBAM certificate price at €82.32 — up from €75.28 in Q2 — leaving importers of steel, cement and aluminium exposed as the carbon border mechanism ramps up. Italy and Czechia have pressed for temporary ETS relief ahead of the October 15-16 EU summit. The separate ETS2 market for buildings and road transport is due to begin auctions in 2027.',
+   source:'EEX / European Commission / Investing.com', tags:['Carbon','EU ETS','CBAM']},
 
   {emoji:'🌀', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'October 9, 2026', impact:'high',
-   headline:'Hurricane Isaias Shuts In About 63% of US Gulf Oil Output Before Making Landfall in Florida',
-   summary:'Hurricane Isaias forced producers to shut in roughly 63% of US Gulf of Mexico oil output — about 1.3 million barrels a day — and around 57% of regional gas production, federal data showed on October 8, as Shell, Chevron and Harbour Energy evacuated platforms. Some 121 of the Gulf\'s 371 manned platforms, nearly a third, were cleared of workers. The storm made landfall near Destin, Florida, on the evening of October 9 before weakening into a post-tropical cyclone. Refineries in Mississippi and Alabama faced the sharpest risk, though Louisiana plants were expected to avoid the worst, and restart timelines remained unconfirmed over the weekend.',
-   source:'CNBC / NBC News / EnergyNow', tags:['Hurricane','Gulf of Mexico','Supply']},
+   date:'October 8, 2026', impact:'high',
+   headline:'Gulf Hurricane Shut In About 75% of US Offshore Oil Output; SPR Hits Lowest Since 1982',
+   summary:'A hurricane forced producers to shut in roughly 75% of US Gulf of Mexico oil output last week, federal and market data showed, sharpening supply worries already inflamed by Middle East disruptions. The outage landed as the US Strategic Petroleum Reserve stood at about 283 million barrels in early October, its lowest level since 1982 after repeated draws to offset war-driven losses. Analysts warn the thin emergency cushion leaves Washington with little room to calm prices if another shock hits. Restart timelines for evacuated platforms and affected Gulf Coast refineries remained a focus for traders.',
+   source:'IEA / EIA / Reuters', tags:['Hurricane','Gulf of Mexico','SPR']},
 
   {emoji:'🛢', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'October 4, 2026', impact:'high',
-   headline:'OPEC+ Keeps November Output Targets Steady for a Second Month; Ministers Next Meet November 1',
-   summary:'OPEC+\'s core producers — Saudi Arabia, Russia, Iraq, Kuwait, Kazakhstan, Algeria and Oman — agreed on October 4 to hold November output at September\'s required levels, extending the pause they began in October after monthly hikes from April through September. The restraint matters less than usual: Gulf producers have been pumping well below quota as the US-Iran war disrupts exports, with the core group reported pumping around 25 million b/d in August, roughly 5 million b/d below prewar levels. Analysts expect little policy change before 2027, with the capacity review that sets next year\'s quotas delayed by the war. The ministers are scheduled to meet again on November 1.',
-   source:'Xinhua / CNBC / Enerdata', tags:['OPEC+','Supply','Quotas']},
+   date:'October 12, 2026', impact:'high',
+   headline:'OPEC+ Reaffirms Market-Stability Commitment as Ministers Gather in Riyadh',
+   summary:'OPEC+ producers reaffirmed their commitment to market stability at an October 4 meeting, extending the output pause they adopted earlier in the autumn, and ministers from the Declaration of Cooperation gathered again in Riyadh on October 12. The restraint matters less than usual: Gulf producers have been pumping below quota as the conflict with Iran disrupts exports, and OPEC\'s latest report flags a rebound in Saudi supply as volumes recover. Analysts expect little formal policy change before 2027, with the capacity review that sets next year\'s quotas delayed by the war. The alliance continues to lean on voluntary cuts to defend prices.',
+   source:'OPEC / Reuters / Enerdata', tags:['OPEC+','Supply','Quotas']},
 
   {emoji:'📊', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'October 7, 2026', impact:'med',
-   headline:'EIA Lifts Its Q4 Brent Forecast to $105, Citing Tight Diesel and Supply Disruptions',
-   summary:'The EIA\'s October Short-Term Energy Outlook, released October 6, raised its fourth-quarter 2026 Brent forecast to an average of $105 a barrel — $14 higher than the prior month — pointing partly to extreme tightness in diesel markets that is pushing refiners to demand more crude. The agency lifted its full-year 2026 Brent average to about $96 but still expects prices to ease to roughly $84 a barrel in 2027 as disruptions fade and supply recovers. It boosted its 2027 oil price outlook by around $10 versus the prior month. The forecast underscores how war-driven supply risk, not demand, is setting the tone for crude.',
-   source:'EIA Short-Term Energy Outlook / Rigzone', tags:['EIA','Brent','Forecast']},
+   date:'October 14, 2026', impact:'med',
+   headline:'IEA Warns Renewed Gulf Attacks Leave the Oil-Supply Recovery Fragile',
+   summary:'The IEA\'s October Oil Market Report said renewed attacks in the Gulf leave the recovery in global oil supply fragile, keeping Brent above $100 a barrel. The agency expects world oil demand to contract year on year through the fourth quarter of 2026 as high prices and economic strain bite, even as supply slowly claws back disrupted volumes. It pointed to the hurricane-driven US Gulf shut-ins and the depleted Strategic Petroleum Reserve as fresh sources of vulnerability. The report underscores how war-driven supply risk, not demand, is still setting the tone for crude.',
+   source:'IEA Oil Market Report', tags:['IEA','Supply','Brent']},
 
   {emoji:'⛽', bgColor:'rgba(249,115,22,0.12)', cat:'supply', catColor:'#f97316', catLabel:'SUPPLY',
-   date:'October 6, 2026', impact:'med',
-   headline:'Henry Hub Holds Near $3.1/MMBtu, Insulated From the Global Gas Crunch',
-   summary:'US natural gas traded around $3.0-$3.2 per MMBtu in early October — EIA spot data showed $3.03 on October 6, with other trackers near $3.12 — a fraction of European and Asian benchmarks lifted to multiples of the US price by the Gulf crisis. Record feedgas flows to LNG export terminals are tightening the domestic balance, but abundant shale output and comfortable storage keep the market well supplied. The EIA sees Henry Hub averaging in the low-$3 range this year and next as US LNG exports keep climbing. The gap between a calm US gas market and a strained global one remains vast.',
-   source:'EIA / FRED / Buckhead Energy', tags:['Henry Hub','Storage','LNG']},
+   date:'October 13, 2026', impact:'med',
+   headline:'China Set to Resume Refined-Fuel Exports, Easing Tight Global Diesel',
+   summary:'China is set to resume refined-fuel exports in October after a brief halt, a move expected to ease tight global diesel, gasoline and jet fuel markets strained by the Gulf crisis. The added barrels would come alongside Washington\'s push to get more Russian diesel flowing, a combination traders cited as capping crude prices this week. Diesel has been the epicenter of the squeeze, with refiners demanding more crude to chase middle-distillate margins. Analysts caution that the relief depends on export quotas and on whether promised Russian volumes actually materialize.',
+   source:'Reuters / Irish Times', tags:['China','Diesel','Exports']},
 
-  {emoji:'⚡', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'October 7, 2026', impact:'high',
-   headline:'EIA: US Electricity Use Rose About 4% in Q3 as a Hot Summer and Data Centers Drive Record Demand',
-   summary:'US electricity consumption climbed about 4% in the third quarter of 2026 from a year earlier, the EIA said in its October Short-Term Energy Outlook, as a hot summer lifted cooling loads and the data-center build-out kept commercial demand rising. Power use is set to hit record highs through 2027, with the agency projecting new utility-scale generating capacity at an all-time high this year. Natural gas remains a dominant near-term fuel for new generation even as solar output grows strongly. Grid operators warn that interconnection queues and transformer shortages are now the binding constraints on serving fresh load.',
-   source:'EIA Short-Term Energy Outlook', tags:['Electricity','Data Centers','US']},
+  {emoji:'📉', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
+   date:'October 13, 2026', impact:'high',
+   headline:'OPEC Cuts Its 2026 Oil-Demand Growth Forecast a Sixth Time, Lifts 2027 View to +2.6M b/d',
+   summary:'OPEC again trimmed its 2026 oil-demand growth forecast — the sixth consecutive downward revision — while sharply raising its 2027 outlook, its monthly report showed. The group put this year\'s growth at only about 200,000 barrels a day, down from roughly 400,000 a month earlier and a fraction of the 1.4 million projected at the start of 2026, as the Iran war and high prices sap consumption. For 2027 it sees demand growth rebounding to about 2.6 million b/d, tied partly to the need to replenish stockpiles drawn down during the conflict. The split captures a market whipsawed between war-driven weakness now and a sharp expected snapback later.',
+   source:'OPEC / The Hill / Investing.com', tags:['OPEC','Demand','Forecast']},
 
   {emoji:'🖥', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'October 2, 2026', impact:'med',
-   headline:'US Data-Center Power Demand Keeps Climbing as a 715 MW Solar Portfolio Changes Hands',
-   summary:'The scramble to power US data centers continues, with Exus Renewables acquiring a roughly 715 MWp solar portfolio across Louisiana and Wisconsin to serve surging electricity and industrial demand. The Department of Energy estimates data centers consumed about 192 TWh in 2024 — roughly 4.7% of total US electricity — with a reference case pointing to around 649 TWh by 2030. BloombergNEF expects data-center electricity use to more than triple by 2035, though it describes the surge as significant but localized. Hyperscalers are pairing large solar and storage buildouts with firm baseload as grid reliability is tested.',
-   source:'DMC Education / DOE / BloombergNEF', tags:['Data Centers','Solar','US']},
+   date:'October 10, 2026', impact:'med',
+   headline:'Data-Center Power Demand Keeps Climbing as India Eyes a Near 50-Fold Storage Surge by 2032',
+   summary:'The global scramble to power data centers continues to reshape electricity demand, with hyperscalers pairing large solar and storage buildouts with firm baseload as grids are tested. BloombergNEF expects data-center electricity use to more than triple by 2035, describing the surge as significant but geographically concentrated. In India, battery-storage capacity is projected to surge nearly 50-fold by 2032 as the grid races to absorb renewables and rising load. Analysts increasingly treat storage as core grid infrastructure rather than a backup line item as new demand outpaces transmission.',
+   source:'OilPrice / BloombergNEF', tags:['Data Centers','Storage','India']},
 
   {emoji:'⛏', bgColor:'rgba(59,130,246,0.1)', cat:'demand', catColor:'#3b82f6', catLabel:'DEMAND',
-   date:'October 12, 2026', impact:'med',
+   date:'October 3, 2026', impact:'med',
    headline:'Winter Buying Pushes Newcastle Thermal Coal to a 23-Month High Near $149/t',
-   summary:'Newcastle thermal coal rose to about $149 a tonne on October 12, a 23-month high, as winter restocking and gas-to-coal switching lifted demand even as some Asian buyers stepped back from pricey spot cargoes. The benchmark has climbed steadily from around $136/t in late August and near $144/t in mid-September, according to the IEA and market trackers. High LNG prices through much of the year pushed utilities in Japan, South Korea and emerging Asia to lean on coal-fired output. The rebound underscores how the fuel crisis has stalled the near-term coal phase-down even as renewables surge in the power mix.',
+   summary:'Newcastle thermal coal rose to about $149 a tonne in early October, a 23-month high, as winter restocking and gas-to-coal switching lifted demand even as some Asian buyers stepped back from pricey spot cargoes. The 6,000 kcal/kg FOB benchmark has climbed steadily from the mid-$130s in late summer, according to market trackers. High LNG prices through much of the year have pushed utilities in Japan, South Korea and emerging Asia to lean on coal-fired output. The rebound underscores how the fuel crisis has stalled the near-term coal phase-down even as renewables surge in the power mix.',
    source:'Trading Economics / The Coal Hub / IEA', tags:['Coal','Newcastle','Gas-to-Coal']},
 
   {emoji:'🔋', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
    date:'October 9, 2026', impact:'high',
    headline:'Wood Mackenzie: Four-Hour Batteries Now Cheaper Than Gas Peakers in All 43 Markets Modeled',
-   summary:'Four-hour battery storage now undercuts open-cycle gas turbines on cost in every one of the 43 markets Wood Mackenzie analyzed, the consultancy said in an October report covered by TechCrunch and Utility Dive. The finding marks a tipping point for how new peaking and data-center capacity gets built, with batteries increasingly chosen over gas for fast-ramping power. WoodMac notes data-center load growth is still pulling North American gas investment higher even as storage economics improve. Analysts describe batteries as moving from a backup line item toward core grid and data-center infrastructure.',
-   source:'Wood Mackenzie / TechCrunch / Utility Dive', tags:['Storage','Batteries','Gas Peakers']},
+   summary:'Four-hour battery storage now undercuts open-cycle gas turbines on cost in every one of the 43 markets Wood Mackenzie analyzed, the consultancy said in an October report covered by pv magazine and Utility Dive. The finding marks a tipping point for how new peaking and data-center capacity gets built, with batteries increasingly chosen over gas for fast-ramping power. WoodMac notes US tariffs could threaten the near-term gains even as the underlying economics improve. Analysts describe batteries as moving from a backup line item toward core grid and data-center infrastructure.',
+   source:'Wood Mackenzie / pv magazine / Utility Dive', tags:['Storage','Batteries','Gas Peakers']},
 
   {emoji:'🌞', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'October 2, 2026', impact:'high',
-   headline:'Developers Plan a Record 90+ GW of New US Power Capacity in 2026, Solar More Than Half',
-   summary:'US developers plan to add more than 90 GW of new generating capacity in 2026, a record, with S&P Global putting solar at about 51.2 GW, battery storage at roughly 25.7 GW and wind near 13.1 GW. Bankable Chinese solar modules remain near record lows around $0.085-0.095 a watt amid persistent overcapacity, while US distributed-market modules fell to about $0.37/W in Q2 and delivered prices run far higher once duties and Foreign Entity of Concern rules apply. The split is steering US capital toward domestically compliant supply chains and solar-plus-storage projects that can firm surging data-center loads, even as the buildout tests grid reliability.',
-   source:'S&P Global / Wood Mackenzie / SEIA', tags:['Solar','Storage','FEOC']},
+   date:'October 13, 2026', impact:'high',
+   headline:'India Plans to Mandate On-Site Storage at New Solar and Wind Projects From July 2027',
+   summary:'Indian authorities plan to require developers of new solar and wind projects to install on-site battery storage from July 1, 2027, to smooth output and curb curtailment as renewables flood the grid. The push lands alongside a wave of manufacturing commitments, including a planned 20 GWh battery assembly plant in Nagpur and fresh grid-scale storage tenders. Chinese tier-1 TOPCon modules remain near record lows around $0.085 a watt amid persistent overcapacity, keeping project economics attractive outside tariff-walled markets. The mandate signals how fast storage is becoming a default companion to new clean-power build-out.',
+   source:'OilPrice / pv magazine / BloombergNEF', tags:['Solar','Storage','India']},
 
   {emoji:'🌐', bgColor:'rgba(16,185,129,0.1)', cat:'renewables', catColor:'#10b981', catLabel:'RENEWABLES',
-   date:'October 7, 2026', impact:'med',
-   headline:'EU Puts Energy Security at the Heart of Its COP31 Push for a Faster Green Transition',
-   summary:'The EU is framing energy security as central to its COP31 strategy, arguing that cutting fossil-fuel dependence and accelerating the clean-energy transition is the surest route to stable, affordable power, Euronews reported on October 7. The pitch lands as the bloc endures a second winter of acute gas-supply strain and record-low storage, and as it prepares a full ban on Russian LNG from January 2027. Brussels wants faster renewables deployment, grid upgrades and storage to blunt its exposure to volatile import markets. The message: the energy-security crisis is an argument for the transition, not against it.',
-   source:'Euronews / European Commission', tags:['EU','COP31','Transition']},
+   date:'October 13, 2026', impact:'med',
+   headline:'Batteries Emerge as the Low-Cost Backbone of the Grid as Home Installs Surge',
+   summary:'Analysts increasingly cast stationary batteries as the low-cost backbone of the future energy system, pointing to plunging costs and fast deployment across homes, grids and remote islands. Australians installed 276,011 home battery systems in the first half of 2026, up 52% on the previous six months, while South Africa has placed storage at the center of its long-term electricity plan with a 4.6 GW target. Falling renewable costs and rising diesel prices are also pushing isolated grids toward PV-plus-battery systems. The shift reflects storage moving from a niche add-on to core infrastructure worldwide.',
+   source:'ESS News / Energy-Storage.news', tags:['Storage','Batteries','Australia']},
 
   {emoji:'🏛', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'October 9, 2026', impact:'high',
-   headline:'US Treasury Issues a Temporary License for Russian Diesel; Senators Call the Deal Illegal',
-   summary:'The Treasury\'s Office of Foreign Assets Control issued a temporary license on October 9 allowing the sale, delivery and importation of Russian-origin diesel — including imports into the United States — through April 7, 2027, to steady a tight global market. Seven US senators, four Republicans and three Democrats, said the arrangement is illegal because Congress banned imports of Russian energy in 2022. Washington has not extended similar relief to Iranian oil, which remains under a US blockade. The move underpins President Trump\'s push to get more Russian diesel flowing ahead of the November midterms, part of his claimed "energy ceasefire" with Moscow and Kyiv.',
-   source:'US Treasury OFAC / CNBC / Reuters', tags:['Sanctions','Russia','Diesel']},
+   date:'October 13, 2026', impact:'high',
+   headline:'US Treasury Lifts Sanctions to Allow Russian Diesel; Bipartisan Lawmakers Call the Deal Illegal',
+   summary:'The Treasury Department said it would lift sanctions to allow Russian-origin diesel to reach global markets, including the United States, a move President Trump has tied to lowering domestic fuel prices. The decision drew sharp bipartisan backlash, with lawmakers arguing it appears to violate a 2022 US law barring imports of Russian energy — passed just weeks after Trump signed the Lindsey Graham Sanctioning Russia Act. The arrangement underpins Trump\'s claimed "energy ceasefire" between Moscow and Kyiv ahead of the November midterms. Washington has not extended similar relief to Iranian oil, which remains under a US blockade.',
+   source:'US Treasury / The Hill / PBS NewsHour', tags:['Sanctions','Russia','Diesel']},
 
   {emoji:'🇪🇺', bgColor:'rgba(168,85,247,0.1)', cat:'policy', catColor:'#a855f7', catLabel:'POLICY',
-   date:'October 12, 2026', impact:'med',
-   headline:'EU Weighs Delaying Methane Rules and Debates ETS Reform as Leaders Head Into a Summit',
-   summary:'Energy Commissioner Dan Jørgensen has proposed delaying parts of the EU methane regulation affecting energy imports by a year, after importers said suppliers would not provide required data and Washington warned it could redirect LNG supply if the rules are not eased; the Commission published draft methane reporting templates on October 12. The same day, environment ministers debated the Commission\'s ETS review and COP31 preparations, with the EUA holding in the mid-€80s and Italy and Czechia pressing for temporary relief. EU leaders meet October 15-16 focused on high energy costs for households and industry. Brussels is balancing affordability against its 2040 climate targets heading into winter.',
-   source:'Inside Climate News / ClimateTrade / Bloomberg', tags:['EU','Methane','ETS']},
+   date:'October 13, 2026', impact:'med',
+   headline:'EU Adopts Its Largest Sanctions Package Since 2022 as the US Targets Iran\'s Shadow Fleet',
+   summary:'The EU approved its largest set of sanctions since the 2022 invasion, adding roughly 1,569 people and businesses to its list in a bid to tighten pressure on Moscow\'s war economy and energy revenues. In parallel, the US Treasury imposed new measures targeting the remnants of Iran\'s shadow fleet of tankers as it works to choke off Tehran\'s crude exports. The twin moves came even as Washington eased some sanctions on Russian diesel, highlighting a tangled policy mix aimed at punishing adversaries while steadying global fuel supply. Enforcement against evasion networks and ship-to-ship transfers remains the central challenge.',
+   source:'EU Council / Reuters / US Treasury', tags:['EU','Sanctions','Iran']},
 
   {emoji:'🛡', bgColor:'rgba(239,68,68,0.12)', cat:'geopolitics', catColor:'#ef4444', catLabel:'GEOPOLITICS',
-   date:'October 12, 2026', impact:'high',
-   headline:'Houthi Strikes Hit Riyadh\'s Airport and a Tanker Near Hormuz, but Mideast Oil Keeps Flowing',
-   summary:'Iran-backed Houthi militants launched a barrage of drones and missiles at Saudi Arabia\'s main airport and struck a tanker near the Strait of Hormuz, Bloomberg reported this week, keeping a geopolitical risk premium baked into crude. Yet Persian Gulf exports continue to move through the chokepoint at rates close to prewar levels, with Gulf producers leaning on pipeline workarounds and ship-to-ship transfers. US penalties still threaten countries that keep economic ties with Tehran — China, India, Turkey, Iraq and the UAE seen as most exposed — and a US naval blockade continues to curb Iranian exports even as Washington eases some Russia sanctions. Insurers are pricing steep war-risk premiums on Gulf voyages.',
-   source:'Bloomberg / Energy Connects / CRS', tags:['Hormuz','Houthi','War Risk']},
+   date:'October 13, 2026', impact:'high',
+   headline:'Brent Steady Amid Middle East Tensions as Gulf Attacks Keep a Risk Premium in Place',
+   summary:'Brent held steady above $105 a barrel in mid-October as traders weighed renewed attacks on Saudi Arabia against the prospect of additional Russian diesel, Bloomberg-sourced reporting showed. A geopolitical risk premium remains baked into crude, yet Persian Gulf exports continue to move through the Strait of Hormuz at rates close to prewar levels via pipeline workarounds and ship-to-ship transfers. US penalties still threaten countries that keep economic ties with Tehran, while a naval blockade curbs Iranian exports even as Washington eases some Russia sanctions. Insurers are pricing steep war-risk premiums on Gulf voyages.',
+   source:'Bloomberg / Rigzone / Energy Connects', tags:['Hormuz','Middle East','War Risk']},
 ];
 
 // ─────────────────────────────────────────────
